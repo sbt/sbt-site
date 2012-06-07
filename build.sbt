@@ -1,5 +1,8 @@
 sbtPlugin := true
 
+// This should be tied to sbtPlugin IMHO.
+publishMavenStyle := false
+
 name := "sbt-site-plugin"
 
 organization := "com.jsuereth"
