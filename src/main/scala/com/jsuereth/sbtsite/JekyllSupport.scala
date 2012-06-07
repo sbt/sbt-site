@@ -13,7 +13,7 @@ object JekyllSupport {
     Seq(
       sourceDirectory in Jekyll <<= sourceDirectory(_ / "jekyll"),
       target in Jekyll <<= target(_ / "jekyll"),
-      includeFilter in Jekyll := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif"),
+      includeFilter in Jekyll := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "CNAME" | ".nojekyll"),
       RequiredGems := Map.empty
       //(mappings in SiteKeys.siteMappings) <++= (mappings in Jekyll),
     ) ++ inConfig(Jekyll)(Seq(
