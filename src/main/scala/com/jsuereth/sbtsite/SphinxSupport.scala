@@ -12,7 +12,8 @@ object SphinxSupport {
     Seq(
       sourceDirectory in Sphinx <<= sourceDirectory(_ / "sphinx"),
       target in Sphinx <<= target(_ / "sphinx"),
-      includeFilter in Sphinx := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif")
+      // Note: txt is used for search index.
+      includeFilter in Sphinx := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt")
     ) ++ inConfig(Sphinx)(Seq(
       mappings <<= (sourceDirectory, target, includeFilter, streams) map SphinxImpl.generate
     ))
