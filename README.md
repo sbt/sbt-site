@@ -90,7 +90,7 @@ To place pamflet HTML under a directory, run:
     site.pamfletSupport("manual")
 
 
-The above will place pamflet generated HTML under the `pamflet/` directory in the generated site.
+The above will place pamflet generated HTML under the `manual/` directory in the generated site.
 
 ### Changing the source directory ###
 
