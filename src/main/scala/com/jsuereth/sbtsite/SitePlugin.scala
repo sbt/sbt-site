@@ -41,6 +41,8 @@ object SitePlugin extends Plugin {
     /** Includes Sphinx generated site under a the root directory. */
     def sphinxSupport(alias: String = ""): Seq[Setting[_]] = 
       SphinxSupport.settings ++ Seq(addMappingsToSiteDir(mappings in SphinxSupport.Sphinx, alias)) 
+    def pamfletSupport(alias: String = ""): Seq[Setting[_]] =
+      PamfletSupport.settings ++ Seq(addMappingsToSiteDir(mappings in PamfletSupport.Pamflet, alias))
   }
   // Note: We include helpers so other plugins can 'plug in' to this one without requiring users to use/configure the site plugin.
   override val settings = Seq(
