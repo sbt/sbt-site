@@ -8,8 +8,9 @@ This is an SBT plugin that can generate project websites.   It is designed to wo
 
 Add this to your `project/plugins.sbt`:
 
+    resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
 
-    addSbtPlugin("com.jsuereth" % "sbt-site-plugin" % "0.4.0")
+    addSbtPlugin("com.jsuereth" % "sbt-site-plugin" % "0.5.0")
 
 
 And then in your `build.sbt` file:
@@ -75,6 +76,28 @@ The site plugin has direct support for building Sphinx projects locally.  This a
 
     site.sphinxSupport()
 
+
+### Pamflet generation ###
+
+The site plugin has direct support for building [Pamflet](pamflet.databinder.net) projects.   This assumes you have a pamflet project under the `src/pamflet` directory.   To enable pamflet site generation, simplay add the following to your `build.sbt` file:
+
+
+    site.pamfletSupport()
+
+To place pamflet HTML under a directory, run:
+
+    
+    site.pamfletSupport("manual")
+
+
+The above will place pamflet generated HTML under the `pamflet/` directory in the generated site.
+
+### Changing the source directory ###
+
+To change the source directory for static site files, use the `siteSourceDirectory` alias:
+
+
+    siteSourceDirectory <<= target / "generated-stuff"
 
 *TODO - Link to documentation site on usage and configuration.*
 
