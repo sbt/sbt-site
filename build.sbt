@@ -13,3 +13,6 @@ publishTo := Some(Resolver.url("sbt-plugin-releases", new URL("http://scalasbt.a
 
 publishMavenStyle := false
 
+libraryDependencies += "net.databinder" % "pamflet-library_2.9.1" % "0.4.1"
+
+libraryDependencies += "com.tristanhunt" % "knockoff_2.9.1" % "0.8.0-16"
