@@ -8,6 +8,8 @@ This is an SBT plugin that can generate project websites.   It is designed to wo
 
 Add this to your `project/plugins.sbt`:
 
+    publishTo := Some(Resolver.url("sbt-plugin-releases", new URL("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases/"))(Resolver.ivyStylePatterns))
+
     resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
 
     addSbtPlugin("com.jsuereth" % "sbt-site-plugin" % "0.5.0")
