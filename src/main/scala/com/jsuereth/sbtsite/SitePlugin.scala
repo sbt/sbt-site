@@ -8,6 +8,7 @@ object SitePlugin extends Plugin {
   object site {
     // TODO - Site key references here  
     import SiteKeys._
+
     val settings = Seq(
       siteMappings := Seq[(File,String)](),    
       siteDirectory <<= target(_ / "site"),
