@@ -12,7 +12,7 @@ Add this to your `project/plugins.sbt`:
 
     resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
 
-    addSbtPlugin("com.jsuereth" % "sbt-site-plugin" % "0.5.0")
+    addSbtPlugin("com.jsuereth" % "sbt-site-plugin" % "0.6.0")
 
 
 And then in your `build.sbt` file:
