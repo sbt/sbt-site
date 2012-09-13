@@ -24,7 +24,7 @@ private[sphinx] class CommandLineSphinxRunner(configOverrides: Map[String,String
     val cmd = {
        Seq("sphinx-build", "-b", "html") ++
        configOverrideParams ++
-       Seq("sphinx-build", "-b", "html")
+       Seq(src.getAbsolutePath, target.getAbsolutePath)
     }
     sbt.Process(cmd, Some(src)) ! log match {
        case 0 => ()
