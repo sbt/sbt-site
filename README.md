@@ -12,7 +12,7 @@ Add this to your `project/plugins.sbt`:
 
     resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
 
-    addSbtPlugin("com.jsuereth" % "sbt-site-plugin" % "0.5.0")
+    addSbtPlugin("com.jsuereth" % "sbt-site-plugin" % "0.6.0")
 
 
 And then in your `build.sbt` file:
@@ -100,6 +100,10 @@ To change the source directory for static site files, use the `siteSourceDirecto
 
 
     siteSourceDirectory <<= target / "generated-stuff"
+
+### Previewing the site ###
+
+To preview your generated site, run `preview-site` to open a web server. Direct your web browser to `http://localhost:4000/` to view your site.
 
 *TODO - Link to documentation site on usage and configuration.*
 

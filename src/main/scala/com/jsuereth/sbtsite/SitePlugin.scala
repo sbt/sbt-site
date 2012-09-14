@@ -8,6 +8,7 @@ object SitePlugin extends Plugin {
   object site {
     // TODO - Site key references here  
     import SiteKeys._
+
     val settings = Seq(
       siteMappings := Seq[(File,String)](),    
       siteDirectory <<= target(_ / "site"),
@@ -25,7 +26,8 @@ object SitePlugin extends Plugin {
         }
         dir      
       }
-    )
+    ) ++ Preview.settings
+
     /** Convenience functions to add a task of mappings to a site under a nested directory. */
     def addMappingsToSiteDir(mappings: TaskKey[Seq[(File,String)]], nestedDirectory: String): Setting[_] =
       siteMappings <++= mappings map { m =>
