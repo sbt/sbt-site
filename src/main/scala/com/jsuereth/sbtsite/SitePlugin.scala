@@ -17,14 +17,10 @@ object SitePlugin extends Plugin {
       siteMappings <++= (includeFilter in makeSite, siteSourceDirectory) map { (incs, dir ) =>
         dir ** incs x relativeTo(dir)
       },
-      makeSite <<= (siteDirectory, siteMappings) map { (dir, maps) =>
-        // TODO - Lazier way to do this.
-        for((file, target) <- maps) {
-          val tfile = dir / target
-          if(file.isDirectory) IO.createDirectory(tfile)
-          else IO.copyFile(file,tfile)
-        }
-        dir      
+      makeSite <<= (siteDirectory, cacheDirectory in makeSite, siteMappings) map { (dir, cacheDir, maps) =>
+        val concrete = maps map { case (file, target) => (file, dir / target) }
+        Sync(cacheDir / "make-site")(concrete)
+        dir
       }
     ) ++ Preview.settings
 
