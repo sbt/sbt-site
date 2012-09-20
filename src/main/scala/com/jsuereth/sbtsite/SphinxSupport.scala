@@ -2,31 +2,25 @@ package com.jsuereth.sbtsite
 
 import sbt._
 import Keys._
-
+import sphinx._
 import SiteKeys.siteMappings
+
 
 object SphinxSupport {
   val Sphinx = config("sphinx")
   
+  val sphinxConfigSettings = SettingKey[Map[String, String]]("sphinx-config-settings", "-D options that should be passed when running sphinx.")
+  val sphinxRunner = TaskKey[SphinxRunner]("sphinx-runner", "A class used to run sphinx commands.")
   val settings: Seq[Setting[_]] =
     Seq(
       sourceDirectory in Sphinx <<= sourceDirectory(_ / "sphinx"),
       target in Sphinx <<= target(_ / "sphinx"),
       // Note: txt is used for search index.
-      includeFilter in Sphinx := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt")
+      includeFilter in Sphinx := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt"),
+      // By default, turn off smartypants so we get copy-pastable examples.
+      sphinxConfigSettings := Map("html_use_smartypants" -> "0")
     ) ++ inConfig(Sphinx)(Seq(
-      mappings <<= (sourceDirectory, target, includeFilter, streams) map SphinxImpl.generate
+      sphinxRunner <<= (sphinxConfigSettings) map sphinx.newRunner,
+      mappings <<= (sphinxRunner, sourceDirectory, target, includeFilter, streams) map sphinx.generate
     ))
-}
-
-object SphinxImpl {
-  final def generate(src: File, target: File, inc: FileFilter, s: TaskStreams): Seq[(File, String)] = {
-     sbt.Process(Seq("sphinx-build", "-b", "html", src.getAbsolutePath, target.getAbsolutePath), Some(src)) ! s.log match {
-       case 0 => ()
-       case n => sys.error("Failed to run sphinx-build.  Exit code: " + n)
-     }
-     for { 
-       (file, name) <- (target ** inc x relativeTo(target))
-     } yield file -> name
-  }
 }
