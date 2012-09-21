@@ -1,4 +1,4 @@
-package com.jsuereth.sbtsite
+package com.typesafe.sbt
 
 import sbt._
 import Keys._
