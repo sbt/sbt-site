@@ -1,8 +1,9 @@
-package com.jsuereth.sbtsite
+package com.typesafe.sbt
+package site
 
 import sbt._
 import unfiltered.util._
-import SiteKeys._
+import SbtSite.SiteKeys._
 
 object Preview {
 

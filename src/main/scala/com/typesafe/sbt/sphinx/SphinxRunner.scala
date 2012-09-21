@@ -1,10 +1,9 @@
-package com.jsuereth.sbtsite
+package com.typesafe.sbt
 package sphinx
 
 import sbt._
 import Keys._
-
-import SiteKeys.siteMappings
+import SbtSite.SiteKeys.siteMappings
 
 
 /** A generic interface to sphinx that will remain binary compatible in this plugin. */

@@ -1,20 +1,21 @@
 sbtPlugin := true
 
-// This should be tied to sbtPlugin IMHO.
-publishMavenStyle := false
+name := "sbt-site"
 
-name := "sbt-site-plugin"
+organization := "com.typesafe.sbt"
 
-organization := "com.jsuereth"
-
-version := "0.6.0"
-
-publishTo := Some(Resolver.url("sbt-plugin-releases", new URL("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases/"))(Resolver.ivyStylePatterns))
+version := "0.7.0-SNAPSHOT"
 
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
-
-publishMavenStyle := false
 
 libraryDependencies += "net.databinder" % "pamflet-library_2.9.1" % "0.4.1"
 
 libraryDependencies += "com.tristanhunt" % "knockoff_2.9.1" % "0.8.0-16"
+
+publishMavenStyle := false
+
+publishTo <<= (version) { v =>
+  def scalasbt(repo: String) = ("scalasbt " + repo, "http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-" + repo)
+  val (name, repo) = if (v.endsWith("-SNAPSHOT")) scalasbt("snapshots") else scalasbt("releases")
+  Some(Resolver.url(name, url(repo))(Resolver.ivyStylePatterns))
+}
