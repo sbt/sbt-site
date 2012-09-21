@@ -3,6 +3,7 @@
 This is an sbt plugin that can generate project websites.
 
 It is designed to work hand-in-hand with publishing plugins like [xsbt-ghpages-plugin].
+For integrating with [xsbt-ghpages-plugin] please see the [0.4 version][old] of this plugin.
 
 
 ## Usage ##
@@ -10,6 +11,8 @@ It is designed to work hand-in-hand with publishing plugins like [xsbt-ghpages-p
 Add this to your `project/plugins.sbt`:
 
     addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.6.0")
+
+*Note: this requires sbt 0.12 - for sbt 0.11 see the [0.4 version][old] of this plugin.*
 
 And then in your `build.sbt` file:
 
@@ -110,7 +113,7 @@ web browser to `http://localhost:4000/` to view your site.
 
 *TODO - Link to documentation site on usage and configuration.*
 
-
+[old]: https://github.com/sbt/sbt-site-plugin/tree/0.4.0
 [xsbt-ghpages-plugin]: http://github.com/jsuereth/xsbt-ghpages-plugin
 [Pamflet]: http://pamflet.databinder.net
 
