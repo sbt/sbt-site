@@ -1,14 +1,15 @@
-package com.jsuereth.sbtsite
+package com.typesafe.sbt
+package site
 
 import sbt._
 import Keys._
 import sphinx._
-import SiteKeys.siteMappings
+import SbtSite.SiteKeys.siteMappings
 
 
 object SphinxSupport {
   val Sphinx = config("sphinx")
-  
+
   val sphinxConfigSettings = SettingKey[Map[String, String]]("sphinx-config-settings", "-D options that should be passed when running sphinx.")
   val sphinxRunner = TaskKey[SphinxRunner]("sphinx-runner", "A class used to run sphinx commands.")
   val settings: Seq[Setting[_]] =

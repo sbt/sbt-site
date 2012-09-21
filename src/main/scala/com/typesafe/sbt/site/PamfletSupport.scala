@@ -1,11 +1,12 @@
-package com.jsuereth.sbtsite
+package com.typesafe.sbt
+package site
 
 import sbt._
 import Keys._
 
 object PamfletSupport {
   val Pamflet = config("pamflet")
-    
+
   val settings: Seq[Setting[_]] =
     Seq(
       sourceDirectory in Pamflet <<= sourceDirectory(_ / "pamflet"),
@@ -24,7 +25,7 @@ object PamfletRunner {
     val props = input / "template.properties"
     if(!output.exists) output.mkdirs()
     //if(!props.exists) sys.error("CANNOT FIND " + props)
-    val storage = FileStorage(input, 
+    val storage = FileStorage(input,
                    new File(input, "template.properties") match {
                       case file if file.exists => Some(file)
                       case _ => None
