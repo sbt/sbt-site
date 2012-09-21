@@ -2,8 +2,7 @@
 
 This is an sbt plugin that can generate project websites.
 
-It is designed to work hand-in-hand with publishing plugins like [xsbt-ghpages-plugin].
-For integrating with [xsbt-ghpages-plugin] please see the [0.4 version][old] of this plugin.
+It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 
 ## Usage ##
@@ -20,9 +19,8 @@ And then in your `build.sbt` file:
 
 Then, run `make-site` to generate your project's webpage in the `target/site` directory.
 
-Again, see the [xsbt-ghpages-plugin](http://github.com/jsuereth/xsbt-ghpages-plugin)
-for publishing information to gh-pages. We expect other publishing mechanisms to be
-supported in the future.
+See the [sbt-ghpages] plugin for information about publishing to gh-pages. We expect other
+publishing mechanisms to be supported in the future.
 
 
 ## Adding content to your site ##
@@ -113,7 +111,6 @@ web browser to `http://localhost:4000/` to view your site.
 
 *TODO - Link to documentation site on usage and configuration.*
 
-[old]: https://github.com/sbt/sbt-site-plugin/tree/0.4.0
-[xsbt-ghpages-plugin]: http://github.com/jsuereth/xsbt-ghpages-plugin
+[old]: https://github.com/sbt/sbt-site/tree/0.4.0
+[sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [Pamflet]: http://pamflet.databinder.net
-
