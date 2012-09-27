@@ -2,10 +2,9 @@ package com.typesafe.sbt
 package site
 
 import sbt._
-import Keys._
-import sphinx._
-import SbtSite.SiteKeys.siteMappings
-
+import sbt.Keys._
+import sbt.Project.Initialize
+import com.typesafe.sbt.sphinx._
 
 object SphinxSupport {
   val Sphinx = config("sphinx")
@@ -15,11 +14,12 @@ object SphinxSupport {
   val sphinxProperties = SettingKey[Map[String, String]]("sphinx-properties", "-D options that should be passed when running Sphinx.")
   val sphinxInputs = TaskKey[SphinxInputs]("sphinx-inputs", "Combined inputs for the Sphinx runner.")
   val sphinxRunner = TaskKey[SphinxRunner]("sphinx-runner", "The class used to run Sphinx commands.")
-
   val installPackages = TaskKey[Seq[File]]("install-packages", "Install custom Python packages for Sphinx.")
-  val enable = TaskKey[Boolean]("enable", "Enable/disable generation of different outputs.")
-  val generateHtml = TaskKey[Option[File]]("generate-html", "Run Sphinx generation for HTML output.")
-  val generatePdf = TaskKey[Option[File]]("generate-pdf", "Run Sphinx generation for PDF output.")
+  val enableOutput = TaskKey[Boolean]("enable-output", "Enable/disable generation of different outputs.")
+  val generateHtml = TaskKey[File]("generate-html", "Run Sphinx generation for HTML output.")
+  val generatePdf = TaskKey[File]("generate-pdf", "Run Sphinx generation for PDF output.")
+  val generatedHtml = TaskKey[Option[File]]("generated-html", "Sphinx HTML output, if enabled. Enabled by default.")
+  val generatedPdf = TaskKey[Option[File]]("generated-pdf", "Sphinx PDF output, if enabled. Disabled by default.")
   val generate = TaskKey[File]("generate", "Run all enabled Sphinx generation and combine output.")
 
   val settings: Seq[Setting[_]] = inConfig(Sphinx)(Seq(
@@ -33,10 +33,12 @@ object SphinxSupport {
     sphinxInputs <<= combineSphinxInputs,
     sphinxRunner := SphinxRunner(),
     installPackages <<= installPackagesTask,
-    enable in generateHtml := true,
-    enable in generatePdf := false,
+    enableOutput in generateHtml := true,
+    enableOutput in generatePdf := false,
     generateHtml <<= generateHtmlTask,
     generatePdf <<= generatePdfTask,
+    generatedHtml <<= ifEnabled(generateHtml),
+    generatedPdf <<= ifEnabled(generatePdf),
     generate <<= generateTask,
     includeFilter := ("*.html" | "*.pdf" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt"),
     mappings <<= mappingsTask
@@ -50,19 +52,19 @@ object SphinxSupport {
     (sourceDirectory, includeFilter in generate, excludeFilter in generate, installPackages, sphinxTags, sphinxProperties) map SphinxInputs
   }
 
-  def generateHtmlTask = (enable in generateHtml, sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
-    (enabled, runner, inputs, baseTarget, cacheDir, s) => {
-      if (enabled) Some(runner.generateHtml(inputs, baseTarget, cacheDir, s.log)) else None
-    }
+  def generateHtmlTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
+    (runner, inputs, baseTarget, cacheDir, s) => runner.generateHtml(inputs, baseTarget, cacheDir, s.log)
   }
 
-  def generatePdfTask = (enable in generatePdf, sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
-    (enabled, runner, inputs, baseTarget, cacheDir, s) => {
-      if (enabled) Some(runner.generatePdf(inputs, baseTarget, cacheDir, s.log)) else None
-    }
+  def generatePdfTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
+    (runner, inputs, baseTarget, cacheDir, s) => runner.generatePdf(inputs, baseTarget, cacheDir, s.log)
   }
 
-  def generateTask = (generateHtml, generatePdf, target, cacheDirectory, streams) map {
+  def ifEnabled[T](key: TaskKey[T]): Initialize[Task[Option[T]]] = (enableOutput in key in key.scope, key.task) flatMap {
+    (enabled, enabledTask) => if (enabled) (enabledTask map Some.apply) else task { None }
+  }
+
+  def generateTask = (generatedHtml, generatedPdf, target, cacheDirectory, streams) map {
     (htmlOutput, pdfOutput, baseTarget, cacheDir, s) => {
       val target = baseTarget / "docs"
       val cache = cacheDir / "sphinx" / "docs"
