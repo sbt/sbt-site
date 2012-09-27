@@ -12,6 +12,7 @@ object SphinxSupport {
   val sphinxPackages = SettingKey[Seq[File]]("sphinx-packages", "Custom Python package sources to install for Sphinx.")
   val sphinxTags = SettingKey[Seq[String]]("sphinx-tags", "Sphinx tags that should be passed when running Sphinx.")
   val sphinxProperties = SettingKey[Map[String, String]]("sphinx-properties", "-D options that should be passed when running Sphinx.")
+  val sphinxIncremental = SettingKey[Boolean]("sphinx-incremental", "Use incremental Sphinx building. Off by default.")
   val sphinxInputs = TaskKey[SphinxInputs]("sphinx-inputs", "Combined inputs for the Sphinx runner.")
   val sphinxRunner = TaskKey[SphinxRunner]("sphinx-runner", "The class used to run Sphinx commands.")
   val installPackages = TaskKey[Seq[File]]("install-packages", "Install custom Python packages for Sphinx.")
@@ -28,6 +29,7 @@ object SphinxSupport {
     sphinxPackages := Seq.empty,
     sphinxTags := Seq.empty,
     sphinxProperties := Map.empty,
+    sphinxIncremental := false,
     includeFilter in generate := AllPassFilter,
     excludeFilter in generate := HiddenFileFilter,
     sphinxInputs <<= combineSphinxInputs,
@@ -49,7 +51,7 @@ object SphinxSupport {
   }
 
   def combineSphinxInputs = {
-    (sourceDirectory, includeFilter in generate, excludeFilter in generate, installPackages, sphinxTags, sphinxProperties) map SphinxInputs
+    (sourceDirectory, includeFilter in generate, excludeFilter in generate, sphinxIncremental, installPackages, sphinxTags, sphinxProperties) map SphinxInputs
   }
 
   def generateHtmlTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {

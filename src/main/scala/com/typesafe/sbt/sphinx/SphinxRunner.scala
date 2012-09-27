@@ -8,7 +8,7 @@ import SbtSite.SiteKeys.siteMappings
 /**
  * Combined inputs for Sphinx runner.
  */
-case class SphinxInputs(src: File, include: FileFilter, exclude: FileFilter, packages: Seq[File], tags: Seq[String], properties: Map[String, String])
+case class SphinxInputs(src: File, include: FileFilter, exclude: FileFilter, incremental: Boolean, packages: Seq[File], tags: Seq[String], properties: Map[String, String])
 
 object SphinxRunner {
   /**
@@ -49,11 +49,11 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
   }
 
   def generateHtml(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File = {
-    sphinxBuild("html", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.packages, inputs.tags, inputs.properties, log)
+    sphinxBuild("html", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.packages, inputs.tags, inputs.properties, log)
   }
 
   def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File = {
-    val latexOutput = sphinxBuild("latex", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.packages, inputs.tags, inputs.properties, log)
+    val latexOutput = sphinxBuild("latex", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.packages, inputs.tags, inputs.properties, log)
     makePdf(latexOutput, log)
   }
 
@@ -87,7 +87,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
    * Run sphinx-build with a given builder (html or latex).
    * @return output directory
    */
-  private def sphinxBuild(builder: String, src: File, include: FileFilter, exclude: FileFilter, baseTarget: File, cacheDir: File, packages: Seq[File], tags: Seq[String], properties: Map[String, String], log: Logger): File = {
+  private def sphinxBuild(builder: String, src: File, include: FileFilter, exclude: FileFilter, baseTarget: File, cacheDir: File, incremental: Boolean, packages: Seq[File], tags: Seq[String], properties: Map[String, String], log: Logger): File = {
     val target = baseTarget / builder
     val doctrees = baseTarget / "doctrees" / builder
     val cache = cacheDir / "sphinx" / builder
@@ -97,11 +97,13 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
         val tagList = if (tags.isEmpty) "" else tags.mkString(" (", ", ", ")")
         val desc = "%s%s" format (builder, tagList)
         log.info("Generating Sphinx %s documentation..." format desc)
-        IO.delete(target)
+        if (!incremental) IO.delete(target)
         val logger = sphinxLogger(log)
+        val buildOptions = if (!incremental) Seq("-a", "-E") else Seq.empty[String]
+        val colourOptions = if (!log.ansiCodesSupported) Seq("-N") else Seq.empty[String]
         val tagOptions = tags flatMap (Seq("-t", _))
         val propertyOptions = (properties map { case (k, v) => "-D%s=%s" format (k, v) }).toSeq
-        val command = Seq("sphinx-build", "-aEN", "-b", builder, "-d", doctrees.absolutePath) ++ tagOptions ++ propertyOptions ++ Seq(src.absolutePath, target.absolutePath)
+        val command = Seq("sphinx-build") ++ buildOptions ++ colourOptions ++ Seq("-b", builder, "-d", doctrees.absolutePath) ++ tagOptions ++ propertyOptions ++ Seq(src.absolutePath, target.absolutePath)
         val env = "PYTHONPATH" -> Path.makeString(packages)
         log.debug("Command: " + command.mkString(" "))
         log.debug("Environment: " + env)
