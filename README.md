@@ -111,6 +111,16 @@ web browser to `http://localhost:4000/` to view your site.
 
 *TODO - Link to documentation site on usage and configuration.*
 
+
+## Packaging and Publishing ##
+
+To create a zip package of the site run `package-site`.
+
+To also publish this zip file when running `publish`, add the following to your `build.sbt`:
+
+    site.publishSite
+
+
 [old]: https://github.com/sbt/sbt-site/tree/0.4.0
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [Pamflet]: http://pamflet.databinder.net
