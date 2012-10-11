@@ -7,13 +7,11 @@ name := "sbt-site-plugin"
 
 organization := "com.jsuereth"
 
-version := "0.6.0"
+version := "0.6.0-SNAPSHOT"
 
-publishTo := Some(Resolver.url("sbt-plugin-releases", new URL("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases/"))(Resolver.ivyStylePatterns))
+publishTo := Some(Resolver.url("sbt-plugin-releases", new URL("http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/"))(Resolver.ivyStylePatterns))
 
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
-
-publishMavenStyle := false
 
 libraryDependencies += "net.databinder" % "pamflet-library_2.9.1" % "0.4.1"
 
