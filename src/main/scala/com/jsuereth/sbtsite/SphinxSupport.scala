@@ -15,13 +15,21 @@ object SphinxSupport {
       // Note: txt is used for search index.
       includeFilter in Sphinx := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt")
     ) ++ inConfig(Sphinx)(Seq(
-      mappings <<= (sourceDirectory, target, includeFilter, streams) map SphinxImpl.generate
+      mappings <<= (sourceDirectory, target, includeFilter, version, streams) map SphinxImpl.generate
     ))
 }
 
 object SphinxImpl {
-  final def generate(src: File, target: File, inc: FileFilter, s: TaskStreams): Seq[(File, String)] = {
-     sbt.Process(Seq("sphinx-build", "-b", "html", src.getAbsolutePath, target.getAbsolutePath), Some(src)) ! s.log match {
+  def generate(src: File, target: File, inc: FileFilter, s: TaskStreams): Seq[(File, String)] =
+    generate(src, target, inc, Nil, s)
+  def generate(src: File, target: File, inc: FileFilter, version: String, s: TaskStreams): Seq[(File, String)] = {
+    val binV = CrossVersion.binaryVersion(version, "")
+    val extraArgs = ("-Dversion=" + binV) :: ("-Drelease=" + version) :: Nil
+    generate(src, target, inc, extraArgs, s)
+  }
+  def generate(src: File, target: File, inc: FileFilter, extraArgs: List[String], s: TaskStreams): Seq[(File, String)] = {
+     val sphinxCommand = Seq("sphinx-build", "-b", "html") ++ extraArgs ++ Seq(src.getAbsolutePath, target.getAbsolutePath)
+     sbt.Process(sphinxCommand, Some(src)) ! s.log match {
        case 0 => ()
        case n => sys.error("Failed to run sphinx-build.  Exit code: " + n)
      }
