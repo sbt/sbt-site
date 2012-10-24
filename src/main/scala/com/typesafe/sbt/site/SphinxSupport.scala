@@ -43,8 +43,16 @@ object SphinxSupport {
     generatedPdf <<= ifEnabled(generatePdf),
     generate <<= generateTask,
     includeFilter := ("*.html" | "*.pdf" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt"),
-    mappings <<= mappingsTask
+    mappings <<= mappingsTask,
+    // For now, we default to passing the version in as a property.
+    sphinxProperties <++= (version apply defaultVersionProperties)
   ))
+
+  
+  def defaultVersionProperties(version: String) = {
+    val binV = CrossVersion.binaryVersion(version, "")
+    Map("version" -> binV, "release" -> version) 
+  }
 
   def installPackagesTask = (sphinxRunner, sphinxPackages, target, streams) map {
     (runner, packages, baseTarget, s) => packages map { p => runner.installPackage(p, baseTarget, s.log) }

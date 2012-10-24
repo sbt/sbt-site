@@ -15,7 +15,7 @@ libraryDependencies += "com.tristanhunt" % "knockoff_2.9.1" % "0.8.0-16"
 publishMavenStyle := false
 
 publishTo <<= (version) { v =>
-  def scalasbt(repo: String) = ("scalasbt " + repo, "http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-" + repo)
+  def scalasbt(repo: String) = ("scalasbt " + repo, "http://repo.scala-sbt.org/scalasbt/sbt-plugin-" + repo)
   val (name, repo) = if (v.endsWith("-SNAPSHOT")) scalasbt("snapshots") else scalasbt("releases")
   Some(Resolver.url(name, url(repo))(Resolver.ivyStylePatterns))
 }
