@@ -35,9 +35,9 @@ trait SphinxRunner {
 
   /**
    * Generate PDF output from reStructuedText sources.
-   * @return PDF output file
+   * @return PDF output files
    */
-  def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File
+  def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): Seq[File]
 }
 
 /**
@@ -52,7 +52,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
     sphinxBuild("html", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.packages, inputs.tags, inputs.properties, log)
   }
 
-  def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File = {
+  def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): Seq[File] = {
     val latexOutput = sphinxBuild("latex", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.packages, inputs.tags, inputs.properties, log)
     makePdf(latexOutput, log)
   }
@@ -122,20 +122,22 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
    * Run make pdf in the latex output directory.
    * @return PDF file
    */
-  private def makePdf(latex: File, log: Logger): File = {
-    def failed = sys.error("Failed to build Sphinx pdf documentation.")
-    (latex * "*.tex").get.headOption map { tex =>
+  private def makePdf(latexBase: File, log: Logger): Seq[File] = {
+    val texFiles = (latexBase * "*.tex").get
+    val pdfFiles = texFiles map { tex =>
       val (base, ext) = tex.baseAndExt
-      val pdf = latex / (base + ".pdf")
-      if (!pdf.exists) {
-        log.info("Generating Sphinx pdf documentation...")
-        val logger = sphinxLogger(log)
-        val exitCode = Process(Seq("make", "all-pdf"), latex) ! logger
-        if (exitCode != 0) failed
-        log.info("Sphinx pdf documentation generated: %s" format pdf)
-      }
-      pdf
-    } getOrElse failed
+      latexBase / (base + ".pdf")
+    }
+    val outofdate = (texFiles, pdfFiles).zipped.exists { case (tex, pdf) => tex.lastModified > pdf.lastModified }
+    if(outofdate) {
+      log.info("Generating Sphinx pdf documentation...")
+      val logger = sphinxLogger(log)
+      val exitCode = Process(Seq("make", "all-pdf"), latexBase) ! logger
+      if (exitCode != 0)
+        sys.error("Sphinx pdf generation failed.  See debug output for details.")
+      log.info("Sphinx pdf documentation generated:\n\t%s" format pdfFiles.mkString("\n\t"))
+    }
+    pdfFiles
   }
 
   /**
