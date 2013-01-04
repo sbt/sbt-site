@@ -38,6 +38,12 @@ trait SphinxRunner {
    * @return PDF output files
    */
   def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): Seq[File]
+
+  /**
+   * Generate Epub output from reStructuredText sources.
+   * @return Epub output files
+   */
+  def generateEpub(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File
 }
 
 /**
@@ -55,6 +61,10 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
   def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): Seq[File] = {
     val latexOutput = sphinxBuild("latex", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.packages, inputs.tags, inputs.properties, log)
     makePdf(latexOutput, log)
+  }
+
+  def generateEpub(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File = {
+    sphinxBuild("epub", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.packages, inputs.tags, inputs.properties, log)
   }
 
   /**
