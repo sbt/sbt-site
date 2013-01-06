@@ -19,8 +19,10 @@ object SphinxSupport {
   val enableOutput = TaskKey[Boolean]("enable-output", "Enable/disable generation of different outputs.")
   val generateHtml = TaskKey[File]("generate-html", "Run Sphinx generation for HTML output.")
   val generatePdf = TaskKey[Seq[File]]("generate-pdf", "Run Sphinx generation for PDF output.")
+  val generateEpub = TaskKey[File]("generate-epub", "Run Sphinx generation for Epub output.")
   val generatedHtml = TaskKey[Option[File]]("generated-html", "Sphinx HTML output, if enabled. Enabled by default.")
   val generatedPdf = TaskKey[Seq[File]]("generated-pdf", "Sphinx PDF output, if enabled. Disabled by default.")
+  val generatedEpub = TaskKey[Option[File]]("generated-epub", "Sphinx Epub output, if enabled. Disabled by default")
   val generate = TaskKey[File]("generate", "Run all enabled Sphinx generation and combine output.")
 
   val settings: Seq[Setting[_]] = inConfig(Sphinx)(Seq(
@@ -37,10 +39,13 @@ object SphinxSupport {
     installPackages <<= installPackagesTask,
     enableOutput in generateHtml := true,
     enableOutput in generatePdf := false,
+    enableOutput in generateEpub := false,
     generateHtml <<= generateHtmlTask,
     generatePdf <<= generatePdfTask,
+    generateEpub <<= generateEpubTask,
     generatedHtml <<= ifEnabled(generateHtml),
     generatedPdf <<= seqIfEnabled(generatePdf),
+    generatedEpub <<= ifEnabled(generateEpub),
     generate <<= generateTask,
     includeFilter := ("*.html" | "*.pdf" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt"),
     mappings <<= mappingsTask,
@@ -70,6 +75,10 @@ object SphinxSupport {
     (runner, inputs, baseTarget, cacheDir, s) => runner.generatePdf(inputs, baseTarget, cacheDir, s.log)
   }
 
+  def generateEpubTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
+    (runner, inputs, baseTarget, cacheDir, s) => runner.generateEpub(inputs, baseTarget, cacheDir, s.log)
+  }
+
   def ifEnabled[T](key: TaskKey[T]): Initialize[Task[Option[T]]] = ifEnabled0[T,Option[T]](key, _ map Some.apply, None)
   def seqIfEnabled[T](key: TaskKey[Seq[T]]): Initialize[Task[Seq[T]]] = ifEnabled0[Seq[T], Seq[T]](key, identity, Nil)
 
@@ -77,13 +86,14 @@ object SphinxSupport {
     (enabled, enabledTask) => if (enabled) f(enabledTask) else task { nil }
   }
 
-  def generateTask = (generatedHtml, generatedPdf, target, cacheDirectory, streams) map {
-    (htmlOutput, pdfOutputs, baseTarget, cacheDir, s) => {
+  def generateTask = (generatedHtml, generatedPdf, generatedEpub, target, cacheDirectory, streams) map {
+    (htmlOutput, pdfOutputs, epubOutput, baseTarget, cacheDir, s) => {
       val target = baseTarget / "docs"
       val cache = cacheDir / "sphinx" / "docs"
       val htmlMapping = htmlOutput.toSeq flatMap { html => (html ***).get x rebase(html, target) }
       val pdfMapping = pdfOutputs map { pdf => (pdf, target / pdf.name) }
-      val mapping = htmlMapping ++ pdfMapping
+      val epubMapping = epubOutput.toSeq flatMap { epub => (epub ***).get x rebase(epub, target) }
+      val mapping = htmlMapping ++ pdfMapping ++ epubMapping
       Sync(cache)(mapping)
       s.log.info("Sphinx documentation generated: %s" format target)
       target
