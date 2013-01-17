@@ -47,7 +47,7 @@ object SphinxSupport {
     generatedPdf <<= seqIfEnabled(generatePdf),
     generatedEpub <<= ifEnabled(generateEpub),
     generate <<= generateTask,
-    includeFilter := ("*.html" | "*.pdf" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.txt"),
+    includeFilter in Sphinx := AllPassFilter,
     mappings <<= mappingsTask,
     // For now, we default to passing the version in as a property.
     sphinxProperties <++= (version apply defaultVersionProperties)
@@ -101,6 +101,6 @@ object SphinxSupport {
   }
 
   def mappingsTask = (generate, includeFilter) map {
-    (output, include) => output ** include x relativeTo(output)
+    (output, include) => output ** include --- output x relativeTo(output)
   }
 }
