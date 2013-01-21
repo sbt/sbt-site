@@ -13,7 +13,7 @@ Add this to your ``project/plugins.sbt``:
 
 ::
 
-    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.6.0")
+    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.6.1")
 
 *Note: this requires sbt 0.12 - for sbt 0.11 see the `0.4
 version <https://github.com/sbt/sbt-site/tree/0.4.0>`_ of this plugin.*
