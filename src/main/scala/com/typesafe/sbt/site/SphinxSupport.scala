@@ -92,7 +92,7 @@ object SphinxSupport {
       val cache = cacheDir / "sphinx" / "docs"
       val htmlMapping = htmlOutput.toSeq flatMap { html => (html ***).get x rebase(html, target) }
       val pdfMapping = pdfOutputs map { pdf => (pdf, target / pdf.name) }
-      val epubMapping = epubOutput.toSeq flatMap { epub => (epub ***).get x rebase(epub, target) }
+      val epubMapping = epubOutput.toSeq flatMap { epub => (epub ** "*.epub").get x rebase(epub, target) }
       val mapping = htmlMapping ++ pdfMapping ++ epubMapping
       Sync(cache)(mapping)
       s.log.info("Sphinx documentation generated: %s" format target)
