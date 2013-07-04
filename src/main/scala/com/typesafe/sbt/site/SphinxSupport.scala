@@ -23,7 +23,7 @@ object SphinxSupport {
   val generatedHtml = TaskKey[Option[File]]("generated-html", "Sphinx HTML output, if enabled. Enabled by default.")
   val generatedPdf = TaskKey[Seq[File]]("generated-pdf", "Sphinx PDF output, if enabled. Disabled by default.")
   val generatedEpub = TaskKey[Option[File]]("generated-epub", "Sphinx Epub output, if enabled. Disabled by default")
-  val generate = TaskKey[File]("generate", "Run all enabled Sphinx generation and combine output.")
+  val generate = TaskKey[File]("sphinx-generate", "Run all enabled Sphinx generation and combine output.")
 
   val settings: Seq[Setting[_]] = inConfig(Sphinx)(Seq(
     sourceDirectory <<= sourceDirectory / "sphinx",
