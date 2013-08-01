@@ -9,7 +9,7 @@ It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 Add this to your `project/plugins.sbt`:
 
-    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.6.2")
+    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.7.0")
 
 *Note: this requires sbt 0.12 - for sbt 0.11 see the [0.4 version][old] of this plugin.*
 
@@ -83,18 +83,9 @@ generation, simply add the following to your `build.sbt` file:
 
 ### Pamflet generation ###
 
-The site plugin has direct support for building [Pamflet] projects. This assumes you
-have a pamflet project under the `src/pamflet` directory. To enable pamflet site
-generation, simplay add the following to your `build.sbt` file:
-
-    site.pamfletSupport()
-
-To place pamflet HTML under a directory, run:
-
-    site.pamfletSupport("manual")
-
-The above will place pamflet generated HTML under the `manual/` directory in the
-generated site.
+**Note:** Pamflet support was temporarily removed due to scala binary versioning issues.
+Once we can load pamflet via reflection, or it has a 2.10 compatible release, it will
+be re-enabled.
 
 
 ### Changing the source directory ###
