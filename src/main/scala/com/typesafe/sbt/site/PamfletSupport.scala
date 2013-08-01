@@ -4,6 +4,7 @@ package site
 import sbt._
 import Keys._
 
+@deprecated("0.7.0","Pamflet support was disabled in version 0.7.0 due to lack of Scala 2.10 binaries for pamflet")
 object PamfletSupport {
   val Pamflet = config("pamflet")
 
@@ -18,19 +19,8 @@ object PamfletSupport {
     ))
 }
 
-import pamflet._
 
 object PamfletRunner {
-  def run(input: File, output: File, includeFilter: FileFilter): Seq[(File, String)] = {
-    val props = input / "template.properties"
-    if(!output.exists) output.mkdirs()
-    //if(!props.exists) sys.error("CANNOT FIND " + props)
-    val storage = FileStorage(input,
-                   new File(input, "template.properties") match {
-                      case file if file.exists => Some(file)
-                      case _ => None
-                   })
-    Produce(storage.contents, output)
-    output ** includeFilter --- output x relativeTo(output)
-  }
+  def run(input: File, output: File, includeFilter: FileFilter): Seq[(File, String)] = 
+    sys.error("Pamflet support was disabled in version 0.7.0 due to lack of Scala 2.10 binaries")
 }
