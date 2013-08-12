@@ -4,7 +4,7 @@ name := "sbt-site"
 
 organization := "com.typesafe.sbt"
 
-version := "0.7.0"
+version := "0.7.1-SNAPSHOT"
 
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
 
