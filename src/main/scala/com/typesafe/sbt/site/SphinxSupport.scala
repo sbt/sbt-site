@@ -9,6 +9,7 @@ import com.typesafe.sbt.sphinx._
 object SphinxSupport {
   val Sphinx = config("sphinx")
 
+  val sphinxEnv = TaskKey[Map[String, String]]("sphinx-env", "Environment variables to set for forked sphinx-build process.")
   val sphinxPackages = SettingKey[Seq[File]]("sphinx-packages", "Custom Python package sources to install for Sphinx.")
   val sphinxTags = SettingKey[Seq[String]]("sphinx-tags", "Sphinx tags that should be passed when running Sphinx.")
   val sphinxProperties = SettingKey[Map[String, String]]("sphinx-properties", "-D options that should be passed when running Sphinx.")
@@ -31,6 +32,7 @@ object SphinxSupport {
     sphinxPackages := Seq.empty,
     sphinxTags := Seq.empty,
     sphinxProperties := Map.empty,
+    sphinxEnv := Map.empty,
     sphinxIncremental := false,
     includeFilter in generate := AllPassFilter,
     excludeFilter in generate := HiddenFileFilter,
@@ -50,9 +52,16 @@ object SphinxSupport {
     includeFilter in Sphinx := AllPassFilter,
     mappings <<= mappingsTask,
     // For now, we default to passing the version in as a property.
-    sphinxProperties <++= (version apply defaultVersionProperties)
+    sphinxProperties <++= (version apply defaultVersionProperties),
+    sphinxEnv <<= defaultEnvTask
   ))
 
+  def defaultEnvTask = installPackages map {
+    pkgs =>
+      Map(
+        "PYTHONPATH" -> Path.makeString(pkgs)
+      )
+  }
   
   def defaultVersionProperties(version: String) = {
     val binV = CrossVersion.binaryVersion(version, "")
@@ -64,7 +73,7 @@ object SphinxSupport {
   }
 
   def combineSphinxInputs = {
-    (sourceDirectory, includeFilter in generate, excludeFilter in generate, sphinxIncremental, installPackages, sphinxTags, sphinxProperties) map SphinxInputs
+    (sourceDirectory, includeFilter in generate, excludeFilter in generate, sphinxIncremental, sphinxTags, sphinxProperties, sphinxEnv) map SphinxInputs
   }
 
   def generateHtmlTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
