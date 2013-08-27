@@ -9,7 +9,7 @@ It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 Add this to your `project/plugins.sbt`:
 
-    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.7.0")
+    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.7.1")
 
 *Note: this requires sbt 0.12 - for sbt 0.11 see the [0.4 version][old] of this plugin.*
 
