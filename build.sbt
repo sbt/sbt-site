@@ -24,5 +24,5 @@ site.sphinxSupport()
 
 scriptedSettings
 
-scriptedLaunchOpts <+= version apply { v => "-Dproject.version="+v }
+scriptedLaunchOpts += "-Dproject.version="+version.value
 
