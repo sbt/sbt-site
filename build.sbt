@@ -1,5 +1,16 @@
 sbtPlugin := true
 
+sbtVersion in Global := {
+  scalaBinaryVersion.value match {
+    case "2.10" => "0.13.0"
+    case "2.9.2" => "0.12.4"
+  }
+}
+
+scalaVersion in Global := "2.9.2"
+
+crossScalaVersions in Global := Seq("2.9.2", "2.10.3")
+
 name := "sbt-site"
 
 organization := "com.typesafe.sbt"
