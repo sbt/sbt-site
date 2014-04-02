@@ -1,10 +1,16 @@
+import com.typesafe.sbt.SbtGit._
+
+versionWithGit
+
+scalaVersion := "2.10.2"
+
+git.baseVersion := "0.7"
+
 sbtPlugin := true
 
 name := "sbt-site"
 
 organization := "com.typesafe.sbt"
-
-version := "0.7.2-SNAPSHOT"
 
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
 
@@ -26,3 +32,11 @@ scriptedSettings
 
 scriptedLaunchOpts <+= version apply { v => "-Dproject.version="+v }
 
+sbtVersion in Global := {
+  scalaBinaryVersion.value match {
+    case "2.10" => "0.13.0"
+    case "2.9.2" => "0.12.4"
+  }
+}
+
+crossScalaVersions := Seq("2.9.2", "2.10.2")

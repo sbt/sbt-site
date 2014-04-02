@@ -23,7 +23,9 @@ object JekyllSupport {
         (src, t, inc, _, s) => JekyllImpl.generate(src, t, inc, s)
       }
     )) ++ Seq(
-      siteMappings <++= mappings in Jekyll
+      siteMappings <++= mappings in Jekyll,
+      // TODO - this may need to be optional.
+      watchSources in Global <++= (sourceDirectory in Jekyll) map (d => d.***.get)
     )
 }
 

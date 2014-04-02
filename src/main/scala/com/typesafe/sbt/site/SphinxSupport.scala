@@ -54,7 +54,8 @@ object SphinxSupport {
     // For now, we default to passing the version in as a property.
     sphinxProperties <++= (version apply defaultVersionProperties),
     sphinxEnv <<= defaultEnvTask
-  ))
+    // TODO - We may want the ~ support to be optional...
+  )) ++ Seq(watchSources in Global <++= (sourceDirectory in Sphinx) map (d => d.***.get))
 
   def defaultEnvTask = installPackages map {
     pkgs =>
