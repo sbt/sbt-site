@@ -97,7 +97,7 @@ To change the source directory for static site files, use the `siteSourceDirecto
 
 ### Previewing the site ###
 
-To preview your generated site, run `preview-site` to open a web server. Direct your
+To preview your generated site, run `previewSite` to open a web server. Direct your
 web browser to `http://localhost:4000/` to view your site.
 
 *TODO - Link to documentation site on usage and configuration.*
