@@ -34,7 +34,7 @@ object JekyllImpl {
   // TODO - Add command line args and the like.
   final def generate(src: File, target: File, inc: FileFilter, s: TaskStreams): Seq[(File, String)] = {
     // Run Jekyll
-    sbt.Process(Seq("jekyll", target.getAbsolutePath), Some(src)) ! s.log match {
+    sbt.Process(Seq("jekyll", "build", "-d", target.getAbsolutePath), Some(src)) ! s.log match {
       case 0 => ()
       case n => sys.error("Could not run jekyll, error: " + n)
     }
