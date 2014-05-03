@@ -8,9 +8,8 @@ object PamfletSupport {
   val Pamflet = config("pamflet")
 
   def settings(config: Configuration = Pamflet): Seq[Setting[_]] =
+    Generator.directorySettings(config) ++
     Seq(
-      sourceDirectory in config <<= sourceDirectory(_ / "pamflet"),
-      target in config <<= target(_ / "pamflet"),
       // Note: txt is used for search index.
       includeFilter in config := AllPassFilter
     ) ++ inConfig(config)(Seq(

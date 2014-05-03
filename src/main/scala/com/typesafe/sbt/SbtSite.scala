@@ -26,14 +26,14 @@ object SbtSite extends Plugin {
 
     val settings = Seq(
       siteMappings := Seq.empty,
-      siteDirectory <<= target / "site",
-      siteSourceDirectory <<= sourceDirectory / "site",
+      siteDirectory := target.value / "site",
+      siteSourceDirectory := sourceDirectory.value / "site",
       includeFilter in makeSite := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf",
-      siteMappings <++= (siteSourceDirectory, includeFilter in makeSite) map selectSubpaths,
-      makeSite <<= (siteDirectory, cacheDirectory in makeSite, siteMappings) map copySite,
-      artifact in packageSite <<= moduleName(siteArtifact),
+      siteMappings ++= selectSubpaths(siteSourceDirectory.value, (includeFilter in makeSite).value),
+      makeSite := copySite(siteDirectory.value, streams.value.cacheDirectory, siteMappings.value),
+      artifact in packageSite := siteArtifact(moduleName.value),
       artifactPath in packageSite <<= Defaults.artifactPathSetting(artifact in packageSite),
-      packageSite <<= (makeSite, artifactPath in packageSite, streams) map createSiteZip
+      packageSite := createSiteZip(makeSite.value, (artifactPath in packageSite).value, streams.value)
     ) ++ Preview.settings
 
     /** Convenience functions to add a task of mappings to a site under a nested directory. */
@@ -45,12 +45,13 @@ object SbtSite extends Plugin {
     /** Includes scaladoc APIS in site under a "latest/api" directory. */
     def includeScaladoc(alias: String = "latest/api"): Seq[Setting[_]] =
       Seq(addMappingsToSiteDir(mappings in packageDoc in Compile, alias))
-    /** Includes Jekyll generated site under a the root directory. */
+    /** Includes Jekyll generated site under the root directory. */
     def jekyllSupport(alias: String = ""): Seq[Setting[_]] =
       JekyllSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in JekyllSupport.Jekyll, alias))
-    /** Includes Sphinx generated site under a the root directory. */
+    /** Includes Sphinx generated site under the root directory. */
     def sphinxSupport(alias: String = ""): Seq[Setting[_]] =
       SphinxSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in SphinxSupport.Sphinx, alias))
+    /** Includes Pamflet generate site under the root directory. */
     def pamfletSupport(alias: String = ""): Seq[Setting[_]] =
       PamfletSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in PamfletSupport.Pamflet, alias))
 

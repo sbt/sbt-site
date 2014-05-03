@@ -11,19 +11,19 @@ object JekyllSupport {
   val RequiredGems = SettingKey[Map[String,String]]("jekyll-required-gems", "Required gem + versions for this build.")
   val CheckGems = TaskKey[Unit]("jekyll-check-gems", "Tests whether or not all required gems are available.")
   def settings(config: Configuration = Jekyll): Seq[Setting[_]] =
+    Generator.directorySettings(config) ++
     Seq(
-      sourceDirectory in config <<= sourceDirectory(_ / "jekyll"),
-      target in config <<= target(_ / "jekyll"),
       includeFilter in config := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "CNAME" | ".nojekyll"),
       RequiredGems := Map.empty
       //(mappings in SiteKeys.siteMappings) <++= (mappings in Jekyll),
     ) ++ inConfig(config)(Seq(
-      CheckGems <<= (RequiredGems, streams) map JekyllImpl.checkGems,
-       mappings <<= (sourceDirectory, target, includeFilter, CheckGems, streams) map {
-        (src, t, inc, _, s) => JekyllImpl.generate(src, t, inc, s)
+      CheckGems := JekyllImpl.checkGems(RequiredGems.value, streams.value),
+      mappings := {
+        val cg = CheckGems.value
+        JekyllImpl.generate(sourceDirectory.value, target.value, includeFilter.value, streams.value)
       }
     )) ++ Seq(
-      siteMappings <++= mappings in config,
+      siteMappings ++= (mappings in config).value,
       // TODO - this may need to be optional.
       watchSources in Global <++= (sourceDirectory in config) map (d => d.***.get)
     )

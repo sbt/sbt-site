@@ -53,3 +53,5 @@ sbtVersion in Global := {
     case "2.9.2" => "0.12.4"
   }
 }
+
+scalacOptions += "-deprecation"
