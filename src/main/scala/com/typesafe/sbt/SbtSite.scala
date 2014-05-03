@@ -47,12 +47,12 @@ object SbtSite extends Plugin {
       Seq(addMappingsToSiteDir(mappings in packageDoc in Compile, alias))
     /** Includes Jekyll generated site under a the root directory. */
     def jekyllSupport(alias: String = ""): Seq[Setting[_]] =
-      JekyllSupport.settings ++ Seq(addMappingsToSiteDir(mappings in JekyllSupport.Jekyll, alias))
+      JekyllSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in JekyllSupport.Jekyll, alias))
     /** Includes Sphinx generated site under a the root directory. */
     def sphinxSupport(alias: String = ""): Seq[Setting[_]] =
-      SphinxSupport.settings ++ Seq(addMappingsToSiteDir(mappings in SphinxSupport.Sphinx, alias))
+      SphinxSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in SphinxSupport.Sphinx, alias))
     def pamfletSupport(alias: String = ""): Seq[Setting[_]] =
-      PamfletSupport.settings ++ Seq(addMappingsToSiteDir(mappings in PamfletSupport.Pamflet, alias))
+      PamfletSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in PamfletSupport.Pamflet, alias))
 
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
   }

@@ -26,7 +26,7 @@ object SphinxSupport {
   val generatedEpub = TaskKey[Option[File]]("generated-epub", "Sphinx Epub output, if enabled. Disabled by default")
   val generate = TaskKey[File]("sphinx-generate", "Run all enabled Sphinx generation and combine output.")
 
-  val settings: Seq[Setting[_]] = inConfig(Sphinx)(Seq(
+  def settings(config: Configuration = Sphinx): Seq[Setting[_]] = inConfig(config)(Seq(
     sourceDirectory <<= sourceDirectory / "sphinx",
     target <<= target / "sphinx",
     sphinxPackages := Seq.empty,
@@ -55,7 +55,7 @@ object SphinxSupport {
     sphinxProperties <++= (version apply defaultVersionProperties),
     sphinxEnv <<= defaultEnvTask
     // TODO - We may want the ~ support to be optional...
-  )) ++ Seq(watchSources in Global <++= (sourceDirectory in Sphinx) map (d => d.***.get))
+  )) ++ Seq(watchSources in Global <++= (sourceDirectory in config) map (d => d.***.get))
 
   def defaultEnvTask = installPackages map {
     pkgs =>

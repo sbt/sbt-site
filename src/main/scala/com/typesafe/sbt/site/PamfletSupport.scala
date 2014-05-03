@@ -7,13 +7,13 @@ import Keys._
 object PamfletSupport {
   val Pamflet = config("pamflet")
 
-  val settings: Seq[Setting[_]] =
+  def settings(config: Configuration = Pamflet): Seq[Setting[_]] =
     Seq(
-      sourceDirectory in Pamflet <<= sourceDirectory(_ / "pamflet"),
-      target in Pamflet <<= target(_ / "pamflet"),
+      sourceDirectory in config <<= sourceDirectory(_ / "pamflet"),
+      target in config <<= target(_ / "pamflet"),
       // Note: txt is used for search index.
-      includeFilter in Pamflet := AllPassFilter
-    ) ++ inConfig(Pamflet)(Seq(
+      includeFilter in config := AllPassFilter
+    ) ++ inConfig(config)(Seq(
       mappings <<= (sourceDirectory, target, includeFilter) map PamfletRunner.run
     ))
 }
