@@ -2,7 +2,7 @@ import com.typesafe.sbt.SbtGit._
 
 versionWithGit
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.10.4"
 
 git.baseVersion := "0.7"
 
@@ -17,7 +17,9 @@ sbtVersion in Global := {
 
 scalaVersion in Global := "2.9.2"
 
-crossScalaVersions in Global := Seq("2.9.2", "2.10.3")
+crossScalaVersions in Global := Seq("2.9.2", "2.10.4")
+
+crossScalaVersions := Seq("2.9.2", "2.10.4")
 
 name := "sbt-site"
 
@@ -35,6 +37,8 @@ publishTo <<= (version) { v =>
 
 libraryDependencies += "net.databinder" %% "unfiltered-jetty" % "0.6.8" 
 
+libraryDependencies += "net.databinder" %% "pamflet-library" % "0.5.0"
+
 site.settings
 
 site.sphinxSupport()
@@ -49,5 +53,3 @@ sbtVersion in Global := {
     case "2.9.2" => "0.12.4"
   }
 }
-
-crossScalaVersions := Seq("2.9.2", "2.10.2")

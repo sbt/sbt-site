@@ -83,10 +83,16 @@ generation, simply add the following to your `build.sbt` file:
 
 ### Pamflet generation ###
 
-**Note:** Pamflet support was temporarily removed due to scala binary versioning issues.
-Once we can load pamflet via reflection, or it has a 2.10 compatible release, it will
-be re-enabled.
+The site plugin has direct support for building [Pamflet](pamflet.databinder.net) projects.   This assumes you have a pamflet project under the `src/pamflet` directory.   To enable pamflet site generation, simplay add the following to your `build.sbt` file:
 
+
+    site.pamfletSupport()
+
+To place pamflet HTML under a directory, run:
+    
+    site.pamfletSupport("manual")
+
+The above will place pamflet generated HTML under the `manual/` directory in the generated site.
 
 ### Changing the source directory ###
 
