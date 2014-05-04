@@ -4,7 +4,7 @@ versionWithGit
 
 scalaVersion := "2.10.4"
 
-git.baseVersion := "0.7"
+git.baseVersion := "1.0"
 
 sbtPlugin := true
 
