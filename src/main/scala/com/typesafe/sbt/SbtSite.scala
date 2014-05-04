@@ -2,7 +2,7 @@ package com.typesafe.sbt
 
 import sbt._
 import Keys._
-import site.{ JekyllSupport, PamfletSupport, Preview, SphinxSupport }
+import site.{ JekyllSupport, PamfletSupport, Preview, SphinxSupport, NanocSupport }
 
 
 object SbtSite extends Plugin {
@@ -54,7 +54,9 @@ object SbtSite extends Plugin {
     /** Includes Pamflet generate site under the root directory. */
     def pamfletSupport(alias: String = ""): Seq[Setting[_]] =
       PamfletSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in PamfletSupport.Pamflet, alias))
-
+    /** Includes Nanoc generated site under the root directory. */
+    def nanocSupport(alias: String = ""): Seq[Setting[_]] =
+      NanocSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in NanocSupport.Nanoc, alias))
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
   }
 

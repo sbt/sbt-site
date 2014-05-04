@@ -35,9 +35,11 @@ publishTo <<= (version) { v =>
   Some(Resolver.url(name, url(repo))(Resolver.ivyStylePatterns))
 }
 
-libraryDependencies += "net.databinder" %% "unfiltered-jetty" % "0.6.8" 
-
-libraryDependencies += "net.databinder" %% "pamflet-library" % "0.5.0"
+libraryDependencies ++= Seq(
+  "net.databinder" %% "unfiltered-jetty" % "0.6.8",
+  "net.databinder" %% "pamflet-library" % "0.5.0",
+  "org.yaml" % "snakeyaml" % "1.13"
+)
 
 site.settings
 
