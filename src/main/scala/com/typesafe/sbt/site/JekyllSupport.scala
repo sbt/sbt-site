@@ -23,10 +23,9 @@ object JekyllSupport {
         JekyllImpl.generate(sourceDirectory.value, target.value, includeFilter.value, streams.value)
       }
     )) ++ Seq(
-      siteMappings ++= (mappings in config).value,
-      // TODO - this may need to be optional.
-      watchSources in Global <++= (sourceDirectory in config) map (d => d.***.get)
-    )
+      siteMappings ++= (mappings in config).value
+    ) ++
+    Generator.watchSettings(config) // TODO - this may need to be optional.
 }
 
 /** Helper class with implementations of tasks. */

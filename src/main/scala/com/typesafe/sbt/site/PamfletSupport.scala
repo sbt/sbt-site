@@ -14,7 +14,8 @@ object PamfletSupport {
       includeFilter in config := AllPassFilter
     ) ++ inConfig(config)(Seq(
       mappings <<= (sourceDirectory, target, includeFilter) map PamfletRunner.run
-    ))
+    )) ++
+    Generator.watchSettings(config) // TODO - this may need to be optional.
 }
 
 import pamflet._

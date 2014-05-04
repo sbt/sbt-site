@@ -10,4 +10,8 @@ object Generator {
   		sourceDirectory := sourceDirectory.value / config.name,
       target := target.value / config.name
   	))
+  def watchSettings(config: Configuration): Seq[Setting[_]] =
+  	Seq(
+  		watchSources in Global <++= (sourceDirectory in config) map { _.***.get }
+  	)
 }
