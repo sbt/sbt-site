@@ -66,7 +66,7 @@ One common issue with Jekyll is ensuring that everyone uses the same version for
 generating a website.  There is special support for ensuring the version of gems.
 To do so, add the following to your `build.sbt` file:
 
-    com.typesafe.sbt.site.JekyllSupport.RequiredGems := Map(
+    com.typesafe.sbt.site.JekyllSupport.requiredGems := Map(
       "jekyll" -> "0.11.2",
       "liquid" -> "2.3.0"
     )
@@ -80,13 +80,26 @@ generation, simply add the following to your `build.sbt` file:
 
     site.sphinxSupport()
 
-
 ### Pamflet generation ###
 
-**Note:** Pamflet support was temporarily removed due to scala binary versioning issues.
-Once we can load pamflet via reflection, or it has a 2.10 compatible release, it will
-be re-enabled.
+The site plugin has direct support for building [Pamflet](pamflet.databinder.net) projects.   This assumes you have a pamflet project under the `src/pamflet` directory.   To enable pamflet site generation, simply add the following to your `build.sbt` file:
 
+
+    site.pamfletSupport()
+
+To place pamflet HTML under a directory, run:
+    
+    site.pamfletSupport("manual")
+
+The above will place pamflet generated HTML under the `manual/` directory in the generated site.
+
+### nanoc generation ###
+
+The site plugin has direct support for building [nanoc](http://nanoc.ws/) projects.
+This assumes you have a nanoc project under the `src/nanoc` directory. To enable nanoc site generation,
+simply simply add the following to your `build.sbt` file:
+
+    site.nanocSupport()
 
 ### Changing the source directory ###
 

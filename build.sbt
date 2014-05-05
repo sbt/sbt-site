@@ -2,9 +2,9 @@ import com.typesafe.sbt.SbtGit._
 
 versionWithGit
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.10.4"
 
-git.baseVersion := "0.7"
+git.baseVersion := "1.0"
 
 sbtPlugin := true
 
@@ -17,7 +17,9 @@ sbtVersion in Global := {
 
 scalaVersion in Global := "2.9.2"
 
-crossScalaVersions in Global := Seq("2.9.2", "2.10.3")
+crossScalaVersions in Global := Seq("2.9.2", "2.10.4")
+
+crossScalaVersions := Seq("2.9.2", "2.10.4")
 
 name := "sbt-site"
 
@@ -33,7 +35,11 @@ publishTo <<= (version) { v =>
   Some(Resolver.url(name, url(repo))(Resolver.ivyStylePatterns))
 }
 
-libraryDependencies += "net.databinder" %% "unfiltered-jetty" % "0.6.8" 
+libraryDependencies ++= Seq(
+  "net.databinder" %% "unfiltered-jetty" % "0.6.8",
+  "net.databinder" %% "pamflet-library" % "0.5.0",
+  "org.yaml" % "snakeyaml" % "1.13"
+)
 
 site.settings
 
@@ -50,4 +56,4 @@ sbtVersion in Global := {
   }
 }
 
-crossScalaVersions := Seq("2.9.2", "2.10.2")
+scalacOptions += "-deprecation"

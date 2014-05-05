@@ -8,25 +8,24 @@ import SbtSite.SiteKeys.siteMappings
 object JekyllSupport {
   val Jekyll = config("jekyll")
 
-  val RequiredGems = SettingKey[Map[String,String]]("jekyll-required-gems", "Required gem + versions for this build.")
-  val CheckGems = TaskKey[Unit]("jekyll-check-gems", "Tests whether or not all required gems are available.")
-  val settings: Seq[Setting[_]] =
+  val requiredGems = SettingKey[Map[String,String]]("jekyll-required-gems", "Required gem + versions for this build.")
+  val checkGems = TaskKey[Unit]("jekyll-check-gems", "Tests whether or not all required gems are available.")
+  def settings(config: Configuration = Jekyll): Seq[Setting[_]] =
+    Generator.directorySettings(config) ++
     Seq(
-      sourceDirectory in Jekyll <<= sourceDirectory(_ / "jekyll"),
-      target in Jekyll <<= target(_ / "jekyll"),
-      includeFilter in Jekyll := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "CNAME" | ".nojekyll"),
-      RequiredGems := Map.empty
+      includeFilter in config := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "CNAME" | ".nojekyll"),
+      requiredGems := Map.empty
       //(mappings in SiteKeys.siteMappings) <++= (mappings in Jekyll),
-    ) ++ inConfig(Jekyll)(Seq(
-      CheckGems <<= (RequiredGems, streams) map JekyllImpl.checkGems,
-       mappings <<= (sourceDirectory, target, includeFilter, CheckGems, streams) map {
-        (src, t, inc, _, s) => JekyllImpl.generate(src, t, inc, s)
+    ) ++ inConfig(config)(Seq(
+      checkGems := Generator.checkGems(requiredGems.value, streams.value),
+      mappings := {
+        val cg = checkGems.value
+        JekyllImpl.generate(sourceDirectory.value, target.value, includeFilter.value, streams.value)
       }
     )) ++ Seq(
-      siteMappings <++= mappings in Jekyll,
-      // TODO - this may need to be optional.
-      watchSources in Global <++= (sourceDirectory in Jekyll) map (d => d.***.get)
-    )
+      siteMappings ++= (mappings in config).value
+    ) ++
+    Generator.watchSettings(config) // TODO - this may need to be optional.
 }
 
 /** Helper class with implementations of tasks. */
@@ -40,31 +39,7 @@ object JekyllImpl {
     }
     // Figure out what was generated.
     for {
-      (file, name) <- (target ** inc x relativeTo(target))
+      (file, name) <- (target ** inc --- target x relativeTo(target))
     } yield file -> name
-  }
-
-  final def checkGems(requirements: Map[String,String], s: TaskStreams): Unit = {
-    /** Generates an error message if the gem's version isn't appropriate for this build. */
-    def makeError(gem: String, version: String, current: Option[String]): Option[String] = current match {
-      case Some(v) if v contains version  => None
-      case Some(v) => Some("This build requires the gem [%s (%s)] but found version (%s) instead." format(gem, version, v))
-      case None    => Some("This build requires the gem [%s (%s)] to be installed." format (gem, version))
-    }
-    val errors = for {
-      (gem, version) <- requirements
-      error <- makeError(gem, version, getVersion(gem))
-    } yield error
-    if(!errors.isEmpty)
-      sys.error(errors.mkString("Gem version requirements failed:\n\t", "\n\t", "\n"))
-  }
-
-  /** Checks versions of gems installed. */
-  private def getVersion(gem: String): Option[String] = {
-    val installed = Seq("gem", "list", "--local", gem).!!
-    """\((.+)\)""".r.findFirstMatchIn(installed) match {
-      case None    => None
-      case Some(m) => Some(m.group(1))
-    }
   }
 }

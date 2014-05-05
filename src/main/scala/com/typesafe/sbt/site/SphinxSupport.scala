@@ -26,36 +26,36 @@ object SphinxSupport {
   val generatedEpub = TaskKey[Option[File]]("generated-epub", "Sphinx Epub output, if enabled. Disabled by default")
   val generate = TaskKey[File]("sphinx-generate", "Run all enabled Sphinx generation and combine output.")
 
-  val settings: Seq[Setting[_]] = inConfig(Sphinx)(Seq(
-    sourceDirectory <<= sourceDirectory / "sphinx",
-    target <<= target / "sphinx",
-    sphinxPackages := Seq.empty,
-    sphinxTags := Seq.empty,
-    sphinxProperties := Map.empty,
-    sphinxEnv := Map.empty,
-    sphinxIncremental := false,
-    includeFilter in generate := AllPassFilter,
-    excludeFilter in generate := HiddenFileFilter,
-    sphinxInputs <<= combineSphinxInputs,
-    sphinxRunner := SphinxRunner(),
-    installPackages <<= installPackagesTask,
-    enableOutput in generateHtml := true,
-    enableOutput in generatePdf := false,
-    enableOutput in generateEpub := false,
-    generateHtml <<= generateHtmlTask,
-    generatePdf <<= generatePdfTask,
-    generateEpub <<= generateEpubTask,
-    generatedHtml <<= ifEnabled(generateHtml),
-    generatedPdf <<= seqIfEnabled(generatePdf),
-    generatedEpub <<= ifEnabled(generateEpub),
-    generate <<= generateTask,
-    includeFilter in Sphinx := AllPassFilter,
-    mappings <<= mappingsTask,
-    // For now, we default to passing the version in as a property.
-    sphinxProperties <++= (version apply defaultVersionProperties),
-    sphinxEnv <<= defaultEnvTask
-    // TODO - We may want the ~ support to be optional...
-  )) ++ Seq(watchSources in Global <++= (sourceDirectory in Sphinx) map (d => d.***.get))
+  def settings(config: Configuration = Sphinx): Seq[Setting[_]] =
+    Generator.directorySettings(config) ++
+    inConfig(config)(Seq(
+      sphinxPackages := Seq.empty,
+      sphinxTags := Seq.empty,
+      sphinxProperties := Map.empty,
+      sphinxEnv := Map.empty,
+      sphinxIncremental := false,
+      includeFilter in generate := AllPassFilter,
+      excludeFilter in generate := HiddenFileFilter,
+      sphinxInputs := combineSphinxInputs.value,
+      sphinxRunner := SphinxRunner(),
+      installPackages := installPackagesTask.value,
+      enableOutput in generateHtml := true,
+      enableOutput in generatePdf := false,
+      enableOutput in generateEpub := false,
+      generateHtml <<= generateHtmlTask,
+      generatePdf <<= generatePdfTask,
+      generateEpub <<= generateEpubTask,
+      generatedHtml <<= ifEnabled(generateHtml),
+      generatedPdf <<= seqIfEnabled(generatePdf),
+      generatedEpub <<= ifEnabled(generateEpub),
+      generate <<= generateTask,
+      includeFilter in Sphinx := AllPassFilter,
+      mappings <<= mappingsTask,
+      // For now, we default to passing the version in as a property.
+      sphinxProperties ++= defaultVersionProperties(version.value),
+      sphinxEnv <<= defaultEnvTask
+    )) ++
+    Generator.watchSettings(config) // TODO - this may need to be optional.
 
   def defaultEnvTask = installPackages map {
     pkgs =>
@@ -69,48 +69,72 @@ object SphinxSupport {
     Map("version" -> binV, "release" -> version) 
   }
 
-  def installPackagesTask = (sphinxRunner, sphinxPackages, target, streams) map {
-    (runner, packages, baseTarget, s) => packages map { p => runner.installPackage(p, baseTarget, s.log) }
+  def installPackagesTask = Def.task {
+    val runner = sphinxRunner.value
+    val packages = sphinxPackages.value
+    val s = streams.value
+    packages map { p => runner.installPackage(p, target.value, s.log) }
   }
 
   def combineSphinxInputs = {
     (sourceDirectory, includeFilter in generate, excludeFilter in generate, sphinxIncremental, sphinxTags, sphinxProperties, sphinxEnv) map SphinxInputs
   }
 
-  def generateHtmlTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
-    (runner, inputs, baseTarget, cacheDir, s) => runner.generateHtml(inputs, baseTarget, cacheDir, s.log)
+  def generateHtmlTask = Def.task {
+    val runner = sphinxRunner.value
+    val inputs = sphinxInputs.value
+    val t = target.value
+    val s = streams.value
+    runner.generateHtml(inputs, t, s.cacheDirectory, s.log)
   }
 
-  def generatePdfTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
-    (runner, inputs, baseTarget, cacheDir, s) => runner.generatePdf(inputs, baseTarget, cacheDir, s.log)
+  def generatePdfTask = Def.task {
+    val runner = sphinxRunner.value
+    val inputs = sphinxInputs.value
+    val t = target.value
+    val s = streams.value
+    runner.generatePdf(inputs, t, s.cacheDirectory, s.log)
   }
 
-  def generateEpubTask = (sphinxRunner, sphinxInputs, target, cacheDirectory, streams) map {
-    (runner, inputs, baseTarget, cacheDir, s) => runner.generateEpub(inputs, baseTarget, cacheDir, s.log)
+  def generateEpubTask = Def.task {
+    val runner = sphinxRunner.value
+    val inputs = sphinxInputs.value
+    val t = target.value
+    val s = streams.value
+    runner.generateEpub(inputs, t, s.cacheDirectory, s.log)
   }
 
-  def ifEnabled[T](key: TaskKey[T]): Initialize[Task[Option[T]]] = ifEnabled0[T,Option[T]](key, _ map Some.apply, None)
-  def seqIfEnabled[T](key: TaskKey[Seq[T]]): Initialize[Task[Seq[T]]] = ifEnabled0[Seq[T], Seq[T]](key, identity, Nil)
+  def ifEnabled[T](key: TaskKey[T]): Def.Initialize[Task[Option[T]]] = ifEnabled0[T,Option[T]](key, _ map Some.apply, None)
+  def seqIfEnabled[T](key: TaskKey[Seq[T]]): Def.Initialize[Task[Seq[T]]] = ifEnabled0[Seq[T], Seq[T]](key, identity, Nil)
 
-  private[this] def ifEnabled0[S,T](key: TaskKey[S], f: Task[S] => Task[T], nil: T): Initialize[Task[T]] = (enableOutput in key in key.scope, key.task) flatMap {
+  private[this] def ifEnabled0[S,T](key: TaskKey[S], f: Task[S] => Task[T], nil: T): Def.Initialize[Task[T]] = (enableOutput in key in key.scope, key.task) flatMap {
     (enabled, enabledTask) => if (enabled) f(enabledTask) else task { nil }
   }
 
-  def generateTask = (generatedHtml, generatedPdf, generatedEpub, target, cacheDirectory, streams) map {
-    (htmlOutput, pdfOutputs, epubOutput, baseTarget, cacheDir, s) => {
-      val target = baseTarget / "docs"
-      val cache = cacheDir / "sphinx" / "docs"
-      val htmlMapping = htmlOutput.toSeq flatMap { html => (html ***).get x rebase(html, target) }
-      val pdfMapping = pdfOutputs map { pdf => (pdf, target / pdf.name) }
-      val epubMapping = epubOutput.toSeq flatMap { epub => (epub ** "*.epub").get x rebase(epub, target) }
-      val mapping = htmlMapping ++ pdfMapping ++ epubMapping
-      Sync(cache)(mapping)
-      s.log.info("Sphinx documentation generated: %s" format target)
-      target
+  def generateTask = Def.task {
+    val htmlOutput = generatedHtml.value
+    val pdfOutputs = generatedPdf.value
+    val epubOutput = generatedEpub.value
+    val s = streams.value
+    val cacheDir = s.cacheDirectory
+    val t = target.value / "docs"
+    val cache = cacheDir / "sphinx" / "docs"
+    val htmlMapping = htmlOutput.toSeq flatMap { html =>
+      (html ***).get x rebase(html, t)
     }
+    val pdfMapping = pdfOutputs map { pdf => (pdf, t / pdf.name) }
+    val epubMapping = epubOutput.toSeq flatMap { epub =>
+      (epub ** "*.epub").get x rebase(epub, t)
+    }
+    val mapping = htmlMapping ++ pdfMapping ++ epubMapping
+    Sync(cache)(mapping)
+    s.log.info("Sphinx documentation generated: %s" format t)
+    t
   }
 
-  def mappingsTask = (generate, includeFilter) map {
-    (output, include) => output ** include --- output x relativeTo(output)
+  def mappingsTask = Def.task {
+    val output = generate.value
+    val include = includeFilter.value
+    output ** include --- output x relativeTo(output)
   }
 }

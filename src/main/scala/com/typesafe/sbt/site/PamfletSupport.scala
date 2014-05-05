@@ -4,23 +4,26 @@ package site
 import sbt._
 import Keys._
 
-@deprecated("0.7.0","Pamflet support was disabled in version 0.7.0 due to lack of Scala 2.10 binaries for pamflet")
 object PamfletSupport {
   val Pamflet = config("pamflet")
 
-  val settings: Seq[Setting[_]] =
+  def settings(config: Configuration = Pamflet): Seq[Setting[_]] =
+    Generator.directorySettings(config) ++
     Seq(
-      sourceDirectory in Pamflet <<= sourceDirectory(_ / "pamflet"),
-      target in Pamflet <<= target(_ / "pamflet"),
       // Note: txt is used for search index.
-      includeFilter in Pamflet := AllPassFilter
-    ) ++ inConfig(Pamflet)(Seq(
+      includeFilter in config := AllPassFilter
+    ) ++ inConfig(config)(Seq(
       mappings <<= (sourceDirectory, target, includeFilter) map PamfletRunner.run
-    ))
+    )) ++
+    Generator.watchSettings(config) // TODO - this may need to be optional.
 }
 
+import pamflet._
 
 object PamfletRunner {
-  def run(input: File, output: File, includeFilter: FileFilter): Seq[(File, String)] = 
-    sys.error("Pamflet support was disabled in version 0.7.0 due to lack of Scala 2.10 binaries")
+  def run(input: File, output: File, includeFilter: FileFilter): Seq[(File, String)] = {
+    val storage = FileStorage(input)
+    Produce(storage.globalized, output)
+    output ** includeFilter --- output x relativeTo(output)
+  }
 }
