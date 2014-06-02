@@ -9,9 +9,9 @@ It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 Add this to your `project/plugins.sbt`:
 
-    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.7.2")
+    addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.0")
 
-*Note: this requires sbt 0.12 - for sbt 0.11 see the [0.4 version][old] of this plugin.*
+*Note: this requires sbt 0.13 - for sbt 0.12 see the [0.7.2 version][old] of this plugin.*
 
 And then in your `build.sbt` file:
 
@@ -125,6 +125,6 @@ To also publish this zip file when running `publish`, add the following to your 
     site.publishSite
 
 
-[old]: https://github.com/sbt/sbt-site/tree/0.4.0
+[old]: https://github.com/sbt/sbt-site/tree/0.7.2
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [Pamflet]: http://pamflet.databinder.net
