@@ -1,12 +1,16 @@
 import com.typesafe.sbt.SbtGit._
 
-versionWithGit
+sbtPlugin := true
+
+name := "sbt-site"
+
+organization := "com.typesafe.sbt"
 
 scalaVersion := "2.10.4"
 
-git.baseVersion := "1.0"
+versionWithGit
 
-sbtPlugin := true
+git.baseVersion := "1.0"
 
 sbtVersion in Global := {
   scalaBinaryVersion.value match {
@@ -21,24 +25,19 @@ crossScalaVersions in Global := Seq("2.9.2", "2.10.4")
 
 crossScalaVersions := Seq("2.9.2", "2.10.4")
 
-name := "sbt-site"
-
-organization := "com.typesafe.sbt"
-
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
 
 publishMavenStyle := false
 
-publishTo <<= (version) { v =>
-  def scalasbt(repo: String) = ("scalasbt " + repo, "http://repo.scala-sbt.org/scalasbt/sbt-plugin-" + repo)
-  val (name, repo) = if (v.endsWith("-SNAPSHOT")) scalasbt("snapshots") else scalasbt("releases")
-  Some(Resolver.url(name, url(repo))(Resolver.ivyStylePatterns))
+publishTo := {
+  if (isSnapshot.value) Some(Classpaths.sbtPluginSnapshots)
+  else Some(Classpaths.sbtPluginReleases)
 }
 
 libraryDependencies ++= Seq(
-  "net.databinder" %% "unfiltered-jetty" % "0.6.8",
-  "net.databinder" %% "pamflet-library" % "0.6.0",
-  "org.yaml" % "snakeyaml" % "1.13"
+  "net.databinder" %% "unfiltered-jetty" % "0.8.0",
+  "net.databinder" %% "pamflet-library"  % "0.6.0",
+  "org.yaml"       %  "snakeyaml"        % "1.13"
 )
 
 site.settings
@@ -49,11 +48,4 @@ scriptedSettings
 
 scriptedLaunchOpts += "-Dproject.version="+version.value
 
-sbtVersion in Global := {
-  scalaBinaryVersion.value match {
-    case "2.10" => "0.13.0"
-    case "2.9.2" => "0.12.4"
-  }
-}
-
-scalacOptions += "-deprecation"
+scalacOptions ++= Seq("-deprecation", "-unchecked")
