@@ -35,7 +35,7 @@ publishTo := {
 }
 
 libraryDependencies ++= Seq(
-  "net.databinder" %% "unfiltered-jetty" % "0.8.0",
+  "net.databinder" %% "unfiltered-jetty" % "0.6.8",
   "net.databinder" %% "pamflet-library"  % "0.6.0",
   "org.yaml"       %  "snakeyaml"        % "1.13"
 )
