@@ -101,6 +101,14 @@ simply simply add the following to your `build.sbt` file:
 
     site.nanocSupport()
 
+### Asciidoctor site generation ###
+
+The site plugin has direct support for building Asciidoctor projects locally. This assumes
+you have a asciidoctor project under the `src/asciidoctor` directory. To enable asciidoctor site
+generation, simply add the following to your `build.sbt` file:
+
+    site.asciidoctorSupport()
+
 ### Changing the source directory ###
 
 To change the source directory for static site files, use the `siteSourceDirectory` alias:
