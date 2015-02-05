@@ -8,7 +8,8 @@ organization := "com.typesafe.sbt"
 
 scalaVersion := "2.10.4"
 
-versionWithGit
+//versionWithGit
+version := "0.8.2-SNAPSHOT"
 
 git.baseVersion := "1.0"
 
@@ -37,7 +38,8 @@ publishTo := {
 libraryDependencies ++= Seq(
   "net.databinder" %% "unfiltered-jetty" % "0.6.8",
   "net.databinder" %% "pamflet-library"  % "0.6.0",
-  "org.yaml"       %  "snakeyaml"        % "1.13"
+  "org.yaml"        % "snakeyaml"        % "1.13",
+  "org.asciidoctor" % "asciidoctorj"     % "1.5.2"
 )
 
 site.settings

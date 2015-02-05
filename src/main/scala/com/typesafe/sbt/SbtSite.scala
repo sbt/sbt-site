@@ -1,5 +1,6 @@
 package com.typesafe.sbt
 
+import com.typesafe.sbt.site.site.AsciidoctorSupport
 import sbt._
 import Keys._
 import site.{ JekyllSupport, PamfletSupport, Preview, SphinxSupport, NanocSupport }
@@ -57,6 +58,8 @@ object SbtSite extends Plugin {
     /** Includes Nanoc generated site under the root directory. */
     def nanocSupport(alias: String = ""): Seq[Setting[_]] =
       NanocSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in NanocSupport.Nanoc, alias))
+    def asciidoctorSupport(alias: String = ""): Seq[Setting[_]] =
+      AsciidoctorSupport.settings ++ Seq(addMappingsToSiteDir(mappings in AsciidoctorSupport.Asciidoctor, alias))
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
   }
 
