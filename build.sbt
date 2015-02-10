@@ -8,8 +8,7 @@ organization := "com.typesafe.sbt"
 
 scalaVersion := "2.10.4"
 
-//versionWithGit
-version := "0.8.2-SNAPSHOT"
+versionWithGit
 
 git.baseVersion := "1.0"
 
