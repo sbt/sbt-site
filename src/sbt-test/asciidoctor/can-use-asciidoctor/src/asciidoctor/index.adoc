@@ -1,0 +1,15 @@
+= Hello, AsciiDoc!
+Doc Writer <doc@example.com>
+:project-version:
+
+An introduction to http://asciidoc.org[AsciiDoc].
+
+This is passed from the SBT build: {project-version}
+
+== First Section
+
+* item 1
+* item 2
+
+[source,ruby]
+puts "Hello, World!"
