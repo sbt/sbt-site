@@ -1,4 +1,17 @@
 import com.typesafe.sbt.SbtGit._
+import bintray.Keys._
+
+bintrayPublishSettings
+
+publishMavenStyle := false
+
+bintrayOrganization in bintray := Some("sbt")
+
+name in bintray := "sbt-site"
+
+repository in bintray := "sbt-plugin-releases"
+
+licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
 
 sbtPlugin := true
 
@@ -26,13 +39,6 @@ crossScalaVersions in Global := Seq("2.9.2", "2.10.4")
 crossScalaVersions := Seq("2.9.2", "2.10.4")
 
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
-
-publishMavenStyle := false
-
-publishTo := {
-  if (isSnapshot.value) Some(Classpaths.sbtPluginSnapshots)
-  else Some(Classpaths.sbtPluginReleases)
-}
 
 libraryDependencies ++= Seq(
   "net.databinder" %% "unfiltered-jetty" % "0.6.8",
