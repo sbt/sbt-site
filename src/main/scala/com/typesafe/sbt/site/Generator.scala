@@ -25,7 +25,7 @@ object Generator {
       (gem, version) <- requirements
       error <- makeError(gem, version, getGemVersion(gem))
     } yield error
-    if(!errors.isEmpty)
+    if(errors.nonEmpty)
       sys.error(errors.mkString("Gem version requirements failed:\n\t", "\n\t", "\n"))
   }
 

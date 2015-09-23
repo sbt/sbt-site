@@ -3,7 +3,6 @@ package site
 
 import sbt._
 import sbt.Keys._
-import sbt.Project.Initialize
 import com.typesafe.sbt.sphinx._
 
 object SphinxSupport {
@@ -120,11 +119,11 @@ object SphinxSupport {
     val t = target.value / "docs"
     val cache = cacheDir / "sphinx" / "docs"
     val htmlMapping = htmlOutput.toSeq flatMap { html =>
-      (html ***).get x rebase(html, t)
+      html.***.get pair rebase(html, t)
     }
     val pdfMapping = pdfOutputs map { pdf => (pdf, t / pdf.name) }
     val epubMapping = epubOutput.toSeq flatMap { epub =>
-      (epub ** "*.epub").get x rebase(epub, t)
+      (epub ** "*.epub").get pair rebase(epub, t)
     }
     val mapping = htmlMapping ++ pdfMapping ++ epubMapping
     Sync(cache)(mapping)
@@ -135,6 +134,6 @@ object SphinxSupport {
   def mappingsTask = Def.task {
     val output = generate.value
     val include = includeFilter.value
-    output ** include --- output x relativeTo(output)
+    output ** include --- output pair relativeTo(output)
   }
 }

@@ -103,7 +103,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
     val cache = cacheDir / "sphinx" / builder
     val cached = FileFunction.cached(cache)(FilesInfo.hash, FilesInfo.exists) { (in, out) =>
       val changes = in.modified
-      if (!changes.isEmpty) {
+      if (changes.nonEmpty) {
         val tagList = if (tags.isEmpty) "" else tags.mkString(" (", ", ", ")")
         val desc = "%s%s" format (builder, tagList)
         log.info("Generating Sphinx %s documentation..." format desc)

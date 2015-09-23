@@ -1,5 +1,4 @@
 package com.typesafe.sbt.site
-package site
 
 import java.util
 
@@ -43,7 +42,7 @@ object AsciidoctorRunner {
       IO.copyDirectory(inputImages, outputImages, overwrite = true)
     }
     Thread.currentThread().setContextClassLoader(oldContextClassLoader)
-    output ** includeFilter --- output x relativeTo(output)
+    output ** includeFilter --- output pair relativeTo(output)
   }
 
 }
