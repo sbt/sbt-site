@@ -1,5 +1,7 @@
 # sbt-site #
 
+[![Build Status](https://travis-ci.org/metasim/sbt-site.svg?branch=metasim/travis)](https://travis-ci.org/metasim/sbt-site)
+
 This is an sbt plugin that can generate project websites.
 
 It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
@@ -88,7 +90,7 @@ The site plugin has direct support for building [Pamflet](http://pamflet.databin
     site.pamfletSupport()
 
 To place pamflet HTML under a directory, run:
-    
+
     site.pamfletSupport("manual")
 
 The above will place pamflet generated HTML under the `manual/` directory in the generated site.
