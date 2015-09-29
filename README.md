@@ -82,7 +82,7 @@ generation, simply add the following to your `build.sbt` file:
 
 ### Pamflet generation ###
 
-The site plugin has direct support for building [Pamflet](pamflet.databinder.net) projects.   This assumes you have a pamflet project under the `src/pamflet` directory.   To enable pamflet site generation, simply add the following to your `build.sbt` file:
+The site plugin has direct support for building [Pamflet](http://pamflet.databinder.net/) projects.   This assumes you have a pamflet project under the `src/pamflet` directory.   To enable pamflet site generation, simply add the following to your `build.sbt` file:
 
 
     site.pamfletSupport()
