@@ -1,5 +1,7 @@
 # sbt-site #
 
+[![Build Status](https://travis-ci.org/sbt/sbt-site.svg)](https://travis-ci.org/sbt/sbt-site)
+
 [![Join the chat at https://gitter.im/sbt/sbt-site](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sbt/sbt-site?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is an sbt plugin that can generate project websites.
@@ -90,7 +92,7 @@ The site plugin has direct support for building [Pamflet](http://pamflet.databin
     site.pamfletSupport()
 
 To place pamflet HTML under a directory, run:
-    
+
     site.pamfletSupport("manual")
 
 The above will place pamflet generated HTML under the `manual/` directory in the generated site.
