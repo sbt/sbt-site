@@ -1,5 +1,7 @@
 # sbt-site #
 
+[![Join the chat at https://gitter.im/sbt/sbt-site](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sbt/sbt-site?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is an sbt plugin that can generate project websites.
 
 It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
