@@ -3,6 +3,8 @@
 
 [![Join the chat at https://gitter.im/sbt/sbt-site](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sbt/sbt-site?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site-imported/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
+
 This is an sbt plugin that can generate project websites.
 
 It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
@@ -11,7 +13,7 @@ It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 Add this to your `project/plugins.sbt`:
 
 ```
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.1")
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.2")
 ```
 
 _Note: this requires sbt 0.13 - for sbt 0.12 see the [0.7.2 version][old] of this plugin._
