@@ -127,7 +127,7 @@ This will default to putting the scaladoc under the `latest/api` directory on th
 site.includeScaladoc("alternative/directory")
 ```
 
-## Previewing the site
+## Previewing the Site
 To preview your generated site, run `previewSite` to open a web server. Direct your web browser to [http://localhost:4000/](http://localhost:4000/) to view your site.
 
 ## Packaging and Publishing
