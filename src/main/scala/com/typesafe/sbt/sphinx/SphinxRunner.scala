@@ -3,7 +3,7 @@ package sphinx
 
 import sbt._
 import Keys._
-import SbtSite.SiteKeys.siteMappings
+
 
 /**
  * Combined inputs for Sphinx runner.

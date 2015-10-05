@@ -3,34 +3,44 @@ package site
 
 import sbt._
 import Keys._
-import SbtSite.SiteKeys.siteMappings
 import collection.immutable
 import java.io.FileReader
+/** Nanoc generator. */
+object NanocSupport extends AutoPlugin {
+  override def requires = SbtSite
+  override def trigger = noTrigger
+  object autoImport {
+    val Nanoc = config("nanoc")
 
-object NanocSupport {
-  val Nanoc = config("nanoc")
+    val requiredGems = SettingKey[Map[String, String]](
+      "nanoc-required-gems", "Required gem + versions for this build.")
+    val checkGems = TaskKey[Unit](
+      "nanoc-check-gems", "Tests whether or not all required gems are available.")
+  }
+  import autoImport._
+  override def projectSettings: Seq[Setting[_]] =
+    SiteHelpers.directorySettings(Nanoc) ++
+      Seq(
+        includeFilter in Nanoc := AllPassFilter,
+        requiredGems := Map.empty
+      ) ++ inConfig(Nanoc)(
+      Seq(
+        checkGems := SiteHelpers.checkGems(requiredGems.value, streams.value),
+        mappings := {
+          val cg = checkGems.value
+          generate(
+            sourceDirectory.value, target.value, includeFilter.value, streams.value)
+        },
+        SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
+      )) ++
+      SiteHelpers.watchSettings(Nanoc)
 
-  val requiredGems = SettingKey[Map[String,String]]("nanoc-required-gems", "Required gem + versions for this build.")
-  val checkGems = TaskKey[Unit]("nanoc-check-gems", "Tests whether or not all required gems are available.")
-  def settings(config: Configuration = Nanoc): Seq[Setting[_]] =
-    Generator.directorySettings(config) ++
-    Seq(
-      includeFilter in config := AllPassFilter,
-      requiredGems := Map.empty
-    ) ++ inConfig(config)(Seq(
-      checkGems := Generator.checkGems(requiredGems.value, streams.value),
-      mappings := {
-        val cg = checkGems.value
-        NanocImpl.generate(sourceDirectory.value, target.value, includeFilter.value, streams.value)
-      }
-    )) ++
-    Generator.watchSettings(config) // TODO - this may need to be optional.
-}
-
-/** Helper class with implementations of tasks. */
-object NanocImpl {
   // TODO - Add command line args and the like.
-  final def generate(src: File, target: File, inc: FileFilter, s: TaskStreams): Seq[(File, String)] = {
+  private[sbt] def generate(
+    src: File,
+    target: File,
+    inc: FileFilter,
+    s: TaskStreams): Seq[(File, String)] = {
     // Run nanoc
     sbt.Process(Seq("nanoc"), Some(src)) ! s.log match {
       case 0 => ()
@@ -38,7 +48,8 @@ object NanocImpl {
     }
     val output = outputDir(src)
     if (output.getCanonicalPath != target.getCanonicalPath) {
-      s.log.warn(s"""Output directory ${output.toString} does not match the target ${target.toString}.
+      s.log.warn(
+        s"""Output directory ${output.toString} does not match the target ${target.toString}.
 We are going to copy the files over, but you might want to change
 ${yamlFileName(src)} so clean task cleans.""")
       IO.copyDirectory(output, target, overwrite = true, preserveLastModified = true)
@@ -46,13 +57,13 @@ ${yamlFileName(src)} so clean task cleans.""")
 
     // Figure out what was generated.
     for {
-      (file, name) <- (target ** inc --- target pair relativeTo(target))
+      (file, name) <- target ** inc --- target pair relativeTo(target)
     } yield file -> name
   }
 
-  def yamlFileName(src: File): File = src / "nanoc.yaml"
+  private[sbt] def yamlFileName(src: File): File = src / "nanoc.yaml"
 
-  def outputDir(src: File): File = {
+  private[sbt] def outputDir(src: File): File = {
     val yaml = nanocYaml(yamlFileName(src))
     // it's output_dir in nanoc 3.x, and according to http://nanoc.ws/docs/nanoc-4-upgrade-guide/ it's
     // going to be changed to build_dir
@@ -64,12 +75,12 @@ ${yamlFileName(src)} so clean task cleans.""")
     }
   }
 
-  def nanocYaml(configFile: File): immutable.Map[String, Any] = {
+  private[sbt] def nanocYaml(configFile: File): immutable.Map[String, Any] = {
     import org.yaml.snakeyaml.Yaml
     import java.util.{Map => JMap}
     import collection.JavaConversions._
     if (!configFile.exists) {
-      sys.error(s"""$configFile is not found!""")
+      sys.error( s"""$configFile is not found!""")
     }
     val yaml = new Yaml()
     val x = yaml.load(new FileReader(configFile)).asInstanceOf[JMap[String, Any]]

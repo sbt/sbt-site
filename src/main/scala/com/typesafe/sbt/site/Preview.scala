@@ -3,12 +3,22 @@ package site
 
 import sbt._
 import unfiltered.util._
-import SbtSite.SiteKeys._
 
-object Preview {
+object Preview extends AutoPlugin {
+  override def requires = SbtSite
+  override def trigger = allRequirements
 
-  //@TODO Add configuraiton to make server just local
-  val settings: Seq[Setting[_]] = Seq(
+  object autoImport {
+    val previewSite = TaskKey[Unit]("preview-site", "Launches a jetty server that serves your generated site from the target directory")
+    val previewFixedPort = SettingKey[Option[Int]]("previewFixedPort") in previewSite
+    val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
+  }
+  import SbtSite.autoImport._
+  import autoImport._
+
+
+  //@TODO Add configuration to make server just local
+  override val projectSettings: Seq[Setting[_]] = Seq(
     previewSite <<= (makeSite, previewFixedPort, previewLaunchBrowser) map { (file, portOption, browser) =>
       val port = portOption getOrElse Port.any
       val server = createServer(file, port) start()
@@ -29,6 +39,6 @@ object Preview {
   )
 
   def createServer(siteTarget: File, port: Int) =
-    unfiltered.jetty.Http(port) resources (new URL(siteTarget.toURI.toURL, "."))
+    unfiltered.jetty.Http(port) resources new URL(siteTarget.toURI.toURL, ".")
 
 }

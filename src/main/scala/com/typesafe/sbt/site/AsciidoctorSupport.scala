@@ -2,26 +2,35 @@ package com.typesafe.sbt.site
 
 import java.util
 
+import com.typesafe.sbt.SbtSite
 import org.asciidoctor.Asciidoctor.Factory
 import org.asciidoctor.{AsciiDocDirectoryWalker, Options, SafeMode}
 import sbt.Keys._
 import sbt._
+object AsciidoctorSupport extends AutoPlugin {
+  override def requires = SbtSite
+  override def trigger = noTrigger
 
-object AsciidoctorSupport {
+  object autoImport {
+    val Asciidoctor = config("asciidoctor")
+  }
+  import autoImport._
+  override def projectSettings: Seq[Setting[_]] = Seq(
+    sourceDirectory in Asciidoctor <<= sourceDirectory(_ / "asciidoctor"),
+    target in Asciidoctor <<= target(_ / "asciidoctor"),
+    includeFilter in Asciidoctor := AllPassFilter) ++
+    inConfig(Asciidoctor)(
+      Seq(
+        mappings <<= (sourceDirectory, target, includeFilter, version) map run,
+        SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
+      )
+    )
 
-  val Asciidoctor = config("asciidoctor")
-
-  val settings: Seq[Setting[_]] =
-    Seq(
-      sourceDirectory in Asciidoctor <<= sourceDirectory(_ / "asciidoctor"),
-      target in Asciidoctor <<= target(_ / "asciidoctor"),
-      includeFilter in Asciidoctor := AllPassFilter) ++ inConfig(Asciidoctor)(Seq(
-      mappings <<= (sourceDirectory, target, includeFilter, version) map AsciidoctorRunner.run))
-}
-
-object AsciidoctorRunner {
-
-  def run(input: File, output: File, includeFilter: FileFilter, version: String): Seq[(File, String)] = {
+  private def run(
+    input: File,
+    output: File,
+    includeFilter: FileFilter,
+    version: String): Seq[(File, String)] = {
     val oldContextClassLoader = Thread.currentThread().getContextClassLoader
     Thread.currentThread().setContextClassLoader(this.getClass.getClassLoader)
     val asciidoctor = Factory.create()
@@ -44,5 +53,4 @@ object AsciidoctorRunner {
     Thread.currentThread().setContextClassLoader(oldContextClassLoader)
     output ** includeFilter --- output pair relativeTo(output)
   }
-
 }
