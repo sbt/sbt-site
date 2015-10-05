@@ -1,10 +1,11 @@
-package com.typesafe.sbt
-package site
+package com.typesafe.sbt.site.nanoc
 
-import sbt._
-import Keys._
-import collection.immutable
 import java.io.FileReader
+import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
+import sbt.Keys._
+import sbt._
+
+import scala.collection.immutable
 /** Nanoc generator. */
 object NanocSupport extends AutoPlugin {
   override def requires = SbtSite
@@ -76,8 +77,10 @@ ${yamlFileName(src)} so clean task cleans.""")
   }
 
   private[sbt] def nanocYaml(configFile: File): immutable.Map[String, Any] = {
+    import java.util.{Map ⇒ JMap}
+
     import org.yaml.snakeyaml.Yaml
-    import java.util.{Map => JMap}
+
     import collection.JavaConversions._
     if (!configFile.exists) {
       sys.error( s"""$configFile is not found!""")

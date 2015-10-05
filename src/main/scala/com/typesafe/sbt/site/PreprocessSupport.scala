@@ -1,7 +1,6 @@
 package com.typesafe.sbt.site
 
-import com.typesafe.sbt.SbtSite
-import com.typesafe.sbt.SbtSite._
+import SbtSite._
 import sbt.Keys._
 import sbt._
 

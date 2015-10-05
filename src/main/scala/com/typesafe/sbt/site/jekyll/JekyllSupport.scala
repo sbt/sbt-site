@@ -1,6 +1,6 @@
-package com.typesafe.sbt
-package site
+package com.typesafe.sbt.site.jekyll
 
+import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
 import sbt.Keys._
 import sbt._
 object JekyllSupport extends AutoPlugin {

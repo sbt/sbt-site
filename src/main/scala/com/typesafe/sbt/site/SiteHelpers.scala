@@ -8,7 +8,7 @@ import sbt._
  * Utility/support functions.
  */
 object SiteHelpers {
-  import com.typesafe.sbt.SbtSite.siteMappings
+  import SbtSite.siteMappings
   /** Convenience functions to add a task of mappings to a site under a nested directory. */
   def addMappingsToSiteDir(
     mappings: TaskKey[Seq[(File, String)]],

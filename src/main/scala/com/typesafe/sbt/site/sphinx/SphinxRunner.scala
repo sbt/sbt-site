@@ -1,5 +1,4 @@
-package com.typesafe.sbt
-package sphinx
+package com.typesafe.sbt.site.sphinx
 
 import sbt._
 import Keys._

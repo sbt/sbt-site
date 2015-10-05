@@ -1,7 +1,6 @@
-package com.typesafe.sbt
-package site
+package com.typesafe.sbt.site.sphinx
 
-import com.typesafe.sbt.sphinx._
+import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
 import sbt.Keys._
 import sbt._
 

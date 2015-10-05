@@ -1,8 +1,7 @@
-package com.typesafe.sbt.site
+package com.typesafe.sbt.site.asciidoctor
 
 import java.util
-
-import com.typesafe.sbt.SbtSite
+import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
 import org.asciidoctor.Asciidoctor.Factory
 import org.asciidoctor.{AsciiDocDirectoryWalker, Options, SafeMode}
 import sbt.Keys._

@@ -1,8 +1,7 @@
-package com.typesafe.sbt
+package com.typesafe.sbt.site
 
+import sbt.Keys._
 import sbt._
-import Keys._
-import com.typesafe.sbt.site._
 
 object SbtSite extends AutoPlugin {
   override def trigger = allRequirements
