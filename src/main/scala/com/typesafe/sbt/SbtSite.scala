@@ -1,9 +1,9 @@
 package com.typesafe.sbt
 
-import com.typesafe.sbt.site.site.AsciidoctorSupport
+import com.typesafe.sbt.site.AsciidoctorSupport
 import sbt._
 import Keys._
-import site.{ JekyllSupport, PamfletSupport, Preview, SphinxSupport, NanocSupport }
+import com.typesafe.sbt.site._
 
 
 object SbtSite extends Plugin {
@@ -60,6 +60,8 @@ object SbtSite extends Plugin {
       NanocSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in NanocSupport.Nanoc, alias))
     def asciidoctorSupport(alias: String = ""): Seq[Setting[_]] =
       AsciidoctorSupport.settings ++ Seq(addMappingsToSiteDir(mappings in AsciidoctorSupport.Asciidoctor, alias))
+    def preprocessSite(alias: String = ""): Seq[Setting[_]] =
+      PreprocessSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in PreprocessSupport.Preprocess, alias))
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
   }
 
@@ -71,7 +73,7 @@ object SbtSite extends Plugin {
   def selectSubpaths(dir: File, filter: FileFilter): Seq[(File, String)] = Path.selectSubpaths(dir, filter).toSeq
 
   def copySite(dir: File, cacheDir: File, maps: Seq[(File, String)]): File = {
-    val concrete = maps map { case (file, target) => (file, dir / target) }
+    val concrete = maps map { case (file, dest) => (file, dir / dest) }
     Sync(cacheDir / "make-site")(concrete)
     dir
   }

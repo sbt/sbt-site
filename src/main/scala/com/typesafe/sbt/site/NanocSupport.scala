@@ -41,12 +41,12 @@ object NanocImpl {
       s.log.warn(s"""Output directory ${output.toString} does not match the target ${target.toString}.
 We are going to copy the files over, but you might want to change
 ${yamlFileName(src)} so clean task cleans.""")
-      IO.copyDirectory(output, target, true, true)
+      IO.copyDirectory(output, target, overwrite = true, preserveLastModified = true)
     }
 
     // Figure out what was generated.
     for {
-      (file, name) <- (target ** inc --- target x relativeTo(target))
+      (file, name) <- (target ** inc --- target pair relativeTo(target))
     } yield file -> name
   }
 

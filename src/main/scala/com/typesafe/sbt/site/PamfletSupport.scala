@@ -24,6 +24,6 @@ object PamfletRunner {
   def run(input: File, output: File, includeFilter: FileFilter): Seq[(File, String)] = {
     val storage = FileStorage(input)
     Produce(storage.globalized, output)
-    output ** includeFilter --- output x relativeTo(output)
+    output ** includeFilter --- output pair relativeTo(output)
   }
 }

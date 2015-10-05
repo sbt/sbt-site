@@ -39,7 +39,7 @@ object JekyllImpl {
     }
     // Figure out what was generated.
     for {
-      (file, name) <- (target ** inc --- target x relativeTo(target))
+      (file, name) <- (target ** inc --- target pair relativeTo(target))
     } yield file -> name
   }
 }
