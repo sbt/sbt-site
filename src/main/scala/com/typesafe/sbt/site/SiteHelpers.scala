@@ -8,13 +8,13 @@ import sbt._
  * Utility/support functions.
  */
 object SiteHelpers {
-  import SbtSitePlugin.siteMappings
+  import SitePlugin.siteMappings
   /** Convenience functions to add a task of mappings to a site under a nested directory. */
   def addMappingsToSiteDir(
     mappings: TaskKey[Seq[(File, String)]],
-    nestedDirectory: String): Setting[_] =
-    siteMappings <++= mappings map { m =>
-      for ((f, d) <- m) yield (f, nestedDirectory + "/" + d)
+    nestedDirectory: SettingKey[String]): Setting[_] =
+    siteMappings <++= (mappings, nestedDirectory) map { (m, n) =>
+      for ((f, d) <- m) yield (f, n + "/" + d)
     }
 
   def selectSubpaths(dir: File, filter: FileFilter): Seq[(File, String)] =

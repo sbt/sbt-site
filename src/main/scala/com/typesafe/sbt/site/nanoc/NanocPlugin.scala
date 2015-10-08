@@ -1,14 +1,15 @@
 package com.typesafe.sbt.site.nanoc
 
 import java.io.FileReader
-import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
+import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
+import com.typesafe.sbt.site.{SitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
 
 import scala.collection.immutable
 /** Nanoc generator. */
 object NanocPlugin extends AutoPlugin {
-  override def requires = SbtSitePlugin
+  override def requires = SitePlugin
   override def trigger = noTrigger
   object autoImport {
     val Nanoc = config("nanoc")
@@ -24,17 +25,20 @@ object NanocPlugin extends AutoPlugin {
       Seq(
         includeFilter in Nanoc := AllPassFilter,
         requiredGems := Map.empty
-      ) ++ inConfig(Nanoc)(
-      Seq(
-        checkGems := SiteHelpers.checkGems(requiredGems.value, streams.value),
-        mappings := {
-          val cg = checkGems.value
-          generate(
-            sourceDirectory.value, target.value, includeFilter.value, streams.value)
-        },
-        SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
-      )) ++
-      SiteHelpers.watchSettings(Nanoc)
+      ) ++
+      inConfig(Nanoc)(
+        Seq(
+          checkGems := SiteHelpers.checkGems(requiredGems.value, streams.value),
+          mappings := {
+            val cg = checkGems.value
+            generate(
+              sourceDirectory.value, target.value, includeFilter.value, streams.value)
+          },
+          siteSubdirName := ""
+        )
+      ) ++
+      SiteHelpers.watchSettings(Nanoc) ++
+      SiteHelpers.addMappingsToSiteDir(mappings in Nanoc, siteSubdirName in Nanoc)
 
   // TODO - Add command line args and the like.
   private[sbt] def generate(

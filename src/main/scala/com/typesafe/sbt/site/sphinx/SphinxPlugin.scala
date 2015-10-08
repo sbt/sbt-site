@@ -1,12 +1,12 @@
 package com.typesafe.sbt.site.sphinx
 
-import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
+import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
+import com.typesafe.sbt.site.{SitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
-
 /** Sphinx generator. */
 object SphinxPlugin extends AutoPlugin {
-  override def requires = SbtSitePlugin
+  override def requires = SitePlugin
   override def trigger = noTrigger
 
   object autoImport {
@@ -71,15 +71,14 @@ object SphinxPlugin extends AutoPlugin {
         // For now, we default to passing the version in as a property.
         sphinxProperties ++= defaultVersionProperties(version.value),
         sphinxEnv <<= defaultEnvTask,
-        SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
-      )) ++
-    SiteHelpers.watchSettings(Sphinx)
+        siteSubdirName := ""
+      )
+    ) ++
+    SiteHelpers.watchSettings(Sphinx) ++
+    SiteHelpers.addMappingsToSiteDir(mappings in Sphinx, siteSubdirName in Sphinx)
 
   def defaultEnvTask = installPackages map {
-    pkgs =>
-      Map(
-        "PYTHONPATH" -> Path.makeString(pkgs)
-      )
+    pkgs => Map("PYTHONPATH" -> Path.makeString(pkgs))
   }
 
   def defaultVersionProperties(version: String) = {

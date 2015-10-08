@@ -1,10 +1,11 @@
 package com.typesafe.sbt.site.jekyll
 
-import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
+import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
+import com.typesafe.sbt.site.{SitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
 object JekyllPlugin extends AutoPlugin {
-  override def requires = SbtSitePlugin
+  override def requires = SitePlugin
   override def trigger = noTrigger
 
   object autoImport {
@@ -20,16 +21,19 @@ object JekyllPlugin extends AutoPlugin {
       Seq(
         includeFilter in Jekyll := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "CNAME" | ".nojekyll"),
         requiredGems := Map.empty
-      ) ++ inConfig(Jekyll)(
-      Seq(
-        checkGems := SiteHelpers.checkGems(requiredGems.value, streams.value),
-        mappings := {
-          val cg = checkGems.value
-          generate(sourceDirectory.value, target.value, includeFilter.value, streams.value)
-        },
-        SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
-      )) ++ SiteHelpers.watchSettings(Jekyll)
-
+      ) ++
+      inConfig(Jekyll)(
+        Seq(
+          checkGems := SiteHelpers.checkGems(requiredGems.value, streams.value),
+          mappings := {
+            val cg = checkGems.value
+            generate(sourceDirectory.value, target.value, includeFilter.value, streams.value)
+          },
+          siteSubdirName := ""
+        )
+      ) ++
+      SiteHelpers.watchSettings(Jekyll) ++
+      SiteHelpers.addMappingsToSiteDir(mappings in Jekyll, siteSubdirName in Jekyll)
 
   // TODO - Add command line args and the like.
   final def generate(

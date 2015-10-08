@@ -1,13 +1,14 @@
 package com.typesafe.sbt.site
 
-import SbtSitePlugin._
+import SitePlugin._
+import SitePlugin.autoImport.siteSubdirName
 import sbt.Keys._
 import sbt._
 
 import scala.util.matching.Regex
 /** Provides ability to map values to `@` delimited variables. */
 object PreprocessPlugin extends AutoPlugin {
-  override def requires = SbtSitePlugin
+  override def requires = SitePlugin
   override def trigger = noTrigger
   object autoImport {
     val Preprocess = config("preprocess")
@@ -31,16 +32,20 @@ object PreprocessPlugin extends AutoPlugin {
     preprocessExts := Set("txt", "html", "md"),
     preprocessVars := Map("VERSION" -> version.value),
     includeFilter in Preprocess := AllPassFilter
-  ) ++ inConfig(Preprocess)(
-    Seq(
-      sourceDirectory := sourceDirectory.value / "site-preprocess",
-      target := target.value / Preprocess.name,
-      preprocess := simplePreprocess(
-        sourceDirectory.value, target.value, streams.value.cacheDirectory, preprocessExts.value,
-        preprocessVars.value, streams.value.log),
-      mappings := gatherMappings(preprocess.value, includeFilter.value),
-      SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
-    )) ++ SiteHelpers.watchSettings(Preprocess)
+  ) ++
+    inConfig(Preprocess)(
+      Seq(
+        sourceDirectory := sourceDirectory.value / "site-preprocess",
+        target := target.value / Preprocess.name,
+        preprocess := simplePreprocess(
+          sourceDirectory.value, target.value, streams.value.cacheDirectory, preprocessExts.value,
+          preprocessVars.value, streams.value.log),
+        mappings := gatherMappings(preprocess.value, includeFilter.value),
+        siteSubdirName := ""
+      )
+    ) ++
+    SiteHelpers.watchSettings(Preprocess) ++
+    SiteHelpers.addMappingsToSiteDir(mappings in Preprocess, siteSubdirName in Preprocess)
 
   /**
    * Simple preprocessing of all files in a directory using `@variable@` replacements.

@@ -1,13 +1,16 @@
 package com.typesafe.sbt.site.asciidoctor
 
 import java.util
-import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
+import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
+import com.typesafe.sbt.site.{SitePlugin, SiteHelpers}
 import org.asciidoctor.Asciidoctor.Factory
 import org.asciidoctor.{AsciiDocDirectoryWalker, Options, SafeMode}
 import sbt.Keys._
 import sbt._
+
+/** Asciidoctor generator. */
 object AsciidoctorPlugin extends AutoPlugin {
-  override def requires = SbtSitePlugin
+  override def requires = SitePlugin
   override def trigger = noTrigger
 
   object autoImport {
@@ -21,9 +24,11 @@ object AsciidoctorPlugin extends AutoPlugin {
     inConfig(Asciidoctor)(
       Seq(
         mappings <<= (sourceDirectory, target, includeFilter, version) map run,
-        SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
+        siteSubdirName := ""
       )
-    )
+    ) ++
+    SiteHelpers.watchSettings(Asciidoctor) ++
+    SiteHelpers.addMappingsToSiteDir(mappings in Asciidoctor, siteSubdirName in Asciidoctor)
 
   private def run(
     input: File,

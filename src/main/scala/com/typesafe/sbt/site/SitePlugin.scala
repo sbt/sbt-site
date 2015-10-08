@@ -3,11 +3,13 @@ package com.typesafe.sbt.site
 import sbt.Keys._
 import sbt._
 
-object SbtSitePlugin extends AutoPlugin {
+object SitePlugin extends AutoPlugin {
   override def trigger = allRequirements
   object autoImport {
     val makeSite = TaskKey[File]("make-site", "Generates a static website for a project.")
     val packageSite = TaskKey[File]("package-site", "Create a zip file of the website.")
+    val siteSubdirName = SettingKey[String]("siteSubdirName",
+      "Name of subdirectory in site target directory to put generator plugin content. Defaults to empty string.")
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
   }
   import autoImport._

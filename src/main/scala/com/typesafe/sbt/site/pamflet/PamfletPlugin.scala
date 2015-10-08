@@ -1,13 +1,14 @@
 package com.typesafe.sbt.site.pamflet
 
-import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
+import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
+import com.typesafe.sbt.site.{SitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
 import pamflet._
 
 /** Pamflet generator. */
 object PamfletPlugin extends AutoPlugin {
-  override def requires = SbtSitePlugin
+  override def requires = SitePlugin
   override def trigger = noTrigger
   object autoImport {
     val Pamflet = config("pamflet")
@@ -20,12 +21,15 @@ object PamfletPlugin extends AutoPlugin {
       Seq(
         // Note: txt is used for search index.
         includeFilter in Pamflet := AllPassFilter
-      ) ++ inConfig(Pamflet)(
-      Seq(
-        mappings <<= (sourceDirectory, target, includeFilter) map run,
-        SiteHelpers.addMappingsToSiteDir(mappings, "TODO")
-      )) ++
-      SiteHelpers.watchSettings(Pamflet)
+      ) ++
+      inConfig(Pamflet)(
+        Seq(
+          mappings <<= (sourceDirectory, target, includeFilter) map run,
+          siteSubdirName := ""
+        )
+      ) ++
+      SiteHelpers.watchSettings(Pamflet) ++
+      SiteHelpers.addMappingsToSiteDir(mappings in Pamflet, siteSubdirName in Pamflet)
 
   private[sbt] def run(
     input: File,
