@@ -1,10 +1,10 @@
-package com.typesafe.sbt
-package site
+package com.typesafe.sbt.site.util
 
+import com.typesafe.sbt.site.SitePlugin
 import sbt._
 import unfiltered.util._
 
-object PreviewPlugin extends AutoPlugin {
+object SitePreviewPlugin extends AutoPlugin {
   override def requires = SitePlugin
   override def trigger = allRequirements
 
@@ -22,7 +22,7 @@ object PreviewPlugin extends AutoPlugin {
     previewSite <<= (makeSite, previewFixedPort, previewLaunchBrowser) map { (file, portOption, browser) =>
       val port = portOption getOrElse Port.any
       val server = createServer(file, port) start()
-      println("PreviewPlugin server started on port %d. Press any key to exit." format port)
+      println("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
       // TODO: use something from sbt-web?
       @annotation.tailrec def waitForKey() {
         try { Thread sleep 500 } catch { case _: InterruptedException => () }

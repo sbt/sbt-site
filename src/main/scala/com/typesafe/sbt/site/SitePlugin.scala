@@ -1,5 +1,6 @@
 package com.typesafe.sbt.site
 
+import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
 

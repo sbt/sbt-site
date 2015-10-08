@@ -1,7 +1,9 @@
-package com.typesafe.sbt.site
+package com.typesafe.sbt.site.preprocess
 
-import SitePlugin._
-import SitePlugin.autoImport.siteSubdirName
+import com.typesafe.sbt.site.SitePlugin._
+import com.typesafe.sbt.site.SitePlugin.autoImport._
+import com.typesafe.sbt.site.SitePlugin
+import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
 

@@ -2,7 +2,8 @@ package com.typesafe.sbt.site.asciidoctor
 
 import java.util
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
-import com.typesafe.sbt.site.{SitePlugin, SiteHelpers}
+import com.typesafe.sbt.site.SitePlugin
+import com.typesafe.sbt.site.util.SiteHelpers
 import org.asciidoctor.Asciidoctor.Factory
 import org.asciidoctor.{AsciiDocDirectoryWalker, Options, SafeMode}
 import sbt.Keys._

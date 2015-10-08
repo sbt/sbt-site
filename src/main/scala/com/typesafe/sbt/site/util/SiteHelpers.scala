@@ -1,7 +1,8 @@
-package com.typesafe.sbt.site
+package com.typesafe.sbt.site.util
 
 import java.io.PrintWriter
 
+import com.typesafe.sbt.site.SitePlugin
 import sbt.Keys._
 import sbt._
 /**

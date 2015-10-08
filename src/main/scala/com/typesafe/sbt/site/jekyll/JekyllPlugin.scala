@@ -1,7 +1,8 @@
 package com.typesafe.sbt.site.jekyll
 
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
-import com.typesafe.sbt.site.{SitePlugin, SiteHelpers}
+import com.typesafe.sbt.site.SitePlugin
+import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
 object JekyllPlugin extends AutoPlugin {
