@@ -1,13 +1,13 @@
 package com.typesafe.sbt.site
 
-import SbtSite._
+import SbtSitePlugin._
 import sbt.Keys._
 import sbt._
 
 import scala.util.matching.Regex
 /** Provides ability to map values to `@` delimited variables. */
-object PreprocessSupport extends AutoPlugin {
-  override def requires = SbtSite
+object PreprocessPlugin extends AutoPlugin {
+  override def requires = SbtSitePlugin
   override def trigger = noTrigger
   object autoImport {
     val Preprocess = config("preprocess")

@@ -1,13 +1,13 @@
 package com.typesafe.sbt.site.pamflet
 
-import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
+import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
 import pamflet._
 
 /** Pamflet generator. */
-object PamfletSupport extends AutoPlugin {
-  override def requires = SbtSite
+object PamfletPlugin extends AutoPlugin {
+  override def requires = SbtSitePlugin
   override def trigger = noTrigger
   object autoImport {
     val Pamflet = config("pamflet")

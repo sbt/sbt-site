@@ -1,13 +1,13 @@
 package com.typesafe.sbt.site.asciidoctor
 
 import java.util
-import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
+import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
 import org.asciidoctor.Asciidoctor.Factory
 import org.asciidoctor.{AsciiDocDirectoryWalker, Options, SafeMode}
 import sbt.Keys._
 import sbt._
-object AsciidoctorSupport extends AutoPlugin {
-  override def requires = SbtSite
+object AsciidoctorPlugin extends AutoPlugin {
+  override def requires = SbtSitePlugin
   override def trigger = noTrigger
 
   object autoImport {

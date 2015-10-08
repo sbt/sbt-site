@@ -1,12 +1,12 @@
 package com.typesafe.sbt.site.sphinx
 
-import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
+import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
 
 /** Sphinx generator. */
-object SphinxSupport extends AutoPlugin {
-  override def requires = SbtSite
+object SphinxPlugin extends AutoPlugin {
+  override def requires = SbtSitePlugin
   override def trigger = noTrigger
 
   object autoImport {

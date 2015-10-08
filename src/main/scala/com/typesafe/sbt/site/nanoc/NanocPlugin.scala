@@ -1,14 +1,14 @@
 package com.typesafe.sbt.site.nanoc
 
 import java.io.FileReader
-import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
+import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
 
 import scala.collection.immutable
 /** Nanoc generator. */
-object NanocSupport extends AutoPlugin {
-  override def requires = SbtSite
+object NanocPlugin extends AutoPlugin {
+  override def requires = SbtSitePlugin
   override def trigger = noTrigger
   object autoImport {
     val Nanoc = config("nanoc")

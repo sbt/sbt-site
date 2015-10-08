@@ -1,10 +1,10 @@
 package com.typesafe.sbt.site.jekyll
 
-import com.typesafe.sbt.site.{SbtSite, SiteHelpers}
+import com.typesafe.sbt.site.{SbtSitePlugin, SiteHelpers}
 import sbt.Keys._
 import sbt._
-object JekyllSupport extends AutoPlugin {
-  override def requires = SbtSite
+object JekyllPlugin extends AutoPlugin {
+  override def requires = SbtSitePlugin
   override def trigger = noTrigger
 
   object autoImport {

@@ -4,8 +4,8 @@ package site
 import sbt._
 import unfiltered.util._
 
-object Preview extends AutoPlugin {
-  override def requires = SbtSite
+object PreviewPlugin extends AutoPlugin {
+  override def requires = SbtSitePlugin
   override def trigger = allRequirements
 
   object autoImport {
@@ -13,7 +13,7 @@ object Preview extends AutoPlugin {
     val previewFixedPort = SettingKey[Option[Int]]("previewFixedPort") in previewSite
     val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
   }
-  import SbtSite.autoImport._
+  import SbtSitePlugin.autoImport._
   import autoImport._
 
 
@@ -22,7 +22,7 @@ object Preview extends AutoPlugin {
     previewSite <<= (makeSite, previewFixedPort, previewLaunchBrowser) map { (file, portOption, browser) =>
       val port = portOption getOrElse Port.any
       val server = createServer(file, port) start()
-      println("Preview server started on port %d. Press any key to exit." format port)
+      println("PreviewPlugin server started on port %d. Press any key to exit." format port)
       @annotation.tailrec def waitForKey() {
         try { Thread sleep 500 } catch { case _: InterruptedException => () }
         if(System.in.available <= 0)
