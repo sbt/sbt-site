@@ -1,4 +1,4 @@
 enablePlugins(GitVersioning)
 enablePlugins(GitBranchPrompt)
 
-git.baseVersion := "0.8"
+git.baseVersion := "1.0"
