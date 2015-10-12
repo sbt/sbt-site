@@ -1,0 +1,5 @@
+highlighter: pygments
+name: Rants, Raves and Ridicule
+description: Josh Suereth's musings, miffs and mockery, usually about software development.
+url: http://jsuereth.com
+markdown: rdiscount
