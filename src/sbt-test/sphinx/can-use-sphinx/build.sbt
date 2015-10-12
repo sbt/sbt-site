@@ -2,6 +2,7 @@ name := "test"
 
 enablePlugins(SphinxPlugin)
 
+scriptedBufferLog := false
 
 siteSubdirName in Sphinx := "madewithpython"
 
