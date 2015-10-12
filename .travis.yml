@@ -17,3 +17,4 @@ addons:
 
 install:
   - gem install jekyll nanoc asciidoctor --no-rdoc --no-ri
+  - pip install Sphinx
