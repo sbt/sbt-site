@@ -6,7 +6,7 @@ jdk:
 env:
   - SBT_OPTS="-XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION -d update compile scripted
+  - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted
 
 sudo: false
 

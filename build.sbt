@@ -26,4 +26,4 @@ scriptedSettings
 
 scriptedLaunchOpts += "-Dproject.version="+version.value
 
-scriptedBufferLog := false
+// scriptedBufferLog := false
