@@ -16,5 +16,4 @@ addons:
     - nodejs
 
 install:
-  - gem install jekyll --no-rdoc --no-ri
-  - gem list jekyll
+  - gem install jekyll nanoc asciidoctor --no-rdoc --no-ri
