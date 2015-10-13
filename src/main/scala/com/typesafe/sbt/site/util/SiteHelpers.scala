@@ -9,7 +9,7 @@ import sbt._
  * Utility/support functions.
  */
 object SiteHelpers {
-  import SitePlugin.siteMappings
+  import SitePlugin.autoImport.siteMappings
   /** Convenience functions to add a task of mappings to a site under a nested directory. */
   def addMappingsToSiteDir(
     mappings: TaskKey[Seq[(File, String)]],
@@ -73,13 +73,6 @@ object SiteHelpers {
       case None => None
       case Some(m) => Some(m.group(1))
     }
-  }
-
-  /**
-   * Check whether a file has one of the given extensions.
-   */
-  def hasExtension(extensions: Set[String])(file: File): Boolean = {
-    extensions contains file.ext
   }
 
   /**
