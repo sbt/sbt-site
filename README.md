@@ -5,7 +5,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This sbt plugin generates project websites from static content, [jekyll], [sphinx], [pamflet], [nanoc], and/or [asciidoctor], and can optionally include generated scaladoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 ## Usage
 
@@ -15,7 +15,7 @@ This sbt plugin generates project websites from static content, [jekyll], [sphin
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0")
 ```
 
-> _Note_: As of version 1.0.x, sbt >= 0.13.5 is required.  
+> _Note_: As of `sbt-site` version 1.0.x, sbt version >= 0.13.5 is required.  
 > * For earlier 0.13.x releases, use [version 0.8.2][0.8.2].
 > * For sbt 0.12, use [version 0.7.2][0.7.2].
 > * To upgrade from a previous version, see the **[migration guide]**.
@@ -44,22 +44,30 @@ The site plugin supports basic variable substitution when copying files from `sr
 enablePlugins(PreprocessPlugin)
 ```
 
-Variables are delimited with surrounding `@` symbols (e.g. `@VERSION@`). Values are assigned to variables via the `preprocessVars[Map[String, String]]` setting. For example:
+Variables are delimited by surrounding the name with `@` symbols (e.g. `@VERSION@`). Values are assigned to variables via the setting `preprocessVars: [Map[String, String]]`. For example:
 
 ```
 preprocessVars := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 ```
 
-The setting `preprocessIncludeFilter` is used to define the filename extensions that should be processed when `makeSite` is run. The default filter is `"*.txt" | "*.html" | "*.md" | "*.rst"`.
+Note that the plugin will generate an error if a variable is found in the source file with no matching value in `preprocessVars`.
+
+The setting `preprocessIncludeFilter` is used to define the filename extensions that should be processed when `makeSite` is run.
+
+```
+preprocessIncludeFilter := "*.md" | "*.markdown"
+```
+
+The default filter is `"*.txt" | "*.html" | "*.md" | "*.rst"`.
 
 ### Jekyll Site Generation
-The `sbt-site` plugin has direct support for running [Jekyll]. This is surprisingly useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:
+The `sbt-site` plugin has direct support for running [Jekyll]. This is useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:
 
 ```
 enablePlugins(JekyllPlugin)
 ```
 
-This assumes you have a jekyll project in the `src/jekyll` directory. To change this, set the key `sourceDirectory` in the `Jekyll` scope:
+This assumes you have a Jekyll project in the `src/jekyll` directory. To change this, set the key `sourceDirectory` in the `Jekyll` scope:
 
 ```
 sourceDirectory in Jekyll := sourceDirectory / "hyde"
@@ -103,65 +111,105 @@ siteSubdirName in Sphinx := "giza"
 
 ### Pamflet Site Generation
 
-The `sbt-site` plugin has direct support for building [Pamflet] projects. To enable sphinx site generation, simply enable the associated plugin in your `build.sbt` file:
+The `sbt-site` plugin has direct support for building [Pamflet] projects. To enable Pamflet site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```
 enablePlugins(PamfletPlugin)
 ```
 
-This assumes you have a sphinx project under the `src/sphinx` directory. To change this, set the `sourceDirectory` key in the `Sphinx` scope:
+This assumes you have a Pamflet project under the `src/pamflet` directory. To change this, set the `sourceDirectory` key in the `Pamflet` scope:
 
 ```
 sourceDirectory in Pamflet := sourceDirectory / "papyrus"
 ```
 
-Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Sphinx` scope:
+Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Pamflet` scope:
 
 ```
 // Puts output in `target/site/parchment`
-siteSubdirName in Sphinx := "parchment"
+siteSubdirName in Pamflet := "parchment"
 ```
-
-----
 
 ### Nanoc Site Generation
-The site plugin has direct support for building [nanoc][nanoc] projects. This assumes you have a nanoc project under the `src/nanoc` directory. To enable nanoc site generation, simply simply add the following to your `build.sbt` file:
+
+The `sbt-site` plugin has direct support for building [Nanoc] projects. To enable Nanoc site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```
-site.nanocSupport()
+enablePlugins(NanocPlugin)
 ```
+
+This assumes you have a Nanoc project under the `src/nanoc` directory. To change this, set the `sourceDirectory` key in the `Nanoc` scope:
+
+```
+sourceDirectory in Nanoc := sourceDirectory / "conan"
+```
+
+Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Nanoc` scope:
+
+```
+// Puts output in `target/site/conan`
+siteSubdirName in Nanoc := "conan"
+```
+
 
 ### Asciidoctor Site Generation
-The site plugin has direct support for building [Asciidoctor][asciidoctor] projects locally. This assumes you have a asciidoctor project under the `src/asciidoctor` directory. To enable asciidoctor site generation, simply add the following to your `build.sbt` file:
+The `sbt-site` plugin has direct support for building [Asciidoctor] projects. To enable Asciidoctor site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```
-site.asciidoctorSupport()
+enablePlugins(AsciidoctorPlugin)
 ```
 
-## Scaladoc APIS
-To include Scaladoc with your site, add the following line to your `build.sbt`:
+This assumes you have an Asciidoctor project under the `src/asciidoctor` directory. To change this, set the `sourceDirectory` key in the `Asciidoctor` scope:
 
 ```
-site.includeScaladoc()
+sourceDirectory in Nanoc := sourceDirectory / "asciimd"
 ```
 
-This will default to putting the scaladoc under the `latest/api` directory on the website. You can configure this by passing a parameter to the `includeScaladoc` method:
+Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Asciidoctor` scope:
 
 ```
-site.includeScaladoc("alternative/directory")
+// Puts output in `target/site/asciimd`
+siteSubdirName in Asciidoctor := "asciimd"
+```
+
+
+## ScalaDoc APIS
+To include ScalaDoc with your site, add the following line to your `build.sbt`:
+
+```
+enablePlugins(SiteScaladocPlugin)
+```
+
+This will default to putting the ScalaDoc under the `latest/api` directory on the website. You can change this with the `siteSubdirName` key in the `SiteScaladoc` scope:
+
+```
+// Puts ScalaDoc output in `target/set/api/wip`
+siteSubdirName in SiteScaladoc := "api/wip"
 ```
 
 ## Previewing the Site
-To preview your generated site, run `previewSite` to open a web server. Direct your web browser to [http://localhost:4000/](http://localhost:4000/) to view your site.
+To preview your generated site, run `previewSite`, which launches a web server on port 4000 and attempts to connect your browser to [http://localhost:4000/](http://localhost:4000/). To change the server port, use the key `previewFixedPort`:
+
+```
+previewFixedPort := Some(9999)
+```
+
+To disable browser auto-open, use the key `previewLaunchBrowser`:
+
+```
+previewLaunchBrowser := false
+```
 
 ## Packaging and Publishing
 To create a zip package of the site run `package-site`.
 
-To also publish this zip file when running `publish`, add the following to your `build.sbt`:
+To also include this zip file as an artifact when running `publish`, add the following to your `build.sbt`:
 
 ```
-site.publishSite
+publishSite
 ```
+
+See the [`sbt-ghpages`](sbt-ghpages) plugin documentation for simplified publishing to [GitHub Pages].
 
 ## License
 
