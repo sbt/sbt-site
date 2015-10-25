@@ -5,150 +5,223 @@
 
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This is an sbt plugin that can generate project websites.
-
-It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 ## Usage
-Add this to your `project/plugins.sbt`:
+
+`sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to  your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.2")
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0")
 ```
 
-_Note: this requires sbt 0.13 - for sbt 0.12 see the [0.7.2 version][old] of this plugin._
+> _Note_: As of `sbt-site` version 1.0.x, sbt version >= 0.13.5 is required.  
+> * For earlier 0.13.x releases, use [version 0.8.2][0.8.2].
+> * For sbt 0.12, use [version 0.7.2][0.7.2].
+> * To upgrade from a previous version, see the **[migration guide]**.
 
-And then in your `build.sbt` file:
+See the [sbt-ghpages] plugin for information about publishing to [GitHub Pages]. We expect other publishing mechanisms to be supported in the future.
 
-```
-site.settings
-```
+## Adding Static Content to Your Site
+When you run `makeSite`, your project's webpage is generated in the `target/site` directory. By default, all files under `src/site` are included in `target/site`. To use specific third-party generators (e.g. [Jekyll]), additional sub-plugins will need to be enabled, as described below.
 
-Then, run `make-site` to generate your project's webpage in the `target/site` directory.
-
-See the [sbt-ghpages] plugin for information about publishing to gh-pages. We expect other publishing mechanisms to be supported in the future.
-
-## Adding Content to Your Site
-The sbt-site plugin has specific "support" settings for the various supported ways of generating a site. By default, all files under `src/site` are included in the site. You can add new generated content in one of the following ways:
-
-### Static Site
-Simply add to the site mappings. In your `build.sbt` file:
-
-```
-site.siteMappings <++= Seq(file1 -> "location.html", file2 -> "image.png")
-```
-
-### Changing the Source Directory
-To change the source directory for static site files, use the `siteSourceDirectory` alias:
+The `src/site` directory can be overridden via the `siteSourceDirectory` key:
 
 ```
 siteSourceDirectory <<= target / "generated-stuff"
+```
+
+Additional files outside of `siteSourceDirectory` can be added individually via the `siteMappings` key:
+
+```
+siteMappings ++= Seq(file1 -> "location.html", file2 -> "image.png")
 ```
 
 ### Static Content with Variable Substitution
 The site plugin supports basic variable substitution when copying files from `src/site-preprocess`. To enable, add this to your `build.sbt` file:
 
 ```
-site.preprocessSite()
+enablePlugins(PreprocessPlugin)
 ```
 
-Variables are delimited with two `@` symbols, e.g. `@VERSION@`. Variables are defined via the `preprocessVars[Map[String, String]]` setting. For example:
+Variables are delimited by surrounding the name with `@` symbols (e.g. `@VERSION@`). Values are assigned to variables via the setting `preprocessVars: [Map[String, String]]`. For example:
 
 ```
 preprocessVars := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 ```
 
-The setting `preprocessExt[Set[String]]` is used to define the filename extensions that should be processed when `make-site` is run. The defaults are `Set("txt", "html", "md")`
+Note that the plugin will generate an error if a variable is found in the source file with no matching value in `preprocessVars`.
 
-> Note: The extension specifications must not include the final dot (`.`). Only the symbols after the dot.
+The setting `preprocessIncludeFilter` is used to define the filename extensions that should be processed when `makeSite` is run.
+
+```
+preprocessIncludeFilter := "*.md" | "*.markdown"
+```
+
+The default filter is `"*.txt" | "*.html" | "*.md" | "*.rst"`.
 
 ### Jekyll Site Generation
-The site plugin has direct support for running [jekyll][jekyll] locally.  This is suprisingly useful for suporting custom jekyll plugins that are not allowed when publishing to github, or hosting a jekyll site on your own server. To add jekyll support, add the following to your `build.sbt`:
+The `sbt-site` plugin has direct support for running [Jekyll]. This is useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:
 
 ```
-site.jekyllSupport()
+enablePlugins(JekyllPlugin)
 ```
 
-This assumes you have a jekyll project in the `src/jekyll` directory.
+This assumes you have a Jekyll project in the `src/jekyll` directory. To change this, set the key `sourceDirectory` in the `Jekyll` scope:
+
+```
+sourceDirectory in Jekyll := sourceDirectory / "hyde"
+```
+
+To redirect the output to a subdirectory of `target/site`, use the `siteSubdirName` key in `Jekyll` scope:
+
+```
+// Puts output in `target/site/notJekyllButHyde`
+siteSubdirName in Jekyll := "notJekyllButHyde"
+```
 
 One common issue with Jekyll is ensuring that everyone uses the same version for generating a website.  There is special support for ensuring the version of gems. To do so, add the following to your `build.sbt` file:
 
 ```
-com.typesafe.sbt.site.JekyllSupport.requiredGems := Map(
+requiredGems := Map(
   "jekyll" -> "0.11.2",
   "liquid" -> "2.3.0"
 )
 ```
 
 ### Sphinx Site Generation
-The site plugin has direct support for building [Sphinx][sphinx] projects locally. This assumes you have a sphinx project under the `src/sphinx` directory. To enable sphinx site generation, simply add the following to your `build.sbt` file:
+The `sbt-site` plugin has direct support for building [Sphinx] projects. To enable Sphinx site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```
-site.sphinxSupport()
+enablePlugins(SphinxPlugin)
+```
+
+This assumes you have a Sphinx project under the `src/sphinx` directory. To change this, set the `sourceDirectory` key in the `Sphinx` scope:
+
+```
+sourceDirectory in Sphinx := sourceDirectory / "androsphinx"
+```
+
+Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Sphinx` scope:
+
+```
+// Puts output in `target/site/giza`
+siteSubdirName in Sphinx := "giza"
 ```
 
 ### Pamflet Site Generation
-The site plugin has direct support for building [Pamflet](http://pamflet.databinder.net/) projects.   This assumes you have a pamflet project under the `src/pamflet` directory.   To enable pamflet site generation, simply add the following to your `build.sbt` file:
+
+The `sbt-site` plugin has direct support for building [Pamflet] projects. To enable Pamflet site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```
-site.pamfletSupport()
+enablePlugins(PamfletPlugin)
 ```
 
-To place pamflet HTML under a directory, run:
+This assumes you have a Pamflet project under the `src/pamflet` directory. To change this, set the `sourceDirectory` key in the `Pamflet` scope:
 
 ```
-site.pamfletSupport("manual")
+sourceDirectory in Pamflet := sourceDirectory / "papyrus"
 ```
 
-The above will place pamflet generated HTML under the `manual/` directory in the generated site.
+Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Pamflet` scope:
+
+```
+// Puts output in `target/site/parchment`
+siteSubdirName in Pamflet := "parchment"
+```
 
 ### Nanoc Site Generation
-The site plugin has direct support for building [nanoc][nanoc] projects. This assumes you have a nanoc project under the `src/nanoc` directory. To enable nanoc site generation, simply simply add the following to your `build.sbt` file:
+
+The `sbt-site` plugin has direct support for building [Nanoc] projects. To enable Nanoc site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```
-site.nanocSupport()
+enablePlugins(NanocPlugin)
 ```
+
+This assumes you have a Nanoc project under the `src/nanoc` directory. To change this, set the `sourceDirectory` key in the `Nanoc` scope:
+
+```
+sourceDirectory in Nanoc := sourceDirectory / "conan"
+```
+
+Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Nanoc` scope:
+
+```
+// Puts output in `target/site/conan`
+siteSubdirName in Nanoc := "conan"
+```
+
 
 ### Asciidoctor Site Generation
-The site plugin has direct support for building [Asciidoctor][asciidoctor] projects locally. This assumes you have a asciidoctor project under the `src/asciidoctor` directory. To enable asciidoctor site generation, simply add the following to your `build.sbt` file:
+The `sbt-site` plugin has direct support for building [Asciidoctor] projects. To enable Asciidoctor site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```
-site.asciidoctorSupport()
+enablePlugins(AsciidoctorPlugin)
 ```
 
-## Scaladoc APIS
-To include Scaladoc with your site, add the following line to your `build.sbt`:
+This assumes you have an Asciidoctor project under the `src/asciidoctor` directory. To change this, set the `sourceDirectory` key in the `Asciidoctor` scope:
 
 ```
-site.includeScaladoc()
+sourceDirectory in Nanoc := sourceDirectory / "asciimd"
 ```
 
-This will default to putting the scaladoc under the `latest/api` directory on the website. You can configure this by passing a parameter to the `includeScaladoc` method:
+Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Asciidoctor` scope:
 
 ```
-site.includeScaladoc("alternative/directory")
+// Puts output in `target/site/asciimd`
+siteSubdirName in Asciidoctor := "asciimd"
+```
+
+
+## ScalaDoc APIS
+To include ScalaDoc with your site, add the following line to your `build.sbt`:
+
+```
+enablePlugins(SiteScaladocPlugin)
+```
+
+This will default to putting the ScalaDoc under the `latest/api` directory on the website. You can change this with the `siteSubdirName` key in the `SiteScaladoc` scope:
+
+```
+// Puts ScalaDoc output in `target/set/api/wip`
+siteSubdirName in SiteScaladoc := "api/wip"
 ```
 
 ## Previewing the Site
-To preview your generated site, run `previewSite` to open a web server. Direct your web browser to [http://localhost:4000/](http://localhost:4000/) to view your site.
+To preview your generated site, run `previewSite`, which launches a web server on port 4000 and attempts to connect your browser to [http://localhost:4000/](http://localhost:4000/). To change the server port, use the key `previewFixedPort`:
+
+```
+previewFixedPort := Some(9999)
+```
+
+To disable browser auto-open, use the key `previewLaunchBrowser`:
+
+```
+previewLaunchBrowser := false
+```
 
 ## Packaging and Publishing
 To create a zip package of the site run `package-site`.
 
-To also publish this zip file when running `publish`, add the following to your `build.sbt`:
+To also include this zip file as an artifact when running `publish`, add the following to your `build.sbt`:
 
 ```
-site.publishSite
+publishSite
 ```
+
+See the [`sbt-ghpages`](sbt-ghpages) plugin documentation for simplified publishing to [GitHub Pages].
 
 ## License
 
 `sbt-site` is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for specifics and copyright declaration.
 
-[old]: https://github.com/sbt/sbt-site/tree/0.7.2
+[0.7.2]: https://github.com/sbt/sbt-site/tree/v0.7.2
+[0.8.2]: https://github.com/sbt/sbt-site/tree/v0.8.2
+[migration guide]: notes/migrate-0.8.2-to-1.0.md
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [jekyll]: http://jekyllrb.com
 [pamflet]: http://pamflet.databinder.net
 [nanoc]: http://nanoc.ws/
 [asciidoctor]: http://asciidoctor.org
 [sphinx]: http://sphinx-doc.org
+[GitHub Pages]: https://pages.github.com

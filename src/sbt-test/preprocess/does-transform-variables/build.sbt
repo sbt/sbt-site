@@ -1,20 +1,17 @@
 import java.util.Date
 
-import com.typesafe.sbt.site.PreprocessSupport._
+enablePlugins(PreprocessPlugin)
 
-name := "test"
-
-site.settings
+name := "preprocess test"
 
 version := "0.0-ABCD"
 
-site.preprocessSite()
-
 preprocessVars := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 
+siteSubdirName in Preprocess := "md-stuff"
+
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in Preprocess).value
-  println((mappings in Preprocess).value)
+  val dest = (target in makeSite).value / (siteSubdirName in Preprocess).value
   val readme = dest / "README.md"
   assert(readme.exists, s"${readme.getAbsolutePath} did not exist")
   val content = IO.readLines(readme)

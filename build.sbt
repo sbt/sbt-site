@@ -25,3 +25,5 @@ libraryDependencies ++= Seq(
 scriptedSettings
 
 scriptedLaunchOpts += "-Dproject.version="+version.value
+
+// scriptedBufferLog := false

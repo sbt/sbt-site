@@ -1,5 +1,12 @@
-pygments: true
-name: Rants, Raves and Ridicule
-description: Josh Suereth's musings, miffs and mockery, usually about software development.
-url: http://jsuereth.com
-markdown: rdiscount
+# Site settings
+title: SBT Bizness
+email: sbt@sbt.sbt
+description: > # this means to ignore newlines until "baseurl:"
+  This is my awesome sbt test site.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+twitter_username: sbt
+github_username:  scala_sbt
+
+# Build settings
+markdown: kramdown
