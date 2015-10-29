@@ -4,17 +4,10 @@ import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
 
+/** Primary plugin for generating static website in sbt. Automatically loads when added to project.. */
 object SitePlugin extends AutoPlugin {
   override def trigger = allRequirements
-  object autoImport {
-    val makeSite = TaskKey[File]("make-site", "Generates a static website for a project.")
-    val packageSite = TaskKey[File]("package-site", "Create a zip file of the website.")
-    val siteSubdirName = SettingKey[String]("siteSubdirName",
-      "Name of subdirectory in site target directory to put generator plugin content. Defaults to empty string.")
-    val siteMappings = mappings in makeSite
-    val siteDirectory = target in makeSite
-    val siteSources = sources in makeSite
-    val siteSourceDirectory = sourceDirectory in makeSite
+  object autoImport extends SiteKeys {
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
   }
   import autoImport._

@@ -18,20 +18,24 @@ object AsciidoctorPlugin extends AutoPlugin {
     val Asciidoctor = config("asciidoctor")
   }
   import autoImport._
-  override def projectSettings: Seq[Setting[_]] = Seq(
-    sourceDirectory in Asciidoctor <<= sourceDirectory(_ / "asciidoctor"),
-    target in Asciidoctor <<= target(_ / "asciidoctor"),
-    includeFilter in Asciidoctor := AllPassFilter) ++
-    inConfig(Asciidoctor)(
+
+  override def projectSettings = asciidoctorSettings(Asciidoctor)
+
+  /** Creates settings necessary for running Asciidoctor in the given configuration. */
+  def asciidoctorSettings(config: Configuration): Seq[Setting[_]] =
+    inConfig(config)(
       Seq(
-        mappings <<= (sourceDirectory, target, includeFilter, version) map run,
+        includeFilter := AllPassFilter,
+        mappings := generate(sourceDirectory.value, target.value, includeFilter.value, version.value),
         siteSubdirName := ""
       )
     ) ++
-    SiteHelpers.watchSettings(Asciidoctor) ++
-    SiteHelpers.addMappingsToSiteDir(mappings in Asciidoctor, siteSubdirName in Asciidoctor)
+      SiteHelpers.directorySettings(config) ++
+      SiteHelpers.watchSettings(config) ++
+      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
 
-  private def run(
+  /** Run asciidoctor in new ClassLoader. */
+  private[sbt] def generate(
     input: File,
     output: File,
     includeFilter: FileFilter,

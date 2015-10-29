@@ -1,6 +1,5 @@
-package com.typesafe.sbt.site.util
+package com.typesafe.sbt.site
 
-import com.typesafe.sbt.site.SitePlugin
 import sbt._
 import unfiltered.util._
 
@@ -9,7 +8,7 @@ object SitePreviewPlugin extends AutoPlugin {
   override def trigger = allRequirements
 
   object autoImport {
-    val previewSite = TaskKey[Unit]("preview-site", "Launches a jetty server that serves your generated site from the target directory")
+    val previewSite = TaskKey[Unit]("previewSite", "Launches a jetty server that serves your generated site from the target directory")
     val previewFixedPort = SettingKey[Option[Int]]("previewFixedPort") in previewSite
     val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
   }

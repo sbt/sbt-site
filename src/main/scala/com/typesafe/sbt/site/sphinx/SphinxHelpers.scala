@@ -1,7 +1,6 @@
 package com.typesafe.sbt.site.sphinx
 
 import sbt._
-import Keys._
 
 
 /**

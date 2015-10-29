@@ -11,15 +11,8 @@ import scala.util.matching.Regex
 object PreprocessPlugin extends AutoPlugin {
   override def requires = SitePlugin
   override def trigger = noTrigger
-  object autoImport {
+  object autoImport extends PreprocessKeys {
     val Preprocess = config("preprocess")
-
-    // Setting and task keys that can be used to set up preprocessing
-    val preprocessIncludeFilter = SettingKey[FileFilter](
-      "preprocess-include-filter", "Filter defining set of files to preprocess")
-    val preprocessVars = SettingKey[Map[String, String]](
-      "preprocess-vars", "Replacements for preprocessing.")
-    val preprocess = TaskKey[File]("preprocess", "Preprocess a directory of files.")
   }
   import autoImport._
   // Default variable replacement regex
@@ -27,15 +20,16 @@ object PreprocessPlugin extends AutoPlugin {
   // Allows @@ -> @ replacement
   private[sbt] val defaultReplacements = Map("" -> "@")
 
-  override def projectSettings: Seq[Setting[_]] = Seq(
-    siteSourceDirectory in Preprocess := siteSourceDirectory.value,
-    siteDirectory in Preprocess := siteDirectory.value,
-    preprocessIncludeFilter := "*.txt" | "*.html" | "*.md" | "*.rst",
-    preprocessVars := Map("VERSION" -> version.value),
-    includeFilter in Preprocess := AllPassFilter
-  ) ++
-    inConfig(Preprocess)(
+  override def projectSettings = preprocessSettings(Preprocess)
+
+  def preprocessSettings(config: Configuration): Seq[Setting[_]] =
+    inConfig(config)(
       Seq(
+        siteSourceDirectory := siteSourceDirectory.value,
+        siteDirectory := siteDirectory.value,
+        preprocessIncludeFilter := "*.txt" | "*.html" | "*.md" | "*.rst",
+        preprocessVars := Map("VERSION" -> version.value),
+        includeFilter in Preprocess := AllPassFilter,
         sourceDirectory := sourceDirectory.value / "site-preprocess",
         target := target.value / Preprocess.name,
         preprocess := simplePreprocess(
@@ -45,8 +39,8 @@ object PreprocessPlugin extends AutoPlugin {
         siteSubdirName := ""
       )
     ) ++
-    SiteHelpers.watchSettings(Preprocess) ++
-    SiteHelpers.addMappingsToSiteDir(mappings in Preprocess, siteSubdirName in Preprocess)
+      SiteHelpers.watchSettings(config) ++
+      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
 
   /**
    * Simple preprocessing of all files in a directory using `@variable@` replacements.

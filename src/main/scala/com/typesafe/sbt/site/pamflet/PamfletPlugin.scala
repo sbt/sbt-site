@@ -16,23 +16,22 @@ object PamfletPlugin extends AutoPlugin {
   }
 
   import autoImport._
+  override def projectSettings = pamfletSettings(Pamflet)
 
-  override def projectSettings: Seq[Setting[_]] =
-    SiteHelpers.directorySettings(Pamflet) ++
-      Seq(
-        // Note: txt is used for search index.
-        includeFilter in Pamflet := AllPassFilter
-      ) ++
-      inConfig(Pamflet)(
+  def pamfletSettings(config: Configuration): Seq[Setting[_]] =
+      inConfig(config)(
         Seq(
-          mappings <<= (sourceDirectory, target, includeFilter) map run,
+          includeFilter := AllPassFilter,
+          mappings := generate(sourceDirectory.value, target.value, includeFilter.value),
           siteSubdirName := ""
         )
       ) ++
-      SiteHelpers.watchSettings(Pamflet) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in Pamflet, siteSubdirName in Pamflet)
+        SiteHelpers.directorySettings(config) ++
+        SiteHelpers.watchSettings(config) ++
+        SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
 
-  private[sbt] def run(
+  /** Run pamflet in sbt's JVM. */
+  private[sbt] def generate(
     input: File,
     output: File,
     includeFilter: FileFilter): Seq[(File, String)] = {
