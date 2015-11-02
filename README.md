@@ -211,6 +211,35 @@ publishSite
 
 See the [`sbt-ghpages`](sbt-ghpages) plugin documentation for simplified publishing to [GitHub Pages].
 
+## Advanced Usage
+
+If you need to run a generator on more than one source directory, bypassing the `AutoPlugin` sytem and defining one or more sbt `Configuration`s is necessary. For example, suppose you two Pamflet source directories and want them each generated as a subdirectory under `target/site`. A `build.sbt` might look something like this:
+
+```
+// Define two `Configuration` instances.
+val Site1 = config("site1")
+
+val Site2 = config("site2")
+
+// Apply the default pamflet settings to the `Site1` config
+PamfletPlugin.pamfletSettings(Site1)
+
+// Customize the source directory
+sourceDirectory in Site1 := sourceDirectory.value / "pamflet-site-1"
+
+// Customize the output subdirectory
+siteSubdirName in Site1 := "chapter1"
+
+// Same as above, but for config `Site2`
+PamfletPlugin.pamfletSettings(Site2)
+
+sourceDirectory in Site2 := sourceDirectory.value / "pamflet-site-2"
+
+siteSubdirName in Site2 := "chapter2"
+```
+
+Each of the other generators follow a similar pattern (e.g. `JekyllPlugin.jekyllSettings(config("foo"))`).
+
 ## License
 
 `sbt-site` is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for specifics and copyright declaration.
