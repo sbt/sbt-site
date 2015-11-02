@@ -151,4 +151,4 @@ site.publishSite
 [nanoc]: http://nanoc.ws/
 [asciidoctor]: http://asciidoctor.org
 [sphinx]: http://sphinx-doc.org
-[RC]: https://github.com/sbt/sbt-site/tree/release/1.0.0-RC1
+[RC]: https://github.com/sbt/sbt-site/tree/release/1.0.0-RC2
