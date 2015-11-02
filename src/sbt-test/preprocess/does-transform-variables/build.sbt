@@ -6,7 +6,7 @@ name := "preprocess test"
 
 version := "0.0-ABCD"
 
-preprocessVars := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
+preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 
 siteSubdirName in Preprocess := "md-stuff"
 
