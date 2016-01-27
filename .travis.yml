@@ -15,6 +15,9 @@ addons:
     packages:
     - nodejs
 
+before_install:
+  - rvm install 2.2.3
+
 install:
   - gem install jekyll --no-rdoc --no-ri
   - gem list jekyll
