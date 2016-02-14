@@ -3,6 +3,8 @@ sbtPlugin := true
 
 name := "sbt-site"
 
+version := "1.0.0-RC3-SNAPSHOT"
+
 organization := "com.typesafe.sbt"
 
 licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
