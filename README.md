@@ -23,7 +23,7 @@ And then in your `build.sbt` file:
 site.settings
 ```
 
-Then, run `make-site` to generate your project's webpage in the `target/site` directory.
+Then, run `makeSite` to generate your project's webpage in the `target/site` directory.
 
 See the [sbt-ghpages] plugin for information about publishing to gh-pages. We expect other publishing mechanisms to be supported in the future.
 
