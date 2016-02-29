@@ -18,3 +18,4 @@ addons:
 
 install:
   - gem install jekyll:2.5.3 nanoc asciidoctor --no-rdoc --no-ri
+  - npm install -g gitbook-cli
