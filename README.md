@@ -9,7 +9,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 
 ## Usage
 
-`sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to  your `project/plugins.sbt` file:
+`sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to your `project/plugins.sbt` file:
 
 ```
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0-RC2")
@@ -80,7 +80,7 @@ To redirect the output to a subdirectory of `target/site`, use the `siteSubdirNa
 siteSubdirName in Jekyll := "notJekyllButHyde"
 ```
 
-One common issue with Jekyll is ensuring that everyone uses the same version for generating a website.  There is special support for ensuring the version of gems. To do so, add the following to your `build.sbt` file:
+One common issue with Jekyll is ensuring that everyone uses the same version for generating a website. There is special support for ensuring the version of gems. To do so, add the following to your `build.sbt` file:
 
 ```
 requiredGems := Map(
@@ -162,7 +162,7 @@ enablePlugins(AsciidoctorPlugin)
 This assumes you have an Asciidoctor project under the `src/asciidoctor` directory. To change this, set the `sourceDirectory` key in the `Asciidoctor` scope:
 
 ```
-sourceDirectory in Nanoc := sourceDirectory / "asciimd"
+sourceDirectory in Asciidoctor := sourceDirectory / "asciimd"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Asciidoctor` scope:
@@ -213,7 +213,7 @@ See the [`sbt-ghpages`](sbt-ghpages) plugin documentation for simplified publish
 
 ## Advanced Usage
 
-If you need to run a generator on more than one source directory, bypassing the `AutoPlugin` sytem and defining one or more sbt `Configuration`s is necessary. For example, suppose you two Pamflet source directories and want them each generated as a subdirectory under `target/site`. A `build.sbt` might look something like this:
+If you need to run a generator on more than one source directory, bypassing the `AutoPlugin` system and defining one or more sbt `Configuration`s is necessary. For example, suppose you two Pamflet source directories and want them each generated as a subdirectory under `target/site`. A `build.sbt` might look something like this:
 
 ```
 // Define two `Configuration` instances.

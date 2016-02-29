@@ -9,7 +9,7 @@ import sbt.Keys._
 import sbt._
 
 import scala.collection.immutable
-/** Support ot generato a Nanoc-based website. */
+/** Support to generate a Nanoc-based website. */
 object NanocPlugin extends AutoPlugin {
   override def requires = SitePlugin
   override def trigger = noTrigger

@@ -7,7 +7,7 @@ import com.typesafe.sbt.site.util.{RubyHelpers, SiteHelpers}
 import sbt.Keys._
 import sbt._
 
-/** Support to generate a Jekyll-base website. */
+/** Support to generate a Jekyll-based website. */
 object JekyllPlugin extends AutoPlugin {
   override def requires = SitePlugin
   override def trigger = noTrigger
