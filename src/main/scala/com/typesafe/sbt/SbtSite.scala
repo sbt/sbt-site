@@ -60,6 +60,8 @@ object SbtSite extends Plugin {
       NanocSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in NanocSupport.Nanoc, alias))
     def asciidoctorSupport(alias: String = ""): Seq[Setting[_]] =
       AsciidoctorSupport.settings ++ Seq(addMappingsToSiteDir(mappings in AsciidoctorSupport.Asciidoctor, alias))
+    def gitbookSupport(alias: String = ""): Seq[Setting[_]] =
+      GitbookSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in GitbookSupport.Gitbook, alias))
     def preprocessSite(alias: String = ""): Seq[Setting[_]] =
       PreprocessSupport.settings() ++ Seq(addMappingsToSiteDir(mappings in PreprocessSupport.Preprocess, alias))
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)

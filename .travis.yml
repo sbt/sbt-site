@@ -21,3 +21,4 @@ before_install:
 install:
   - gem install jekyll --no-rdoc --no-ri
   - gem list jekyll
+  - npm install -g gitbook-cli
