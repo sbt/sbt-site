@@ -1,0 +1,4 @@
+> make-site
+$ exists node_modules/gitbook
+$ exists target/gitbook/index.html
+$ exists target/gitbook/chapter1/index.html

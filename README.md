@@ -115,6 +115,21 @@ The site plugin has direct support for building [Asciidoctor][asciidoctor] proje
 site.asciidoctorSupport()
 ```
 
+### GitBook Site Generation
+The site plugin has direct support for building [GitBook][gitbook] projects locally. This assumes you have a GitBook project under the `src/gitbook` directory and that nodejs and npm are installed. To enable GitBook site generation add the following to your `build.sbt` file:
+
+```
+site.gitbookSupport()
+```
+
+The GitBook support can also be configured to manage all GitBook setup and installation by configuring a dedicated directory in which GitBook's npm packages can be installed.
+
+```scala
+import com.typesafe.sbt.site.GitbookSupport.{ Gitbook, gitbookInstallDir }
+
+gitbookInstallDir in Gitbook := Some(baseDirectory.value / "node_modules" / "gitbook")
+```
+
 ## Scaladoc APIS
 To include Scaladoc with your site, add the following line to your `build.sbt`:
 
@@ -150,5 +165,6 @@ site.publishSite
 [pamflet]: http://pamflet.databinder.net
 [nanoc]: http://nanoc.ws/
 [asciidoctor]: http://asciidoctor.org
+[gitbook]: https://help.gitbook.com/
 [sphinx]: http://sphinx-doc.org
 [RC]: https://github.com/sbt/sbt-site/tree/release/1.0.0-RC2
