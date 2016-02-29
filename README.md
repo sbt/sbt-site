@@ -62,7 +62,7 @@ The setting `preprocessExt[Set[String]]` is used to define the filename extensio
 > Note: The extension specifications must not include the final dot (`.`). Only the symbols after the dot.
 
 ### Jekyll Site Generation
-The site plugin has direct support for running [jekyll][jekyll] locally.  This is suprisingly useful for suporting custom jekyll plugins that are not allowed when publishing to github, or hosting a jekyll site on your own server. To add jekyll support, add the following to your `build.sbt`:
+The site plugin has direct support for running [jekyll][jekyll] locally. This is surprisingly useful for supporting custom jekyll plugins that are not allowed when publishing to github, or hosting a jekyll site on your own server. To add jekyll support, add the following to your `build.sbt`:
 
 ```
 site.jekyllSupport()
@@ -70,7 +70,7 @@ site.jekyllSupport()
 
 This assumes you have a jekyll project in the `src/jekyll` directory.
 
-One common issue with Jekyll is ensuring that everyone uses the same version for generating a website.  There is special support for ensuring the version of gems. To do so, add the following to your `build.sbt` file:
+One common issue with Jekyll is ensuring that everyone uses the same version for generating a website. There is special support for ensuring the version of gems. To do so, add the following to your `build.sbt` file:
 
 ```
 com.typesafe.sbt.site.JekyllSupport.requiredGems := Map(
@@ -87,7 +87,7 @@ site.sphinxSupport()
 ```
 
 ### Pamflet Site Generation
-The site plugin has direct support for building [Pamflet](http://pamflet.databinder.net/) projects.   This assumes you have a pamflet project under the `src/pamflet` directory.   To enable pamflet site generation, simply add the following to your `build.sbt` file:
+The site plugin has direct support for building [Pamflet](http://pamflet.databinder.net/) projects. This assumes you have a pamflet project under the `src/pamflet` directory. To enable pamflet site generation, simply add the following to your `build.sbt` file:
 
 ```
 site.pamfletSupport()
@@ -102,7 +102,7 @@ site.pamfletSupport("manual")
 The above will place pamflet generated HTML under the `manual/` directory in the generated site.
 
 ### Nanoc Site Generation
-The site plugin has direct support for building [nanoc][nanoc] projects. This assumes you have a nanoc project under the `src/nanoc` directory. To enable nanoc site generation, simply simply add the following to your `build.sbt` file:
+The site plugin has direct support for building [nanoc][nanoc] projects. This assumes you have a nanoc project under the `src/nanoc` directory. To enable nanoc site generation, simply add the following to your `build.sbt` file:
 
 ```
 site.nanocSupport()
