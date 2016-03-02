@@ -12,7 +12,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 `sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0-RC2")
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0-RC3")
 ```
 
 > _Note_: As of `sbt-site` version 1.0.x, sbt version >= 0.13.5 is required.  
