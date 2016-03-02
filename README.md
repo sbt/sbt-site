@@ -21,6 +21,8 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.2")
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0-RC3")
 ```
 
+Please see [these instructions](https://github.com/sbt/sbt-site/blob/release/1.0.0-RC3/README.md) on how to use the `1.0.x` version, as many things have changed.
+
 
 And then in your `build.sbt` file:
 
