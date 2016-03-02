@@ -15,7 +15,7 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.2")
 ```
 
 > *Note*: this requires sbt 0.13 - for sbt 0.12 see the [0.7.2 version][old] of this plugin.  
-> *Note*: The release candidate with `Autoplugin` conversion is available [here][RC].
+> *Note*: The `1.0.01 release candidate with `Autoplugin` conversion is available [here][RC].
 
 And then in your `build.sbt` file:
 
