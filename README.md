@@ -1,5 +1,5 @@
 # sbt-site
-[![Build Status](https://travis-ci.org/sbt/sbt-site.svg)](https://travis-ci.org/sbt/sbt-site)
+[![Build Status](https://travis-ci.org/sbt/sbt-site.svg?branch=master)](https://travis-ci.org/sbt/sbt-site)
 
 [![Join the chat at https://gitter.im/sbt/sbt-site](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sbt/sbt-site?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -15,7 +15,12 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.2")
 ```
 
 > *Note*: this requires sbt 0.13 - for sbt 0.12 see the [0.7.2 version][old] of this plugin.  
-> *Note*: The `1.0.01 release candidate with `Autoplugin` conversion is available [here][RC].
+> *Note*: The `1.0.0` release candidate with `Autoplugin` support is available [here][RC], or as:
+
+```
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0-RC3")
+```
+
 
 And then in your `build.sbt` file:
 
@@ -151,4 +156,4 @@ site.publishSite
 [nanoc]: http://nanoc.ws/
 [asciidoctor]: http://asciidoctor.org
 [sphinx]: http://sphinx-doc.org
-[RC]: https://github.com/sbt/sbt-site/tree/release/1.0.0-RC2
+[RC]: https://github.com/sbt/sbt-site/tree/release/1.0.0-RC3
