@@ -11,7 +11,7 @@ script:
 
 before_install:
   - rvm install 2.2.3
- 
+
 sudo: false
 
 addons:
@@ -21,5 +21,5 @@ addons:
     - python-sphinx
 
 install:
-  - gem install jekyll:2.5.3 nanoc asciidoctor --no-rdoc --no-ri
+  - gem install jekyll:2.5.3 nanoc:3.8.0 asciidoctor --no-rdoc --no-ri
   - npm install -g gitbook-cli
