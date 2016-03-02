@@ -5,9 +5,13 @@ jdk:
    - openjdk6
 env:
   - SBT_OPTS="-XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
+
 script:
   - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted
 
+before_install:
+  - rvm install 2.2.3
+ 
 sudo: false
 
 addons:
