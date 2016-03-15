@@ -9,6 +9,7 @@ object SitePlugin extends AutoPlugin {
   override def trigger = allRequirements
   object autoImport extends SiteKeys {
     def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
+    val addMappingsToSiteDir = com.typesafe.sbt.site.util.SiteHelpers.addMappingsToSiteDir _
   }
   import autoImport._
 
