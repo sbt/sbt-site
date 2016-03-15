@@ -9,21 +9,21 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 
 **Table of Contents**
 
-- [sbt-site](#)
-	- [Usage](#)
-	- [Adding Static Content to Your Site](#)
-		- [Static Content with Variable Substitution](#)
-		- [Jekyll Site Generation](#)
-		- [Sphinx Site Generation](#)
-		- [Pamflet Site Generation](#)
-		- [Nanoc Site Generation](#)
-		- [Asciidoctor Site Generation](#)
-		- [GitBook Site Generation](#)
-	- [ScalaDoc APIS](#)
-	- [Previewing the Site](#)
-	- [Packaging and Publishing](#)
-	- [Advanced Usage](#)
-	- [License](#)
+- [sbt-site](#sbt-site)
+	- [Usage](#usage)
+	- [Adding Static Content to Your Site](#adding-static-content-to-your-site)
+		- [Static Content with Variable Substitution](#static-content-with-variable-substitution)
+		- [Jekyll Site Generation](#jekyll-site-generation)
+		- [Sphinx Site Generation](#sphinx-site-generation)
+		- [Pamflet Site Generation](#pamflet-site-generation)
+		- [Nanoc Site Generation](#nanoc-site-generation)
+		- [Asciidoctor Site Generation](#asciidoctor-site-generation)
+		- [GitBook Site Generation](#gitbook-site-generation)
+	- [ScalaDoc APIs](#scaladoc-apis)
+	- [Previewing the Site](#previewing-the-site)
+	- [Packaging and Publishing](#packaging-and-publishing)
+	- [Advanced Usage](#advanced-usage)
+	- [License](#license)
 	
 ## Usage
 
@@ -219,7 +219,7 @@ gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "git
 ```
 
 
-## ScalaDoc APIS
+## ScalaDoc APIs
 To include ScalaDoc with your site, add the following line to your `build.sbt`:
 
 ```
