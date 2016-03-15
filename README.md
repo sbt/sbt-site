@@ -5,22 +5,40 @@
 
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
+**Table of Contents**
+
+- [sbt-site](#)
+	- [Usage](#)
+	- [Adding Static Content to Your Site](#)
+		- [Static Content with Variable Substitution](#)
+		- [Jekyll Site Generation](#)
+		- [Sphinx Site Generation](#)
+		- [Pamflet Site Generation](#)
+		- [Nanoc Site Generation](#)
+		- [Asciidoctor Site Generation](#)
+		- [GitBook Site Generation](#)
+	- [ScalaDoc APIS](#)
+	- [Previewing the Site](#)
+	- [Packaging and Publishing](#)
+	- [Advanced Usage](#)
+	- [License](#)
+	
 ## Usage
 
 `sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0-RC3")
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0")
 ```
 
-> _Note_: As of `sbt-site` version 1.0.x, sbt version >= 0.13.5 is required.  
-> * For earlier 0.13.x releases, use [version 0.8.2][0.8.2].
-> * For sbt 0.12, use [version 0.7.2][0.7.2].
-> * To upgrade from a previous version, see the **[migration guide]**.
+<big>To upgrade from a previous version (e.g. 0.8.x), please see the **[migration guide]**.</big>
 
-See the [sbt-ghpages] plugin for information about publishing to [GitHub Pages]. We expect other publishing mechanisms to be supported in the future.
+_Note_: As of `sbt-site` version 1.0.x, sbt version >= 0.13.5 is required.  
+
+* For earlier 0.13.x releases, use [version 0.8.2][0.8.2].
+* For sbt 0.12, use [version 0.7.2][0.7.2].
 
 ## Adding Static Content to Your Site
 When you run `makeSite`, your project's webpage is generated in the `target/site` directory. By default, all files under `src/site` are included in `target/site`. To use specific third-party generators (e.g. [Jekyll]), additional sub-plugins will need to be enabled, as described below.
@@ -215,6 +233,10 @@ This will default to putting the ScalaDoc under the `latest/api` directory on th
 siteSubdirName in SiteScaladoc := "api/wip"
 ```
 
+## Publishing to Github Pages
+
+See the [sbt-ghpages] plugin for information about publishing to [GitHub Pages]. We expect other publishing mechanisms to be supported in the future.
+
 ## Previewing the Site
 To preview your generated site, run `previewSite`, which launches a web server on port 4000 and attempts to connect your browser to [http://localhost:4000/](http://localhost:4000/). To change the server port, use the key `previewFixedPort`:
 
@@ -283,3 +305,4 @@ Each of the other generators follow a similar pattern (e.g. `JekyllPlugin.jekyll
 [gitbook]: https://help.gitbook.com/
 [sphinx]: http://sphinx-doc.org
 [GitHub Pages]: https://pages.github.com
+[GitBook]: https://www.gitbook.com

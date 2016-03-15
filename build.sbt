@@ -5,7 +5,7 @@ name := "sbt-site"
 
 organization := "com.typesafe.sbt"
 
-version := "1.0.0-RC3-SNAPSHOT"
+version := "1.0.0-SNAPSHOT"
 
 licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
 
@@ -15,7 +15,7 @@ scalaVersion in Global := "2.10.6"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
-resolvers += "sonatype-releases" at "https://oss.sonatype.org/service/local/repositories/releases/content/"
+resolvers += Resolver.sonatypeRepo("releases")
 
 libraryDependencies ++= Seq(
   "net.databinder" %% "unfiltered-jetty" % "0.6.8",
