@@ -5,8 +5,12 @@ jdk:
    - openjdk6
 env:
   - SBT_OPTS="-XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
+
 script:
   - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted
+
+before_install:
+  - rvm install 2.2.3
 
 sudo: false
 
@@ -14,10 +18,11 @@ addons:
   apt:
     packages:
     - nodejs
+    - python-sphinx
 
 before_install:
   - rvm install 2.2.3
 
 install:
-  - gem install jekyll --no-rdoc --no-ri
-  - gem list jekyll
+  - gem install jekyll:2.5.3 nanoc:3.8.0 asciidoctor --no-rdoc --no-ri
+  - npm install -g gitbook-cli

@@ -1,0 +1,16 @@
+# Release 1.0.0
+
+## Enhancements
+
+1. Conversion to `AutoPlugin`
+2. Support for GitBook generator. (Thanks to @jonas!)
+
+## Project Management
+
+1. Added `scripted` tests for:
+   * nanoc
+   * pamflet
+   * site + scaladoc
+   * sphinx
+   * gitbook
+2. Code and documentation cleanup
