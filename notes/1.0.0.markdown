@@ -3,7 +3,7 @@
 ## Enhancements
 
 1. Conversion to `AutoPlugin`
-2. Support for GitBook generator.
+2. Support for GitBook generator. (Thanks to @jonas!)
 
 ## Project Management
 
@@ -12,3 +12,5 @@
    * pamflet
    * site + scaladoc
    * sphinx
+   * gitbook
+2. Code and documentation cleanup
