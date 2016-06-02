@@ -88,7 +88,7 @@ enablePlugins(JekyllPlugin)
 This assumes you have a Jekyll project in the `src/jekyll` directory. To change this, set the key `sourceDirectory` in the `Jekyll` scope:
 
 ```
-sourceDirectory in Jekyll := sourceDirectory / "hyde"
+sourceDirectory in Jekyll := sourceDirectory.value / "hyde"
 ```
 
 To redirect the output to a subdirectory of `target/site`, use the `siteSubdirName` key in `Jekyll` scope:
@@ -117,7 +117,7 @@ enablePlugins(SphinxPlugin)
 This assumes you have a Sphinx project under the `src/sphinx` directory. To change this, set the `sourceDirectory` key in the `Sphinx` scope:
 
 ```
-sourceDirectory in Sphinx := sourceDirectory / "androsphinx"
+sourceDirectory in Sphinx := sourceDirectory.value / "androsphinx"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Sphinx` scope:
@@ -138,7 +138,7 @@ enablePlugins(PamfletPlugin)
 This assumes you have a Pamflet project under the `src/pamflet` directory. To change this, set the `sourceDirectory` key in the `Pamflet` scope:
 
 ```
-sourceDirectory in Pamflet := sourceDirectory / "papyrus"
+sourceDirectory in Pamflet := sourceDirectory.value / "papyrus"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Pamflet` scope:
@@ -159,7 +159,7 @@ enablePlugins(NanocPlugin)
 This assumes you have a Nanoc project under the `src/nanoc` directory. To change this, set the `sourceDirectory` key in the `Nanoc` scope:
 
 ```
-sourceDirectory in Nanoc := sourceDirectory / "conan"
+sourceDirectory in Nanoc := sourceDirectory.value / "conan"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Nanoc` scope:
@@ -180,7 +180,7 @@ enablePlugins(AsciidoctorPlugin)
 This assumes you have an Asciidoctor project under the `src/asciidoctor` directory. To change this, set the `sourceDirectory` key in the `Asciidoctor` scope:
 
 ```
-sourceDirectory in Asciidoctor := sourceDirectory / "asciimd"
+sourceDirectory in Asciidoctor := sourceDirectory.value / "asciimd"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Asciidoctor` scope:
@@ -202,7 +202,7 @@ enablePlugins(GitBookPlugin)
 This assumes you have a GitBook project under the `src/gitbook` directory. To change this, set the `sourceDirectory` key in the `GitBook` scope:
 
 ```
-sourceDirectory in GitBook := sourceDirectory / "doc"
+sourceDirectory in GitBook := sourceDirectory.value / "doc"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `GitBook` scope:
@@ -229,7 +229,7 @@ enablePlugins(SiteScaladocPlugin)
 This will default to putting the ScalaDoc under the `latest/api` directory on the website. You can change this with the `siteSubdirName` key in the `SiteScaladoc` scope:
 
 ```
-// Puts ScalaDoc output in `target/set/api/wip`
+// Puts ScalaDoc output in `target/site/api/wip`
 siteSubdirName in SiteScaladoc := "api/wip"
 ```
 
