@@ -5,7 +5,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox] and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 **Table of Contents**
 
@@ -25,7 +25,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 	- [Packaging and Publishing](#packaging-and-publishing)
 	- [Advanced Usage](#advanced-usage)
 	- [License](#license)
-	
+
 ## Usage
 
 `sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to your `project/plugins.sbt` file:
@@ -247,7 +247,7 @@ This will default to putting the ScalaDoc under the `latest/api` directory on th
 siteSubdirName in SiteScaladoc := "api/wip"
 ```
 
-## Publishing to Github Pages
+## Publishing to GitHub Pages
 
 See the [sbt-ghpages] plugin for information about publishing to [GitHub Pages]. We expect other publishing mechanisms to be supported in the future.
 
@@ -273,11 +273,11 @@ To also include this zip file as an artifact when running `publish`, add the fol
 publishSite
 ```
 
-See the [`sbt-ghpages`](sbt-ghpages) plugin documentation for simplified publishing to [GitHub Pages].
+See the [sbt-ghpages] plugin documentation for simplified publishing to [GitHub Pages].
 
 ## Advanced Usage
 
-If you need to run a generator on more than one source directory, bypassing the `AutoPlugin` system and defining one or more sbt `Configuration`s is necessary. For example, suppose you two Pamflet source directories and want them each generated as a subdirectory under `target/site`. A `build.sbt` might look something like this:
+If you need to run a generator on more than one source directory, bypassing the `AutoPlugin` system and defining one or more sbt `Configuration`s is necessary. For example, suppose you have two Pamflet source directories and want them each generated as a subdirectory under `target/site`. A `build.sbt` might look something like this:
 
 ```
 // Define two `Configuration` instances.
@@ -316,7 +316,7 @@ Each of the other generators follow a similar pattern (e.g. `JekyllPlugin.jekyll
 [pamflet]: http://pamflet.databinder.net
 [nanoc]: http://nanoc.ws/
 [asciidoctor]: http://asciidoctor.org
-[gitbook]: https://help.gitbook.com/
+[gitbook]: https://toolchain.gitbook.com/
 [sphinx]: http://sphinx-doc.org
 [GitHub Pages]: https://pages.github.com
-[GitBook]: https://www.gitbook.com
+[paradox]: https://github.com/lightbend/paradox
