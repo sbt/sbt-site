@@ -19,6 +19,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 		- [Nanoc Site Generation](#nanoc-site-generation)
 		- [Asciidoctor Site Generation](#asciidoctor-site-generation)
 		- [GitBook Site Generation](#gitbook-site-generation)
+		- [Paradox Site Generation](#paradox-site-generation)
 	- [ScalaDoc APIs](#scaladoc-apis)
 	- [Previewing the Site](#previewing-the-site)
 	- [Packaging and Publishing](#packaging-and-publishing)
@@ -218,6 +219,19 @@ The plugin can also be configured to manage all GitBook setup and installation b
 gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "gitbook")
 ```
 
+### Paradox Site Generation
+
+The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
+
+```
+enablePlugins(ParadoxSitePlugin)
+```
+
+This assumes you have a Paradox project under the `src/paradox` directory. To change this, set the `sourceDirectory` key in the `Paradox` scope:
+
+```
+sourceDirectory in Paradox := sourceDirectory.value / "doc"
+```
 
 ## ScalaDoc APIs
 To include ScalaDoc with your site, add the following line to your `build.sbt`:
