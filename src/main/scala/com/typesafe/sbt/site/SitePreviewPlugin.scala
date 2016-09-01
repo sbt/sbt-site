@@ -47,7 +47,7 @@ object SitePreviewPlugin extends AutoPlugin {
       val port = previewFixedPort.value getOrElse Port.any
       val sLog = streams.value.log
 
-      Preview(port, makeSite.value, (target in previewAuto).value) run { server =>
+      Preview(port, (target in previewAuto).value, makeSite, watchSources, state.value) run { server =>
         Browser open(server.portBindings.head.url)
       }
       sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
