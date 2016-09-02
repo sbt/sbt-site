@@ -252,7 +252,7 @@ siteSubdirName in SiteScaladoc := "api/wip"
 See the [sbt-ghpages] plugin for information about publishing to [GitHub Pages]. We expect other publishing mechanisms to be supported in the future.
 
 ## Previewing the Site
-To preview your generated site, run `previewSite`, which launches a web server on port 4000 and attempts to connect your browser to [http://localhost:4000/](http://localhost:4000/). To change the server port, use the key `previewFixedPort`:
+To preview your generated site, you can run `previewSite` which launches a static web server, or `previewAuto` which launches a dynamic server updating its content at each modification in your source files. Both launch the server on port 4000 and attempts to connect your browser to [http://localhost:4000/](http://localhost:4000/). To change the server port, use the key `previewFixedPort`:
 
 ```
 previewFixedPort := Some(9999)
