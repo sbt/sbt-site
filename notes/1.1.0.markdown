@@ -1,0 +1,5 @@
+# Release 1.1.0
+
+## Enhancements
+
+1. Support for [Paradox](https://github.com/lightbend/paradox). Thanks @eed3si9n!
