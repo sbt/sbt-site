@@ -26,11 +26,13 @@ object GitBookPlugin extends AutoPlugin {
     inConfig(config)(
       Seq(
         includeFilter := AllPassFilter,
+        excludeFilter := HiddenFileFilter,
         gitbookInstallDir := None,
         mappings := generate(
           sourceDirectory.value,
           target.value,
           includeFilter.value,
+          excludeFilter.value,
           gitbookInstallDir.value,
           streams.value
         ),
@@ -42,7 +44,7 @@ object GitBookPlugin extends AutoPlugin {
       SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
 
   /** Run gitbook commands. */
-  private[sbt] def generate(src: File, target: File, inc: FileFilter, installDir: Option[File], s: TaskStreams): Seq[(File, String)] = {
+  private[sbt] def generate(src: File, target: File, inc: FileFilter, exc: FileFilter, installDir: Option[File], s: TaskStreams): Seq[(File, String)] = {
     val runEnv = installDir.map("HOME" -> _.getAbsolutePath).toSeq
     def run(cmd: String*) =
       Process(cmd.toSeq, Some(src), runEnv: _*) ! s.log match {
@@ -81,9 +83,8 @@ object GitBookPlugin extends AutoPlugin {
     }
 
     // Figure out what was generated.
-    for {
-      (file, name) <- (target ** inc --- target pair relativeTo(target))
-    } yield file -> name
+    val files = (target ** inc) --- (target ** exc) --- target
+    files pair relativeTo(target)
   }
 
   private[sbt] def bookJson(src: File): File = src / "book.json"
