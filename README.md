@@ -19,6 +19,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 		- [Nanoc Site Generation](#nanoc-site-generation)
 		- [Asciidoctor Site Generation](#asciidoctor-site-generation)
 		- [GitBook Site Generation](#gitbook-site-generation)
+		- [Paradox Site Generation](#paradox-site-generation)
 	- [ScalaDoc APIs](#scaladoc-apis)
 	- [Previewing the Site](#previewing-the-site)
 	- [Packaging and Publishing](#packaging-and-publishing)
@@ -30,7 +31,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 `sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.0.0")
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.1.0")
 ```
 
 <big>To upgrade from a previous version (e.g. 0.8.x), please see the **[migration guide]**.</big>
@@ -88,7 +89,7 @@ enablePlugins(JekyllPlugin)
 This assumes you have a Jekyll project in the `src/jekyll` directory. To change this, set the key `sourceDirectory` in the `Jekyll` scope:
 
 ```
-sourceDirectory in Jekyll := sourceDirectory / "hyde"
+sourceDirectory in Jekyll := sourceDirectory.value / "hyde"
 ```
 
 To redirect the output to a subdirectory of `target/site`, use the `siteSubdirName` key in `Jekyll` scope:
@@ -117,7 +118,7 @@ enablePlugins(SphinxPlugin)
 This assumes you have a Sphinx project under the `src/sphinx` directory. To change this, set the `sourceDirectory` key in the `Sphinx` scope:
 
 ```
-sourceDirectory in Sphinx := sourceDirectory / "androsphinx"
+sourceDirectory in Sphinx := sourceDirectory.value / "androsphinx"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Sphinx` scope:
@@ -138,7 +139,7 @@ enablePlugins(PamfletPlugin)
 This assumes you have a Pamflet project under the `src/pamflet` directory. To change this, set the `sourceDirectory` key in the `Pamflet` scope:
 
 ```
-sourceDirectory in Pamflet := sourceDirectory / "papyrus"
+sourceDirectory in Pamflet := sourceDirectory.value / "papyrus"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Pamflet` scope:
@@ -159,7 +160,7 @@ enablePlugins(NanocPlugin)
 This assumes you have a Nanoc project under the `src/nanoc` directory. To change this, set the `sourceDirectory` key in the `Nanoc` scope:
 
 ```
-sourceDirectory in Nanoc := sourceDirectory / "conan"
+sourceDirectory in Nanoc := sourceDirectory.value / "conan"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Nanoc` scope:
@@ -180,7 +181,7 @@ enablePlugins(AsciidoctorPlugin)
 This assumes you have an Asciidoctor project under the `src/asciidoctor` directory. To change this, set the `sourceDirectory` key in the `Asciidoctor` scope:
 
 ```
-sourceDirectory in Asciidoctor := sourceDirectory / "asciimd"
+sourceDirectory in Asciidoctor := sourceDirectory.value / "asciimd"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Asciidoctor` scope:
@@ -202,7 +203,7 @@ enablePlugins(GitBookPlugin)
 This assumes you have a GitBook project under the `src/gitbook` directory. To change this, set the `sourceDirectory` key in the `GitBook` scope:
 
 ```
-sourceDirectory in GitBook := sourceDirectory / "doc"
+sourceDirectory in GitBook := sourceDirectory.value / "doc"
 ```
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `GitBook` scope:
@@ -218,6 +219,19 @@ The plugin can also be configured to manage all GitBook setup and installation b
 gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "gitbook")
 ```
 
+### Paradox Site Generation
+
+The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
+
+```
+enablePlugins(ParadoxSitePlugin)
+```
+
+This assumes you have a Paradox project under the `src/paradox` directory. To change this, set the `sourceDirectory` key in the `Paradox` scope:
+
+```
+sourceDirectory in Paradox := sourceDirectory.value / "doc"
+```
 
 ## ScalaDoc APIs
 To include ScalaDoc with your site, add the following line to your `build.sbt`:
@@ -229,7 +243,7 @@ enablePlugins(SiteScaladocPlugin)
 This will default to putting the ScalaDoc under the `latest/api` directory on the website. You can change this with the `siteSubdirName` key in the `SiteScaladoc` scope:
 
 ```
-// Puts ScalaDoc output in `target/set/api/wip`
+// Puts ScalaDoc output in `target/site/api/wip`
 siteSubdirName in SiteScaladoc := "api/wip"
 ```
 
