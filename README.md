@@ -5,7 +5,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox], and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 **Table of Contents**
 
@@ -320,3 +320,4 @@ Each of the other generators follow a similar pattern (e.g. `JekyllPlugin.jekyll
 [sphinx]: http://sphinx-doc.org
 [GitHub Pages]: https://pages.github.com
 [GitBook]: https://www.gitbook.com
+[Paradox]: https://github.com/lightbend/paradox
