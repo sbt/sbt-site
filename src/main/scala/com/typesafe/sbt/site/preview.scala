@@ -48,7 +48,7 @@ object Preview {
     } }
 
   def updateSources(files: Seq[File]): Map[File, Long] =
-    Map(files.map(file => file -> file.lastModified()): _*)
+    Map(files.filter(!_.toString.endsWith("~")).map(file => file -> file.lastModified()): _*)
 
   def runTask[A](task: TaskKey[A], state: State): (State, A) = {
   	val extracted = Project extract state

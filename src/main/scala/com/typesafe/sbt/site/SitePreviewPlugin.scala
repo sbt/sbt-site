@@ -10,9 +10,9 @@ object SitePreviewPlugin extends AutoPlugin {
 
   object autoImport {
     val previewSite = TaskKey[Unit]("previewSite", "Launches a jetty server that serves your generated site from the target directory")
+    val previewAuto = TaskKey[Unit]("previewAuto", "Launches an automatic jetty server that serves your generated site from the target directory")
     val previewFixedPort = SettingKey[Option[Int]]("previewFixedPort") in previewSite
     val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
-    val previewAuto = TaskKey[Unit]("previewAuto", "Launches an automatic jetty server that serves your generated site from the target directory")
   }
   import SitePlugin.autoImport._
   import autoImport._
@@ -41,17 +41,19 @@ object SitePreviewPlugin extends AutoPlugin {
       server stop()
       server destroy()
     },
-    previewFixedPort := Some(4000),
-    previewLaunchBrowser := true,
     previewAuto := {
       val port = previewFixedPort.value getOrElse Port.any
       val sLog = streams.value.log
+      val browser = previewLaunchBrowser.value
 
       Preview(port, (target in previewAuto).value, makeSite, watchSources, state.value) run { server =>
-        Browser open(server.portBindings.head.url)
+        if(browser)
+          Browser open(server.portBindings.head.url)
       }
       sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
     },
+    previewFixedPort := Some(4000),
+    previewLaunchBrowser := true,
     target in previewAuto := siteDirectory.value
   )
 
