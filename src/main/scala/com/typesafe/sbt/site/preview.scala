@@ -1,6 +1,6 @@
 package com.typesafe.sbt.site
 
-import sbt._
+import sbt._, Keys._
 import unfiltered.jetty.Server
 import unfiltered.filter.Plan
 import unfiltered.response._
@@ -11,28 +11,43 @@ import collection.mutable.Map
 
 object Preview {
   def apply(port: Int, base: File, genSite: TaskKey[File], genSources: TaskKey[Seq[File]], state: State): Server = {
-    val (_, rootFile) = runTask(genSite, state)
-    val (_, rootSources) = runTask(genSources, state)
+    val rootFile = runTask(genSite, state)
+    val rootSources = runTask(genSources, state)
 
-    val rootPage = new URL(rootFile.toURI.toURL, "index.html") // TODO: which file to start with?
-    var mapSources: Map[File, Long] = updateSources(rootSources)
+    val rootPage: Option[URL] = startPageURL(rootFile)
+    var mapSources: Map[File, Long] = mapFileToLastModified(rootSources)
 
     val plan: Plan = unfiltered.filter.Planify {
-      case GET(unfiltered.request.Path(Seg(Nil))) =>
-        responseStreamer(rootPage)
       case GET(unfiltered.request.Path(Seg(path))) => {
-        val (_, newSources) = runTask(genSources, state)
-        val newMapSources = updateSources(newSources)
+        val newSources = runTask(genSources, state)
+        val newMapSources = mapFileToLastModified(newSources)
         if(mapSources != newMapSources) {
           val _ = runTask(genSite, state)
           mapSources = newMapSources
         }
-        val newFile: File = base / path.mkString("/")
-        responseStreamer(newFile.toURI.toURL)
+        path match {
+          case p :: ps =>
+            val newFile: File = base / path.mkString("/")
+            responseStreamer(newFile.toURI.toURL)
+          case Nil =>
+            rootPage match {
+              case Some(startingPage) => responseStreamer(startingPage)
+              case None => ResponseString("No file found, make sure to generate any starting web page at root project (default: \"index.html\")")
+            }
+        }
       }
     }
     val http = unfiltered.jetty.Server.local(port)
-    http.plan(plan).resources(rootPage)
+    http.plan(plan).resources(new URL(rootFile.toURI.toURL, "."))
+  }
+
+  def startPageURL(rootFile: File): Option[URL] = {
+    val files = rootFile.listFiles.filter(!_.isDirectory)
+    files.toList.filter(_.getName == "index.html") match {
+      case ind :: Nil => Some(ind.toURI.toURL)
+      case Nil if(files.length > 0) => Some(files(0).toURI.toURL)
+      case _ => None
+    }
   }
 
   def responseStreamer(url: URL) =
@@ -47,11 +62,12 @@ object Preview {
       }
     } }
 
-  def updateSources(files: Seq[File]): Map[File, Long] =
+  def mapFileToLastModified(files: Seq[File]): Map[File, Long] =
     Map(files.filter(!_.toString.endsWith("~")).map(file => file -> file.lastModified()): _*)
 
-  def runTask[A](task: TaskKey[A], state: State): (State, A) = {
+  def runTask[A](task: TaskKey[A], state: State): A = {
     val extracted = Project extract state
-    extracted.runTask(task, state)
+    val (_, result) = extracted.runTask(task, state)
+    result
   }
 }
