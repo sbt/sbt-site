@@ -17,8 +17,6 @@ object SitePreviewPlugin extends AutoPlugin {
   import SitePlugin.autoImport._
   import autoImport._
 
-
-  //@TODO Add configuration to make server just local
   override val projectSettings: Seq[Setting[_]] = Seq(
     previewSite := {
       val file = makeSite.value
@@ -43,14 +41,12 @@ object SitePreviewPlugin extends AutoPlugin {
     },
     previewAuto := {
       val port = previewFixedPort.value getOrElse Port.any
-      val sLog = streams.value.log
       val browser = previewLaunchBrowser.value
 
       Preview(port, (target in previewAuto).value, makeSite, watchSources, state.value) run { server =>
         if(browser)
           Browser open(server.portBindings.head.url)
       }
-      sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
     },
     previewFixedPort := Some(4000),
     previewLaunchBrowser := true,
