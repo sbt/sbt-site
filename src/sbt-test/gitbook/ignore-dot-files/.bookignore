@@ -1,0 +1,5 @@
+project/
+target/
+boot/
+global/
+*.sbt
