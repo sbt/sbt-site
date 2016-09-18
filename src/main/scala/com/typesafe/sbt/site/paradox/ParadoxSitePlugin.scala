@@ -31,7 +31,8 @@ object ParadoxSitePlugin extends AutoPlugin {
           val _ = paradox.value
           val output = (target in paradox).value
           output ** includeFilter.value --- output pair relativeTo(output)
-        }
+        },
+        siteSubdirName := ""
       )
     ) ++
     SiteHelpers.directorySettings(config) ++
