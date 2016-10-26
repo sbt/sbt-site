@@ -12,7 +12,7 @@ script:
 before_install:
   - rvm install 2.2.3
 
-sudo: false
+sudo: true
 
 addons:
   apt:
