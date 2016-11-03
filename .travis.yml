@@ -27,7 +27,7 @@ install:
   - gem install jekyll:2.5.3 nanoc:3.8.0 asciidoctor --no-rdoc --no-ri
   - npm install -g gitbook-cli
   - |
-    mkdir $TRAVIS_BUILD_DIR/download && \
+    mkdir $TRAVIS_BUILD_DIR/download && mkdir $HOME/bin && \
     wget https://github.com/spf13/hugo/releases/download/v0.16/hugo_0.16_linux-64bit.tgz -O $TRAVIS_BUILD_DIR/download/hugo.tgz && \
     tar xvf $TRAVIS_BUILD_DIR/download/hugo.tgz && \
     mv $TRAVIS_BUILD_DIR/hugo $HOME/bin/hugo && \
