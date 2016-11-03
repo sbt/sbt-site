@@ -20,6 +20,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 		- [Asciidoctor Site Generation](#asciidoctor-site-generation)
 		- [GitBook Site Generation](#gitbook-site-generation)
 		- [Paradox Site Generation](#paradox-site-generation)
+		- [Hugo Site Generation](#hugo-site-generation)
 	- [ScalaDoc APIs](#scaladoc-apis)
 	- [Previewing the Site](#previewing-the-site)
 	- [Packaging and Publishing](#packaging-and-publishing)
@@ -231,6 +232,26 @@ This assumes you have a Paradox project under the `src/paradox` directory. To ch
 
 ```
 sourceDirectory in Paradox := sourceDirectory.value / "doc"
+```
+
+### Hugo Site Generation
+
+The `sbt-site` plugin has support for building [Hugo](http://gohugo.io/) projects. To enable Hugo site generation, simply enable the associated plugin in your `build.sbt` file:
+
+```
+enablePlugins(HugoPlugin)
+```
+
+The `hugo` binary must be installed on your `$PATH` in order to be accessible to `sbt-site`. In addition, this plugin assumes you have a Hugo project under the `src/hugo` directory. To change this, set the `sourceDirectory` key in the `Hugo` scope:
+
+```
+sourceDirectory in Paradox := sourceDirectory.value / "doc"
+```
+
+You may also change the [base-url](https://gohugo.io/overview/configuration/) that gets passed to the `hugo` command by adjusting the following setting:
+
+```
+baseURL in Hugo := "https://yourdomain.com"
 ```
 
 ## ScalaDoc APIs
