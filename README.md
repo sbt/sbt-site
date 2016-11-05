@@ -5,7 +5,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox] and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox], [Hugo] and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 **Table of Contents**
 
@@ -31,8 +31,8 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 
 `sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to your `project/plugins.sbt` file:
 
-```
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.1.0")
+```sbt
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.2.0-RC1")
 ```
 
 <big>To upgrade from a previous version (e.g. 0.8.x), please see the **[migration guide]**.</big>
@@ -224,33 +224,33 @@ gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "git
 
 The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
 
-```
+```sbt
 enablePlugins(ParadoxSitePlugin)
 ```
 
 This assumes you have a Paradox project under the `src/paradox` directory. To change this, set the `sourceDirectory` key in the `Paradox` scope:
 
-```
+```sbt
 sourceDirectory in Paradox := sourceDirectory.value / "doc"
 ```
 
 ### Hugo Site Generation
 
-The `sbt-site` plugin has support for building [Hugo](http://gohugo.io/) projects. To enable Hugo site generation, simply enable the associated plugin in your `build.sbt` file:
+The `sbt-site` plugin has support for building [Hugo] projects. To enable Hugo site generation, simply enable the associated plugin in your `build.sbt` file:
 
-```
+```sbt
 enablePlugins(HugoPlugin)
 ```
 
 The `hugo` binary must be installed on your `$PATH` in order to be accessible to `sbt-site`. In addition, this plugin assumes you have a Hugo project under the `src/hugo` directory. To change this, set the `sourceDirectory` key in the `Hugo` scope:
 
-```
+```sbt
 sourceDirectory in Paradox := sourceDirectory.value / "doc"
 ```
 
 You may also change the [base-url](https://gohugo.io/overview/configuration/) that gets passed to the `hugo` command by adjusting the following setting:
 
-```
+```sbt
 baseURL in Hugo := "https://yourdomain.com"
 ```
 
@@ -333,13 +333,12 @@ Each of the other generators follow a similar pattern (e.g. `JekyllPlugin.jekyll
 [0.8.2]: https://github.com/sbt/sbt-site/tree/v0.8.2
 [migration guide]: notes/migrate-0.8.2-to-1.0.md
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
-[jekyll]: http://jekyllrb.com
-[pamflet]: http://pamflet.databinder.net
-[nanoc]: http://nanoc.ws/
-[asciidoctor]: http://asciidoctor.org
-[gitbook]: https://toolchain.gitbook.com/
-[sphinx]: http://sphinx-doc.org
+[Jekyll]: http://jekyllrb.com
+[Pamflet]: http://pamflet.databinder.net
+[Nanoc]: http://nanoc.ws/
+[Asciidoctor]: http://asciidoctor.org
+[Sphinx]: http://sphinx-doc.org
 [GitHub Pages]: https://pages.github.com
-<<<<<<< HEAD
 [GitBook]: https://www.gitbook.com
 [Paradox]: https://github.com/lightbend/paradox
+[Hugo]: http://gohugo.io/

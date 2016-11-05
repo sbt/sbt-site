@@ -1,4 +1,7 @@
 # Release Process Outline
+
+This project uses GitFlow. PRs should be merged onto `develop`. New releases prepared from `release/vX.Y.Z` branch. `master` updated from `release/...` branches.
+
 1. Run `git clean -fdx`. This makes sure there are no unexpected dependencies or artifacts that could affect the build.
 2. Create a branch to do the release work on. Something like `release/<X>.<Y>.<Z>` is good.
 3. Write release notes in Markdown with filename  `notes/<X>.<Y>.markdown`. Go through the commit logs and collect the major new features, bug fixes, deprecations, and anything else relevant to users. Making note of breaking changes is particularly important.

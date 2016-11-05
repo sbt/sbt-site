@@ -3,5 +3,3 @@
 ## Enhancements
 
 1. Support for [Paradox](https://github.com/lightbend/paradox). Thanks @eed3si9n!
-2. Support for [Hugo](https://gohugo.io). Thanks @timperrett!
-3. Added `previewAuto` command, which launches a dynamic HTML server updating content with each modification in site source. Thanks @gsechaud! 
