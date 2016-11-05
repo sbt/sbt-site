@@ -1,0 +1,9 @@
+# Release 1.2.0-RC1
+
+_Version 1.2.0 is initially coming out in "RC" form due to an upgrade in the `unfiltered` dependency. Please see below._
+
+## Enhancements
+
+1. Support for [Hugo](https://gohugo.io) site generation. Thanks @timperrett!
+2. Added `excludeFilter` support to GitBook generator. Thanks @jonas!
+3. Added `previewAuto` command, which launches a dynamic HTML server updating content with each modification in site source. Thanks @gsechaud! Note: This change includes an upgrade of the `unfiltered` depenency. Please let us know of any incompatibilities with other plugins that might be caused by this change.

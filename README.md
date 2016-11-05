@@ -5,7 +5,7 @@
 
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox] and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox], [Hugo] and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 **Table of Contents**
 
@@ -20,6 +20,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 		- [Asciidoctor Site Generation](#asciidoctor-site-generation)
 		- [GitBook Site Generation](#gitbook-site-generation)
 		- [Paradox Site Generation](#paradox-site-generation)
+		- [Hugo Site Generation](#hugo-site-generation)
 	- [ScalaDoc APIs](#scaladoc-apis)
 	- [Previewing the Site](#previewing-the-site)
 	- [Packaging and Publishing](#packaging-and-publishing)
@@ -30,8 +31,8 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 
 `sbt-site` is deployed as an `AutoPlugin`. To enable, simply add the following to your `project/plugins.sbt` file:
 
-```
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.1.0")
+```sbt
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.2.0-RC1")
 ```
 
 <big>To upgrade from a previous version (e.g. 0.8.x), please see the **[migration guide]**.</big>
@@ -223,14 +224,34 @@ gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "git
 
 The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
 
-```
+```sbt
 enablePlugins(ParadoxSitePlugin)
 ```
 
 This assumes you have a Paradox project under the `src/paradox` directory. To change this, set the `sourceDirectory` key in the `Paradox` scope:
 
-```
+```sbt
 sourceDirectory in Paradox := sourceDirectory.value / "doc"
+```
+
+### Hugo Site Generation
+
+The `sbt-site` plugin has support for building [Hugo] projects. To enable Hugo site generation, simply enable the associated plugin in your `build.sbt` file:
+
+```sbt
+enablePlugins(HugoPlugin)
+```
+
+The `hugo` binary must be installed on your `$PATH` in order to be accessible to `sbt-site`. In addition, this plugin assumes you have a Hugo project under the `src/hugo` directory. To change this, set the `sourceDirectory` key in the `Hugo` scope:
+
+```sbt
+sourceDirectory in Paradox := sourceDirectory.value / "doc"
+```
+
+You may also change the [base-url](https://gohugo.io/overview/configuration/) that gets passed to the `hugo` command by adjusting the following setting:
+
+```sbt
+baseURL in Hugo := "https://yourdomain.com"
 ```
 
 ## ScalaDoc APIs
@@ -252,7 +273,7 @@ siteSubdirName in SiteScaladoc := "api/wip"
 See the [sbt-ghpages] plugin for information about publishing to [GitHub Pages]. We expect other publishing mechanisms to be supported in the future.
 
 ## Previewing the Site
-To preview your generated site, run `previewSite`, which launches a web server on port 4000 and attempts to connect your browser to [http://localhost:4000/](http://localhost:4000/). To change the server port, use the key `previewFixedPort`:
+To preview your generated site, you can run `previewSite` which launches a static web server, or `previewAuto` which launches a dynamic server updating its content at each modification in your source files. Both launch the server on port 4000 and attempts to connect your browser to [http://localhost:4000/](http://localhost:4000/). To change the server port, use the key `previewFixedPort`:
 
 ```sbt
 previewFixedPort := Some(9999)
@@ -312,11 +333,12 @@ Each of the other generators follow a similar pattern (e.g. `JekyllPlugin.jekyll
 [0.8.2]: https://github.com/sbt/sbt-site/tree/v0.8.2
 [migration guide]: notes/migrate-0.8.2-to-1.0.md
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
-[jekyll]: http://jekyllrb.com
-[pamflet]: http://pamflet.databinder.net
-[nanoc]: http://nanoc.ws/
-[asciidoctor]: http://asciidoctor.org
-[gitbook]: https://toolchain.gitbook.com/
-[sphinx]: http://sphinx-doc.org
+[Jekyll]: http://jekyllrb.com
+[Pamflet]: http://pamflet.databinder.net
+[Nanoc]: http://nanoc.ws/
+[Asciidoctor]: http://asciidoctor.org
+[Sphinx]: http://sphinx-doc.org
 [GitHub Pages]: https://pages.github.com
-[paradox]: https://github.com/lightbend/paradox
+[GitBook]: https://www.gitbook.com
+[Paradox]: https://github.com/lightbend/paradox
+[Hugo]: http://gohugo.io/

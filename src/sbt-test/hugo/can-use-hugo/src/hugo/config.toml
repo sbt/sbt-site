@@ -1,0 +1,9 @@
+baseurl = "http://localhost:1313/"
+languageCode = "en-us"
+author = "sbt-site"
+copyright = "All rights reserved."
+
+[params]
+  github_host = "github.com"
+  github_repository = "verizon/knobs"
+  project_name = "Knobs"

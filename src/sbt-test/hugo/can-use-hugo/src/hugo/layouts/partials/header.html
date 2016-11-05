@@ -1,0 +1,15 @@
+<header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="//{{ $.Param "github_host" }}/{{ $.Param "github_repository" }}" class="site-title">
+      {{ $.Param "project_name" }}
+      </a>
+      <nav class="site-nav">
+        {{ range .Data.Pages }}
+        <a href="#{{ .Slug | lower }}">{{ .Title | lower }}</a>
+        {{ end }}
+      </nav>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</header>

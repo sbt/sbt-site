@@ -1,6 +1,7 @@
 package com.typesafe.sbt.site
 
 import sbt._
+import Keys._
 import unfiltered.util._
 
 object SitePreviewPlugin extends AutoPlugin {
@@ -9,19 +10,23 @@ object SitePreviewPlugin extends AutoPlugin {
 
   object autoImport {
     val previewSite = TaskKey[Unit]("previewSite", "Launches a jetty server that serves your generated site from the target directory")
+    val previewAuto = TaskKey[Unit]("previewAuto", "Launches an automatic jetty server that serves your generated site from the target directory")
     val previewFixedPort = SettingKey[Option[Int]]("previewFixedPort") in previewSite
     val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
   }
   import SitePlugin.autoImport._
   import autoImport._
 
-
-  //@TODO Add configuration to make server just local
   override val projectSettings: Seq[Setting[_]] = Seq(
-    previewSite <<= (makeSite, previewFixedPort, previewLaunchBrowser) map { (file, portOption, browser) =>
+    previewSite := {
+      val file = makeSite.value
+      val portOption = previewFixedPort.value
+      val browser = previewLaunchBrowser.value
+
       val port = portOption getOrElse Port.any
       val server = createServer(file, port) start()
-      println("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
+      val sLog = streams.value.log
+      sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
       // TODO: use something from sbt-web?
       @annotation.tailrec def waitForKey() {
         try { Thread sleep 500 } catch { case _: InterruptedException => () }
@@ -34,11 +39,21 @@ object SitePreviewPlugin extends AutoPlugin {
       server stop()
       server destroy()
     },
+    previewAuto := {
+      val port = previewFixedPort.value getOrElse Port.any
+      val browser = previewLaunchBrowser.value
+
+      Preview(port, (target in previewAuto).value, makeSite, watchSources, state.value) run { server =>
+        if(browser)
+          Browser open(server.portBindings.head.url)
+      }
+    },
     previewFixedPort := Some(4000),
-    previewLaunchBrowser := true
+    previewLaunchBrowser := true,
+    target in previewAuto := siteDirectory.value
   )
 
   def createServer(siteTarget: File, port: Int) =
-    unfiltered.jetty.Http(port) resources new URL(siteTarget.toURI.toURL, ".")
+    unfiltered.jetty.Server.local(port) resources new URL(siteTarget.toURI.toURL, ".")
 
 }
