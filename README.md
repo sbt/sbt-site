@@ -48,7 +48,7 @@ When you run `makeSite`, your project's webpage is generated in the `target/site
 The `src/site` directory can be overridden via the `siteSourceDirectory` key:
 
 ```sbt
-siteSourceDirectory <<= target / "generated-stuff"
+siteSourceDirectory := target.value / "generated-stuff"
 ```
 
 Additional files outside of `siteSourceDirectory` can be added individually via the `siteMappings` key:
