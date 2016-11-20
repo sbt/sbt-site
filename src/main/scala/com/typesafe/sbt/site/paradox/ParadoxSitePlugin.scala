@@ -25,7 +25,6 @@ object ParadoxSitePlugin extends AutoPlugin {
       ParadoxPlugin.paradoxSettings ++
       List(
         sourceDirectory in paradox := sourceDirectory.value,
-        target in paradox := target.value,
         includeFilter := AllPassFilter,
         mappings := {
           val _ = paradox.value

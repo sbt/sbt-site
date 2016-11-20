@@ -10,5 +10,8 @@ lazy val root = (project in file(".")).
       assert(index.exists, s"${index.getAbsolutePath} did not exist")
       val content = IO.readLines(index)
       assert(content.exists(_.contains("Paradox Testing")), s"Did not find expected content in:\n${content.mkString("\n")}")
+
+      val themeFile = dest / "paradox/theme/page.st"
+      assert(!themeFile.exists, s"$themeFile should not exist [#80]")
     }
   )
