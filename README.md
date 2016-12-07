@@ -222,7 +222,7 @@ gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "git
 
 ### Paradox Site Generation
 
-The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
+The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file along with the theme:
 
 ```sbt
 enablePlugins(ParadoxSitePlugin)
@@ -232,6 +232,19 @@ This assumes you have a Paradox project under the `src/paradox` directory. To ch
 
 ```sbt
 sourceDirectory in Paradox := sourceDirectory.value / "doc"
+```
+
+If you are configuring Paradox from scratch remember to also configure a theme:
+
+```sbt
+paradoxTheme := Some(builtinParadoxTheme("generic"))
+``
+
+Note that Paradox settings such as `paradoxProperties` should be scoped to `Paradox` instead of `Compile` as used in the [Paradox documentation]. For example to configure an `@extref` link prefix use:
+```sbt
+paradoxProperties in Paradox ++= Map(
+  "extref.rfc.base_url" -> "http://tools.ietf.org/html/rfc%s"
+)
 ```
 
 ### Hugo Site Generation
@@ -341,4 +354,5 @@ Each of the other generators follow a similar pattern (e.g. `JekyllPlugin.jekyll
 [GitHub Pages]: https://pages.github.com
 [GitBook]: https://www.gitbook.com
 [Paradox]: https://github.com/lightbend/paradox
+[Paradox documentation]: http://developer.lightbend.com/docs/paradox/latest/
 [Hugo]: http://gohugo.io/
