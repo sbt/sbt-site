@@ -2,7 +2,7 @@ language: scala
 scala:
    - 2.10.6
 jdk:
-   - openjdk6
+   - openjdk7
 env:
   - SBT_OPTS="-XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
 
