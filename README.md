@@ -222,7 +222,7 @@ gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "git
 
 ### Paradox Site Generation
 
-The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file along with the theme:
+The `sbt-site` plugin has direct support for building [Paradox] projects. To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
 
 ```sbt
 enablePlugins(ParadoxSitePlugin)
@@ -238,7 +238,7 @@ If you are configuring Paradox from scratch remember to also configure a theme:
 
 ```sbt
 paradoxTheme := Some(builtinParadoxTheme("generic"))
-``
+```
 
 Note that Paradox settings such as `paradoxProperties` should be scoped to `Paradox` instead of `Compile` as used in the [Paradox documentation]. For example to configure an `@extref` link prefix use:
 ```sbt
