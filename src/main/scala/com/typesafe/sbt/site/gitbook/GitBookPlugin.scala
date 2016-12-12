@@ -72,14 +72,20 @@ object GitBookPlugin extends AutoPlugin {
 
     val gitbook = installDir.map(install).getOrElse("gitbook")
 
-    run(gitbook, "build")
+    outputDir(src) match {
+      case Some(output) =>
+        run(gitbook, "build")
+        if (output.getCanonicalPath != target.getCanonicalPath) {
+          s.log.warn(
+            s"""|The output directory in book.json resolves to ${output}
+                |which does not match the target ${target}.
+                |We are going to copy the files over, but you might want to remove
+                |the 'output' setting in ${bookJson(src)} so the clean task cleans.""".stripMargin)
+          IO.copyDirectory(output, target, overwrite = true, preserveLastModified = true)
+        }
 
-    val output = outputDir(src)
-    if (output.getCanonicalPath != target.getCanonicalPath) {
-      s.log.warn(s"""|Output directory ${output} does not match the target ${target}.
-                     |We are going to copy the files over, but you might want to change
-                     |${bookJson(src)} so clean task cleans.""".stripMargin)
-      IO.copyDirectory(output, target, overwrite = true, preserveLastModified = true)
+      case None =>
+        run(gitbook, "build", src.getAbsolutePath, target.getCanonicalPath)
     }
 
     // Figure out what was generated.
@@ -88,14 +94,19 @@ object GitBookPlugin extends AutoPlugin {
   }
 
   private[sbt] def bookJson(src: File): File = src / "book.json"
-  private[sbt] val defaultOutputDir = "_book"
 
-  private[sbt] def outputDir(src: File): File = {
+  private[sbt] def outputDir(src: File): Option[File] = {
     val bookConfig = ConfigFactory.parseFile(bookJson(src))
-    val output = Try(bookConfig.getString("output")).getOrElse(defaultOutputDir)
+    val version = Try(bookConfig.getString("gitbook").split("[.]").head.toInt).toOption
+    val output = Try(bookConfig.getString("output")).getOrElse("_book")
 
-    Path.resolve(src)(file(output)) getOrElse {
-      sys.error("Unable to resolve $output directory.")
+    /*
+     * Version 3 does not support configuring the output directory in book.json
+     * but allows to specify the output directory on the command line.
+     */
+    version match {
+      case Some(v) if v >= 3 => None
+      case _                 => Some(IO.resolve(src, file(output)))
     }
   }
 
