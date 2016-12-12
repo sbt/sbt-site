@@ -1,9 +1,13 @@
 name := "test"
 
+//#enablePlugin
 enablePlugins(PamfletPlugin)
+//#enablePlugin
 
-
-siteSubdirName in Pamflet := "phun"
+//#siteSubdirName
+// Puts output in `target/site/parchment`
+siteSubdirName in Pamflet := "parchment"
+//#siteSubdirName
 
 TaskKey[Unit]("checkContent") := {
   val dest = (target in makeSite).value / (siteSubdirName in Pamflet).value
@@ -12,4 +16,3 @@ TaskKey[Unit]("checkContent") := {
   val content = IO.readLines(index)
   assert(content.exists(_.contains("Phun")), s"Did not find expected content in:\n${content.mkString("\n")}")
 }
-

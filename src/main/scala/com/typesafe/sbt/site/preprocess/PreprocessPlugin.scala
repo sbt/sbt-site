@@ -27,7 +27,11 @@ object PreprocessPlugin extends AutoPlugin {
       Seq(
         siteSourceDirectory := siteSourceDirectory.value,
         siteDirectory := siteDirectory.value,
-        preprocessIncludeFilter := "*.txt" | "*.html" | "*.md" | "*.rst",
+        preprocessIncludeFilter :=
+          //#preprocessIncludeFilter
+          "*.txt" | "*.html" | "*.md" | "*.rst"
+          //#preprocessIncludeFilter
+          ,
         preprocessVars := Map("VERSION" -> version.value),
         includeFilter in Preprocess := AllPassFilter,
         sourceDirectory := sourceDirectory.value / "site-preprocess",
