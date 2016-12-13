@@ -1,6 +1,12 @@
 name := "test"
 
+//#enablePlugin
 enablePlugins(HugoPlugin)
+//#enablePlugin
+
+//#baseURL
+baseURL in Hugo := uri("https://yourdomain.com")
+//#baseURL
 
 siteSubdirName in Hugo := "thisIsHugo"
 

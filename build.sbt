@@ -8,6 +8,7 @@ organization := "com.typesafe.sbt"
 version := "1.2.1-SNAPSHOT"
 
 licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
+scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "git@github.com:sbt/sbt-site.git"))
 
 scalaVersion := "2.10.6"
 
@@ -29,6 +30,10 @@ libraryDependencies ++= Seq(
 )
 
 addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.7")
+
+enablePlugins(ParadoxSitePlugin)
+sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
+paradoxTheme := Some(builtinParadoxTheme("generic"))
 
 scriptedSettings
 

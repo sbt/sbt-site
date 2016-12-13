@@ -2,7 +2,9 @@ name := "test"
 
 enablePlugins(GitBookPlugin)
 
+//#gitbookInstallDir
 gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "gitbook")
+//#gitbookInstallDir
 
 TaskKey[Unit]("checkContent") := {
   val installDir = (gitbookInstallDir in GitBook).value

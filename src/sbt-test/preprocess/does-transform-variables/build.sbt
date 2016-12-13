@@ -1,12 +1,20 @@
 import java.util.Date
 
+//#enablePlugin
 enablePlugins(PreprocessPlugin)
+//#enablePlugin
 
 name := "preprocess test"
 
 version := "0.0-ABCD"
 
+//#preprocessVars
 preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
+//#preprocessVars
+
+//#preprocessIncludeFilter
+preprocessIncludeFilter := "*.md" | "*.markdown"
+//#preprocessIncludeFilter
 
 siteSubdirName in Preprocess := "md-stuff"
 
