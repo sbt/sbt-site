@@ -8,7 +8,7 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 
 ## Documentation
 
-The documentation is available at <https://sbt.github.io/sbt-site/>
+The documentation is available at <http://www.scala-sbt.org/sbt-site/>
 
 ## License
 
