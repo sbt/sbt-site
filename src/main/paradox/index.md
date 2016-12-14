@@ -1,6 +1,6 @@
 # sbt-site
 
-This sbt-site plugin generates project websites from static content as well as @ref:[third-party generators](generators/index.md) and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt-site plugin generates project websites from static content as well as @ref:[third-party generators](generators/index.md) and can optionally include generated Scaladoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 Before upgrading please consult the @github:[release notes](/notes/). Instructions for upgrading from a version before 1.x.x can be found in the @github[migration guide].
 

@@ -1,10 +1,10 @@
 # sbt-site
 
 [![Build Status](https://travis-ci.org/sbt/sbt-site.svg)](https://travis-ci.org/sbt/sbt-site)
-[![Join the chat at https://gitter.im/sbt/sbt-site](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sbt/sbt-site?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/sbt/sbt-site](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sbt/sbt-site)
 [ ![Download](https://api.bintray.com/packages/sbt/sbt-plugin-releases/sbt-site/images/download.svg) ](https://bintray.com/sbt/sbt-plugin-releases/sbt-site-imported/_latestVersion)
 
-This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox], [Hugo] and/or [Asciidoctor], and can optionally include generated ScalaDoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
+This sbt plugin generates project websites from static content, [Jekyll], [Sphinx], [Pamflet], [Nanoc], [GitBook], [Paradox], [Hugo] and/or [Asciidoctor], and can optionally include generated Scaladoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
 ## Documentation
 
