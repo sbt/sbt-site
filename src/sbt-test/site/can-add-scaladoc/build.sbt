@@ -5,7 +5,7 @@ enablePlugins(SiteScaladocPlugin)
 //#enablePlugin
 
 //#siteSubdirName
-// Puts ScalaDoc output in `target/site/api/latest`
+// Puts Scaladoc output in `target/site/api/latest`
 siteSubdirName in SiteScaladoc := "api/latest"
 //#siteSubdirName
 

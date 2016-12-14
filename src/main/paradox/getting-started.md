@@ -26,13 +26,13 @@ Or if such files should be added in a separate directory via `addMappingsToSiteD
 
 @@ snip[addMappingsToSiteDir](../../sbt-test/site/can-have-custom-mappings/build.sbt) { #addMappingsToSiteDir }
 
-## ScalaDoc APIs
+## Scaladoc APIs
 
-To include ScalaDoc with your site, add the following line to your `build.sbt`:
+To include Scaladoc with your site, add the following line to your `build.sbt`:
 
 @@ snip[enablePlugin](../../sbt-test/site/can-add-scaladoc/build.sbt) { #enablePlugin }
 
-This will default to putting the ScalaDoc under the `latest/api` directory on the website. You can change this with the `siteSubdirName` key in the `SiteScaladoc` scope:
+This will default to putting the Scaladoc under the `latest/api` directory on the website. You can change this with the `siteSubdirName` key in the `SiteScaladoc` scope:
 
 @@ snip[siteSubdirName](../../sbt-test/site/can-add-scaladoc/build.sbt) { #siteSubdirName }
 
