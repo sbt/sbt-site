@@ -14,4 +14,4 @@ Similarly, the output can be redirected to a subdirectory of `target/site` via t
 
 @@ snip[siteSubdirName](../../../sbt-test/pamflet/can-use-pamflet/build.sbt) { #siteSubdirName }
 
-[Pamflet]: http://pamflet.databinder.net
+[Pamflet]: http://www.foundweekends.org/pamflet/

@@ -19,7 +19,7 @@ The documentation is available at <http://www.scala-sbt.org/sbt-site/>
 [migration guide]: notes/migrate-0.8.2-to-1.0.md
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [Jekyll]: http://jekyllrb.com
-[Pamflet]: http://pamflet.databinder.net
+[Pamflet]: http://www.foundweekends.org/pamflet/
 [Nanoc]: http://nanoc.ws/
 [Asciidoctor]: http://asciidoctor.org
 [Sphinx]: http://sphinx-doc.org
