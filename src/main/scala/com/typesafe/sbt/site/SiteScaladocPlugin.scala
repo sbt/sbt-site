@@ -14,9 +14,18 @@ object SiteScaladocPlugin extends AutoPlugin {
   }
   import autoImport._
 
-  override val projectSettings: Seq[Setting[_]] =
-    Seq(
-      siteSubdirName in SiteScaladoc := "latest/api"
+  override val projectSettings = scaladocSettings(SiteScaladoc)
+
+  def scaladocSettings(
+    config: Configuration,
+    scaladocMappings: TaskKey[Seq[(File, String)]] = (mappings in (Compile, packageDoc)),
+    scaladocDir: String = "latest/api"
+  ): Seq[Setting[_]] =
+    inConfig(config)(
+      Seq(
+        siteSubdirName := scaladocDir,
+        mappings := scaladocMappings.value
+      )
     ) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in packageDoc in Compile, siteSubdirName in SiteScaladoc)
+      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
 }
