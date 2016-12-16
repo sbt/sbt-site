@@ -14,9 +14,11 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "$project.version$")
 
 ## Adding Content to Your Site
 
-When you run `makeSite`, your project's webpage is generated in the `target/site` directory. By default, all files under `src/site` are included in `target/site`. In addition to static content, @ref:[site generators](generators/index.md) supporting tools such as Jekyll and Sphinx can be used for managing your site's content.
+When you run `makeSite`, your project's webpage is generated in the `target/site` directory. By default, all files under `src/site` are included in `target/site`. If your site mainly contains static content but you want to replace for example a version string in some of the pages you can use @ref:[preprocessing](preprocess.md) to substitute variables.
 
-If you already have a way to generate a site and all you want is to use sbt-site to package and maybe include API documentation, you can configure `siteSourceDirectory` to point to the directory containing the generated site files instead of `src/site`:
+In addition to static content, you can also generated content as part of the build process and add it to your site. sbt-site has support for adding @ref:[Scaladoc][apidoc] and provides several @ref:[site generators](generators/index.md) such as Jekyll and Sphinx which can be used for managing your site's content.
+
+If you already have a way to generate a site and all you want is to use sbt-site to package and maybe include @ref:[API documentation][apidoc], you can configure `siteSourceDirectory` to point to the directory containing the generated site files instead of `src/site`:
 
 ```sbt
 siteSourceDirectory := target.value / "generated-stuff"
@@ -38,16 +40,6 @@ setting's key. In most cases this can be achieved by scoping sbt-site's
 above.
 
 @@@
-
-## Scaladoc APIs
-
-To include Scaladoc with your site, add the following line to your `build.sbt`:
-
-@@ snip[enablePlugin](../../sbt-test/site/can-add-scaladoc/build.sbt) { #enablePlugin }
-
-This will default to putting the Scaladoc under the `latest/api` directory on the website. You can change this with the `siteSubdirName` key in the `SiteScaladoc` scope:
-
-@@ snip[siteSubdirName](../../sbt-test/site/can-add-scaladoc/build.sbt) { #siteSubdirName }
 
 ## Previewing the Site
 
@@ -76,6 +68,7 @@ publishSite
 To publish a generated site to [GitHub Pages] use the [sbt-ghpages] plugin.
 We expect other publishing mechanisms to be supported in the future.
 
+[apidoc]: api-documentation.md
 [sbt file mappings]: http://www.scala-sbt.org/0.13/docs/Mapping-Files.html
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [GitHub Pages]: https://pages.github.com

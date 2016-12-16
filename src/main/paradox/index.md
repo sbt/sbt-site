@@ -18,6 +18,7 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
 
  - [getting-started](getting-started.md)
  - [preprocess](preprocess.md)
+ - [api-documentation](api-documentation.md)
  - [generators](generators/index.md)
  - [advanced-usage](advanced-usage.md)
 
