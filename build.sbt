@@ -34,6 +34,10 @@ addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.7")
 enablePlugins(ParadoxSitePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
 paradoxTheme := Some(builtinParadoxTheme("generic"))
+version in Paradox := {
+  if (isSnapshot.value) "git tag -l".!!.split("\r?\n").last.substring(1)
+  else version.value
+}
 
 scriptedSettings
 

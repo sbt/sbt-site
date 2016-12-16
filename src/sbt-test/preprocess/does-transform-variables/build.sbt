@@ -16,7 +16,9 @@ preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Da
 preprocessIncludeFilter := "*.md" | "*.markdown"
 //#preprocessIncludeFilter
 
-siteSubdirName in Preprocess := "md-stuff"
+//#sourceDirectory
+sourceDirectory in Preprocess := sourceDirectory.value / "site-preprocess"
+//#sourceDirectory
 
 TaskKey[Unit]("checkContent") := {
   val dest = (target in makeSite).value / (siteSubdirName in Preprocess).value

@@ -1,4 +1,4 @@
-# Generators
+# Site Generators
 
 Site generators are provided via separate plugins. Below all supported plugins
 are listed in alphabetical order.
