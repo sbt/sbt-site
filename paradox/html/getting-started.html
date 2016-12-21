@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>Getting Started · sbt-site</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='sbt-site'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="index.html" >
+<span class="home-icon">⌂</span>sbt-site
+</a>
+<div class="version-number">
+1.1.0
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started.html" class="active">Getting Started</a></li>
+  <li><a href="preprocess.html">Preprocessing</a></li>
+  <li><a href="api-documentation.html">API documentation</a></li>
+  <li><a href="generators/index.html">Site Generators</a>
+  <ul>
+    <li><a href="generators/asciidoctor.html">Asciidoctor</a></li>
+    <li><a href="generators/gitbook.html">GitBook</a></li>
+    <li><a href="generators/hugo.html">Hugo</a></li>
+    <li><a href="generators/jekyll.html">Jekyll</a></li>
+    <li><a href="generators/nanoc.html">Nanoc</a></li>
+    <li><a href="generators/pamflet.html">Pamflet</a></li>
+    <li><a href="generators/paradox.html">Paradox</a></li>
+    <li><a href="generators/sphinx.html">Sphinx</a></li>
+  </ul></li>
+  <li><a href="advanced-usage.html">Advanced Usage</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="index.html">sbt-site</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="index.html" >
+<span class="home-icon">⌂</span>sbt-site
+</a>
+<div class="version-number">
+1.1.0
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started.html" class="active">Getting Started</a></li>
+  <li><a href="preprocess.html">Preprocessing</a></li>
+  <li><a href="api-documentation.html">API documentation</a></li>
+  <li><a href="generators/index.html">Site Generators</a>
+  <ul>
+    <li><a href="generators/asciidoctor.html">Asciidoctor</a></li>
+    <li><a href="generators/gitbook.html">GitBook</a></li>
+    <li><a href="generators/hugo.html">Hugo</a></li>
+    <li><a href="generators/jekyll.html">Jekyll</a></li>
+    <li><a href="generators/nanoc.html">Nanoc</a></li>
+    <li><a href="generators/pamflet.html">Pamflet</a></li>
+    <li><a href="generators/paradox.html">Paradox</a></li>
+    <li><a href="generators/sphinx.html">Sphinx</a></li>
+  </ul></li>
+  <li><a href="advanced-usage.html">Advanced Usage</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">sbt-site</a></li>
+  <li>Getting Started</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h1><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting Started</h1>
+<p>This page will help you get started with sbt-site and teach you the basic concepts.</p>
+<h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
+<p>To enable the plugin in your sbt project, add the following to your <code>project/plugins.sbt</code> file:</p>
+<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.typesafe.sbt&quot; % &quot;sbt-site&quot; % &quot;1.1.0&quot;)
+</code></pre>
+<h2><a href="#adding-content-to-your-site" name="adding-content-to-your-site" class="anchor"><span class="anchor-link"></span></a>Adding Content to Your Site</h2>
+<p>When you run <code>makeSite</code>, your project&rsquo;s webpage is generated in the <code>target/site</code> directory. By default, all files under <code>src/site</code> are included in <code>target/site</code>. If your site mainly contains static content but you want to replace for example a version string in some of the pages you can use <a href="preprocess.html">preprocessing</a> to substitute variables.</p>
+<p>In addition to static content, you can also generated content as part of the build process and add it to your site. sbt-site has support for adding <a href="api-documentation.html">Scaladoc</a> and provides several <a href="generators/index.html">site generators</a> such as Jekyll and Sphinx which can be used for managing your site&rsquo;s content.</p>
+<p>If you already have a way to generate a site and all you want is to use sbt-site to package and maybe include <a href="api-documentation.html">API documentation</a>, you can configure <code>siteSourceDirectory</code> to point to the directory containing the generated site files instead of <code>src/site</code>:</p>
+<pre class="prettyprint"><code class="language-sbt">siteSourceDirectory := target.value / &quot;generated-stuff&quot;
+</code></pre>
+<p>Additional files outside of <code>siteSourceDirectory</code> can be added via <a href="http://www.scala-sbt.org/0.13/docs/Mapping-Files.html">sbt file mappings</a>:</p>
+<pre class="prettyprint"><code class="language-sbt">mappings in makeSite ++= Seq(
+  file(&quot;LICENSE&quot;) -&gt; &quot;LICENSE&quot;,
+  file(&quot;src/assets/favicon.ico&quot;) -&gt; &quot;favicon.ico&quot;
+)</code></pre>
+<p>If you want to add files from an sbt task to a site sub-directory use the provided <code>addMappingsToSiteDir</code>:</p>
+<pre class="prettyprint"><code class="language-sbt">val someDirName = settingKey[String](&quot;Some dir name&quot;)
+someDirName := &quot;someFancySource&quot;
+
+addMappingsToSiteDir(mappings in (Compile, packageSrc), someDirName)
+
+// Or using siteSubdirName scoped to a sbt task or a configuration
+siteSubdirName in ScalaUnidoc := &quot;api&quot;
+addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)</code></pre><div class="callout note "><div class="callout-title">Note</div>
+<p><code>addMappingsToSiteDir</code> requires that the site sub-directory name is passed via a setting&rsquo;s key. In most cases this can be achieved by scoping sbt-site&rsquo;s <code>siteSubdirName</code> setting&rsquo;s key to the task providing the mappings as shown above.</p></div>
+<h2><a href="#previewing-the-site" name="previewing-the-site" class="anchor"><span class="anchor-link"></span></a>Previewing the Site</h2>
+<p>To preview your generated site, you can run <code>previewSite</code> which launches a static web server, or <code>previewAuto</code> which launches a dynamic server updating its content at each modification in your source files. Both launch the server on port 4000 and attempts to connect your browser to <a href="http://localhost:4000/">http://localhost:4000/</a>. To change the server port, use the key <code>previewFixedPort</code>:</p>
+<pre class="prettyprint"><code class="language-sbt">previewFixedPort := Some(9999)
+</code></pre>
+<p>To disable browser auto-open, use the key <code>previewLaunchBrowser</code>:</p>
+<pre class="prettyprint"><code class="language-sbt">previewLaunchBrowser := false
+</code></pre>
+<h2><a href="#packaging" name="packaging" class="anchor"><span class="anchor-link"></span></a>Packaging</h2>
+<p>To create a zip package of the site run <code>package-site</code>.</p>
+<p>To also include this zip file as an artifact when running <code>publish</code>, add the following to your <code>build.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-sbt">publishSite
+</code></pre>
+<h2><a href="#publishing" name="publishing" class="anchor"><span class="anchor-link"></span></a>Publishing</h2>
+<p>To publish a generated site to <a href="https://pages.github.com">GitHub Pages</a> you can use the <a href="http://github.com/sbt/sbt-ghpages">sbt-ghpages</a> plugin. We expect other publishing mechanisms to be supported in the future.</p>
+<h3><a href="#publishing-to-github-pages-using-sbt-ghpages" name="publishing-to-github-pages-using-sbt-ghpages" class="anchor"><span class="anchor-link"></span></a>Publishing to GitHub Pages using sbt-ghpages</h3>
+<p>Set up the plugin by adding the following to <code>project/plugins.sbt</code> (check the <a href="http://github.com/sbt/sbt-ghpages">sbt-ghpages project</a> for the most recent version).</p>
+<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.typesafe.sbt&quot; % &quot;sbt-ghpages&quot; % &quot;0.5.4&quot;)</code></pre>
+<p>Then configure your sbt build to use a special remote when running on Travis CI and otherwise fall back to the normal Git remote configured via the <code>scmInfo</code> setting.</p>
+<pre class="prettyprint"><code class="language-sbt">scmInfo := Some(ScmInfo(url(&quot;https://github.com/sbt/sbt-site&quot;), &quot;git@github.com:sbt/sbt-site.git&quot;))
+
+ghpages.settings
+git.remoteRepo := scmInfo.value.get.connection</code></pre>
+<p>At this point you should be able to run <code>sbt ghpagesPushSite</code> to publish your site.</p><div class="callout note "><div class="callout-title">Note</div>
+<p>Before running <code>sbt ghpagesPushSite</code> the first time you need to create the <code>gh-pages</code> branch. One way to do it is to build your site and publish a first version of it using the following commands:</p>
+<pre class="prettyprint"><code class="language-sh">$ sbt clean make-site                             # &lt;1&gt; Build the site
+$ origin=$(git remote get-url origin)             # &lt;2&gt; Save the current remote for later
+$ cd target/site
+$ git init                                        # &lt;3&gt; Create site repo and add initial content
+$ git add .
+$ git commit -m &quot;Initial import of GitHub Pages&quot;
+$ git push --force &quot;$origin&quot; master:gh-pages      # &lt;4&gt; Publish the repo&#39;s master branch as gh-pages
+</code></pre></div>
+<h3><a href="#publishing-to-github-pages-from-travis-ci" name="publishing-to-github-pages-from-travis-ci" class="anchor"><span class="anchor-link"></span></a>Publishing to GitHub Pages from Travis CI</h3>
+<p>The following tutorial shows you how to set up a custom publish mechanism and then walks you through the steps to configure Travis CI to publish your site as part of its <a href="https://docs.travis-ci.com/user/deployment">deployment process</a>. At the end you will be able to both publish your GitHub Pages site manually by running a command and automatically when a tag is created or changes are merged to a specific branch.</p><div class="callout warning "><div class="callout-title">Warning</div>
+<p>The authentication mechanism shown in this example is not suitable for use in Travis CI with sbt-ghpages because the credentials will be visible in the build log.</p></div>
+<p>First add a <code>site:publish</code> task to your sbt build which uses a special remote when running on Travis CI and otherwise fall back to the normal Git remote configured via the <code>scmInfo</code> setting.</p>
+<pre class="prettyprint"><code class="language-sbt">scmInfo := Some(ScmInfo(url(&quot;https://github.com/sbt/sbt-site&quot;), &quot;git@github.com:sbt/sbt-site.git&quot;))
+
+publish in config(&quot;site&quot;) := {
+  val _ = makeSite.value
+
+  def git(args: String*) =
+    Process(&quot;git&quot; +: args, (target in makeSite).value) ! streams.value.log
+
+  git(&quot;init&quot;)
+  git(&quot;add&quot;, &quot;.&quot;)
+  git(&quot;commit&quot;, &quot;-m&quot;, s&quot;Update site from ${version.value}&quot;)
+
+  val remote = Seq(&quot;GH_TOKEN&quot;, &quot;TRAVIS_REPO_SLUG&quot;).map(sys.env.get).flatten match {
+    case List(auth, repo) =&gt; s&quot;https://$auth@github.com/$repo.git&quot;
+    case _                =&gt; scmInfo.value.get.connection
+  }
+
+  git(&quot;push&quot;, &quot;--quiet&quot;, &quot;--force&quot;, remote, &quot;master:gh-pages&quot;)
+}</code></pre>
+<p>At this point you should be able to run <code>sbt site:publish</code> locally if you want to update your site.</p>
+<p>To authenticate Travis CI to publish changes to the <code>gh-pages</code> branch you need to generate a GitHub token on the <a href="https://github.com/settings/tokens/new">New personal access token</a> page. Depending on whether you are publishing to a private or public repo check the <code>repo</code> or <code>public_repo</code> scope respectively and click the <strong>Generate token</strong> button at the end of the page. Make sure to copy the token to the clipboard.</p>
+<p><img src="generate-token.png" alt="Generate a GitHub token" /></p>
+<p>Next, open a terminal and install the Travis CLI in order to encrypt the token:</p>
+<pre class="prettyprint"><code class="language-sh">$ gem install travis
+$ travis encrypt GH_TOKEN=&lt;paste-token&gt;
+Please add the following to your .travis.yml file:
+
+  secure: &quot;...&quot;
+</code></pre>
+<p>Copy the line starting with <code>secure:</code> and add it to <code>.travis.yml</code>.</p>
+<pre class="prettyprint"><code class="language-yml">env:
+  global:
+    - secure: &quot;T9+0ju8QoXFQOjKUkolV+u6Dbil245+anUSJ3RK1pScSM2tTjtQnxufmsKQl6B12NYCtOmHZKk2paXaGJjGpyCC4m2EDU/usf1EpS2JxftSaCv0YnDx137ihT0Pf7KWllaHa+n/4VajTBf+6lUj5h9C51ObzQ/C0feWzMFrNIxs=&quot;</code></pre><div class="callout note "><div class="callout-title">Note</div>
+<p>At this point, you should run <code>travis lint</code> to check that the resulting <code>.travis.yml</code> is correct.</p></div>
+<p>Finally configure a deploy step in <code>.travis.yml</code> using the script provider. For a complete set of triggers see the <a href="https://docs.travis-ci.com/user/deployment">Travis deployment documentation</a> in this example we publishing when changes are made to a specific branch and explicitly disable publishing for pull request.</p>
+<pre class="prettyprint"><code class="language-yml">before_deploy:
+  - git config --global user.name &quot;$USER&quot;
+  - git config --global user.email &quot;$TRAVIS_BUILD_NUMBER@$TRAVIS_COMMIT&quot;
+
+deploy:
+  provider: script
+  script: sbt site:publish
+  skip_cleanup: true
+  on:
+    branch: publish-site
+    condition: $TRAVIS_PULL_REQUEST = false</code></pre>
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="preprocess.html">Preprocessing</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started.html#getting-started">Getting Started</a>
+  <ul>
+    <li><a href="getting-started.html#setup">Setup</a></li>
+    <li><a href="getting-started.html#adding-content-to-your-site">Adding Content to Your Site</a></li>
+    <li><a href="getting-started.html#previewing-the-site">Previewing the Site</a></li>
+    <li><a href="getting-started.html#packaging">Packaging</a></li>
+    <li><a href="getting-started.html#publishing">Publishing</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2016</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="js/magellan.js"></script>
+
+<style type="text/css">@import "lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

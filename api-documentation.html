@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>API documentation · sbt-site</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='sbt-site'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="index.html" >
+<span class="home-icon">⌂</span>sbt-site
+</a>
+<div class="version-number">
+1.1.0
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started.html">Getting Started</a></li>
+  <li><a href="preprocess.html">Preprocessing</a></li>
+  <li><a href="api-documentation.html" class="active">API documentation</a></li>
+  <li><a href="generators/index.html">Site Generators</a>
+  <ul>
+    <li><a href="generators/asciidoctor.html">Asciidoctor</a></li>
+    <li><a href="generators/gitbook.html">GitBook</a></li>
+    <li><a href="generators/hugo.html">Hugo</a></li>
+    <li><a href="generators/jekyll.html">Jekyll</a></li>
+    <li><a href="generators/nanoc.html">Nanoc</a></li>
+    <li><a href="generators/pamflet.html">Pamflet</a></li>
+    <li><a href="generators/paradox.html">Paradox</a></li>
+    <li><a href="generators/sphinx.html">Sphinx</a></li>
+  </ul></li>
+  <li><a href="advanced-usage.html">Advanced Usage</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="index.html">sbt-site</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="index.html" >
+<span class="home-icon">⌂</span>sbt-site
+</a>
+<div class="version-number">
+1.1.0
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started.html">Getting Started</a></li>
+  <li><a href="preprocess.html">Preprocessing</a></li>
+  <li><a href="api-documentation.html" class="active">API documentation</a></li>
+  <li><a href="generators/index.html">Site Generators</a>
+  <ul>
+    <li><a href="generators/asciidoctor.html">Asciidoctor</a></li>
+    <li><a href="generators/gitbook.html">GitBook</a></li>
+    <li><a href="generators/hugo.html">Hugo</a></li>
+    <li><a href="generators/jekyll.html">Jekyll</a></li>
+    <li><a href="generators/nanoc.html">Nanoc</a></li>
+    <li><a href="generators/pamflet.html">Pamflet</a></li>
+    <li><a href="generators/paradox.html">Paradox</a></li>
+    <li><a href="generators/sphinx.html">Sphinx</a></li>
+  </ul></li>
+  <li><a href="advanced-usage.html">Advanced Usage</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">sbt-site</a></li>
+  <li>API documentation</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h1><a href="#api-documentation" name="api-documentation" class="anchor"><span class="anchor-link"></span></a>API documentation</h1>
+<h2><a href="#scaladoc" name="scaladoc" class="anchor"><span class="anchor-link"></span></a>Scaladoc</h2>
+<p>To include Scaladoc with your site, add the following line to your <code>build.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-sbt">enablePlugins(SiteScaladocPlugin)</code></pre>
+<p>This will default to putting the Scaladoc under the <code>latest/api</code> directory on the website. You can change this with the <code>siteSubdirName</code> key in the <code>SiteScaladoc</code> scope:</p>
+<pre class="prettyprint"><code class="language-sbt">// Puts Scaladoc output in `target/site/api/latest`
+siteSubdirName in SiteScaladoc := &quot;api/latest&quot;</code></pre>
+<h2><a href="#aggregating-api-documentation-with-sbt-unidoc" name="aggregating-api-documentation-with-sbt-unidoc" class="anchor"><span class="anchor-link"></span></a>Aggregating API documentation with sbt-unidoc</h2>
+<p><a href="https://github.com/sbt/sbt-unidoc">sbt-unidoc</a> allows to aggregate Scaladoc or Javadoc from sub-projects into a unified view. The following example shows how you can add aggregated Scaladoc to your site:</p>
+<pre class="prettyprint"><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
+
+lazy val root = project.in(file(&quot;.&quot;))
+  .settings(
+    unidocSettings,
+    siteSubdirName in ScalaUnidoc := &quot;api&quot;,
+    addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)
+  )
+  .aggregate(cats, kittens)</code></pre>
+<h2><a href="#scaladoc-from-multiple-projects" name="scaladoc-from-multiple-projects" class="anchor"><span class="anchor-link"></span></a>Scaladoc from multiple projects</h2>
+<p>In case you want to include the Scaladoc separate for each sub-product there are several options. If you only have a few sub-projects the simplest solution is to manually include the scaladoc for each project:</p>
+<pre class="prettyprint"><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
+
+// Define a `Configuration` for each project.
+val Cats = config(&quot;cats&quot;)
+val Kittens = config(&quot;kittens&quot;)
+
+lazy val siteWithScaladoc = project.in(file(&quot;site/scaladoc&quot;))
+  .settings(
+    SiteScaladocPlugin.scaladocSettings(Cats, mappings in (Compile, packageDoc) in cats, &quot;api/cats&quot;),
+    SiteScaladocPlugin.scaladocSettings(Kittens, mappings in (Compile, packageDoc) in kittens, &quot;api/kittens&quot;)
+  )</code></pre>
+<p>For projects with many such sub-projects, a more maintainable approach is to configure it in a more programatic way:</p>
+<pre class="prettyprint"><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
+
+lazy val scaladocSiteProjects = List(cats, kittens)
+
+lazy val scaladocSiteSettings = scaladocSiteProjects.flatMap { project =&gt;
+  // Create a config for setting the subdirectory
+  SiteScaladocPlugin.scaladocSettings(
+    config(project.id),
+    mappings in (Compile, packageDoc) in project,
+    s&quot;api/${project.id}&quot;
+  )
+}
+
+val siteWithScaladocAlt = project.in(file(&quot;site/scaladoc-alternative&quot;))
+  .settings(scaladocSiteSettings)</code></pre>
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="generators/index.html">Site Generators</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="api-documentation.html#api-documentation">API documentation</a>
+  <ul>
+    <li><a href="api-documentation.html#scaladoc">Scaladoc</a></li>
+    <li><a href="api-documentation.html#aggregating-api-documentation-with-sbt-unidoc">Aggregating API documentation with sbt-unidoc</a></li>
+    <li><a href="api-documentation.html#scaladoc-from-multiple-projects">Scaladoc from multiple projects</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2016</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="js/magellan.js"></script>
+
+<style type="text/css">@import "lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

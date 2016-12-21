@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>Paradox · sbt-site</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='sbt-site'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/page.js"></script>
+<link rel="stylesheet" type="text/css" href="../lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="../css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="../images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt-site
+</a>
+<div class="version-number">
+1.1.0
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started.html">Getting Started</a></li>
+  <li><a href="../preprocess.html">Preprocessing</a></li>
+  <li><a href="../api-documentation.html">API documentation</a></li>
+  <li><a href="../generators/index.html">Site Generators</a>
+  <ul>
+    <li><a href="../generators/asciidoctor.html">Asciidoctor</a></li>
+    <li><a href="../generators/gitbook.html">GitBook</a></li>
+    <li><a href="../generators/hugo.html">Hugo</a></li>
+    <li><a href="../generators/jekyll.html">Jekyll</a></li>
+    <li><a href="../generators/nanoc.html">Nanoc</a></li>
+    <li><a href="../generators/pamflet.html">Pamflet</a></li>
+    <li><a href="../generators/paradox.html" class="active">Paradox</a></li>
+    <li><a href="../generators/sphinx.html">Sphinx</a></li>
+  </ul></li>
+  <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="../index.html">sbt-site</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt-site
+</a>
+<div class="version-number">
+1.1.0
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started.html">Getting Started</a></li>
+  <li><a href="../preprocess.html">Preprocessing</a></li>
+  <li><a href="../api-documentation.html">API documentation</a></li>
+  <li><a href="../generators/index.html">Site Generators</a>
+  <ul>
+    <li><a href="../generators/asciidoctor.html">Asciidoctor</a></li>
+    <li><a href="../generators/gitbook.html">GitBook</a></li>
+    <li><a href="../generators/hugo.html">Hugo</a></li>
+    <li><a href="../generators/jekyll.html">Jekyll</a></li>
+    <li><a href="../generators/nanoc.html">Nanoc</a></li>
+    <li><a href="../generators/pamflet.html">Pamflet</a></li>
+    <li><a href="../generators/paradox.html" class="active">Paradox</a></li>
+    <li><a href="../generators/sphinx.html">Sphinx</a></li>
+  </ul></li>
+  <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="../index.html">sbt-site</a></li>
+  <li><a href="../generators/index.html">Site Generators</a></li>
+  <li>Paradox</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h1><a href="#paradox" name="paradox" class="anchor"><span class="anchor-link"></span></a>Paradox</h1>
+<p>The <code>sbt-site</code> plugin has direct support for building <a href="https://github.com/lightbend/paradox">Paradox</a> projects. To enable Paradox site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
+<pre class="prettyprint"><code class="language-sbt">enablePlugins(ParadoxSitePlugin)</code></pre>
+<p>This assumes you have a Paradox project under the <code>src/paradox</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Paradox</code> scope:</p>
+<pre class="prettyprint"><code class="language-sbt">sourceDirectory in Paradox := sourceDirectory.value / &quot;doc&quot;
+</code></pre>
+<p>If you are configuring Paradox from scratch remember to also configure a theme:</p>
+<pre class="prettyprint"><code class="language-sbt">paradoxTheme := Some(builtinParadoxTheme(&quot;generic&quot;))</code></pre>
+<p>Note that Paradox settings such as <code>paradoxProperties</code> should be scoped to <code>Paradox</code> instead of <code>Compile</code> as used in the <a href="http://developer.lightbend.com/docs/paradox/latest/">Paradox documentation</a>. For example to configure an <code>@extref</code> link prefix use:</p>
+<pre class="prettyprint"><code class="language-sbt">paradoxProperties in Paradox ++= Map(
+  &quot;extref.rfc.base_url&quot; -&gt; &quot;http://tools.ietf.org/html/rfc%s&quot;
+)</code></pre>
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="../generators/sphinx.html">Sphinx</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2016</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="../js/magellan.js"></script>
+
+<style type="text/css">@import "../lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="../lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>
