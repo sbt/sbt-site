@@ -32,3 +32,11 @@ install:
     chmod +x $HOME/bin/hugo && \
     rm -rf $TRAVIS_BUILD_DIR/download/
 
+before_cache:
+  - find $HOME/.sbt -name "*.lock" | xargs rm
+  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot/
