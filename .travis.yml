@@ -4,6 +4,9 @@ scala:
 jdk:
    - openjdk7
 
+before_script:
+  - export PATH=$PATH:$HOME/bin/
+
 script:
   - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted
 
@@ -29,5 +32,3 @@ install:
     chmod +x $HOME/bin/hugo && \
     rm -rf $TRAVIS_BUILD_DIR/download/
 
-before_script:
-  - export PATH=$PATH:$HOME/bin/
