@@ -8,7 +8,7 @@ before_script:
   - export PATH=$PATH:$HOME/bin/
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted
+  - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted make-site
 
 sudo: false
 
