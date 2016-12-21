@@ -7,9 +7,6 @@ jdk:
 script:
   - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted
 
-before_install:
-  - rvm install 2.2.3
-
 sudo: false
 
 addons:
