@@ -8,7 +8,9 @@ organization := "com.typesafe.sbt"
 version := "1.2.1-SNAPSHOT"
 
 licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
+//#scm-info
 scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "git@github.com:sbt/sbt-site.git"))
+//#scm-info
 
 scalaVersion := "2.10.6"
 
@@ -38,6 +40,11 @@ version in Paradox := {
   if (isSnapshot.value) "git tag -l".!!.split("\r?\n").last.substring(1)
   else version.value
 }
+
+//#ghpages-publish
+ghpages.settings
+git.remoteRepo := scmInfo.value.get.connection
+//#ghpages-publish
 
 scriptedSettings
 

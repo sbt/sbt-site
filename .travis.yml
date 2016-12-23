@@ -3,14 +3,12 @@ scala:
    - 2.10.6
 jdk:
    - openjdk7
-env:
-  - SBT_OPTS="-XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
+
+before_script:
+  - export PATH=$PATH:$HOME/bin/
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted
-
-before_install:
-  - rvm install 2.2.3
+  - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted make-site
 
 sudo: false
 
@@ -34,5 +32,11 @@ install:
     chmod +x $HOME/bin/hugo && \
     rm -rf $TRAVIS_BUILD_DIR/download/
 
-before_script:
-  - export PATH=$PATH:$HOME/bin/
+before_cache:
+  - find $HOME/.sbt -name "*.lock" | xargs rm
+  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot/
