@@ -13,16 +13,16 @@ The biggest of the breaking changes is the use of `enablePlugins(<plugin object>
 
 The base plugin (`SitePlugin`) is enabled by default, so files in the `src/site` directory are processed according to the default settings. Invocation of other generators must be adjusted accordingly.
 
-Generator   | Previous (0.x)              | New (1.x)
------------ | --------------------------- | -----------------------------------
-Base        | `site.settings`             | _automatic_
-Preprocess  | `site.preprocessSite()`     | `enablePlugins(PreprocessPlugin)`
-Jekyll      | `site.jekyllSupport()`      | `enablePlugins(JekyllPlugin)`
-Sphinx      | `site.sphinxSupport()`      | `enablePlugins(SphinxPlugin)`
-Pamflet     | `site.pamfletSupport()`     | `enablePlugins(PamfletPlugin)`
-Nanoc       | `site.nanocSupport()`       | `enablePlugins(NanocPlugin)`
-Asciidoctor | `site.asciidoctorSupport()` | `enablePlugins(AsciidoctorPlugin)`
-Scaladoc    | `site.includeScaladoc()`    | `enablePlugins(SiteScaladocPlugin)`
+Generator          | Previous (0.x)              | New (1.x)
+------------------ | --------------------------- | -----------------------------------
+Base               | `site.settings`             | _automatic_
+@ref:[Preprocess]  | `site.preprocessSite()`     | `enablePlugins(PreprocessPlugin)`
+@ref:[Jekyll]      | `site.jekyllSupport()`      | `enablePlugins(JekyllPlugin)`
+@ref:[Sphinx]      | `site.sphinxSupport()`      | `enablePlugins(SphinxPlugin)`
+@ref:[Pamflet]     | `site.pamfletSupport()`     | `enablePlugins(PamfletPlugin)`
+@ref:[Nanoc]       | `site.nanocSupport()`       | `enablePlugins(NanocPlugin)`
+@ref:[Asciidoctor] | `site.asciidoctorSupport()` | `enablePlugins(AsciidoctorPlugin)`
+@ref:[Scaladoc]    | `site.includeScaladoc()`    | `enablePlugins(SiteScaladocPlugin)`
 
 ### Configuring Site Subdirectory
 
@@ -34,6 +34,32 @@ siteSubdirName in Jekyll := "jekyll-goodness"
 siteSubdirName in SiteScaladoc := "jekyll-goodness/api"
 ```
 
+### Adding Custom Mappings to a Site Directory
+
+Content added using:
+
+```scala
+site.addMappingsToSiteDir(mappings: TaskKey[Seq[(File,String)]], nestedDirectory: String)
+```
+
+has been replaced with:
+
+```scala
+addMappingsToSiteDir(mappings: TaskKey[Seq[(File, String)]], nestedDirectory: SettingKey[String])
+```
+
+The following examples show how you can define nested directory via a custom setting or by scoping `siteSubdirName` to either an sbt key or configuration:
+
+@@ snip[addMappingsToSiteDir](../../sbt-test/site/can-have-custom-mappings/build.sbt) { #addMappingsToSiteDir }
+
 ### Miscellaneous
 
 In the `PreprocessPlugin`, the key `preprocessExts: SettingKey[Set[String]]` has been replaced by `preprocessIncludeFilter: SettingKey[FileFilter]`.
+
+[Preprocess]: preprocess.md#variable-substitution
+[Jekyll]: generators/jekyll.md
+[Sphinx]: generators/sphinx.md
+[Pamflet]: generators/pamflet.md
+[Nanoc]: generators/nanoc.md
+[Asciidoctor]: generators/asciidoctor.md
+[Scaladoc]: api-documentation.md#scaladoc
