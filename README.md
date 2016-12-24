@@ -14,9 +14,6 @@ The documentation is available at <http://www.scala-sbt.org/sbt-site/>
 
 `sbt-site` is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for specifics and copyright declaration.
 
-[0.7.2]: https://github.com/sbt/sbt-site/tree/v0.7.2
-[0.8.2]: https://github.com/sbt/sbt-site/tree/v0.8.2
-[migration guide]: notes/migrate-0.8.2-to-1.0.md
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [Jekyll]: http://jekyllrb.com
 [Pamflet]: http://www.foundweekends.org/pamflet/
