@@ -20,6 +20,7 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
  - [preprocess](preprocess.md)
  - [api-documentation](api-documentation.md)
  - [generators](generators/index.md)
+ - [publishing](publishing.md)
  - [advanced-usage](advanced-usage.md)
  - [migration-guide](migration-guide.md)
 
