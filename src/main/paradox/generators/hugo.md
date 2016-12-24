@@ -1,10 +1,10 @@
 # Hugo
 
-The `sbt-site` plugin has support for building [Hugo] projects. To enable Hugo site generation, simply enable the associated plugin in your `build.sbt` file:
+The sbt-site plugin has support for building [Hugo] projects. To enable Hugo site generation, simply enable the associated plugin in your `build.sbt` file:
 
 @@ snip[enablePlugin](../../../sbt-test/hugo/can-use-hugo/build.sbt) { #enablePlugin }
 
-The `hugo` binary must be installed on your `$PATH` in order to be accessible to `sbt-site`. In addition, this plugin assumes you have a Hugo project under the `src/hugo` directory. To change this, set the `sourceDirectory` key in the `Hugo` scope:
+The `hugo` binary must be installed on your `$PATH` in order to be accessible to sbt-site. In addition, this plugin assumes you have a Hugo project under the `src/hugo` directory. To change this, set the `sourceDirectory` key in the `Hugo` scope:
 
 ```sbt
 sourceDirectory in Hugo := sourceDirectory.value / "doc"

@@ -12,7 +12,7 @@ The documentation is available at <http://www.scala-sbt.org/sbt-site/>
 
 ## License
 
-`sbt-site` is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for specifics and copyright declaration.
+sbt-site is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for specifics and copyright declaration.
 
 [sbt-ghpages]: http://github.com/sbt/sbt-ghpages
 [Jekyll]: http://jekyllrb.com

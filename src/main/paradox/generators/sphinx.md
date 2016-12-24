@@ -1,6 +1,6 @@
 # Sphinx
 
-The `sbt-site` plugin has direct support for building [Sphinx] projects. To enable Sphinx site generation, simply enable the associated plugin in your `build.sbt` file:
+The sbt-site plugin has direct support for building [Sphinx] projects. To enable Sphinx site generation, simply enable the associated plugin in your `build.sbt` file:
 
 @@ snip[enablePlugin](../../../sbt-test/sphinx/can-use-sphinx/build.sbt) { #enablePlugin }
 
