@@ -48,7 +48,9 @@
     <li><a href="../generators/paradox.html">Paradox</a></li>
     <li><a href="../generators/sphinx.html" class="active">Sphinx</a></li>
   </ul></li>
+  <li><a href="../publishing.html">Publishing</a></li>
   <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -99,7 +101,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../generators/paradox.html">Paradox</a></li>
     <li><a href="../generators/sphinx.html" class="active">Sphinx</a></li>
   </ul></li>
+  <li><a href="../publishing.html">Publishing</a></li>
   <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -124,7 +128,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#sphinx" name="sphinx" class="anchor"><span class="anchor-link"></span></a>Sphinx</h1>
-<p>The <code>sbt-site</code> plugin has direct support for building <a href="http://sphinx-doc.org">Sphinx</a> projects. To enable Sphinx site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
+<p>The sbt-site plugin has direct support for building <a href="http://sphinx-doc.org">Sphinx</a> projects. To enable Sphinx site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
 <pre class="prettyprint"><code class="language-sbt">enablePlugins(SphinxPlugin)</code></pre>
 <p>This assumes you have a Sphinx project under the <code>src/sphinx</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Sphinx</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">sourceDirectory in Sphinx := sourceDirectory.value / &quot;androsphinx&quot;
@@ -133,7 +137,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <pre class="prettyprint"><code class="language-sbt">// Puts output in `target/site/giza`
 siteSubdirName in Sphinx := &quot;giza&quot;</code></pre>
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../advanced-usage.html">Advanced Usage</a></p>
+<p><strong>Next:</strong> <a href="../publishing.html">Publishing</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>

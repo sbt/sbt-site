@@ -48,7 +48,9 @@
     <li><a href="../generators/paradox.html">Paradox</a></li>
     <li><a href="../generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="../publishing.html">Publishing</a></li>
   <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -99,7 +101,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../generators/paradox.html">Paradox</a></li>
     <li><a href="../generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="../publishing.html">Publishing</a></li>
   <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -124,7 +128,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#gitbook" name="gitbook" class="anchor"><span class="anchor-link"></span></a>GitBook</h1>
-<p>The <code>sbt-site</code> plugin has direct support for building <a href="https://www.gitbook.com">GitBook</a> projects. To enable GitBook site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
+<p>The sbt-site plugin has direct support for building <a href="https://www.gitbook.com">GitBook</a> projects. To enable GitBook site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
 <pre class="prettyprint"><code class="language-sbt">enablePlugins(GitBookPlugin)</code></pre>
 <p>This assumes you have a GitBook project under the <code>src/gitbook</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>GitBook</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">sourceDirectory in GitBook := sourceDirectory.value / &quot;doc&quot;

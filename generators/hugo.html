@@ -48,7 +48,9 @@
     <li><a href="../generators/paradox.html">Paradox</a></li>
     <li><a href="../generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="../publishing.html">Publishing</a></li>
   <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -99,7 +101,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../generators/paradox.html">Paradox</a></li>
     <li><a href="../generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="../publishing.html">Publishing</a></li>
   <li><a href="../advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -124,9 +128,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
 <h1><a href="#hugo" name="hugo" class="anchor"><span class="anchor-link"></span></a>Hugo</h1>
-<p>The <code>sbt-site</code> plugin has support for building <a href="http://gohugo.io/">Hugo</a> projects. To enable Hugo site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
+<p>The sbt-site plugin has support for building <a href="http://gohugo.io/">Hugo</a> projects. To enable Hugo site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
 <pre class="prettyprint"><code class="language-sbt">enablePlugins(HugoPlugin)</code></pre>
-<p>The <code>hugo</code> binary must be installed on your <code>$PATH</code> in order to be accessible to <code>sbt-site</code>. In addition, this plugin assumes you have a Hugo project under the <code>src/hugo</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Hugo</code> scope:</p>
+<p>The <code>hugo</code> binary must be installed on your <code>$PATH</code> in order to be accessible to sbt-site. In addition, this plugin assumes you have a Hugo project under the <code>src/hugo</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Hugo</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">sourceDirectory in Hugo := sourceDirectory.value / &quot;doc&quot;
 </code></pre>
 <p>You may also change the <a href="https://gohugo.io/overview/configuration/">base-url</a> that gets passed to the <code>hugo</code> command by adjusting the following setting:</p>

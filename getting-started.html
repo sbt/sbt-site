@@ -48,7 +48,9 @@
     <li><a href="generators/paradox.html">Paradox</a></li>
     <li><a href="generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="publishing.html">Publishing</a></li>
   <li><a href="advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -99,7 +101,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="generators/paradox.html">Paradox</a></li>
     <li><a href="generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="publishing.html">Publishing</a></li>
   <li><a href="advanced-usage.html">Advanced Usage</a></li>
+  <li><a href="migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -140,7 +144,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   file(&quot;src/assets/favicon.ico&quot;) -&gt; &quot;favicon.ico&quot;
 )</code></pre>
 <p>If you want to add files from an sbt task to a site sub-directory use the provided <code>addMappingsToSiteDir</code>:</p>
-<pre class="prettyprint"><code class="language-sbt">val someDirName = settingKey[String](&quot;Some dir name&quot;)
+<pre class="prettyprint"><code class="language-sbt">// Define a custom setting and set it to the directory path
+val someDirName = settingKey[String](&quot;Some dir name&quot;)
 someDirName := &quot;someFancySource&quot;
 
 addMappingsToSiteDir(mappings in (Compile, packageSrc), someDirName)
@@ -156,30 +161,11 @@ addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in Sc
 <p>To disable browser auto-open, use the key <code>previewLaunchBrowser</code>:</p>
 <pre class="prettyprint"><code class="language-sbt">previewLaunchBrowser := false
 </code></pre>
-<h2><a href="#packaging" name="packaging" class="anchor"><span class="anchor-link"></span></a>Packaging</h2>
+<h2><a href="#packaging-and-publishing" name="packaging-and-publishing" class="anchor"><span class="anchor-link"></span></a>Packaging and Publishing</h2>
 <p>To create a zip package of the site run <code>package-site</code>.</p>
 <p>To also include this zip file as an artifact when running <code>publish</code>, add the following to your <code>build.sbt</code>:</p>
-<pre class="prettyprint"><code class="language-sbt">publishSite
-</code></pre>
-<h2><a href="#publishing" name="publishing" class="anchor"><span class="anchor-link"></span></a>Publishing</h2>
-<p>To publish a generated site to <a href="https://pages.github.com">GitHub Pages</a> you can use the <a href="http://github.com/sbt/sbt-ghpages">sbt-ghpages</a> plugin. We expect other publishing mechanisms to be supported in the future.</p>
-<h3><a href="#publishing-to-github-pages-using-sbt-ghpages" name="publishing-to-github-pages-using-sbt-ghpages" class="anchor"><span class="anchor-link"></span></a>Publishing to GitHub Pages using sbt-ghpages</h3>
-<p>Set up the plugin by adding the following to <code>project/plugins.sbt</code> (check the <a href="http://github.com/sbt/sbt-ghpages">sbt-ghpages project</a> for the most recent version).</p>
-<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.typesafe.sbt&quot; % &quot;sbt-ghpages&quot; % &quot;0.5.4&quot;)</code></pre>
-<p>Then configure your sbt build to use a special remote when running on Travis CI and otherwise fall back to the normal Git remote configured via the <code>scmInfo</code> setting.</p>
-<pre class="prettyprint"><code class="language-sbt">scmInfo := Some(ScmInfo(url(&quot;https://github.com/sbt/sbt-site&quot;), &quot;git@github.com:sbt/sbt-site.git&quot;))
-ghpages.settings
-git.remoteRepo := scmInfo.value.get.connection</code></pre>
-<p>At this point you should be able to run <code>sbt ghpagesPushSite</code> to publish your site.</p><div class="callout note "><div class="callout-title">Note</div>
-<p>Before running <code>sbt ghpagesPushSite</code> the first time you need to create the <code>gh-pages</code> branch. One way to do it is to build your site and publish a first version of it using the following commands:</p>
-<pre class="prettyprint"><code class="language-sh">$ sbt clean make-site                             # &lt;1&gt; Build the site
-$ origin=$(git remote get-url origin)             # &lt;2&gt; Save the current remote for later
-$ cd target/site
-$ git init                                        # &lt;3&gt; Create site repo and add initial content
-$ git add .
-$ git commit -m &quot;Initial import of GitHub Pages&quot;
-$ git push --force &quot;$origin&quot; master:gh-pages      # &lt;4&gt; Publish the repo&#39;s master branch as gh-pages
-</code></pre></div>
+<pre class="prettyprint"><code class="language-sbt">publishSite</code></pre>
+<p>Once you have generated and packaged your site the next step is to publish it. The <a href="publishing.html">publishing</a> section discusses several mechanisms, such as <a href="http://github.com/sbt/sbt-ghpages">sbt-ghpages</a>.</p>
 <div class="nav-next">
 <p><strong>Next:</strong> <a href="preprocess.html">Preprocessing</a></p>
 </div>
@@ -195,8 +181,7 @@ $ git push --force &quot;$origin&quot; master:gh-pages      # &lt;4&gt; Publish 
     <li><a href="getting-started.html#setup">Setup</a></li>
     <li><a href="getting-started.html#adding-content-to-your-site">Adding Content to Your Site</a></li>
     <li><a href="getting-started.html#previewing-the-site">Previewing the Site</a></li>
-    <li><a href="getting-started.html#packaging">Packaging</a></li>
-    <li><a href="getting-started.html#publishing">Publishing</a></li>
+    <li><a href="getting-started.html#packaging-and-publishing">Packaging and Publishing</a></li>
   </ul></li>
 </ul>
 </div>

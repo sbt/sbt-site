@@ -48,7 +48,9 @@
     <li><a href="generators/paradox.html">Paradox</a></li>
     <li><a href="generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="publishing.html">Publishing</a></li>
   <li><a href="advanced-usage.html" class="active">Advanced Usage</a></li>
+  <li><a href="migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -99,7 +101,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="generators/paradox.html">Paradox</a></li>
     <li><a href="generators/sphinx.html">Sphinx</a></li>
   </ul></li>
+  <li><a href="publishing.html">Publishing</a></li>
   <li><a href="advanced-usage.html" class="active">Advanced Usage</a></li>
+  <li><a href="migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -130,7 +134,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 val Site1 = config(&quot;site1&quot;)
 val Site2 = config(&quot;site2&quot;)
 
-// Apply the default pamflet settings to the `Site1` config
+// Apply the default Paradox settings to the `Site1` config
 ParadoxSitePlugin.paradoxSettings(Site1)
 
 // Customize the source directory
@@ -148,6 +152,9 @@ siteSubdirName in Site2 := &quot;chapter2&quot;
 enablePlugins(ParadoxPlugin)
 paradoxTheme := Some(builtinParadoxTheme(&quot;generic&quot;))</code></pre>
 <p>The other generators follow a similar pattern, e.g. <code>JekyllPlugin.jekyllSettings(config(&quot;foo&quot;))</code>.</p>
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="migration-guide.html">Migration Guide</a></p>
+</div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
 <nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">

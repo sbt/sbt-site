@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Preprocessing · sbt-site</title>
+<title>Migration Guide · sbt-site</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='sbt-site'/>
@@ -35,7 +35,7 @@
 <div class="nav-toc">
 <ul>
   <li><a href="getting-started.html">Getting Started</a></li>
-  <li><a href="preprocess.html" class="active">Preprocessing</a></li>
+  <li><a href="preprocess.html">Preprocessing</a></li>
   <li><a href="api-documentation.html">API documentation</a></li>
   <li><a href="generators/index.html">Site Generators</a>
   <ul>
@@ -50,7 +50,7 @@
   </ul></li>
   <li><a href="publishing.html">Publishing</a></li>
   <li><a href="advanced-usage.html">Advanced Usage</a></li>
-  <li><a href="migration-guide.html">Migration Guide</a></li>
+  <li><a href="migration-guide.html" class="active">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -88,7 +88,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-toc">
 <ul>
   <li><a href="getting-started.html">Getting Started</a></li>
-  <li><a href="preprocess.html" class="active">Preprocessing</a></li>
+  <li><a href="preprocess.html">Preprocessing</a></li>
   <li><a href="api-documentation.html">API documentation</a></li>
   <li><a href="generators/index.html">Site Generators</a>
   <ul>
@@ -103,7 +103,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   </ul></li>
   <li><a href="publishing.html">Publishing</a></li>
   <li><a href="advanced-usage.html">Advanced Usage</a></li>
-  <li><a href="migration-guide.html">Migration Guide</a></li>
+  <li><a href="migration-guide.html" class="active">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -118,7 +118,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="index.html">sbt-site</a></li>
-  <li>Preprocessing</li>
+  <li>Migration Guide</li>
 </ul>
 </div>
 </div>
@@ -126,47 +126,90 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#preprocessing" name="preprocessing" class="anchor"><span class="anchor-link"></span></a>Preprocessing</h1>
-<p>sbt-site supports basic variable substitution via the <code>PreprocessPlugin</code> if for example you need to replace a version string in a source file or a generated HTML file. More advanced preprocessing, such as interpreting code snippets with <a href="https://github.com/tpolecat/tut">tut</a>, is possible via additional configuration as shown below.</p>
-<h2><a href="#variable-substitution" name="variable-substitution" class="anchor"><span class="anchor-link"></span></a>Variable Substitution</h2>
-<p>The <code>PreprocessPlugin</code> reads files from an input directory, substitute variables and writes them to an output directory. In addition to preprocessing static content it is also possible to use the plugin either before or after invoking a <a href="generators/index.html">site generator</a>. To enable, add this to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(PreprocessPlugin)</code></pre>
-<p>By default files are read from <code>src/site-preprocess</code> but this is configurable by setting <code>sourceDirectory</code>:</p>
-<pre class="prettyprint"><code class="language-sbt">sourceDirectory in Preprocess := sourceDirectory.value / &quot;site-preprocess&quot;</code></pre>
-<p>Variables are delimited by surrounding the name with <code>@</code> symbols (e.g. <code>@VERSION@</code>). Values are assigned to variables via the setting <code>preprocessVars: [Map[String, String]]</code>. For example:</p>
-<pre class="prettyprint"><code class="language-sbt">preprocessVars in Preprocess := Map(&quot;VERSION&quot; -&gt; version.value, &quot;DATE&quot; -&gt; new Date().toString)</code></pre><div class="callout note "><div class="callout-title">Note</div>
-<p>The plugin will generate an error if a variable is found in the source file with no matching value in <code>preprocessVars</code>.</p></div>
-<p>The setting <code>preprocessIncludeFilter</code> is used to define the filename extensions that should be processed when <code>makeSite</code> is run.</p>
-<pre class="prettyprint"><code class="language-sbt">preprocessIncludeFilter := &quot;*.md&quot; | &quot;*.markdown&quot;</code></pre>
-<p>The default filter is:</p>
-<pre class="prettyprint"><code class="language-scala">&quot;*.txt&quot; | &quot;*.html&quot; | &quot;*.md&quot; | &quot;*.rst&quot;</code></pre>
-<h2><a href="#preprocessing-markdown-files-with-tut" name="preprocessing-markdown-files-with-tut" class="anchor"><span class="anchor-link"></span></a>Preprocessing Markdown files with tut</h2>
-<p>The <a href="https://github.com/tpolecat/tut">tut</a> sbt plugin allows you to write documentation with fenced code blocks that is typechecked and run as part of your build. For example this markdown snippet:</p>
-<pre class="prettyprint"><code class="language-md">Here is how you add numbers:
-
-```tut
-1 + 1
-```</code></pre>
-<p>Will show the result of running the code in the Scala REPL:</p>
-<pre class="prettyprint"><code>Here is how you add numbers:
-
-```scala
-scala&gt; 1 + 1
-res0: Int = 2    
-```
+<h1><a href="#migration-guide" name="migration-guide" class="anchor"><span class="anchor-link"></span></a>Migration Guide</h1>
+<a id="from-version-0.x.x-to-1.x.x" />
+<h2><a href="#migrating-from-version-0-x-x-to-1-x-x" name="migrating-from-version-0-x-x-to-1-x-x" class="anchor"><span class="anchor-link"></span></a>Migrating from version 0.x.x to 1.x.x</h2>
+<p>The 1.x.x release of sbt-site marks the conversion to the <a href="http://www.scala-sbt.org/0.13/docs/Plugins.html"><code>AutoPlugin</code></a> facility, first introduced in sbt 0.13.5.</p>
+<p>Because sbt best practices have evolved with the introduction of <code>AutoPlugin</code>, this upgrade to sbt-site has resulted in a number of &ldquo;breaking changes&rdquo; insofar as the way site generation is configured (the same functionality remains).</p>
+<h3><a href="#enabling-generators" name="enabling-generators" class="anchor"><span class="anchor-link"></span></a>Enabling Generators</h3>
+<p>The biggest of the breaking changes is the use of <code>enablePlugins(&lt;plugin object&gt;)</code> instead of calls of the form <code>site.xyzSupport()</code>.</p>
+<p>The base plugin (<code>SitePlugin</code>) is enabled by default, so files in the <code>src/site</code> directory are processed according to the default settings. Invocation of other generators must be adjusted accordingly.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Generator </th>
+      <th>Previous (0.x) </th>
+      <th>New (1.x)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Base </td>
+      <td><code>site.settings</code> </td>
+      <td><em>automatic</em></td>
+    </tr>
+    <tr>
+      <td><a href="preprocess.html#variable-substitution">Preprocess</a> </td>
+      <td><code>site.preprocessSite()</code> </td>
+      <td><code>enablePlugins(PreprocessPlugin)</code></td>
+    </tr>
+    <tr>
+      <td><a href="generators/jekyll.html">Jekyll</a> </td>
+      <td><code>site.jekyllSupport()</code> </td>
+      <td><code>enablePlugins(JekyllPlugin)</code></td>
+    </tr>
+    <tr>
+      <td><a href="generators/sphinx.html">Sphinx</a> </td>
+      <td><code>site.sphinxSupport()</code> </td>
+      <td><code>enablePlugins(SphinxPlugin)</code></td>
+    </tr>
+    <tr>
+      <td><a href="generators/pamflet.html">Pamflet</a> </td>
+      <td><code>site.pamfletSupport()</code> </td>
+      <td><code>enablePlugins(PamfletPlugin)</code></td>
+    </tr>
+    <tr>
+      <td><a href="generators/nanoc.html">Nanoc</a> </td>
+      <td><code>site.nanocSupport()</code> </td>
+      <td><code>enablePlugins(NanocPlugin)</code></td>
+    </tr>
+    <tr>
+      <td><a href="generators/asciidoctor.html">Asciidoctor</a> </td>
+      <td><code>site.asciidoctorSupport()</code> </td>
+      <td><code>enablePlugins(AsciidoctorPlugin)</code></td>
+    </tr>
+    <tr>
+      <td><a href="api-documentation.html#scaladoc">Scaladoc</a> </td>
+      <td><code>site.includeScaladoc()</code> </td>
+      <td><code>enablePlugins(SiteScaladocPlugin)</code></td>
+    </tr>
+  </tbody>
+</table>
+<h3><a href="#configuring-site-subdirectory" name="configuring-site-subdirectory" class="anchor"><span class="anchor-link"></span></a>Configuring Site Subdirectory</h3>
+<p>Each of the generators can be instructed to populate a subdirectory under the <code>target/site</code> destination. This is done by setting the <code>siteSubdirName</code> key in the configuration scope of the generator. For example, the following <code>build.sbt</code> fragment enables the Jekyll and Scaladoc generators, and configures their output to be <code>target/site/jekyll-goodness</code> and <code>target/site/jekyll-goodness/api</code>, respectively.</p>
+<pre class="prettyprint"><code class="language-sbt">enablePlugins(JekyllPlugin, SiteScaladocPlugin)
+siteSubdirName in Jekyll := &quot;jekyll-goodness&quot;
+siteSubdirName in SiteScaladoc := &quot;jekyll-goodness/api&quot;
 </code></pre>
-<p>The following example shows how to use it to preprocess a collection of markdown files before running a site generator.</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(ParadoxSitePlugin)
-
-tutSettings
-sourceDirectory in Paradox := tutTargetDirectory.value
-makeSite &lt;&lt;= makeSite.dependsOn(tut)</code></pre>
-<p>The example uses the Paradox site generator but can be adapted to any site generator which understands markdown by configuring its <code>sourceDirectory</code> accordingly. For Jekyll, this would be:</p>
-<pre class="prettyprint"><code class="language-sbt">sourceDirectory in Jekyll := tutTargetDirectory.value
+<h3><a href="#adding-custom-mappings-to-a-site-directory" name="adding-custom-mappings-to-a-site-directory" class="anchor"><span class="anchor-link"></span></a>Adding Custom Mappings to a Site Directory</h3>
+<p>Content added using:</p>
+<pre class="prettyprint"><code class="language-scala">site.addMappingsToSiteDir(mappings: TaskKey[Seq[(File,String)]], nestedDirectory: String)
 </code></pre>
-<div class="nav-next">
-<p><strong>Next:</strong> <a href="api-documentation.html">API documentation</a></p>
-</div>
+<p>has been replaced with:</p>
+<pre class="prettyprint"><code class="language-scala">addMappingsToSiteDir(mappings: TaskKey[Seq[(File, String)]], nestedDirectory: SettingKey[String])
+</code></pre>
+<p>The following examples show how you can define nested directory via a custom setting or by scoping <code>siteSubdirName</code> to either an sbt key or configuration:</p>
+<pre class="prettyprint"><code class="language-sbt">// Define a custom setting and set it to the directory path
+val someDirName = settingKey[String](&quot;Some dir name&quot;)
+someDirName := &quot;someFancySource&quot;
+
+addMappingsToSiteDir(mappings in (Compile, packageSrc), someDirName)
+
+// Or using siteSubdirName scoped to a sbt task or a configuration
+siteSubdirName in ScalaUnidoc := &quot;api&quot;
+addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)</code></pre>
+<h3><a href="#miscellaneous" name="miscellaneous" class="anchor"><span class="anchor-link"></span></a>Miscellaneous</h3>
+<p>In the <code>PreprocessPlugin</code>, the key <code>preprocessExts: SettingKey[Set[String]]</code> has been replaced by <code>preprocessIncludeFilter: SettingKey[FileFilter]</code>.</p>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
 <nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
@@ -174,10 +217,9 @@ makeSite &lt;&lt;= makeSite.dependsOn(tut)</code></pre>
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="preprocess.html#preprocessing">Preprocessing</a>
+  <li><a href="migration-guide.html#migration-guide">Migration Guide</a>
   <ul>
-    <li><a href="preprocess.html#variable-substitution">Variable Substitution</a></li>
-    <li><a href="preprocess.html#preprocessing-markdown-files-with-tut">Preprocessing Markdown files with tut</a></li>
+    <li><a href="migration-guide.html#migrating-from-version-0-x-x-to-1-x-x">Migrating from version 0.x.x to 1.x.x</a></li>
   </ul></li>
 </ul>
 </div>
