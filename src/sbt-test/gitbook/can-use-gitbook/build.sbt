@@ -21,7 +21,7 @@ def checkContentTask = checkContent := {
   val dest = (target in makeSite).value / (siteSubdirName in GitBook).value
 
   val expectedFilesAndWords = Map(
-    dest / "index.html" -> Seq("SBT", "GitBook", "User"),
+    dest / "index.html" -> Seq("sbt", "GitBook", "User"),
     dest / "chapter1" / "index.html" -> Seq("First", "Chapter")
   )
 

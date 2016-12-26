@@ -6,6 +6,6 @@
 
 ## Project Management
 
-* Updated SBT, Scala, and plugin versions
+* Updated sbt, Scala, and plugin versions
 * Added [Travis-CI build](https://travis-ci.org/sbt/sbt-site) support.
 * Added [Gitter](https://gitter.im/sbt/sbt-site) link.

@@ -14,5 +14,5 @@ TaskKey[Unit]("checkContent") := {
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)
-  assert(content.exists(_.contains("SBT")), s"Did not find expected content in:\n${content.mkString("\n")}")
+  assert(content.exists(_.contains("sbt")), s"Did not find expected content in:\n${content.mkString("\n")}")
 }

@@ -4,7 +4,7 @@ Doc Writer <doc@example.com>
 
 An introduction to http://asciidoc.org[AsciiDoc].
 
-This is passed from the SBT build: {project-version}
+This is passed from the sbt build: {project-version}
 
 == First Section
 
