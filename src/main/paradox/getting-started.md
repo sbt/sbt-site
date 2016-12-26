@@ -61,9 +61,7 @@ To create a zip package of the site run `package-site`.
 
 To also include this zip file as an artifact when running `publish`, add the following to your `build.sbt`:
 
-```sbt
-publishSite
-```
+@@ snip[publishSite](../../sbt-test/site/can-package-and-publish-zip-file/build.sbt) { #publishSite }
 
 Once you have generated and packaged your site the next step is to publish it. The @ref:[publishing](publishing.md) section discusses several mechanisms, such as [sbt-ghpages].
 
