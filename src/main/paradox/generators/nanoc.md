@@ -1,6 +1,6 @@
 # Nanoc
 
-The `sbt-site` plugin has direct support for building [Nanoc] projects. To enable Nanoc site generation, simply enable the associated plugin in your `build.sbt` file:
+The sbt-site plugin has direct support for building [Nanoc] projects. To enable Nanoc site generation, simply enable the associated plugin in your `build.sbt` file:
 
 @@ snip[enablePlugin](../../../sbt-test/nanoc/can-use-nanoc/build.sbt) { #enablePlugin }
 

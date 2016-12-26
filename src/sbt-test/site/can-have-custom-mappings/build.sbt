@@ -12,6 +12,7 @@ mappings in makeSite ++= Seq(
 //#mappings
 
 //#addMappingsToSiteDir
+// Define a custom setting and set it to the directory path
 val someDirName = settingKey[String]("Some dir name")
 someDirName := "someFancySource"
 

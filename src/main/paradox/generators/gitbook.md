@@ -1,6 +1,6 @@
 # GitBook
 
-The `sbt-site` plugin has direct support for building [GitBook] projects. To enable GitBook site generation, simply enable the associated plugin in your `build.sbt` file:
+The sbt-site plugin has direct support for building [GitBook] projects. To enable GitBook site generation, simply enable the associated plugin in your `build.sbt` file:
 
 @@ snip[enablePlugin](../../../sbt-test/gitbook/ignore-dot-files/build.sbt) { #enablePlugin }
 

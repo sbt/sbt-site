@@ -1,0 +1,8 @@
+# Check that `package-site` depends on `make-site`
+> package-site
+> checkPackageSite
+> clean
+# Check that `publishSite` depends on `package-site`
+> publish
+> checkPackageSite
+> checkPublishSite

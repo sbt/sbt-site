@@ -33,7 +33,6 @@ lazy val siteWithScaladoc = project.in(file("site/scaladoc"))
 lazy val scaladocSiteProjects = List(cats, kittens)
 
 lazy val scaladocSiteSettings = scaladocSiteProjects.flatMap { project =>
-  // Create a config for setting the subdirectory
   SiteScaladocPlugin.scaladocSettings(
     config(project.id),
     mappings in (Compile, packageDoc) in project,

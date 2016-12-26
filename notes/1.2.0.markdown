@@ -2,8 +2,26 @@
 
 _Version 1.2.0 is initially coming out in "RC" form due to an upgrade in the `unfiltered` dependency. Please see below._
 
+See the [1.2.0 milestone] for the full list of related tickets and PRs.
+
 ## Enhancements
 
 1. Support for [Hugo](https://gohugo.io) site generation. Thanks @timperrett!
 2. Added `excludeFilter` support to GitBook generator. Thanks @jonas!
 3. Added `previewAuto` command, which launches a dynamic HTML server updating content with each modification in site source. Thanks @gsechaud! Note: This change includes an upgrade of the `unfiltered` depenency. Please let us know of any incompatibilities with other plugins that might be caused by this change.
+4. Bump Paradox to version 0.2.7
+5. Improve support for GitBook version 3.x.x. [#83]
+6. Paradox-based documentation site at http://scala-sbt.org/sbt-site/ with improved examples. [#84], [#55]
+
+## Fixes
+
+1. Fix default settings for Paradox. [#74], [#80]
+2. Fix default GitBook mappings to not include `.git` and `.gitignore`. [#67]
+
+[1.2.0 milestone]: https://github.com/sbt/sbt-site/milestone/2
+[#55]: https://github.com/sbt/sbt-site/issues/55
+[#67]: https://github.com/sbt/sbt-site/issues/67
+[#74]: https://github.com/sbt/sbt-site/issues/74
+[#80]: https://github.com/sbt/sbt-site/issues/80
+[#83]: https://github.com/sbt/sbt-site/issues/83
+[#84]: https://github.com/sbt/sbt-site/issues/84

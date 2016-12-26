@@ -5,7 +5,7 @@ name := "test"
 val Site1 = config("site1")
 val Site2 = config("site2")
 
-// Apply the default pamflet settings to the `Site1` config
+// Apply the default Paradox settings to the `Site1` config
 ParadoxSitePlugin.paradoxSettings(Site1)
 
 // Customize the source directory

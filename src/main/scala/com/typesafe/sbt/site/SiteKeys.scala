@@ -9,7 +9,7 @@ import sbt._
  */
 trait SiteKeys {
   val makeSite = TaskKey[File]("make-site", "Generates a static website for a project.")
-  val packageSite = TaskKey[File]("packageSite", "Create a zip file of the website.")
+  val packageSite = TaskKey[File]("package-site", "Create a zip file of the website.")
   val siteSubdirName = SettingKey[String]("siteSubdirName",
       "Name of subdirectory in site target directory to put generator plugin content. Defaults to empty string.")
   val siteMappings = mappings in makeSite

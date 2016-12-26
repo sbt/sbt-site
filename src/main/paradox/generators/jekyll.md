@@ -1,6 +1,6 @@
 # Jekyll
 
-The `sbt-site` plugin has direct support for running [Jekyll]. This is useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:
+The sbt-site plugin has direct support for running [Jekyll]. This is useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:
 
 @@ snip[enablePlugin](../../../sbt-test/jekyll/can-use-jekyll/build.sbt) { #enablePlugin }
 
