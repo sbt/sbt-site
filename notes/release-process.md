@@ -49,11 +49,12 @@ You should see a message that looks looks like this:
   ![](images/add-release-notes.png)  
   ...but we have to copy the release notes from our `notes/<X>.<Y>.<Z>.markdown` file manually.  
   ![](images/github-release-notes.png)
-13. Monitor the [TravicCI build](https://travis-ci.org/sbt/sbt-site) and make sure it [updates the manual](http://www.scala-sbt.org/sbt-site/getting-started.html) with the latest version.
-12. Announce release using [`herald`](https://github.com/n8han/herald). Also announce release on Twitter, including `#scala` 
+12. Monitor the [TravicCI build](https://travis-ci.org/sbt/sbt-site) and make sure it [updates the manual](http://www.scala-sbt.org/sbt-site/getting-started.html) with the latest version.
+13. Announce release using [`herald`](https://github.com/n8han/herald). Also announce release on Twitter, including `#scala` 
 and `@scala_sbt` and major contributor handles (if available). Provide a link to the GitHub release page in tweet.  
   ![](images/tweet.png)
-13. On the `develop` branch, edit the `version` setting in `build.sbt` to match `"<X>.<Y+1>.0-SNAPSHOT"`. Commit and push.
+14. Announce on `#sbt-site` and `#sbt-dev` Gitter channels.  
+15. **Important**: On the `develop` branch, edit the `version` setting in `build.sbt` to match `"<X>.<Y+1>.0-SNAPSHOT"`. Commit and push.
 
 
 
