@@ -1,7 +1,5 @@
 # Release 1.2.0
 
-_Version 1.2.0 is initially coming out in "RC" form due to an upgrade in the `unfiltered` dependency. Please see below._
-
 See the [1.2.0 milestone] for the full list of related tickets and PRs.
 
 ## Enhancements

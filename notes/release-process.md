@@ -39,8 +39,13 @@ You should see a message that looks looks like this:
 10. Finish release per GitFlow process:  
   ![](images/finish-release.png)  
   ![](images/finish-release-defaults.png)  
+  ![](images/before-push.png)  
   Push changes.
-11. Create a [release entry](https://github.com/sbt/sbt-site/releases/new) in GitHub
+  ![](images/after-push.png)
+11. Create a [release entry](https://github.com/sbt/sbt-site/tags) in GitHub. Because GitFlow automatically adds a tag
+ to the history, GitHub picks it up as a release, but we have to copy the release notes from our `notes/<X>.<Y>.<Z>.markdown` file manually.  
+  ![](images/add-release-notes.png)  
+  ![](images/github-release-notes.png)
 13. Monitor the [TravicCI build](https://travis-ci.org/sbt/sbt-site) and make sure it [updates the manual](http://www.scala-sbt.org/sbt-site/getting-started.html) with the latest version.
 12. Announce release using [`herald`](https://github.com/n8han/herald). Also announce release on Twitter, including `#scala` 
 and `@scala_sbt` and major contributor handles (if available).
