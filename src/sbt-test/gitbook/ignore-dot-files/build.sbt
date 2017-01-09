@@ -1,9 +1,15 @@
 name := "test"
 
+//#enablePlugin
 enablePlugins(GitBookPlugin)
+//#enablePlugin
 
 sourceDirectory in GitBook := baseDirectory.value
-siteSubdirName in GitBook := "docs"
+
+//#siteSubdirName
+// Puts output in `target/site/book`
+siteSubdirName in GitBook := "book"
+//#siteSubdirName
 
 val gitHeadPath = ".git/HEAD"
 

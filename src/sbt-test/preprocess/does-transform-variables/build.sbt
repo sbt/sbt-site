@@ -1,14 +1,24 @@
 import java.util.Date
 
+//#enablePlugin
 enablePlugins(PreprocessPlugin)
+//#enablePlugin
 
 name := "preprocess test"
 
 version := "0.0-ABCD"
 
+//#preprocessVars
 preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
+//#preprocessVars
 
-siteSubdirName in Preprocess := "md-stuff"
+//#preprocessIncludeFilter
+preprocessIncludeFilter := "*.md" | "*.markdown"
+//#preprocessIncludeFilter
+
+//#sourceDirectory
+sourceDirectory in Preprocess := sourceDirectory.value / "site-preprocess"
+//#sourceDirectory
 
 TaskKey[Unit]("checkContent") := {
   val dest = (target in makeSite).value / (siteSubdirName in Preprocess).value

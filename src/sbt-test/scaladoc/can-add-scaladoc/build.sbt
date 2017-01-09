@@ -1,6 +1,13 @@
 name := "scaladoc site test"
 
+//#enablePlugin
 enablePlugins(SiteScaladocPlugin)
+//#enablePlugin
+
+//#siteSubdirName
+// Puts Scaladoc output in `target/site/api/latest`
+siteSubdirName in SiteScaladoc := "api/latest"
+//#siteSubdirName
 
 version := "0.0.meow"
 

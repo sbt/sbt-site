@@ -1,9 +1,13 @@
 name := "test"
 
+//#enablePlugin
 enablePlugins(NanocPlugin)
+//#enablePlugin
 
-
-siteSubdirName in Nanoc := "notJekyll"
+//#siteSubdirName
+// Puts output in `target/site/conan`
+siteSubdirName in Nanoc := "conan"
+//#siteSubdirName
 
 TaskKey[Unit]("checkContent") := {
   val dest = (target in makeSite).value / (siteSubdirName in Nanoc).value
@@ -12,4 +16,3 @@ TaskKey[Unit]("checkContent") := {
   val content = IO.readLines(index)
   assert(content.exists(_.contains("nanoc site")), s"Did not find expected content in:\n${content.mkString("\n")}")
 }
-
