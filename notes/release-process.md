@@ -11,7 +11,7 @@ An easy way to use GitFlow is to make use of the support built-in to the [Source
 frontend which includes support for GitFlow. The images below are taken from SourceTree. There are 
 [other ways to use GitFlow](http://danielkummer.github.io/git-flow-cheatsheet/) if you don't want to use SourceTree.
 
-## Releass
+## Release
 
 0. Make sure you have [BinTray](https://bintray.com/sbt) credentials for the "sbt" organization. You won't be able to 
 publish without them.
@@ -55,6 +55,3 @@ and `@scala_sbt` and major contributor handles (if available). Provide a link to
   ![](images/tweet.png)
 14. Announce on `#sbt-site` and `#sbt-dev` Gitter channels.  
 15. **Important**: On the `develop` branch, edit the `version` setting in `build.sbt` to match `"<X>.<Y+1>.0-SNAPSHOT"`. Commit and push.
-
-
-
