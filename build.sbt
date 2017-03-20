@@ -33,6 +33,8 @@ libraryDependencies ++= Seq(
 
 addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.7")
 
+addSbtPlugin("org.planet42"       % "laika-sbt"           % "0.6.0")
+
 enablePlugins(ParadoxSitePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
 paradoxTheme := Some(builtinParadoxTheme("generic"))
