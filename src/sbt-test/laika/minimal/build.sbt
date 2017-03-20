@@ -1,6 +1,8 @@
 name := "test"
 
+//#enablePlugin
 enablePlugins(LaikaSitePlugin)
+//#enablePlugin
 
 siteSubdirName in LaikaSite := "minimal"
 

@@ -1,6 +1,8 @@
 name := "test"
 
+//#enablePlugin
 enablePlugins(LaikaSitePlugin)
+//#enablePlugin
 
 sourceDirectory in LaikaSite := sourceDirectory.value / "blog"
 
