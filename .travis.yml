@@ -28,7 +28,7 @@ install:
     mkdir $TRAVIS_BUILD_DIR/download && mkdir $HOME/bin && \
     wget https://github.com/spf13/hugo/releases/download/v0.20/hugo_0.20_linux-64bit.tar.gz -O $TRAVIS_BUILD_DIR/download/hugo.tgz && \
     tar xvf $TRAVIS_BUILD_DIR/download/hugo.tgz && \
-    mv $TRAVIS_BUILD_DIR/hugo $HOME/bin/hugo && \
+    mv $TRAVIS_BUILD_DIR/hugo_0.20_linux_amd64/hugo_0.20_linux_amd64 $HOME/bin/hugo && \
     chmod +x $HOME/bin/hugo && \
     rm -rf $TRAVIS_BUILD_DIR/download/
   - git fetch --tags
