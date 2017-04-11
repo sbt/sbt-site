@@ -26,7 +26,7 @@ install:
   - npm install -g gitbook-cli
   - |
     mkdir $TRAVIS_BUILD_DIR/download && mkdir $HOME/bin && \
-    wget https://github.com/spf13/hugo/releases/download/v0.16/hugo_0.16_linux-64bit.tgz -O $TRAVIS_BUILD_DIR/download/hugo.tgz && \
+    wget https://github.com/spf13/hugo/releases/download/v0.20/hugo_0.20_linux-64bit.tar.gz -O $TRAVIS_BUILD_DIR/download/hugo.tgz && \
     tar xvf $TRAVIS_BUILD_DIR/download/hugo.tgz && \
     mv $TRAVIS_BUILD_DIR/hugo $HOME/bin/hugo && \
     chmod +x $HOME/bin/hugo && \
