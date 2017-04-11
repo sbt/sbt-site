@@ -63,7 +63,7 @@ object HugoPlugin extends AutoPlugin {
     s.log.debug("checking for the installed version of hugo...")
     for {
       installed <- Try(Seq("hugo", "-", "version").!!)
-      extracted <- Try("""v(\d\.[1]\d)""".r.findFirstMatchIn(installed.trim))
+      extracted <- Try("""v(\d\.\d+)\D""".r.findFirstMatchIn(installed.trim))
       _ <- extracted.fold(Failure(new RuntimeException("Hugo is not currently installed!")): Try[Unit]
                     )(v => if(v.group(1) >= minimumVersion) Success(())
                            else Failure(new RuntimeException("The current version of Hugo installed is not new enough to build this project.")))
