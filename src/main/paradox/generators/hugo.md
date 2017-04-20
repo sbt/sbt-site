@@ -14,4 +14,8 @@ You may also change the [base-url](https://gohugo.io/overview/configuration/) th
 
 @@ snip[baseURL](../../../sbt-test/hugo/can-use-hugo/build.sbt) { #baseURL }
 
+To export environment variables when forking the `hugo` process, for example to render with Hugo's [getenv function](https://hugodocs.info/functions/getenv/), use:
+
+@@ snip[extraEnv](../../../sbt-test/hugo/can-use-hugo/build.sbt) { #extraEnv }
+
 [Hugo]: http://gohugo.io/
