@@ -5,7 +5,7 @@ enablePlugins(ParadoxSitePlugin)
 
 tutSettings
 sourceDirectory in Paradox := tutTargetDirectory.value
-makeSite <<= makeSite.dependsOn(tut)
+makeSite := makeSite.dependsOn(tut).value
 //#tut
 
 TaskKey[Unit]("checkContent") := {

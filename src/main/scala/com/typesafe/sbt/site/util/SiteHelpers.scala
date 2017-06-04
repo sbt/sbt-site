@@ -14,8 +14,8 @@ object SiteHelpers {
   def addMappingsToSiteDir(
     mappings: TaskKey[Seq[(File, String)]],
     nestedDirectory: SettingKey[String]): Setting[_] =
-    siteMappings <++= (mappings, nestedDirectory) map { (m, n) =>
-      for ((f, d) <- m) yield (f, n + "/" + d)
+    siteMappings ++= {
+      for ((f, d) <- mappings.value) yield (f, nestedDirectory.value + "/" + d)
     }
 
   def selectSubpaths(dir: File, filter: FileFilter): Seq[(File, String)] =
@@ -43,7 +43,7 @@ object SiteHelpers {
       ))
   def watchSettings(config: Configuration): Seq[Setting[_]] =
     Seq(
-      watchSources in Global <++= (sourceDirectory in config) map {_.***.get}
+      watchSources in Global ++= (sourceDirectory in config).value.***.get
     )
 
 
