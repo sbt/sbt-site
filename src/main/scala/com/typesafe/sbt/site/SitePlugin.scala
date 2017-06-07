@@ -15,14 +15,14 @@ object SitePlugin extends AutoPlugin {
 
   override lazy val projectSettings = Seq(
     siteMappings := Seq.empty,
-    siteMappings <<= siteMappings ?? Seq.empty,
+    siteMappings := (siteMappings ?? Seq.empty).value,
     siteDirectory := target.value / "site",
     siteSourceDirectory := sourceDirectory.value / "site",
     includeFilter in makeSite := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf",
     siteMappings ++= SiteHelpers.selectSubpaths(siteSourceDirectory.value, (includeFilter in makeSite).value),
     makeSite := SiteHelpers.copySite(siteDirectory.value, streams.value.cacheDirectory, siteMappings.value),
     artifact in packageSite := SiteHelpers.siteArtifact(moduleName.value),
-    artifactPath in packageSite <<= Defaults.artifactPathSetting(artifact in packageSite),
+    artifactPath in packageSite := Defaults.artifactPathSetting(artifact in packageSite).value,
     packageSite := SiteHelpers.createSiteZip(makeSite.value, (artifactPath in packageSite).value, streams.value)
   )
 }

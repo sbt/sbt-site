@@ -42,7 +42,7 @@ object LaikaSitePlugin extends AutoPlugin {
         SiteHelpers.watchSettings(config) ++
         SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config) ++
         Seq(
-          makeSite <<= makeSite.dependsOn(LaikaKeys.html in LaikaKeys.Laika)
+          makeSite := makeSite.dependsOn(LaikaKeys.html in LaikaKeys.Laika).value
         )
 
   private def generate(target: File, inc: FileFilter, exc: FileFilter): Seq[(File, String)] = {

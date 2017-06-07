@@ -32,18 +32,18 @@ object SphinxPlugin extends AutoPlugin {
         enableOutput in generateHtml := true,
         enableOutput in generatePdf := false,
         enableOutput in generateEpub := false,
-        generateHtml <<= generateHtmlTask,
-        generatePdf <<= generatePdfTask,
-        generateEpub <<= generateEpubTask,
-        generatedHtml <<= ifEnabled(generateHtml),
-        generatedPdf <<= seqIfEnabled(generatePdf),
-        generatedEpub <<= ifEnabled(generateEpub),
-        generate <<= generateTask,
+        generateHtml := generateHtmlTask.value,
+        generatePdf := generatePdfTask.value,
+        generateEpub := generateEpubTask.value,
+        generatedHtml := ifEnabled(generateHtml).value,
+        generatedPdf := seqIfEnabled(generatePdf).value,
+        generatedEpub := ifEnabled(generateEpub).value,
+        generate := generateTask.value,
         includeFilter in Sphinx := AllPassFilter,
-        mappings <<= mappingsTask,
+        mappings := mappingsTask.value,
         // For now, we default to passing the version in as a property.
         sphinxProperties ++= defaultVersionProperties(version.value),
-        sphinxEnv <<= defaultEnvTask,
+        sphinxEnv := defaultEnvTask.value,
         siteSubdirName := ""
       )
     ) ++
@@ -67,8 +67,16 @@ object SphinxPlugin extends AutoPlugin {
     packages map { p => runner.installPackage(p, target.value, s.log) }
   }
 
-  def combineSphinxInputs = {
-    (sourceDirectory, includeFilter in generate, excludeFilter in generate, sphinxIncremental, sphinxTags, sphinxProperties, sphinxEnv) map SphinxInputs
+  def combineSphinxInputs = Def.task {
+    SphinxInputs(
+      sourceDirectory.value,
+      (includeFilter in generate).value,
+      (excludeFilter in generate).value,
+      sphinxIncremental.value,
+      sphinxTags.value,
+      sphinxProperties.value,
+      sphinxEnv.value
+    )
   }
 
   def generateHtmlTask = Def.task {
@@ -103,9 +111,9 @@ object SphinxPlugin extends AutoPlugin {
   private[this] def ifEnabled0[S, T](
     key: TaskKey[S],
     f: Task[S] => Task[T],
-    nil: T): Def.Initialize[Task[T]] = (enableOutput in key in key.scope, key.task) flatMap {
-    (enabled, enabledTask) => if (enabled) f(enabledTask) else task {nil}
-  }
+    nil: T): Def.Initialize[Task[T]] = Def.task{
+    if ((enableOutput in key in key.scope).value) f(key.taskValue) else task {nil}
+  }.flatMap(identity)
 
   def generateTask = Def.task {
     val htmlOutput = generatedHtml.value
