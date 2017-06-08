@@ -67,9 +67,7 @@ ${yamlFileName(src)} so clean task cleans.""")
 
   private[sbt] def outputDir(src: File): File = {
     val yaml = nanocYaml(yamlFileName(src))
-    // it's output_dir in nanoc 3.x, and according to http://nanoc.ws/docs/nanoc-4-upgrade-guide/ it's
-    // going to be changed to build_dir
-    val output: String = ((yaml get "output_dir") orElse (yaml get "build_dir")) map {_.toString} getOrElse {
+    val output: String = ((yaml get "output_dir")) map {_.toString} getOrElse {
       sys.error("Neither output_dir nor build_dir was found in ${yamlFileName(src).toString}!")
     }
     Path.resolve(src)(file(output)) getOrElse {
