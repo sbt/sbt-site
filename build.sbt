@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.9")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.12")
 
 addSbtPlugin("org.planet42"       % "laika-sbt"           % "0.6.0")
 
