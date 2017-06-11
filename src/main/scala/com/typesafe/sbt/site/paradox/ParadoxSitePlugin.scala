@@ -21,12 +21,13 @@ object ParadoxSitePlugin extends AutoPlugin {
   override def projectSettings = paradoxSettings(Paradox)
   def paradoxSettings(config: Configuration): Seq[Setting[_]] =
     ParadoxPlugin.paradoxSettings(config) ++
+    List(
+      // Revert config:sourceDirectory set by paradoxSettings
+      sourceDirectory in config := sourceDirectory.value
+    ) ++
     inConfig(config)(
       List(
-        sourceDirectory in paradox := {
-          val sd = sourceDirectory.value
-          if (sd.toString endsWith "/paradox/paradox") new File(sd.toString dropRight "/paradox".length) else sd
-        },
+        sourceDirectory in paradox := sourceDirectory.value,
         includeFilter := AllPassFilter,
         mappings := {
           val _ = paradox.value
