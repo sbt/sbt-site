@@ -29,7 +29,7 @@
 <span class="home-icon">⌂</span>sbt-site
 </a>
 <div class="version-number">
-1.2.0
+1.2.1
 </div>
 </div>
 <div class="nav-toc">
@@ -82,7 +82,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>sbt-site
 </a>
 <div class="version-number">
-1.2.0
+1.2.1
 </div>
 </div>
 <div class="nav-toc">
@@ -172,7 +172,7 @@ Make sure not to add project/travis-deploy-key to the git repository.
 Commit all changes to your .travis.yml.
 </code></pre>
 <p>As instructed in the output of the command add the encrypted secret key found in <code>project/travis-deploy-key.enc</code> to the repository and delete or ignore the unencrypted secret key file.</p>
-<pre class="prettyprint"><code>$ git add project/travis-deploy-key.enc
+<pre><code>$ git add project/travis-deploy-key.enc
 $ echo project/travis-deploy-key &gt;&gt; .git/info/exclude
 </code></pre>
 <p>Finally, configure a deploy step in <code>.travis.yml</code> using the script provider. For a complete set of options and triggers see the <a href="https://docs.travis-ci.com/user/deployment">Travis deployment documentation</a>. In this example, we publishing when a tag is created and explicitly disable publishing for pull request. The <code>before_deploy</code> step takes care of setting up the environment so that <code>git push</code> automatically finds the deploy key.</p>
@@ -196,6 +196,10 @@ deploy:
     condition: $TRAVIS_PULL_REQUEST = false</code></pre><div class="callout note "><div class="callout-title">Note</div>
 <p>Ensure that you modify the above example to use the instructions on how to decrypt the deploy key provided in the output of the <code>travis encrypt-file</code> command.</p>
 <p>At this point, it would also be a good idea to run <code>travis lint</code> to check that the resulting <code>.travis.yml</code> is correct.</p></div>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/publishing.md">here</a>.
+</div>
+
 <div class="nav-next">
 <p><strong>Next:</strong> <a href="advanced-usage.html">Advanced Usage</a></p>
 </div>

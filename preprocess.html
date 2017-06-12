@@ -29,7 +29,7 @@
 <span class="home-icon">⌂</span>sbt-site
 </a>
 <div class="version-number">
-1.2.0
+1.2.1
 </div>
 </div>
 <div class="nav-toc">
@@ -82,7 +82,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>sbt-site
 </a>
 <div class="version-number">
-1.2.0
+1.2.1
 </div>
 </div>
 <div class="nav-toc">
@@ -148,7 +148,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 1 + 1
 ```</code></pre>
 <p>Will show the result of running the code in the Scala REPL:</p>
-<pre class="prettyprint"><code>Here is how you add numbers:
+<pre><code>Here is how you add numbers:
 
 ```scala
 scala&gt; 1 + 1
@@ -156,14 +156,16 @@ res0: Int = 2
 ```
 </code></pre>
 <p>The following example shows how to use it to preprocess a collection of markdown files before running a site generator.</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(ParadoxSitePlugin)
-
-tutSettings
+<pre class="prettyprint"><code class="language-sbt">enablePlugins(ParadoxSitePlugin, TutPlugin)
 sourceDirectory in Paradox := tutTargetDirectory.value
-makeSite &lt;&lt;= makeSite.dependsOn(tut)</code></pre>
+makeSite := makeSite.dependsOn(tut).value</code></pre>
 <p>The example uses the Paradox site generator but can be adapted to any site generator which understands markdown by configuring its <code>sourceDirectory</code> accordingly. For Jekyll, this would be:</p>
 <pre class="prettyprint"><code class="language-sbt">sourceDirectory in Jekyll := tutTargetDirectory.value
 </code></pre>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/preprocess.md">here</a>.
+</div>
+
 <div class="nav-next">
 <p><strong>Next:</strong> <a href="api-documentation.html">API documentation</a></p>
 </div>

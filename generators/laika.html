@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Paradox · sbt-site</title>
+<title>Laika</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='sbt-site'/>
@@ -25,32 +25,15 @@
 <div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
 <nav class="off-canvas-nav">
 <div class="nav-home">
-<a href="../index.html" >
-<span class="home-icon">⌂</span>sbt-site
+<a href="../generators/laika.html" class="active">
+<span class="home-icon">⌂</span>Laika
 </a>
 <div class="version-number">
-1.2.0
+1.2.1
 </div>
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../getting-started.html">Getting Started</a></li>
-  <li><a href="../preprocess.html">Preprocessing</a></li>
-  <li><a href="../api-documentation.html">API documentation</a></li>
-  <li><a href="../generators/index.html">Site Generators</a>
-  <ul>
-    <li><a href="../generators/asciidoctor.html">Asciidoctor</a></li>
-    <li><a href="../generators/gitbook.html">GitBook</a></li>
-    <li><a href="../generators/hugo.html">Hugo</a></li>
-    <li><a href="../generators/jekyll.html">Jekyll</a></li>
-    <li><a href="../generators/nanoc.html">Nanoc</a></li>
-    <li><a href="../generators/pamflet.html">Pamflet</a></li>
-    <li><a href="../generators/paradox.html" class="active">Paradox</a></li>
-    <li><a href="../generators/sphinx.html">Sphinx</a></li>
-  </ul></li>
-  <li><a href="../publishing.html">Publishing</a></li>
-  <li><a href="../advanced-usage.html">Advanced Usage</a></li>
-  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -65,7 +48,7 @@
 H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
 C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
 </a>
-<div class="title"><a href="../index.html">sbt-site</a></div>
+<div class="title"><a href="../generators/laika.html" class="active">Laika</a></div>
 
 <!--
 <a href="https://www.example.com" class="logo show-for-medium">logo</a>
@@ -78,32 +61,15 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="medium-3 large-2 show-for-medium column">
 <nav class="site-nav">
 <div class="nav-home">
-<a href="../index.html" >
-<span class="home-icon">⌂</span>sbt-site
+<a href="../generators/laika.html" class="active">
+<span class="home-icon">⌂</span>Laika
 </a>
 <div class="version-number">
-1.2.0
+1.2.1
 </div>
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../getting-started.html">Getting Started</a></li>
-  <li><a href="../preprocess.html">Preprocessing</a></li>
-  <li><a href="../api-documentation.html">API documentation</a></li>
-  <li><a href="../generators/index.html">Site Generators</a>
-  <ul>
-    <li><a href="../generators/asciidoctor.html">Asciidoctor</a></li>
-    <li><a href="../generators/gitbook.html">GitBook</a></li>
-    <li><a href="../generators/hugo.html">Hugo</a></li>
-    <li><a href="../generators/jekyll.html">Jekyll</a></li>
-    <li><a href="../generators/nanoc.html">Nanoc</a></li>
-    <li><a href="../generators/pamflet.html">Pamflet</a></li>
-    <li><a href="../generators/paradox.html" class="active">Paradox</a></li>
-    <li><a href="../generators/sphinx.html">Sphinx</a></li>
-  </ul></li>
-  <li><a href="../publishing.html">Publishing</a></li>
-  <li><a href="../advanced-usage.html">Advanced Usage</a></li>
-  <li><a href="../migration-guide.html">Migration Guide</a></li>
 </ul>
 </div>
 
@@ -115,33 +81,33 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-header row">
 <div class="medium-12 show-for-medium column">
-<div class="nav-breadcrumbs">
-<ul>
-  <li><a href="../index.html">sbt-site</a></li>
-  <li><a href="../generators/index.html">Site Generators</a></li>
-  <li>Paradox</li>
-</ul>
-</div>
 </div>
 </div>
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#paradox" name="paradox" class="anchor"><span class="anchor-link"></span></a>Paradox</h1>
-<p>The sbt-site plugin has direct support for building <a href="https://github.com/lightbend/paradox">Paradox</a> projects. To enable Paradox site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(ParadoxSitePlugin)</code></pre>
-<p>This assumes you have a Paradox project under the <code>src/paradox</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Paradox</code> scope:</p>
-<pre class="prettyprint"><code class="language-sbt">sourceDirectory in Paradox := sourceDirectory.value / &quot;doc&quot;
+<h1><a href="#laika" name="laika" class="anchor"><span class="anchor-link"></span></a>Laika</h1>
+<p>The sbt-site plugin has support for building [Laika] projects. To enable Laika site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
+<pre class="prettyprint"><code class="language-sbt">enablePlugins(LaikaSitePlugin)</code></pre>
+<p>This plugin assumes you have a Laika project under the <code>src/laika</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>LaikaSite</code> scope:</p>
+<pre class="prettyprint"><code class="language-sbt">sourceDirectory in LaikaSite := sourceDirectory.value / &quot;doc&quot;
 </code></pre>
-<p>If you are configuring Paradox from scratch remember to also configure a theme:</p>
-<pre class="prettyprint"><code class="language-sbt">paradoxTheme := Some(builtinParadoxTheme(&quot;generic&quot;))</code></pre>
-<p>Note that Paradox settings such as <code>paradoxProperties</code> should be scoped to <code>Paradox</code> instead of <code>Compile</code> as used in the <a href="http://developer.lightbend.com/docs/paradox/latest/">Paradox documentation</a>. For example to configure an <code>@extref</code> link prefix use:</p>
-<pre class="prettyprint"><code class="language-sbt">paradoxProperties in Paradox ++= Map(
-  &quot;extref.rfc.base_url&quot; -&gt; &quot;http://tools.ietf.org/html/rfc%s&quot;
-)</code></pre>
-<div class="nav-next">
-<p><strong>Next:</strong> <a href="../generators/sphinx.html">Sphinx</a></p>
+<p>This plugin use <a href="https://github.com/planet42/Laika">Laika</a> sbt plugin internally and redefine default values for several Laika sbt keys which related to <code>sourceDirectory</code> in order to both work in harmony. Default setting of Laika sbt will be included automatically once you enable this plugin, you don&rsquo;t need to include them manually and doing so may result in conflict.</p>
+<p>From other hand you can customize other aspects of Laika&rsquo;s behavior through basic <a href="http://planet42.github.io/Laika/using-laika/sbt.html">Laika sbt plugin</a> keys and hooks. For example in order to add custom block directives you can include such code to your build.sbt:</p>
+<pre class="prettyprint"><code class="language-sbt">import LaikaKeys._                                                                                                            
+
+blockDirectives in Laika += CustomDirectives.postsToc                                                                         
+</code></pre>
+<p>Full sample how use Laika sbt plugin together with sbt-site you can find here:</p>
+<pre class="prettyprint"><code class="language-sbt">import LaikaKeys._
+
+blockDirectives in Laika += CustomDirectives.postsToc
+siteRenderers in Laika += CustomDirectives.postsRenderer
+sourceDirectories in Laika := Seq((sourceDirectory in LaikaSite).value)</code></pre>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/generators/laika.md">here</a>.
 </div>
+
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
 </div>
