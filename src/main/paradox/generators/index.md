@@ -11,6 +11,7 @@ are listed in alphabetical order.
  - [gitbook](gitbook.md)
  - [hugo](hugo.md)
  - [jekyll](jekyll.md)
+ - [laika](laika.md)
  - [nanoc](nanoc.md)
  - [pamflet](pamflet.md)
  - [paradox](paradox.md)
