@@ -1,11 +1,9 @@
 name := "test"
 
 //#tut
-enablePlugins(ParadoxSitePlugin)
-
-tutSettings
+enablePlugins(ParadoxSitePlugin, TutPlugin)
 sourceDirectory in Paradox := tutTargetDirectory.value
-makeSite <<= makeSite.dependsOn(tut)
+makeSite := makeSite.dependsOn(tut).value
 //#tut
 
 TaskKey[Unit]("checkContent") := {

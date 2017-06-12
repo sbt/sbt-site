@@ -20,9 +20,12 @@ object ParadoxSitePlugin extends AutoPlugin {
   import ParadoxPlugin.autoImport._
   override def projectSettings = paradoxSettings(Paradox)
   def paradoxSettings(config: Configuration): Seq[Setting[_]] =
-    ParadoxPlugin.paradoxGlobalSettings ++
+    ParadoxPlugin.paradoxSettings(config) ++
+    List(
+      // Revert config:sourceDirectory set by paradoxSettings
+      sourceDirectory in config := sourceDirectory.value
+    ) ++
     inConfig(config)(
-      ParadoxPlugin.paradoxSettings ++
       List(
         sourceDirectory in paradox := sourceDirectory.value,
         includeFilter := AllPassFilter,

@@ -11,7 +11,7 @@ An easy way to use GitFlow is to make use of the support built-in to the [Source
 frontend which includes support for GitFlow. The images below are taken from SourceTree. There are 
 [other ways to use GitFlow](http://danielkummer.github.io/git-flow-cheatsheet/) if you don't want to use SourceTree.
 
-## Releass
+## Release
 
 0. Make sure you have [BinTray](https://bintray.com/sbt) credentials for the "sbt" organization. You won't be able to 
 publish without them.
@@ -38,13 +38,20 @@ You should see a message that looks looks like this:
 9. Run `sbt bintrayRelease`. This moves the plugin from the staged release to published release on Bintray.
 10. Finish release per GitFlow process:  
   ![](images/finish-release.png)  
+  Accept the defaults:  
   ![](images/finish-release-defaults.png)  
-  Push changes.
-11. Create a [release entry](https://github.com/sbt/sbt-site/releases/new) in GitHub
-13. Monitor the [TravicCI build](https://travis-ci.org/sbt/sbt-site) and make sure it [updates the manual](http://www.scala-sbt.org/sbt-site/getting-started.html) with the latest version.
-12. Announce release using [`herald`](https://github.com/n8han/herald). Also announce release on Twitter, including `#scala` 
-and `@scala_sbt` and major contributor handles (if available).
-13. On the `develop` branch, edit the `version` setting in `build.sbt` to match `"<X>.<Y+1>.0-SNAPSHOT"`. Commit and push.
-
-
-
+  GitFlow will merge release onto `master` and `develop`, and switch the current branch to `develop`.
+  ![](images/before-push.png)  
+  You must push changes yourself to both `develop` **and** `master`.  
+  ![](images/after-push.png)
+11. Create a [release entry](https://github.com/sbt/sbt-site/tags) in GitHub. Because GitFlow automatically adds a tag
+ to the history, GitHub picks it up as a release...
+  ![](images/add-release-notes.png)  
+  ...but we have to copy the release notes from our `notes/<X>.<Y>.<Z>.markdown` file manually.  
+  ![](images/github-release-notes.png)
+12. Monitor the [TravicCI build](https://travis-ci.org/sbt/sbt-site) and make sure it [updates the manual](http://www.scala-sbt.org/sbt-site/getting-started.html) with the latest version.
+13. Announce release using [`herald`](https://github.com/n8han/herald). Also announce release on Twitter, including `#scala` 
+and `@scala_sbt` and major contributor handles (if available). Provide a link to the GitHub release page in tweet.  
+  ![](images/tweet.png)
+14. Announce on `#sbt-site` and `#sbt-dev` Gitter channels.  
+15. **Important**: On the `develop` branch, edit the `version` setting in `build.sbt` to match `"<X>.<Y+1>.0-SNAPSHOT"`. Commit and push.

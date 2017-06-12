@@ -5,7 +5,7 @@ name := "sbt-site"
 
 organization := "com.typesafe.sbt"
 
-version := "1.2.0"
+version := "1.2.1"
 
 licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
@@ -31,7 +31,9 @@ libraryDependencies ++= Seq(
   "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.7")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.12")
+
+addSbtPlugin("org.planet42"       % "laika-sbt"           % "0.6.0")
 
 enablePlugins(ParadoxSitePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"

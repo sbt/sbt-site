@@ -2,7 +2,7 @@ name := "site ghpages test"
 
 version := "0.0-ABCD"
 
-ghpages.settings
+enablePlugins(GhpagesPlugin)
 
 git.remoteRepo := "git@github.com:metasim/sbt-site.git"
 
