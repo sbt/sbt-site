@@ -56,7 +56,7 @@ object SphinxPlugin extends AutoPlugin {
   }
 
   def defaultVersionProperties(version: String) = {
-    val binV = CrossVersion.binaryVersion(version, "")
+    val binV = CrossVersion.binarySbtVersion(version)
     Map("version" -> binV, "release" -> version)
   }
 

@@ -1,17 +1,18 @@
 language: scala
-scala:
-   - 2.10.6
-jdk:
-   - openjdk7
+jdk: oraclejdk8
 
 before_script:
   - export PATH=$PATH:$HOME/bin/
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted make-site
+  - sbt --warn ";$SBT_CROSS_ENV update; compile; scripted; make-site"
 
 sudo: false
 dist: trusty
+env:
+  matrix:
+    - SBT_CROSS_ENV=""
+    - SBT_CROSS_ENV="^^1.0.0-RC3;"
 
 addons:
   apt:
