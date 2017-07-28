@@ -2,12 +2,11 @@ name := "test"
 
 val checkContent = taskKey[Unit]("checkContent")
 
-val v2 = project.configure(gitbookProject("v2"))
 val v3Output = project.configure(gitbookProject("v3-output"))
 val v3 = project.configure(gitbookProject("v3"))
 
 val root = project.in(file("."))
-  .aggregate(v2, v3Output, v3)
+  .aggregate(v3Output, v3)
 
 def gitbookProject(version: String)(project: Project): Project = project
   .in(file(version))
