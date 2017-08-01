@@ -11,6 +11,7 @@ script:
   - sbt ++$TRAVIS_SCALA_VERSION --warn update compile scripted make-site
 
 sudo: false
+dist: trusty
 
 addons:
   apt:
@@ -23,9 +24,9 @@ before_install:
 
 install:
   - gem install jekyll:2.5.3 nanoc:3.8.0 asciidoctor --no-rdoc --no-ri
-  - npm install -g gitbook-cli
+  - npm install -g gitbook-cli@2.3.0
   - |
-    mkdir $TRAVIS_BUILD_DIR/download && mkdir $HOME/bin && \
+    mkdir $TRAVIS_BUILD_DIR/download && \
     wget https://github.com/spf13/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O $TRAVIS_BUILD_DIR/download/hugo.tgz && \
     tar xvf $TRAVIS_BUILD_DIR/download/hugo.tgz && \
     mv $TRAVIS_BUILD_DIR/hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 $HOME/bin/hugo && \
