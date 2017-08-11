@@ -82,12 +82,12 @@ ${yamlFileName(src)} so clean task cleans.""")
 
     import org.yaml.snakeyaml.Yaml
 
-    import collection.JavaConversions._
+    import collection.JavaConverters._
     if (!configFile.exists) {
       sys.error( s"""$configFile is not found!""")
     }
     val yaml = new Yaml()
     val x = yaml.load(new FileReader(configFile)).asInstanceOf[JMap[String, Any]]
-    immutable.Map.empty[String, Any] ++ x
+    x.asScala.toMap
   }
 }
