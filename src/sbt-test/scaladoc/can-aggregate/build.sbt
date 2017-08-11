@@ -9,10 +9,10 @@ lazy val kittens = project.in(file("kittens")).dependsOn(cats)
 //#unidoc-site
 lazy val root = project.in(file("."))
   .settings(
-    unidocSettings,
     siteSubdirName in ScalaUnidoc := "api",
     addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)
   )
+  .enablePlugins(ScalaUnidocPlugin)
   .aggregate(cats, kittens)
 //#unidoc-site
   .aggregate(siteWithScaladoc, siteWithScaladocAlt)
