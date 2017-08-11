@@ -2,6 +2,7 @@ package com.typesafe.sbt.site.gitbook
 
 import sbt._
 import Keys._
+import com.typesafe.sbt.site.Compat.Process
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers

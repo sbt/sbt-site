@@ -1,5 +1,6 @@
 package com.typesafe.sbt.site.util
 
+import com.typesafe.sbt.site.Compat.Process
 import sbt.Keys._
 import sbt._
 
