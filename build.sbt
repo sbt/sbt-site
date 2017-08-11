@@ -31,9 +31,9 @@ libraryDependencies ++= Seq(
   "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.12")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.13")
 
-addSbtPlugin("org.planet42"       % "laika-sbt"           % "0.6.0")
+addSbtPlugin("org.planet42"       % "laika-sbt"           % "0.7.0")
 
 enablePlugins(ParadoxSitePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
@@ -44,7 +44,7 @@ version in Paradox := {
 }
 
 //#ghpages-publish
-ghpages.settings
+enablePlugins(GhpagesPlugin)
 git.remoteRepo := scmInfo.value.get.connection
 //#ghpages-publish
 
