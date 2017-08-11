@@ -1,6 +1,7 @@
 import laika.directive.Directives.Blocks
 import laika.directive.StandardDirectives
 import laika.render.HTMLWriter
+import laika.rewrite.{DocumentCursor, TreeCursor}
 import laika.tree.Documents.{Document, DocumentTree}
 import laika.tree.Elements
 import laika.tree.Elements._
@@ -24,16 +25,17 @@ object CustomDirectives extends StandardDirectives {
         config.getString("by")
       else ""
 
-    context.map { context =>
-      val posts = context.root.navigatables.collect {
-        case pd: DocumentTree =>
-          pd.documents.map { d =>
-            val path = d.path
-            val refPath = context.parent.path
-            PostsTocElement(titleOrName(d),
-              by(d.config),
-              PathInfo.fromPath(path, refPath.parent),
-              Styles("toc"))
+    cursor.map { cursor =>
+      val posts = cursor.root.children.collect {
+        case pd: TreeCursor =>
+          pd.children.collect {
+            case d: DocumentCursor =>
+              val path = d.target.path
+              val refPath = cursor.parent.target.path
+              PostsTocElement(titleOrName(d.target),
+                by(d.config),
+                PathInfo.fromPath(path, refPath.parent),
+                Styles("toc"))
           }
       }.flatten
 
