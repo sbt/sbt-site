@@ -60,6 +60,6 @@ object AsciidoctorPlugin extends AutoPlugin {
       IO.copyDirectory(inputImages, outputImages, overwrite = true)
     }
     Thread.currentThread().setContextClassLoader(oldContextClassLoader)
-    output ** includeFilter --- output pair relativeTo(output)
+    output ** includeFilter --- output pair Path.relativeTo(output)
   }
 }

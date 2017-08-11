@@ -90,7 +90,7 @@ object GitBookPlugin extends AutoPlugin {
 
     // Figure out what was generated.
     val files = (target ** inc) --- (target ** exc) --- target
-    files pair relativeTo(target)
+    files pair Path.relativeTo(target)
   }
 
   private[sbt] def bookJson(src: File): File = src / "book.json"

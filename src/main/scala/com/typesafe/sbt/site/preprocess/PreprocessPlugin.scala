@@ -64,7 +64,7 @@ object PreprocessPlugin extends AutoPlugin {
 
   /** Find out what was generated. */
   private[sbt] def gatherMappings(output: File, includeFilter: FileFilter) = {
-    output ** includeFilter --- output pair relativeTo(output)
+    output ** includeFilter --- output pair Path.relativeTo(output)
   }
 
   /**

@@ -40,6 +40,6 @@ object PamfletPlugin extends AutoPlugin {
     fencePlugins: Seq[FencePlugin]): Seq[(File, String)] = {
     val storage = FileStorage(input, fencePlugins.toList)
     Produce(storage.globalized, output)
-    output ** includeFilter --- output pair relativeTo(output)
+    output ** includeFilter --- output pair Path.relativeTo(output)
   }
 }

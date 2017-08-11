@@ -124,11 +124,11 @@ object SphinxPlugin extends AutoPlugin {
     val t = target.value / "docs"
     val cache = cacheDir / "sphinx" / "docs"
     val htmlMapping = htmlOutput.toSeq flatMap { html =>
-      (html ** AllPassFilter).get pair rebase(html, t)
+      (html ** AllPassFilter).get pair Path.rebase(html, t)
     }
     val pdfMapping = pdfOutputs map { pdf => (pdf, t / pdf.name) }
     val epubMapping = epubOutput.toSeq flatMap { epub =>
-      (epub ** "*.epub").get pair rebase(epub, t)
+      (epub ** "*.epub").get pair Path.rebase(epub, t)
     }
     val mapping = htmlMapping ++ pdfMapping ++ epubMapping
     Sync(cache)(mapping)
@@ -139,6 +139,6 @@ object SphinxPlugin extends AutoPlugin {
   def mappingsTask = Def.task {
     val output = generate.value
     val include = includeFilter.value
-    output ** include --- output pair relativeTo(output)
+    output ** include --- output pair Path.relativeTo(output)
   }
 }

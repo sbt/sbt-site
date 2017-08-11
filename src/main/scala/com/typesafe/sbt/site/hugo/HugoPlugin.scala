@@ -51,12 +51,12 @@ object HugoPlugin extends AutoPlugin {
     baseURL: URI,
     envVars: Map[String, String],
     s: TaskStreams): Seq[(File, String)] = {
-    sbt.Process(Seq("hugo", "-d", target.getAbsolutePath, "--baseURL", baseURL.toString), Some(src), envVars.toSeq: _*) ! s.log match {
+    Process(Seq("hugo", "-d", target.getAbsolutePath, "--baseURL", baseURL.toString), Some(src), envVars.toSeq: _*) ! s.log match {
       case 0 => ()
       case n => sys.error("Could not run hugo binary, error: " + n)
     }
     for {
-      (file, name) <- target ** inc --- target pair relativeTo(target)
+      (file, name) <- target ** inc --- target pair Path.relativeTo(target)
     } yield file -> name
   }
 
@@ -65,7 +65,7 @@ object HugoPlugin extends AutoPlugin {
   def unsafeCheckHugoVersion(minimumVersion: String, s: TaskStreams): Try[Unit] = {
     s.log.debug("checking for the installed version of hugo...")
     for {
-      installed <- Try(Seq("hugo", "-", "version").!!)
+      installed <- Try(Process(Seq("hugo", "-", "version")).!!)
       extracted <- Try("""v(\d(\.\d+)+)\D""".r.findFirstMatchIn(installed.trim))
       _ <- extracted.fold(Failure(new RuntimeException("Hugo is not currently installed!")): Try[Unit]
                     )(v => if(v.group(1) >= minimumVersion) Success(())
