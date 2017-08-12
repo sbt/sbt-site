@@ -30,7 +30,7 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies ++= {
-  if((sbtVersion in pluginCrossBuild).value.startsWith("0.13")) {
+  if ((sbtVersion in pluginCrossBuild).value.startsWith("0.13")) {
     Seq(
       Defaults.sbtPluginExtra(
         "com.lightbend.paradox" % "sbt-paradox" % "0.2.13",
@@ -62,30 +62,23 @@ git.remoteRepo := scmInfo.value.get.connection
 scriptedSettings
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
-  if((sbtVersion in pluginCrossBuild).value.startsWith("0.13")) {
+  if ((sbtVersion in pluginCrossBuild).value.startsWith("0.13")) {
     Def.task{
       scripted.toTask("").value
     }
   } else {
-    case class Test(group: String, name: Option[String])
-
+    val base = sbtTestDirectory.value
     val exclude = Seq(
-      Test("paradox", None), // paradox does not support sbt 1.0
-      Test("laika", None), // https://github.com/planet42/Laika/issues/57
-      Test("site", Some("can-run-generator-twice")), // use paradox
-      Test("site", Some("plays-nice-with-tut")), // use paradox
-      Test("site", Some("plays-nice-with-ghpages")) // https://github.com/sbt/sbt-ghpages/issues/36
+      base / "paradox" * AllPassFilter, // paradox does not support sbt 1.0
+      base / "laika" * AllPassFilter, // https://github.com/planet42/Laika/issues/57
+      base / "site" * ("can-run-generator-twice" || "plays-nice-with-tut"), // use paradox
+      base / "site" * "plays-nice-with-ghpages" // https://github.com/sbt/sbt-ghpages/issues/36
     )
 
-    val groups = file("src/sbt-test").listFiles.map(_.getName).toList
-    val runAll: Seq[String] = groups.filterNot(exclude.map(_.group).toSet).map(_ + "/*")
-    val runPartial: Seq[String] = exclude.collect{ case Test(g, Some(t)) => (g, t) }.groupBy(_._1).flatMap {
-      case (g, tests) =>
-        val excludeTests = tests.map(_._2).toSet
-        (file("src/sbt-test") / g).listFiles.map(_.getName).filterNot(excludeTests).map(g + "/" + _)
-    }.toList
-    val args = (runAll ++ runPartial).mkString(" ", " ", "")
-    streams.value.log.info("scripted test args =" + args)
+    val allTests = base * AllPassFilter * AllPassFilter filter { _.isDirectory }
+    val tests = allTests --- exclude.reduce(_ +++ _)
+    val args = tests.get.map(Path.relativeTo(base)).flatten.mkString(" ", " ", "")
+    streams.value.log.info("scripted test args = " + args)
 
     Def.task{
       scripted.toTask(args).value
