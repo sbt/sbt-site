@@ -1,5 +1,6 @@
 package com.typesafe.sbt.site.jekyll
 
+import com.typesafe.sbt.site.Compat.Process
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.RubyHelpers.RubyKeys

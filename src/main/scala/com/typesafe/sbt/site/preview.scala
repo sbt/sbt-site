@@ -10,16 +10,16 @@ import java.io.OutputStream
 import collection.mutable.Map
 
 object Preview {
-  def apply(port: Int, base: File, genSite: TaskKey[File], genSources: TaskKey[Seq[File]], state: State): Server = {
+  def apply(port: Int, base: File, genSite: TaskKey[File], genSources: State => Seq[File], state: State): Server = {
     val rootFile = runTask(genSite, state)
-    val rootSources = runTask(genSources, state)
+    val rootSources = genSources(state)
 
     val rootPage: Option[URL] = startPageURL(rootFile)
     var mapSources: Map[File, Long] = mapFileToLastModified(rootSources)
 
     val plan: Plan = unfiltered.filter.Planify {
       case GET(unfiltered.request.Path(Seg(path))) => {
-        val newSources = runTask(genSources, state)
+        val newSources = genSources(state)
         val newMapSources = mapFileToLastModified(newSources)
         if(mapSources != newMapSources) {
           val _ = runTask(genSite, state)

@@ -2,7 +2,8 @@ package com.typesafe.sbt.site.util
 
 import java.io.PrintWriter
 
-import com.typesafe.sbt.site.SitePlugin
+import com.typesafe.sbt.site.{Compat, SitePlugin}
+import com.typesafe.sbt.site.Compat._
 import sbt.Keys._
 import sbt._
 /**
@@ -23,7 +24,7 @@ object SiteHelpers {
 
   def copySite(dir: File, cacheDir: File, maps: Seq[(File, String)]): File = {
     val concrete = maps map { case (file, dest) => (file, dir / dest) }
-    Sync(cacheDir / "make-site")(concrete)
+    Sync(CacheStore(cacheDir / "make-site"))(concrete)
     dir
   }
 
@@ -41,11 +42,9 @@ object SiteHelpers {
         sourceDirectory := sourceDirectory.value / config.name,
         target := target.value / config.name
       ))
-  def watchSettings(config: Configuration): Seq[Setting[_]] =
-    Seq(
-      watchSources in Global ++= (sourceDirectory in config).value.***.get
-    )
 
+  def watchSettings(config: Configuration): Seq[Setting[_]] =
+    Compat.watchSettings(config)
 
   /**
    * Transform a file, line by line.

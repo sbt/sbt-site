@@ -1,6 +1,8 @@
 package com.typesafe.sbt.site.sphinx
 
 import sbt._
+import com.typesafe.sbt.site.Compat
+import com.typesafe.sbt.site.Compat.{Process, _}
 
 
 /**
@@ -99,7 +101,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
     val target = baseTarget / builder
     val doctrees = baseTarget / "doctrees" / builder
     val cache = cacheDir / "sphinx" / builder
-    val cached = FileFunction.cached(cache)(FilesInfo.hash, FilesInfo.exists) { (in, out) =>
+    val cached = Compat.cached(cache, FilesInfo.hash, FilesInfo.exists) { (in, out) =>
       val changes = in.modified
       if (changes.nonEmpty) {
         val tagList = if (tags.isEmpty) "" else tags.mkString(" (", ", ", ")")
@@ -117,7 +119,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
         val exitCode = Process(command, src, env.toSeq : _*) ! logger
         if (exitCode != 0) sys.error("Failed to build Sphinx %s documentation." format desc)
         log.info("Sphinx %s documentation generated: %s" format (desc, target))
-        (target ***).get.toSet
+        target.allPaths.get.toSet
       } else Set.empty
     }
     val inputs = src.descendantsExcept(include, exclude).get.toSet
@@ -154,6 +156,8 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
     new ProcessLogger {
       def info(i: => String): Unit = redirect(i)
       def error(e: => String): Unit = redirect(e)
+      def err(e: => String): Unit = redirect(e)
+      def out(e: => String): Unit = redirect(e)
       def buffer[T](f: => T): T = f
       def redirect(message: String): Unit = {
         if (message contains "ERROR") log.error(message)

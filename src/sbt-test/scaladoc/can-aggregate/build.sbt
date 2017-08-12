@@ -1,5 +1,7 @@
 name := "scaladoc subproject test"
 
+scalaVersion in ThisBuild := "2.10.6"
+
 //#subprojects
 lazy val cats = project.in(file("cats"))
 lazy val kittens = project.in(file("kittens")).dependsOn(cats)
@@ -30,11 +32,11 @@ lazy val siteWithScaladoc = project.in(file("site/scaladoc"))
 //#scaladoc-site
 
 //#scaladoc-site-alternative
-lazy val scaladocSiteProjects = List(cats, kittens)
+lazy val scaladocSiteProjects = List((cats, Cats), (kittens, Kittens))
 
-lazy val scaladocSiteSettings = scaladocSiteProjects.flatMap { project =>
+lazy val scaladocSiteSettings = scaladocSiteProjects.flatMap { case (project, conf) =>
   SiteScaladocPlugin.scaladocSettings(
-    config(project.id),
+    conf,
     mappings in (Compile, packageDoc) in project,
     s"api/${project.id}"
   )

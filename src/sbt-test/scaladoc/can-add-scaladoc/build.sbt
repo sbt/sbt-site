@@ -11,6 +11,8 @@ siteSubdirName in SiteScaladoc := "api/latest"
 
 version := "0.0.meow"
 
+scalaVersion := "2.10.6"
+
 TaskKey[Unit]("checkContent") := {
   val dest = (target in makeSite).value / (siteSubdirName in SiteScaladoc).value
   val index = dest / "index.html"

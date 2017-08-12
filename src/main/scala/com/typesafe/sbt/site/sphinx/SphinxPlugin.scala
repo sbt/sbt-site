@@ -1,5 +1,6 @@
 package com.typesafe.sbt.site.sphinx
 
+import com.typesafe.sbt.site.Compat._
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers
@@ -56,7 +57,7 @@ object SphinxPlugin extends AutoPlugin {
   }
 
   def defaultVersionProperties(version: String) = {
-    val binV = CrossVersion.binaryVersion(version, "")
+    val binV = CrossVersion.binarySbtVersion(version)
     Map("version" -> binV, "release" -> version)
   }
 
@@ -64,7 +65,8 @@ object SphinxPlugin extends AutoPlugin {
     val runner = sphinxRunner.value
     val packages = sphinxPackages.value
     val s = streams.value
-    packages map { p => runner.installPackage(p, target.value, s.log) }
+    val t = target.value
+    packages map { p => runner.installPackage(p, t, s.log) }
   }
 
   def combineSphinxInputs = Def.task {
@@ -112,8 +114,9 @@ object SphinxPlugin extends AutoPlugin {
     key: TaskKey[S],
     f: Task[S] => Task[T],
     nil: T): Def.Initialize[Task[T]] = Def.task{
-    if ((enableOutput in key in key.scope).value) f(key.taskValue) else task {nil}
-  }.flatMap(identity)
+    val t = key.taskValue
+    if ((enableOutput in key in key.scope).value) f(t) else task {nil}
+  }.flatMap(identity(_))
 
   def generateTask = Def.task {
     val htmlOutput = generatedHtml.value
@@ -131,7 +134,7 @@ object SphinxPlugin extends AutoPlugin {
       (epub ** "*.epub").get pair Path.rebase(epub, t)
     }
     val mapping = htmlMapping ++ pdfMapping ++ epubMapping
-    Sync(cache)(mapping)
+    Sync(CacheStore(cache))(mapping)
     s.log.info("Sphinx documentation generated: %s" format t)
     t
   }

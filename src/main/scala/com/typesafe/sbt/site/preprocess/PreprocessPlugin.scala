@@ -1,6 +1,6 @@
 package com.typesafe.sbt.site.preprocess
 
-import com.typesafe.sbt.site.SitePlugin
+import com.typesafe.sbt.site.{Compat, SitePlugin}
 import com.typesafe.sbt.site.SitePlugin.autoImport._
 import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
@@ -77,7 +77,7 @@ object PreprocessPlugin extends AutoPlugin {
     transform: (File, File) => Unit,
     cache: File,
     log: Logger): File = {
-    val runTransform = FileFunction.cached(cache)(FilesInfo.hash, FilesInfo.exists) { (in, out) =>
+    val runTransform = Compat.cached(cache, FilesInfo.hash, FilesInfo.exists) { (in, out) =>
       val map = Path.rebase(sourceDir, targetDir)
       if (in.removed.nonEmpty || in.modified.nonEmpty) {
         log.info("Preprocessing directory %s..." format sourceDir)

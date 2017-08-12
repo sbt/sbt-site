@@ -7,7 +7,7 @@ publishSite
 //#publishSite
 
 def artifactFlavour = Def.task {
-  s"${name.value}_${CrossVersion.binaryVersion(scalaVersion.value, "")}"
+  s"${name.value}_${scalaBinaryVersion.value}"
 }
 
 TaskKey[Unit]("checkPackageSite") := {
@@ -17,7 +17,8 @@ TaskKey[Unit]("checkPackageSite") := {
   assert(siteZipFile.exists, s"${siteZipFile.getAbsolutePath} did not exist")
   assert(siteZipFile.getName == siteZipName, s"${siteZipFile.getName} did not match expected '$siteZipName")
 
-  val expectedFiles = Seq("README.html").map(path => path -> (siteSourceDirectory.value / path)).toMap
+  val dir = siteSourceDirectory.value
+  val expectedFiles = Seq("README.html").map(path => path -> (dir / path)).toMap
   val zippedDir = file("target/unzipped-site")
   IO.delete(zippedDir)
   val zippedFiles = IO.unzip(siteZipFile, zippedDir)

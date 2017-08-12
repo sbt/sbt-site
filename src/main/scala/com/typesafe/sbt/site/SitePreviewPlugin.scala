@@ -43,7 +43,7 @@ object SitePreviewPlugin extends AutoPlugin {
       val port = previewFixedPort.value getOrElse Port.any
       val browser = previewLaunchBrowser.value
 
-      Preview(port, (target in previewAuto).value, makeSite, watchSources, state.value) run { server =>
+      Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value) run { server =>
         if(browser)
           Browser open(server.portBindings.head.url)
       }
