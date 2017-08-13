@@ -5,7 +5,7 @@ name := "sbt-site"
 
 organization := "com.typesafe.sbt"
 
-version := "1.3.0"
+version := "1.3.1-SNAPSHOT"
 
 licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
