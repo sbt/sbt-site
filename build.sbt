@@ -71,8 +71,7 @@ TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
     val exclude = Seq(
       base / "paradox" * AllPassFilter, // paradox does not support sbt 1.0
       base / "laika" * AllPassFilter, // https://github.com/planet42/Laika/issues/57
-      base / "site" * ("can-run-generator-twice" || "plays-nice-with-tut"), // use paradox
-      base / "site" * "plays-nice-with-ghpages" // https://github.com/sbt/sbt-ghpages/issues/36
+      base / "site" * ("can-run-generator-twice" || "plays-nice-with-tut") // use paradox
     )
 
     val allTests = base * AllPassFilter * AllPassFilter filter { _.isDirectory }
