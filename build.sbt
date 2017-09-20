@@ -29,14 +29,11 @@ libraryDependencies ++= Seq(
   "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
 )
 
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.0")
+
 libraryDependencies ++= {
-  if ((sbtVersion in pluginCrossBuild).value.startsWith("0.13")) {
+  if ((sbtBinaryVersion in pluginCrossBuild).value == "0.13") {
     Seq(
-      Defaults.sbtPluginExtra(
-        "com.lightbend.paradox" % "sbt-paradox" % "0.2.13",
-        (sbtBinaryVersion in pluginCrossBuild).value,
-        (scalaBinaryVersion in pluginCrossBuild).value
-      ),
       Defaults.sbtPluginExtra(
         "org.planet42" % "laika-sbt" % "0.7.0",
         (sbtBinaryVersion in pluginCrossBuild).value,
@@ -45,6 +42,9 @@ libraryDependencies ++= {
     )
   } else Nil
 }
+
+// fixed in https://github.com/sbt/sbt/pull/3397 (for sbt 0.13.17)
+sbtBinaryVersion in update := (sbtBinaryVersion in pluginCrossBuild).value
 
 enablePlugins(ParadoxSitePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
@@ -62,16 +62,15 @@ git.remoteRepo := scmInfo.value.get.connection
 scriptedSettings
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
-  if ((sbtVersion in pluginCrossBuild).value.startsWith("0.13")) {
+  if ((sbtBinaryVersion in pluginCrossBuild).value == "0.13") {
     Def.task{
       scripted.toTask("").value
     }
   } else {
     val base = sbtTestDirectory.value
     val exclude = Seq(
-      base / "paradox" * AllPassFilter, // paradox does not support sbt 1.0
       base / "laika" * AllPassFilter, // https://github.com/planet42/Laika/issues/57
-      base / "site" * ("can-run-generator-twice" || "plays-nice-with-tut") // use paradox
+      base / "site" * "plays-nice-with-tut" // tut does not support sbt 1.0
     )
 
     val allTests = base * AllPassFilter * AllPassFilter filter { _.isDirectory }
