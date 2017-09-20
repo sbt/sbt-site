@@ -62,25 +62,36 @@ git.remoteRepo := scmInfo.value.get.connection
 scriptedSettings
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
-  if ((sbtBinaryVersion in pluginCrossBuild).value == "0.13") {
-    Def.task{
-      scripted.toTask("").value
-    }
-  } else {
-    val base = sbtTestDirectory.value
-    val exclude = Seq(
-      base / "laika" * AllPassFilter // https://github.com/planet42/Laika/issues/57
-    )
+  val sbtBinVersion = (sbtBinaryVersion in pluginCrossBuild).value
+  val base = sbtTestDirectory.value
 
-    val allTests = base * AllPassFilter * AllPassFilter filter { _.isDirectory }
-    val tests = allTests --- exclude.reduce(_ +++ _)
-    val args = tests.get.map(Path.relativeTo(base)).flatten.mkString(" ", " ", "")
-    streams.value.log.info("scripted test args = " + args)
-
-    Def.task{
-      scripted.toTask(args).value
-    }
+  def isCompatible(directory: File): Boolean = {
+    val buildProps = new java.util.Properties()
+    IO.load(buildProps, directory / "project" / "build.properties")
+    Option(buildProps.getProperty("sbt.version"))
+      .map { version =>
+        val requiredBinVersion = CrossVersion.binarySbtVersion(version)
+        val compatible = requiredBinVersion == sbtBinVersion
+        if (!compatible) {
+          val testName = directory.relativeTo(base).getOrElse(directory)
+          streams.value.log.warn(s"Skipping $testName since it requires sbt $requiredBinVersion")
+        }
+        compatible
+      }
+      .getOrElse(true)
   }
+
+  val testDirectoryFinder = base * AllPassFilter * AllPassFilter filter { _.isDirectory }
+  val tests = for {
+    test <- testDirectoryFinder.get
+    if isCompatible(test)
+    path <- Path.relativeTo(base)(test)
+  } yield path.replace('\\', '/')
+
+  if (tests.nonEmpty)
+    Def.task(scripted.toTask(tests.mkString(" ", " ", "")).value)
+  else
+    Def.task(streams.value.log.warn("No tests can be run for this sbt version"))
 }.value
 
 scriptedLaunchOpts += "-Dproject.version="+version.value
