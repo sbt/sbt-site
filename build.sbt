@@ -69,8 +69,7 @@ TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
   } else {
     val base = sbtTestDirectory.value
     val exclude = Seq(
-      base / "laika" * AllPassFilter, // https://github.com/planet42/Laika/issues/57
-      base / "site" * "plays-nice-with-tut" // tut does not support sbt 1.0
+      base / "laika" * AllPassFilter // https://github.com/planet42/Laika/issues/57
     )
 
     val allTests = base * AllPassFilter * AllPassFilter filter { _.isDirectory }
