@@ -32,7 +32,7 @@ object ParadoxSitePlugin extends AutoPlugin {
         mappings := {
           val _ = paradox.value
           val output = (target in paradox).value
-          output ** includeFilter.value --- output pair relativeTo(output)
+          output ** includeFilter.value --- output pair Path.relativeTo(output)
         },
         siteSubdirName := ""
       )
