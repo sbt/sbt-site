@@ -2,10 +2,6 @@
 
 The sbt-site plugin has direct support for building [Paradox] projects.
 
-@@@ note
-Currently the Paradox generator is only supported for sbt 0.13.
-@@@
-
 To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
 
 @@ snip[enablePlugin](../../../sbt-test/paradox/can-use-paradox/build.sbt) { #enablePlugin }
