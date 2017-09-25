@@ -31,11 +31,11 @@ important. See previous release notes for format/content conventions.
 5. Commit your current changes onto the release branch.  
   ![](images/release-preparation.png)
 6. Run `sbt bintrayWhoami` to confirm your publishing credentials are set up. [See sbt documentation](http://www.scala-sbt.org/0.13/docs/Bintray-For-Plugins.html) on how to get set up with Bintray.
-7. Run `sbt publish` to build the packages and stage artifacts on Bintray. 
+7. Run `sbt ^publish` to build the packages and stage artifacts on Bintray. 
 8. Confirm the plugin is properly [staged for release on Bintray](https://bintray.com/sbt/sbt-plugin-releases/sbt-site/view).
 You should see a message that looks looks like this:  
   ![](images/bintray-notice.png)
-9. Run `sbt bintrayRelease`. This moves the plugin from the staged release to published release on Bintray.
+9. Run `sbt ^bintrayRelease`. This moves the plugin from the staged release to published release on Bintray.
 10. Finish release per GitFlow process:  
   ![](images/finish-release.png)  
   Accept the defaults:  
