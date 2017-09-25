@@ -1,8 +1,7 @@
-addSbtPlugin("me.lessis" % "bintray-sbt" % "0.3.0")
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.2.0")
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.2.8")
+addSbtPlugin("org.foundweekends" % "sbt-bintray" % "0.5.1")
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.3.0")
 //#sbt-ghpages
-addSbtPlugin("com.typesafe.sbt" % "sbt-ghpages" % "0.5.4")
+addSbtPlugin("com.typesafe.sbt" % "sbt-ghpages" % "0.6.1")
 //#sbt-ghpages
 
 libraryDependencies += "org.scala-sbt" % "scripted-plugin" % sbtVersion.value

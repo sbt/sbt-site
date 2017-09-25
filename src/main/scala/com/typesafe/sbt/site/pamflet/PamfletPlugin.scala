@@ -13,6 +13,7 @@ object PamfletPlugin extends AutoPlugin {
   override def trigger = noTrigger
   object autoImport {
     val Pamflet = config("pamflet")
+    val pamfletFencePlugins = SettingKey[Seq[FencePlugin]]("pamfletFencePlugins")
   }
 
   import autoImport._
@@ -22,7 +23,8 @@ object PamfletPlugin extends AutoPlugin {
       inConfig(config)(
         Seq(
           includeFilter := AllPassFilter,
-          mappings := generate(sourceDirectory.value, target.value, includeFilter.value),
+          pamfletFencePlugins := (pamfletFencePlugins in config).?.value.getOrElse(Nil),
+          mappings := generate(sourceDirectory.value, target.value, includeFilter.value, pamfletFencePlugins.value),
           siteSubdirName := ""
         )
       ) ++
@@ -34,9 +36,10 @@ object PamfletPlugin extends AutoPlugin {
   private[sbt] def generate(
     input: File,
     output: File,
-    includeFilter: FileFilter): Seq[(File, String)] = {
-    val storage = FileStorage(input)
+    includeFilter: FileFilter,
+    fencePlugins: Seq[FencePlugin]): Seq[(File, String)] = {
+    val storage = FileStorage(input, fencePlugins.toList)
     Produce(storage.globalized, output)
-    output ** includeFilter --- output pair relativeTo(output)
+    output ** includeFilter --- output pair Path.relativeTo(output)
   }
 }

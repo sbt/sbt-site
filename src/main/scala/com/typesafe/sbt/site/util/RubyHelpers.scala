@@ -1,5 +1,6 @@
 package com.typesafe.sbt.site.util
 
+import com.typesafe.sbt.site.Compat.Process
 import sbt.Keys._
 import sbt._
 
@@ -43,7 +44,7 @@ object RubyHelpers {
 
   /** Checks versions of gems installed. */
   def getGemVersion(gem: String): Option[String] = {
-    val installed = Seq("gem", "list", "--local", gem).!!
+    val installed = Process(Seq("gem", "list", "--local", gem)).!!
     """\((.+)\)""".r.findFirstMatchIn(installed) match {
       case None => None
       case Some(m) => Some(m.group(1))

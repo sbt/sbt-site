@@ -1,6 +1,7 @@
 package com.typesafe.sbt.site.nanoc
 
 import java.io.FileReader
+import com.typesafe.sbt.site.Compat.Process
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.RubyHelpers.RubyKeys
@@ -44,7 +45,7 @@ object NanocPlugin extends AutoPlugin {
     inc: FileFilter,
     s: TaskStreams): Seq[(File, String)] = {
     // Run nanoc
-    sbt.Process(Seq("nanoc"), Some(src)) ! s.log match {
+    Process(Seq("nanoc"), Some(src)) ! s.log match {
       case 0 => ()
       case n => sys.error("Could not run nanoc, error: " + n)
     }
@@ -59,7 +60,7 @@ ${yamlFileName(src)} so clean task cleans.""")
 
     // Figure out what was generated.
     for {
-      (file, name) <- target ** inc --- target pair relativeTo(target)
+      (file, name) <- target ** inc --- target pair Path.relativeTo(target)
     } yield file -> name
   }
 
@@ -82,12 +83,12 @@ ${yamlFileName(src)} so clean task cleans.""")
 
     import org.yaml.snakeyaml.Yaml
 
-    import collection.JavaConversions._
+    import collection.JavaConverters._
     if (!configFile.exists) {
       sys.error( s"""$configFile is not found!""")
     }
     val yaml = new Yaml()
     val x = yaml.load(new FileReader(configFile)).asInstanceOf[JMap[String, Any]]
-    immutable.Map.empty[String, Any] ++ x
+    x.asScala.toMap
   }
 }

@@ -1,5 +1,6 @@
 package com.typesafe.sbt.site.jekyll
 
+import com.typesafe.sbt.site.Compat.Process
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.RubyHelpers.RubyKeys
@@ -43,13 +44,13 @@ object JekyllPlugin extends AutoPlugin {
     inc: FileFilter,
     s: TaskStreams): Seq[(File, String)] = {
     // Run Jekyll
-    sbt.Process(Seq("jekyll", "build", "-d", target.getAbsolutePath), Some(src)) ! s.log match {
+    Process(Seq("jekyll", "build", "-d", target.getAbsolutePath), Some(src)) ! s.log match {
       case 0 => ()
       case n => sys.error("Could not run jekyll, error: " + n)
     }
     // Figure out what was generated.
     for {
-      (file, name) <- target ** inc --- target pair relativeTo(target)
+      (file, name) <- target ** inc --- target pair Path.relativeTo(target)
     } yield file -> name
   }
 

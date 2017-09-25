@@ -1,5 +1,5 @@
-# Check that `package-site` depends on `make-site`
-> package-site
+# Check that `packageSite` depends on `makeSite`
+> packageSite
 > checkPackageSite
 > clean
 # Check that `publishSite` depends on `package-site`

@@ -2,7 +2,7 @@ name := "test"
 
 version := "0.0-ABCD"
 
-unidocSettings
+enablePlugins(ScalaUnidocPlugin)
 
 //#mappings
 mappings in makeSite ++= Seq(

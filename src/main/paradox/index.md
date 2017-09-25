@@ -6,6 +6,9 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
 
 @@@ note
 
+* Version 1.3.0 is cross published to both sbt 0.13 and sbt 1.x, however, the
+  [Laika](generators/laika.md) and [Paradox](generators/paradox.md) generators
+  are only available for sbt 0.13.
 * As of sbt-site version 1.x.x, sbt version >= 0.13.5 is required.
 * For earlier 0.13.x releases, use [version 0.8.2][0.8.2].
 * For sbt 0.12, use [version 0.7.2][0.7.2].

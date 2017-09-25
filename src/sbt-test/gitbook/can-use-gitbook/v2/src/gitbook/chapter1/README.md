@@ -1,3 +1,0 @@
-# First Chapter
-
-It was a stormy night ...
