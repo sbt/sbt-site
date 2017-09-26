@@ -1,3 +1,4 @@
+import scala.sys.process._
 
 sbtPlugin := true
 
@@ -59,8 +60,6 @@ version in Paradox := {
 enablePlugins(GhpagesPlugin)
 git.remoteRepo := scmInfo.value.get.connection
 //#ghpages-publish
-
-scriptedSettings
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
   val sbtBinVersion = (sbtBinaryVersion in pluginCrossBuild).value
