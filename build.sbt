@@ -50,7 +50,14 @@ sbtBinaryVersion in update := (sbtBinaryVersion in pluginCrossBuild).value
 
 enablePlugins(ParadoxSitePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
-paradoxTheme := Some(builtinParadoxTheme("generic"))
+paradoxTheme := Some("io.github.jonas" % "paradox-material-theme" % "0.1.1")
+paradoxProperties in Paradox ++= Map(
+  "material.favicon" -> "img/favicon.png",
+  "material.logo"  -> "img/sbt-logo.svg",
+  "material.repo" -> "https://github.com/sbt/sbt-site",
+  "material.repo.type" -> "github",
+  "material.repo.name" -> "sbt/sbt-site"
+)
 version in Paradox := {
   if (isSnapshot.value) "git tag -l".!!.split("\r?\n").last.substring(1)
   else version.value
