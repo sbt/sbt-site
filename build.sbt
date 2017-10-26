@@ -45,9 +45,6 @@ libraryDependencies ++= {
   } else Nil
 }
 
-// fixed in https://github.com/sbt/sbt/pull/3397 (for sbt 0.13.17)
-sbtBinaryVersion in update := (sbtBinaryVersion in pluginCrossBuild).value
-
 enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
 ParadoxMaterialThemePlugin.paradoxMaterialThemeSettings(Paradox)
