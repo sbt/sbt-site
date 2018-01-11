@@ -42,7 +42,15 @@ libraryDependencies ++= {
         (scalaBinaryVersion in pluginCrossBuild).value
       )
     )
-  } else Nil
+  } else {
+    Seq(
+      Defaults.sbtPluginExtra(
+        "org.planet42" % "laika-sbt" % "0.7.5",
+        (sbtBinaryVersion in pluginCrossBuild).value,
+        (scalaBinaryVersion in pluginCrossBuild).value
+      )
+    )
+  }
 }
 
 enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
