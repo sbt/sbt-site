@@ -9,6 +9,7 @@ import com.typesafe.sbt.site.util.SiteHelpers
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin.autoImport.makeSite
 import laika.sbt.LaikaPlugin.autoImport.{Laika, laikaHTML, laikaSite }
+import Path.relativeTo
 
 object LaikaSitePlugin extends AutoPlugin {
   override def requires = SitePlugin
