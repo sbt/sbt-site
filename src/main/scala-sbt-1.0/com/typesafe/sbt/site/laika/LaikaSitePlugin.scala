@@ -36,7 +36,8 @@ object LaikaSitePlugin extends AutoPlugin {
             excludeFilter.value
           ),
           siteSubdirName := "",
-          target in ( Laika, laikaSite) := (target in makeSite).value,
+          target in Laika := (target in makeSite).value,
+          target in laikaSite := (target in makeSite).value,
           sourceDirectories in Laika := Seq(sourceDirectory.value)
         )
       ) ++
