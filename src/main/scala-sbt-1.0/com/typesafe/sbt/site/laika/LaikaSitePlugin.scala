@@ -9,6 +9,7 @@ import com.typesafe.sbt.site.util.SiteHelpers
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin.autoImport.makeSite
 import laika.sbt.LaikaPlugin.autoImport.{Laika, laikaHTML, laikaSite }
+import laika.sbt.LaikaPlugin
 import Path.relativeTo
 
 object LaikaSitePlugin extends AutoPlugin {
@@ -24,6 +25,7 @@ object LaikaSitePlugin extends AutoPlugin {
 
   /** Creates settings necessary for running Laika in the given configuration. */
   def laikaSettings(config: Configuration): Seq[Setting[_]] =
+    LaikaPlugin.projectSettings ++
       inConfig(config)(
         Seq(
           includeFilter := AllPassFilter,
@@ -42,7 +44,7 @@ object LaikaSitePlugin extends AutoPlugin {
         SiteHelpers.watchSettings(config) ++
         SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config) ++
         Seq(
-          makeSite := makeSite.dependsOn(laikaHTML).value
+          makeSite := makeSite.dependsOn(laikaHTML in Laika).value
         )
 
   private def generate(target: File, inc: FileFilter, exc: FileFilter): Seq[(File, String)] = {
