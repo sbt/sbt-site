@@ -17,7 +17,6 @@ object LaikaSitePlugin extends AutoPlugin {
 
   object autoImport {
     val LaikaSite = config("laikaSite")
-    val bla = config("mundoBla")
   }
   import autoImport._
 
