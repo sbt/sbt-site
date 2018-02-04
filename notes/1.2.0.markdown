@@ -11,7 +11,7 @@ See the [1.2.0 milestone] for the full list of related tickets and PRs.
  any incompatibilities with other plugins that might be caused by this change._
 4. Bump Paradox to version 0.2.7 (@jonas)
 5. Improve support for GitBook version 3.x.x. [#83] (@jonas)
-6. Paradox-based documentation site at http://scala-sbt.org/sbt-site/ with improved examples. [#84], [#55] (@jonas)
+6. Paradox-based documentation site at https://www.scala-sbt.org/sbt-site/ with improved examples. [#84], [#55] (@jonas)
 7. Auto generation/publishing of docs via TravisCI (@jonas)
 8. Updated release process docs (@metasim) 
 

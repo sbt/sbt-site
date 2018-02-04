@@ -9,7 +9,7 @@ organization := "com.typesafe.sbt"
 version := "1.3.2-SNAPSHOT"
 crossSbtVersions := List("0.13.16", "1.0.2")
 
-licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
+licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
 scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "git@github.com:sbt/sbt-site.git"))
 //#scm-info

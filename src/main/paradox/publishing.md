@@ -127,7 +127,7 @@ the resulting `.travis.yml` is correct.
 @@@
 
 [sbt-s3]: https://github.com/sbt/sbt-s3
-[sbt-ghpages]: http://github.com/sbt/sbt-ghpages
+[sbt-ghpages]: https://github.com/sbt/sbt-ghpages
 [GitHub Pages]: https://pages.github.com
 [travis-deployment]: https://docs.travis-ci.com/user/deployment
 [auto-deploy-gist]: https://gist.github.com/domenic/ec8b0fc8ab45f39403dd

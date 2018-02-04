@@ -18,4 +18,4 @@ One common issue with Jekyll is ensuring that everyone uses the same version for
 
 @@ snip[requiredGems](../../../sbt-test/jekyll/can-use-jekyll/build.sbt) { #requiredGems }
 
-[Jekyll]: http://jekyllrb.com
+[Jekyll]: https://jekyllrb.com

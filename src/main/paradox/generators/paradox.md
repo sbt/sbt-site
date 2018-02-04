@@ -21,4 +21,4 @@ Note that Paradox settings such as `paradoxProperties` should be scoped to `Para
 @@ snip[paradoxProperties](../../../sbt-test/paradox/can-use-paradox/build.sbt) { #paradoxProperties }
 
 [Paradox]: https://github.com/lightbend/paradox
-[Paradox documentation]: http://developer.lightbend.com/docs/paradox/latest/
+[Paradox documentation]: https://developer.lightbend.com/docs/paradox/latest/

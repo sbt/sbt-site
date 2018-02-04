@@ -21,7 +21,7 @@ Default setting of Laika sbt will be included automatically once you enable this
 doing so may result in conflict.
 
 From other hand you can customize other aspects of Laika's behavior through basic
-[Laika sbt plugin](http://planet42.github.io/Laika/using-laika/sbt.html) keys and hooks.
+[Laika sbt plugin](https://planet42.github.io/Laika/using-laika/sbt.html) keys and hooks.
 For example in order to add custom block directives you can include such code to your build.sbt:
 
 ```sbt

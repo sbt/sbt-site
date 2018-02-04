@@ -9,7 +9,7 @@ branches, but they aren't common).
 
 An easy way to use GitFlow is to make use of the support built-in to the [SourceTree](https://www.sourcetreeapp.com) 
 frontend which includes support for GitFlow. The images below are taken from SourceTree. There are 
-[other ways to use GitFlow](http://danielkummer.github.io/git-flow-cheatsheet/) if you don't want to use SourceTree.
+[other ways to use GitFlow](https://danielkummer.github.io/git-flow-cheatsheet/) if you don't want to use SourceTree.
 
 ## Release
 
@@ -30,7 +30,7 @@ important. See previous release notes for format/content conventions.
 4. Edit the `version` setting in `build.sbt` to match `"<X>.<Y>.<Z>"`
 5. Commit your current changes onto the release branch.  
   ![](images/release-preparation.png)
-6. Run `sbt bintrayWhoami` to confirm your publishing credentials are set up. [See sbt documentation](http://www.scala-sbt.org/0.13/docs/Bintray-For-Plugins.html) on how to get set up with Bintray.
+6. Run `sbt bintrayWhoami` to confirm your publishing credentials are set up. [See sbt documentation](https://www.scala-sbt.org/0.13/docs/Bintray-For-Plugins.html) on how to get set up with Bintray.
 7. Run `sbt ^publish` to build the packages and stage artifacts on Bintray. 
 8. Confirm the plugin is properly [staged for release on Bintray](https://bintray.com/sbt/sbt-plugin-releases/sbt-site/view).
 You should see a message that looks looks like this:  
@@ -49,7 +49,7 @@ You should see a message that looks looks like this:
   ![](images/add-release-notes.png)  
   ...but we have to copy the release notes from our `notes/<X>.<Y>.<Z>.markdown` file manually.  
   ![](images/github-release-notes.png)
-12. Monitor the [TravicCI build](https://travis-ci.org/sbt/sbt-site) and make sure it [updates the manual](http://www.scala-sbt.org/sbt-site/getting-started.html) with the latest version.
+12. Monitor the [TravicCI build](https://travis-ci.org/sbt/sbt-site) and make sure it [updates the manual](https://www.scala-sbt.org/sbt-site/getting-started.html) with the latest version.
 13. Announce release using [`herald`](https://github.com/n8han/herald). Also announce release on Twitter, including `#scala` 
 and `@scala_sbt` and major contributor handles (if available). Provide a link to the GitHub release page in tweet.  
   ![](images/tweet.png)

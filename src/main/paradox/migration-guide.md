@@ -3,7 +3,7 @@
 <a id="from-version-0.x.x-to-1.x.x" />
 ## Migrating from version 0.x.x to 1.x.x
 
-The 1.x.x release of sbt-site marks the conversion to the [`AutoPlugin`](http://www.scala-sbt.org/0.13/docs/Plugins.html) facility, first introduced in sbt 0.13.5.
+The 1.x.x release of sbt-site marks the conversion to the [`AutoPlugin`](https://www.scala-sbt.org/0.13/docs/Plugins.html) facility, first introduced in sbt 0.13.5.
 
 Because sbt best practices have evolved with the introduction of `AutoPlugin`, this upgrade to sbt-site has resulted in a number of "breaking changes" insofar as the way site generation is configured (the same functionality remains).
 

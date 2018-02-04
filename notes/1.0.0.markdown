@@ -17,4 +17,4 @@ Please consult the [migration guide] before upgrading to this version.
    * gitbook
 2. Code and documentation cleanup
 
-[migration guide]: http://scala-sbt.org/sbt-site/migration-guide.html#from-version-0.x.x-to-1.x.x
+[migration guide]: https://www.scala-sbt.org/sbt-site/migration-guide.html#from-version-0.x.x-to-1.x.x
