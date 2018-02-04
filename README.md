@@ -8,19 +8,19 @@ This sbt plugin generates project websites from static content, [Jekyll], [Sphin
 
 ## Documentation
 
-The documentation is available at <http://www.scala-sbt.org/sbt-site/>
+The documentation is available at <https://www.scala-sbt.org/sbt-site/>
 
 ## License
 
 sbt-site is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for specifics and copyright declaration.
 
-[sbt-ghpages]: http://github.com/sbt/sbt-ghpages
-[Jekyll]: http://jekyllrb.com
+[sbt-ghpages]: https://github.com/sbt/sbt-ghpages
+[Jekyll]: https://jekyllrb.com
 [Pamflet]: http://www.foundweekends.org/pamflet/
-[Nanoc]: http://nanoc.ws/
+[Nanoc]: https://nanoc.ws/
 [Asciidoctor]: http://asciidoctor.org
 [Sphinx]: http://sphinx-doc.org
 [GitBook]: https://www.gitbook.com
 [Paradox]: https://github.com/lightbend/paradox
-[Hugo]: http://gohugo.io/
+[Hugo]: https://gohugo.io/
 [Laika]: https://github.com/planet42/Laika

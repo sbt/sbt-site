@@ -18,4 +18,4 @@ To export environment variables when forking the `hugo` process, for example to 
 
 @@ snip[extraEnv](../../../sbt-test/hugo/can-use-hugo/build.sbt) { #extraEnv }
 
-[Hugo]: http://gohugo.io/
+[Hugo]: https://gohugo.io/

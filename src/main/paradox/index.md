@@ -30,4 +30,4 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
 
 [0.7.2]: https://github.com/sbt/sbt-site/tree/v0.7.2
 [0.8.2]: https://github.com/sbt/sbt-site/tree/v0.8.2
-[sbt-ghpages]: http://github.com/sbt/sbt-ghpages
+[sbt-ghpages]: https://github.com/sbt/sbt-ghpages
