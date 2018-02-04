@@ -7,7 +7,7 @@ name := "sbt-site"
 organization := "com.typesafe.sbt"
 
 version := "1.3.2-SNAPSHOT"
-crossSbtVersions := List("0.13.16", "1.0.2")
+crossSbtVersions := List("0.13.17", "1.0.4")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.1")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.2")
 
 libraryDependencies ++= {
   if ((sbtBinaryVersion in pluginCrossBuild).value == "0.13") {

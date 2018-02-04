@@ -11,8 +11,8 @@ dist: trusty
 jdk: oraclejdk8
 matrix:
   include:
-  - env: SBT_CROSS_VERSION="0.13.16"
-  - env: SBT_CROSS_VERSION="1.0.2"
+  - env: SBT_CROSS_VERSION="0.13.17"
+  - env: SBT_CROSS_VERSION="1.0.4"
 
 addons:
   apt:
