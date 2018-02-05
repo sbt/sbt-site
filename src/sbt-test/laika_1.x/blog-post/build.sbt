@@ -9,9 +9,8 @@ sourceDirectory in LaikaSite := sourceDirectory.value / "blog"
 siteSubdirName in LaikaSite := "blog"
 
 //#laikaSbtPluginCustomization
-laikaBlockDirectives in Laika += CustomDirectives.postsToc
-laikaSiteRenderers in Laika += CustomDirectives.postsRenderer
-sourceDirectories in Laika := Seq((sourceDirectory in LaikaSite).value)
+laikaBlockDirectives in LaikaSite += CustomDirectives.postsToc
+laikaSiteRenderers in LaikaSite += CustomDirectives.postsRenderer
 //#laikaSbtPluginCustomization
 
 TaskKey[Unit]("checkContent") := {
