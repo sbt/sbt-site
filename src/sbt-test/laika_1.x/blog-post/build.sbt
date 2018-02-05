@@ -9,8 +9,6 @@ sourceDirectory in LaikaSite := sourceDirectory.value / "blog"
 siteSubdirName in LaikaSite := "blog"
 
 //#laikaSbtPluginCustomization
-import laika.sbt.LaikaPlugin.autoImport.{laikaBlockDirectives, Laika, laikaSiteRenderers}
-
 laikaBlockDirectives in Laika += CustomDirectives.postsToc
 laikaSiteRenderers in Laika += CustomDirectives.postsRenderer
 sourceDirectories in Laika := Seq((sourceDirectory in LaikaSite).value)
