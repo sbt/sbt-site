@@ -8,12 +8,12 @@ import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin.autoImport.makeSite
-import laika.sbt.LaikaPlugin.autoImport.{Laika, laikaHTML, laikaSite }
+import laika.sbt.LaikaPlugin.autoImport.{ Laika, laikaHTML, laikaSite }
 import laika.sbt.LaikaPlugin
 import Path.relativeTo
 
 object LaikaSitePlugin extends AutoPlugin {
-  override def requires = SitePlugin
+  override def requires = SitePlugin && LaikaPlugin
   override def trigger = noTrigger
 
   object autoImport {
@@ -30,9 +30,9 @@ object LaikaSitePlugin extends AutoPlugin {
           LaikaPlugin.projectSettings,
           target in laikaSite := target.value,
           includeFilter := AllPassFilter,
+          excludeFilter := HiddenFileFilter,
           mappings := {
-            val output = laikaSite.value
-            output ** includeFilter.value --- output pair Path.relativeTo(output)
+            generate(laikaSite.value, includeFilter.value, excludeFilter.value)
           },
           siteSubdirName := "",
           sourceDirectories in Laika := Seq(sourceDirectory.value)
