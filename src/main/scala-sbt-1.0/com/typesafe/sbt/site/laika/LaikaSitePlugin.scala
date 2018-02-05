@@ -25,28 +25,22 @@ object LaikaSitePlugin extends AutoPlugin {
 
   /** Creates settings necessary for running Laika in the given configuration. */
   def laikaSettings(config: Configuration): Seq[Setting[_]] =
-    LaikaPlugin.projectSettings ++
       inConfig(config)(
-        Seq(
+        Def.settings(
+          LaikaPlugin.projectSettings,
+          target in laikaSite := target.value,
           includeFilter := AllPassFilter,
-          excludeFilter := HiddenFileFilter,
-          mappings := generate(
-            target.value,
-            includeFilter.value,
-            excludeFilter.value
-          ),
+          mappings := {
+            val output = laikaSite.value
+            output ** includeFilter.value --- output pair Path.relativeTo(output)
+          },
           siteSubdirName := "",
-          target in Laika := (target in makeSite).value,
-          target in laikaSite := (target in makeSite).value,
           sourceDirectories in Laika := Seq(sourceDirectory.value)
         )
       ) ++
         SiteHelpers.directorySettings(config) ++
         SiteHelpers.watchSettings(config) ++
-        SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config) ++
-        Seq(
-          makeSite := makeSite.dependsOn(laikaHTML in Laika).value
-        )
+        SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
 
   private def generate(target: File, inc: FileFilter, exc: FileFilter): Seq[(File, String)] = {
     // Figure out what was generated.
