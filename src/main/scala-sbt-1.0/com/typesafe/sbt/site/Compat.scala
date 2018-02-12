@@ -14,7 +14,7 @@ object Compat {
   val Process = scala.sys.process.Process
   type ProcessLogger = scala.sys.process.ProcessLogger
 
-  def cached(cacheBaseDirectory: File, inStyle: Style, outStyle: Style)(action: (ChangeReport[File], ChangeReport[File]) => Set[File]): Set[File] => Set[File] = 
+  def cached(cacheBaseDirectory: File, inStyle: Style, outStyle: Style)(action: (ChangeReport[File], ChangeReport[File]) => Set[File]): Set[File] => Set[File] =
     sbt.util.FileFunction.cached(CacheStoreFactory(cacheBaseDirectory), inStyle = inStyle, outStyle = outStyle)(action = action)
 
   val genSources: State => Seq[File] = {
@@ -35,11 +35,16 @@ object Compat {
       val include = includeField(src)
       val exclude = excludeField(src)
 
-      Files.find(
-        base.toPath,
-        64,
-        (f, _) => include.accept(f.toFile) && !exclude.accept(f.toFile)
-      ).iterator().asScala.map(_.toFile).toList
+      try {
+        Files.find(
+          base.toPath,
+          64,
+          (f, _) => include.accept(f.toFile) && !exclude.accept(f.toFile)
+        ).iterator().asScala.map(_.toFile).toList
+      } catch {
+        case _: java.nio.file.NoSuchFileException =>
+          Nil
+      }
     }
   }
 
