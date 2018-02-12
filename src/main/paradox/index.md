@@ -24,6 +24,7 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
  - [publishing](publishing.md)
  - [advanced-usage](advanced-usage.md)
  - [migration-guide](migration-guide.md)
+ - [notes](notes/index.md)
 
 @@@
 

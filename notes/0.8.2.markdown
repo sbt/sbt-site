@@ -1,11 +1,1 @@
-# Release 0.8.2
-
-## Enhancements
-
-* Finished partially implemented "preprocessing" site generation mode whereby files in `src/site-preprocess` with `@` delimited variables (e.g. `@VERSION@`) are expanded based on values in setting `preprocessVars[Map[String, String]]`.
-
-## Project Management
-
-* Updated sbt, Scala, and plugin versions
-* Added [Travis-CI build](https://travis-ci.org/sbt/sbt-site) support.
-* Added [Gitter](https://gitter.im/sbt/sbt-site) link.
+Moved [here](../src/main/paradox/notes/0.8.2.md).
