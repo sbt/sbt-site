@@ -16,7 +16,7 @@
   padding: 1.2rem 1.2rem 0rem;
 }
 
-.md-nav--primary .md-version .md-icon {
+.md-version .md-icon {
   position: relative;
   top: .2rem;
   left: 0;
@@ -64,4 +64,22 @@ pre.prettyprint {
 
 .callout.no-title > :nth-child(2) {
   margin-top: 0;
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-only {
+    display: block;
+  }
+
+  .md-edit, h1 a.anchor {
+    display: none;
+  }
+
+  .md-version:before {
+    content: "\E893";
+  }
 }

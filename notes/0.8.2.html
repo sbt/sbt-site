@@ -18,7 +18,7 @@
 
 <meta name="description" content="sbt-site">
 <link rel="shortcut icon" href="../img/favicon.png">
-<title>Jekyll · sbt-site</title>
+<title>Release 0.8.2 · sbt-site</title>
 <link rel="stylesheet" href="../assets/stylesheets/application.7a4cdee3.css">
 <link rel="stylesheet" href="../lib/material__tabs/dist/mdc.tabs.min.css">
 <link rel="stylesheet" href="../lib/prettify/prettify.css">
@@ -54,7 +54,7 @@ code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 sbt-site
 </span>
 <span class="md-header-nav__topic">
-Jekyll
+Release 0.8.2
 </span>
 </div>
 </div>
@@ -140,7 +140,7 @@ sbt/sbt-site
     <li><a href="../generators/asciidoctor.html" class="page">Asciidoctor</a></li>
     <li><a href="../generators/gitbook.html" class="page">GitBook</a></li>
     <li><a href="../generators/hugo.html" class="page">Hugo</a></li>
-    <li><a href="../generators/jekyll.html" class="active page">Jekyll</a></li>
+    <li><a href="../generators/jekyll.html" class="page">Jekyll</a></li>
     <li><a href="../generators/laika.html" class="page">Laika</a></li>
     <li><a href="../generators/nanoc.html" class="page">Nanoc</a></li>
     <li><a href="../generators/pamflet.html" class="page">Pamflet</a></li>
@@ -159,11 +159,19 @@ sbt/sbt-site
     <li><a href="../notes/1.2.0.html" class="page">Release 1.2.0</a></li>
     <li><a href="../notes/1.1.0.html" class="page">Release 1.1.0</a></li>
     <li><a href="../notes/1.0.0.html" class="page">Release 1.0.0</a></li>
-    <li><a href="../notes/0.8.2.html" class="page">Release 0.8.2</a></li>
+    <li><a href="../notes/0.8.2.html" class="active page">Release 0.8.2</a></li>
     <li><a href="../notes/release-process.html" class="page">Release Process for <code>sbt-site</code></a></li>
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="toc">Table of contents</label>
+<ul>
+  <li><a href="../notes/0.8.2.html#release-0-8-2" class="header">Release 0.8.2</a>
+  <ul>
+    <li><a href="../notes/0.8.2.html#enhancements" class="header">Enhancements</a></li>
+    <li><a href="../notes/0.8.2.html#project-management" class="header">Project Management</a></li>
+  </ul></li>
+</ul>
 </nav>
 
 <div class="md-nav__title--site md-version" title="Version">
@@ -174,26 +182,40 @@ sbt/sbt-site
 </div>
 </div>
 </div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="toc">Table of contents</label>
+<ul>
+  <li><a href="../notes/0.8.2.html#release-0-8-2" class="header">Release 0.8.2</a>
+  <ul>
+    <li><a href="../notes/0.8.2.html#enhancements" class="header">Enhancements</a></li>
+    <li><a href="../notes/0.8.2.html#project-management" class="header">Project Management</a></li>
+  </ul></li>
+</ul>
+</nav>
+
+</div>
+</div>
+</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#jekyll" name="jekyll" class="anchor"><span class="anchor-link"></span></a>Jekyll</h1>
-<p>The sbt-site plugin has direct support for running <a href="https://jekyllrb.com">Jekyll</a>. This is useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(JekyllPlugin)</code></pre>
-<p>This assumes you have a Jekyll project in the <code>src/jekyll</code> directory. To change this, set the key <code>sourceDirectory</code> in the <code>Jekyll</code> scope:</p>
-<pre class="prettyprint"><code class="language-sbt">sourceDirectory in Jekyll := sourceDirectory.value / &quot;hyde&quot;
-</code></pre>
-<p>To redirect the output to a subdirectory of <code>target/site</code>, use the <code>siteSubdirName</code> key in <code>Jekyll</code> scope:</p>
-<pre class="prettyprint"><code class="language-sbt">// Puts output in `target/site/notJekyllButHyde`
-siteSubdirName in Jekyll := &quot;notJekyllButHyde&quot;</code></pre>
-<p>One common issue with Jekyll is ensuring that everyone uses the same version for generating a website. There is special support for ensuring the version of gems. To do so, add the following to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-sbt">requiredGems := Map(
-  &quot;jekyll&quot; -&gt; &quot;2.5.3&quot;,
-  &quot;liquid&quot; -&gt; &quot;2.3.0&quot;
-)</code></pre>
+<h1><a href="#release-0-8-2" name="release-0-8-2" class="anchor"><span class="anchor-link"></span></a>Release 0.8.2</h1>
+<h2><a href="#enhancements" name="enhancements" class="anchor"><span class="anchor-link"></span></a>Enhancements</h2>
+<ul>
+  <li>Finished partially implemented &ldquo;preprocessing&rdquo; site generation mode whereby files in <code>src/site-preprocess</code> with <code>@</code> delimited variables (e.g. <code>@VERSION@</code>) are expanded based on values in setting <code>preprocessVars[Map[String, String]]</code>.</li>
+</ul>
+<h2><a href="#project-management" name="project-management" class="anchor"><span class="anchor-link"></span></a>Project Management</h2>
+<ul>
+  <li>Updated sbt, Scala, and plugin versions</li>
+  <li>Added <a href="https://travis-ci.org/sbt/sbt-site">Travis-CI build</a> support.</li>
+  <li>Added <a href="https://gitter.im/sbt/sbt-site">Gitter</a> link.</li>
+</ul>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/generators/jekyll.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/notes/0.8.2.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -209,7 +231,7 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="../generators/hugo.html" title="Hugo" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<a href="../notes/1.0.0.html" title="Release 1.0.0" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
 <div class="md-flex__cell md-flex__cell--shrink">
 <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
 </div>
@@ -218,17 +240,17 @@ Edit this page
 <span class="md-footer-nav__direction">
 Previous
 </span>
-Hugo
+Release 1.0.0
 </span>
 </div>
 </a>
-<a href="../generators/laika.html" title="Laika" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="../notes/release-process.html" title="Release Process for sbt-site" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Laika
+Release Process for sbt-site
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
