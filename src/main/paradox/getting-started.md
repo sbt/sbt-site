@@ -57,7 +57,7 @@ previewLaunchBrowser := false
 
 ## Packaging and Publishing
 
-To create a zip package of the site run `package-site`.
+To create a zip package of the site run `packageSite`.
 
 To also include this zip file as an artifact when running `publish`, add the following to your `build.sbt`:
 
