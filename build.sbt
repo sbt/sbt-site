@@ -28,7 +28,8 @@ libraryDependencies ++= Seq(
   "org.foundweekends" %% "pamflet-library" % "0.7.1",
   "org.yaml"        % "snakeyaml"        % "1.13",
   "com.typesafe"    % "config"           % "1.2.1", // Last version to support Java 1.6
-  "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
+  "org.asciidoctor" % "asciidoctorj"     % "1.5.4",
+  "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.4.1"
 )
 
 addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.2")
