@@ -11,7 +11,7 @@ crossSbtVersions := List("0.13.17", "1.0.4")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
-scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "git@github.com:sbt/sbt-site.git"))
+scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "scm:git:git@github.com:sbt/sbt-site.git"))
 //#scm-info
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
@@ -68,7 +68,7 @@ version in Paradox := {
 
 //#ghpages-publish
 enablePlugins(GhpagesPlugin)
-git.remoteRepo := scmInfo.value.get.connection
+git.remoteRepo := scmInfo.value.get.connection.replace("scm:git:", "")
 //#ghpages-publish
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
