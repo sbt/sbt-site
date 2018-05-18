@@ -6,7 +6,7 @@ name := "sbt-site"
 
 organization := "com.typesafe.sbt"
 
-version := "1.3.2"
+version := "1.3.3-SNAPSHOT"
 crossSbtVersions := List("0.13.17", "1.0.4")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
@@ -28,7 +28,8 @@ libraryDependencies ++= Seq(
   "org.foundweekends" %% "pamflet-library" % "0.7.1",
   "org.yaml"        % "snakeyaml"        % "1.13",
   "com.typesafe"    % "config"           % "1.2.1", // Last version to support Java 1.6
-  "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
+  "org.asciidoctor" % "asciidoctorj"     % "1.5.4.1",
+  "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.4.1"
 )
 
 addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.2")
