@@ -42,12 +42,12 @@ object SphinxPlugin extends AutoPlugin {
         generate := generateTask.value,
         includeFilter in Sphinx := AllPassFilter,
         mappings := mappingsTask.value,
-        // For now, we default to passing the version in as a property.
-        sphinxProperties ++= defaultVersionProperties(version.value),
+        version := SiteHelpers.shortVersion(version.value),
         sphinxEnv := defaultEnvTask.value,
         siteSubdirName := ""
       )
     ) ++
+      propertiesSettings(config) ++
       SiteHelpers.directorySettings(config) ++
       SiteHelpers.watchSettings(config) ++
       SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
@@ -56,10 +56,13 @@ object SphinxPlugin extends AutoPlugin {
     pkgs => Map("PYTHONPATH" -> Path.makeString(pkgs))
   }
 
-  def defaultVersionProperties(version: String) = {
-    val shortVersion = SiteHelpers.shortVersion(version)
-    Map("version" -> shortVersion, "release" -> version)
-  }
+  // For now, we default to passing the version in as a property.
+  def propertiesSettings(config: Configuration) = Seq(
+    sphinxProperties in config ++= Map(
+      "version" → (version in config).value,
+      "release" → version.value
+    )
+  )
 
   def installPackagesTask = Def.task {
     val runner = sphinxRunner.value
