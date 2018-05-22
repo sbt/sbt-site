@@ -57,8 +57,8 @@ object SphinxPlugin extends AutoPlugin {
   }
 
   def defaultVersionProperties(version: String) = {
-    val binV = CrossVersion.binarySbtVersion(version)
-    Map("version" -> binV, "release" -> version)
+    val shortVersion = SiteHelpers.shortVersion(version)
+    Map("version" -> shortVersion, "release" -> version)
   }
 
   def installPackagesTask = Def.task {
