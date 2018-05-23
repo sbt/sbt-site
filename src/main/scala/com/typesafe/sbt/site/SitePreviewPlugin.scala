@@ -28,7 +28,7 @@ object SitePreviewPlugin extends AutoPlugin {
       val sLog = streams.value.log
       sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
       // TODO: use something from sbt-web?
-      @annotation.tailrec def waitForKey() {
+      @annotation.tailrec def waitForKey(): Unit = {
         try { Thread sleep 500 } catch { case _: InterruptedException => () }
         if(System.in.available <= 0)
           waitForKey()

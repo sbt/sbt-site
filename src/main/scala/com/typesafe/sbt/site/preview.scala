@@ -51,7 +51,7 @@ object Preview {
   }
 
   def responseStreamer(url: URL) =
-    new ResponseStreamer { def stream(os:OutputStream) { 
+    new ResponseStreamer { def stream(os:OutputStream): Unit = {
       val is = url.openStream
       try {
         val buf = new Array[Byte](1024)
