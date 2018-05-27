@@ -1,3 +1,4 @@
 {
-  "gitbook": "3.x.x"
+  "gitbook": "3.x.x",
+  "plugins": ["-lunr"]
 }
