@@ -57,4 +57,12 @@ object SiteHelpers {
       }
     }
   }
+
+  /**
+    * Get short X.Y version
+    */
+  def shortVersion(full: String): String = full match {
+    case VersionNumber(Seq(x, y, _*), _, _) => s"$x.$y"
+    case _ => full
+  }
 }
