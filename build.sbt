@@ -1,6 +1,7 @@
 import scala.sys.process._
 
 sbtPlugin := true
+enablePlugins(SbtPlugin)
 
 name := "sbt-site"
 
