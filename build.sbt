@@ -1,6 +1,7 @@
 import scala.sys.process._
 
 sbtPlugin := true
+enablePlugins(SbtPlugin)
 
 name := "sbt-site"
 
@@ -46,7 +47,7 @@ libraryDependencies ++= {
   } else {
     Seq(
       Defaults.sbtPluginExtra(
-        "org.planet42" % "laika-sbt" % "0.7.5",
+        "org.planet42" % "laika-sbt" % "0.8.0",
         (sbtBinaryVersion in pluginCrossBuild).value,
         (scalaBinaryVersion in pluginCrossBuild).value
       )
