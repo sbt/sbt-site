@@ -21,10 +21,10 @@ addons:
     - python-sphinx
 
 before_install:
-  - rvm install 2.2.5
+  - rvm install 2.4.4
 
 install:
-  - gem install jekyll:2.5.3 nanoc:3.8.0 asciidoctor --no-rdoc --no-ri
+  - gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-rdoc --no-ri
   - npm install -g gitbook-cli@2.3.2
   - gitbook install 3.2.3
   - |
