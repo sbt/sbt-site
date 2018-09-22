@@ -1,5 +1,4 @@
 import laika.directive.Directives.Blocks
-import laika.directive.StandardDirectives
 import laika.render.HTMLWriter
 import laika.rewrite.{DocumentCursor, TreeCursor}
 import laika.tree.Documents.{Document, DocumentTree}
@@ -8,7 +7,7 @@ import laika.tree.Elements._
 import com.typesafe.config.Config
 
 // Just sample, probably not the best way to do custom toc for Laika
-object CustomDirectives extends StandardDirectives {
+object CustomDirectives {
 
   case class PostsTocElement(title: Seq[Span], by: String, path: PathInfo, options: Elements.Options)
     extends Elements.Element with Elements.Block
