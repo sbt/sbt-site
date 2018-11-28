@@ -33,7 +33,7 @@ libraryDependencies ++= Seq(
   "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.4.1"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.4.3")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.4.4")
 
 libraryDependencies ++= {
   if ((sbtBinaryVersion in pluginCrossBuild).value == "0.13") {
