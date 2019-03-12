@@ -40,6 +40,11 @@ object SiteHelpers {
     inConfig(config)(
       Seq(
         sourceDirectory := sourceDirectory.value / config.name,
+      )) ++ targetSettings(config)
+
+  def targetSettings(config: Configuration): Seq[Setting[_]] =
+    inConfig(config)(
+      Seq(
         target := target.value / config.name
       ))
 

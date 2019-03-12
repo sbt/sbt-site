@@ -27,7 +27,6 @@ object ParadoxSitePlugin extends AutoPlugin {
     ) ++
     inConfig(config)(
       List(
-        sourceDirectory in paradox := sourceDirectory.value,
         includeFilter := AllPassFilter,
         mappings := {
           val _ = paradox.value
@@ -37,7 +36,7 @@ object ParadoxSitePlugin extends AutoPlugin {
         siteSubdirName := ""
       )
     ) ++
-    SiteHelpers.directorySettings(config) ++
+    SiteHelpers.targetSettings(config) ++
     SiteHelpers.watchSettings(config) ++
     SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
 }
