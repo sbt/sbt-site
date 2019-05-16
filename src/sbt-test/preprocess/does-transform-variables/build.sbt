@@ -12,6 +12,12 @@ version := "0.0-ABCD"
 preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 //#preprocessVars
 
+//#preprocessRules
+preprocessRules in Preprocess := Seq(
+  ("Author: ([a-z]+)".r, _.group(0).toUpperCase)
+)
+//#preprocessRules
+
 //#preprocessIncludeFilter
 preprocessIncludeFilter := "*.md" | "*.markdown"
 //#preprocessIncludeFilter
@@ -26,4 +32,5 @@ TaskKey[Unit]("checkContent") := {
   assert(readme.exists, s"${readme.getAbsolutePath} did not exist")
   val content = IO.readLines(readme)
   assert(content.exists(_.contains(version.value)), s"Did not find version in:\n${content.mkString("\n")}")
+  assert(content.exists(_.contains("AUTHOR: ME")), s"Did not find 'AUTHOR: ME' in: \n${content.mkString("\n")}")
 }

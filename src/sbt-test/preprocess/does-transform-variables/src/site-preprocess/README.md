@@ -4,3 +4,4 @@
 
 Version: @VERSION@
 Date: @DATE@
+Author: me
