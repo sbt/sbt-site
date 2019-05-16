@@ -14,6 +14,6 @@ trait PreprocessKeys {
       "preprocessIncludeFilter", "Filter defining set of files to preprocess")
   val preprocessVars = SettingKey[Map[String, String]](
       "preprocessVars", "Replacements for preprocessing.")
-   val preprocessRules = SettingKey[Seq[(Regex, Match => String)]]("preprocessRules", "Rules for preprocessing supporting Regular Expressions")
+  val preprocessRules = SettingKey[Seq[(Regex, Match => String)]]("preprocessRules", "Rules for preprocessing supporting Regular Expressions")
   val preprocess = TaskKey[File]("preprocess", "Preprocess a directory of files.")
 }
