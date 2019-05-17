@@ -12,11 +12,9 @@ version := "0.0-ABCD"
 preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 //#preprocessVars
 
-//#preprocessRules
 preprocessRules in Preprocess := Seq(
   ("Author: ([a-z]+)".r, _.group(0).toUpperCase)
 )
-//#preprocessRules
 
 //#preprocessIncludeFilter
 preprocessIncludeFilter := "*.md" | "*.markdown"

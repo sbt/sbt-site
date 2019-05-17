@@ -1,0 +1,2 @@
+> makeSite
+$ must-mirror target/preprocess/scala-2.12/api/App.html expected/App.html

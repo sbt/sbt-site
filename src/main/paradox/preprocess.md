@@ -20,9 +20,11 @@ Variables are delimited by surrounding the name with `@` symbols (e.g. `@VERSION
 The plugin will generate an error if a variable is found in the source file with no matching value in `preprocessVars`.
 @@@
 
-More advanced substitution patterns can be used by providing Regular Expression rules via the setting `preprocessRules: Seq[(Regex, Match => String)]`. For example:
+More advanced substitution patterns can be used by providing Regular Expression rules via the setting `preprocessRules: Seq[(Regex, Match => String)]`.
+For example Scaladoc used to (before 2.12.9 and 2.13.0) prepend ".scala" to source links of Java files.
+The following preprocessing rule will find and fix such links:
 
-@@ snip[preprocessRules](../../sbt-test/preprocess/does-transform-variables/build.sbt) { #preprocessRules }
+@@ snip[preprocessRules](../../sbt-test/preprocess/transform-scaladoc/build.sbt) { #preprocessRules }
 
 The setting `preprocessIncludeFilter` is used to define the filename extensions that should be processed when `makeSite` is run.
 
