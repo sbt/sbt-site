@@ -7,7 +7,7 @@ import sbt.Keys.{excludeFilter, includeFilter, sourceDirectory, watchSources}
 import sbt.internal.io.Source
 import sbt.util.CacheStoreFactory
 import sbt.util.FileInfo.Style
-import sbt.{ChangeReport, Configuration, File, FileFilter, Setting, State}
+import sbt.{ChangeReport, Scope, File, FileFilter, Setting, State}
 
 object Compat {
 
@@ -49,12 +49,12 @@ object Compat {
     }
   }
 
-  def watchSettings(config: Configuration): Seq[Setting[_]] =
+  def watchSettings(scope: Scope): Seq[Setting[_]] =
     Seq(
       ConfigGlobal / watchSources += new Source(
-        base = (sourceDirectory in config).value,
-        includeFilter = (includeFilter in config).value,
-        excludeFilter = (excludeFilter in config).value
+        base = (sourceDirectory in scope).value,
+        includeFilter = (includeFilter in scope).value,
+        excludeFilter = (excludeFilter in scope).value
       )
     )
 

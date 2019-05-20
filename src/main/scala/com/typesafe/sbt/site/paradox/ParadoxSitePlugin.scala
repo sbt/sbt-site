@@ -18,26 +18,13 @@ object ParadoxSitePlugin extends AutoPlugin {
 
   import autoImport._
   import ParadoxPlugin.autoImport._
-  override def projectSettings = paradoxSettings(Paradox)
-  def paradoxSettings(config: Configuration): Seq[Setting[_]] =
-    ParadoxPlugin.paradoxSettings(config) ++
+  override def projectSettings = paradoxSettings(Compile)
+  def paradoxSettings(config: Configuration): Seq[Setting[_]] = {
+    val siteNameConfig = if (config == Compile) Paradox else config
     List(
-      // Revert config:sourceDirectory set by paradoxSettings
-      sourceDirectory in config := sourceDirectory.value
+      siteSubdirName in siteNameConfig := ""
     ) ++
-    inConfig(config)(
-      List(
-        sourceDirectory in paradox := sourceDirectory.value,
-        includeFilter := AllPassFilter,
-        mappings := {
-          val _ = paradox.value
-          val output = (target in paradox).value
-          output ** includeFilter.value --- output pair Path.relativeTo(output)
-        },
-        siteSubdirName := ""
-      )
-    ) ++
-    SiteHelpers.directorySettings(config) ++
-    SiteHelpers.watchSettings(config) ++
-    SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+    SiteHelpers.watchSettings(ThisScope.in(config, paradox.key)) ++
+    SiteHelpers.addMappingsToSiteDir((target in (config, paradox)).map(SiteHelpers.selectSubpaths(_, AllPassFilter)), siteSubdirName in siteNameConfig)
+  }
 }

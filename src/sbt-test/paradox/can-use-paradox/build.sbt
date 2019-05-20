@@ -11,7 +11,7 @@ paradoxTheme := Some(builtinParadoxTheme("generic"))
 //#paradoxTheme
 
 //#paradoxProperties
-paradoxProperties in Paradox ++= Map(
+paradoxProperties ++= Map(
   "extref.rfc.base_url" -> "https://tools.ietf.org/html/rfc%s"
 )
 //#paradoxProperties

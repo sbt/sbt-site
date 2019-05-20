@@ -6,17 +6,18 @@ val Site1 = config("site1")
 val Site2 = config("site2")
 
 // Apply the default Paradox settings to the `Site1` config
+ParadoxPlugin.paradoxSettings(Site1)
 ParadoxSitePlugin.paradoxSettings(Site1)
 
 // Customize the source directory
-sourceDirectory in Site1 := sourceDirectory.value / "paradox-site-1"
+sourceDirectory in (Site1, paradox) := sourceDirectory.value / "paradox-site-1"
 
 // Customize the output subdirectory
 siteSubdirName in Site1 := "chapter1"
 
-// Same as above, but for config `Site2`
+// Same as above, but for config `Site2` keep the default source directory
+ParadoxPlugin.paradoxSettings(Site2)
 ParadoxSitePlugin.paradoxSettings(Site2)
-sourceDirectory in Site2 := sourceDirectory.value / "paradox-site-2"
 siteSubdirName in Site2 := "chapter2"
 
 // Global Paradox settings
