@@ -55,7 +55,7 @@ To disable browser auto-open, use the key `previewLaunchBrowser`:
 previewLaunchBrowser := false
 ```
 
-In case the page to start preview from isn't the site root, sett `previewPath` to the desired path: 
+In case the page to start preview from isn't the site root, set `previewPath` to the desired path: 
 
 ```sbt
 previewPath := "docs/index.html"
