@@ -8,7 +8,9 @@ scalacOptions in (Compile, doc) ++= Seq(
 
 enablePlugins(PreprocessPlugin)
 
-sourceDirectory in Preprocess := (target in doc).value
+sourceDirectory in Preprocess := (target in (Compile, doc)).value
+siteSubdirName in Preprocess := "api"
+makeSite := makeSite.dependsOn(doc in Compile).value
 
 //#preprocessRules
 preprocessRules in Preprocess := Seq(
