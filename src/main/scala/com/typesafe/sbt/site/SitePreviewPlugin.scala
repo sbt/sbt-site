@@ -13,6 +13,7 @@ object SitePreviewPlugin extends AutoPlugin {
     val previewAuto = TaskKey[Unit]("previewAuto", "Launches an automatic jetty server that serves your generated site from the target directory")
     val previewFixedPort = SettingKey[Option[Int]]("previewFixedPort") in previewSite
     val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
+    val previewPath = SettingKey[String]("previewPath", "path to open on `previewSite` and `previewAuto`") in previewSite
   }
   import SitePlugin.autoImport._
   import autoImport._
@@ -22,19 +23,20 @@ object SitePreviewPlugin extends AutoPlugin {
       val file = makeSite.value
       val portOption = previewFixedPort.value
       val browser = previewLaunchBrowser.value
+      val path = previewPath.value
 
       val port = portOption getOrElse Port.any
       val server = createServer(file, port) start()
       val sLog = streams.value.log
       sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
       // TODO: use something from sbt-web?
-      @annotation.tailrec def waitForKey() {
+      @annotation.tailrec def waitForKey(): Unit = {
         try { Thread sleep 500 } catch { case _: InterruptedException => () }
         if(System.in.available <= 0)
           waitForKey()
       }
       if(browser)
-        Browser open ("http://localhost:%d/" format port)
+        Browser open ("http://localhost:%d/%s".format(port, path))
       waitForKey()
       server stop()
       server destroy()
@@ -42,14 +44,16 @@ object SitePreviewPlugin extends AutoPlugin {
     previewAuto := {
       val port = previewFixedPort.value getOrElse Port.any
       val browser = previewLaunchBrowser.value
+      val path = previewPath.value
 
       Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value) run { server =>
-        if(browser)
-          Browser open(server.portBindings.head.url)
+        if (browser)
+          Browser open(server.portBindings.head.url + "/" + path)
       }
     },
     previewFixedPort := Some(4000),
     previewLaunchBrowser := true,
+    previewPath := "",
     target in previewAuto := siteDirectory.value
   )
 

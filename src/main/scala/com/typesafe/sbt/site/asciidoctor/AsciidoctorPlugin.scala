@@ -43,6 +43,7 @@ object AsciidoctorPlugin extends AutoPlugin {
     val oldContextClassLoader = Thread.currentThread().getContextClassLoader
     Thread.currentThread().setContextClassLoader(this.getClass.getClassLoader)
     val asciidoctor = Factory.create()
+    asciidoctor.requireLibrary("asciidoctor-diagram")
     if (!output.exists) output.mkdirs()
     val options = new Options
     options.setToDir(output.getAbsolutePath)

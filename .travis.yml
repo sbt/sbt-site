@@ -4,16 +4,15 @@ before_script:
   - export PATH=$PATH:$HOME/bin/
 
 script:
-  - sbt ";$SBT_CROSS_ENV; update; compile; runScriptedTest; makeSite"
+  - sbt ";^^$SBT_CROSS_VERSION; update; compile; runScriptedTest; makeSite"
 
 sudo: false
 dist: trusty
+jdk: oraclejdk8
 matrix:
   include:
-  - jdk: openjdk7
-    env: SBT_CROSS_ENV="^^0.13.16"
-  - jdk: oraclejdk8
-    env: SBT_CROSS_ENV="^^1.0.0"
+  - env: SBT_CROSS_VERSION="0.13.17"
+  - env: SBT_CROSS_VERSION="1.1.6"
 
 addons:
   apt:
@@ -22,11 +21,12 @@ addons:
     - python-sphinx
 
 before_install:
-  - rvm install 2.2.3
+  - rvm install 2.4.4
 
 install:
-  - gem install jekyll:2.5.3 nanoc:3.8.0 asciidoctor --no-rdoc --no-ri
-  - npm install -g gitbook-cli@2.3.0
+  - gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-rdoc --no-ri
+  - npm install -g gitbook-cli@2.3.2
+  - gitbook install 3.2.3
   - |
     mkdir $TRAVIS_BUILD_DIR/download && \
     wget https://github.com/spf13/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O $TRAVIS_BUILD_DIR/download/hugo.tgz && \
@@ -63,5 +63,5 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: $TRAVIS_PULL_REQUEST = false
+    condition: $TRAVIS_PULL_REQUEST = false && $SBT_CROSS_VERSION = 0.13*
 #travis-deploy

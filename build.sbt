@@ -1,16 +1,18 @@
+import scala.sys.process._
 
 sbtPlugin := true
+enablePlugins(SbtPlugin)
 
 name := "sbt-site"
 
 organization := "com.typesafe.sbt"
 
-version := "1.3.1"
-crossSbtVersions := List("0.13.16", "1.0.2")
+version := "1.3.3"
+crossSbtVersions := List("0.13.17", "1.1.6")
 
-licenses += ("BSD 3-Clause", url("http://opensource.org/licenses/BSD-3-Clause"))
+licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
-scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "git@github.com:sbt/sbt-site.git"))
+scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "scm:git:git@github.com:sbt/sbt-site.git"))
 //#scm-info
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
@@ -27,10 +29,11 @@ libraryDependencies ++= Seq(
   "org.foundweekends" %% "pamflet-library" % "0.7.1",
   "org.yaml"        % "snakeyaml"        % "1.13",
   "com.typesafe"    % "config"           % "1.2.1", // Last version to support Java 1.6
-  "org.asciidoctor" % "asciidoctorj"     % "1.5.4"
+  "org.asciidoctor" % "asciidoctorj"     % "1.5.4.1",
+  "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.4.1"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.0")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.2")
 
 libraryDependencies ++= {
   if ((sbtBinaryVersion in pluginCrossBuild).value == "0.13") {
@@ -41,15 +44,25 @@ libraryDependencies ++= {
         (scalaBinaryVersion in pluginCrossBuild).value
       )
     )
-  } else Nil
+  } else {
+    Seq(
+      Defaults.sbtPluginExtra(
+        "org.planet42" % "laika-sbt" % "0.8.0",
+        (sbtBinaryVersion in pluginCrossBuild).value,
+        (scalaBinaryVersion in pluginCrossBuild).value
+      )
+    )
+  }
 }
 
-// fixed in https://github.com/sbt/sbt/pull/3397 (for sbt 0.13.17)
-sbtBinaryVersion in update := (sbtBinaryVersion in pluginCrossBuild).value
-
-enablePlugins(ParadoxSitePlugin)
+enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
 sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
-paradoxTheme := Some(builtinParadoxTheme("generic"))
+ParadoxMaterialThemePlugin.paradoxMaterialThemeSettings(Paradox)
+paradoxMaterialTheme in Paradox ~= {
+  _.withFavicon("img/favicon.png")
+   .withLogo("img/sbt-logo.svg")
+   .withRepository(uri("https://github.com/sbt/sbt-site"))
+}
 version in Paradox := {
   if (isSnapshot.value) "git tag -l".!!.split("\r?\n").last.substring(1)
   else version.value
@@ -57,10 +70,8 @@ version in Paradox := {
 
 //#ghpages-publish
 enablePlugins(GhpagesPlugin)
-git.remoteRepo := scmInfo.value.get.connection
+git.remoteRepo := scmInfo.value.get.connection.replace("scm:git:", "")
 //#ghpages-publish
-
-scriptedSettings
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
   val sbtBinVersion = (sbtBinaryVersion in pluginCrossBuild).value

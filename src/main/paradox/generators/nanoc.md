@@ -14,4 +14,4 @@ Similarly, the output can be redirected to a subdirectory of `target/site` via t
 
 @@ snip[siteSubdirName](../../../sbt-test/nanoc/can-use-nanoc/build.sbt) { #siteSubdirName }
 
-[Nanoc]: http://nanoc.ws/
+[Nanoc]: https://nanoc.ws/

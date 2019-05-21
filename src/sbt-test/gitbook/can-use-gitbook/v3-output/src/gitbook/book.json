@@ -1,4 +1,5 @@
 {
-  "gitbook": "3.0.3",
-  "output": "target/site/docs"
+  "gitbook": "3.2.3",
+  "output": "target/site/docs",
+  "plugins": ["-lunr"]
 }

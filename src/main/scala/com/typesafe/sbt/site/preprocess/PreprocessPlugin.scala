@@ -7,6 +7,8 @@ import sbt.Keys._
 import sbt._
 
 import scala.util.matching.Regex
+import scala.util.matching.Regex.Match
+
 /** Provides ability to map values to `@` delimited variables. */
 object PreprocessPlugin extends AutoPlugin {
   override def requires = SitePlugin
@@ -33,12 +35,13 @@ object PreprocessPlugin extends AutoPlugin {
           //#preprocessIncludeFilter
           ,
         preprocessVars := Map("VERSION" -> version.value),
+        preprocessRules := Seq.empty,
         includeFilter in Preprocess := AllPassFilter,
         sourceDirectory := sourceDirectory.value / "site-preprocess",
         target := target.value / Preprocess.name,
         preprocess := simplePreprocess(
           sourceDirectory.value, target.value, streams.value.cacheDirectory, preprocessIncludeFilter.value,
-          preprocessVars.value, streams.value.log),
+          preprocessVars.value, preprocessRules.value, streams.value.log),
         mappings := gatherMappings(preprocess.value, includeFilter.value),
         siteSubdirName := ""
       )
@@ -55,10 +58,17 @@ object PreprocessPlugin extends AutoPlugin {
     cacheFile: File,
     fileFilter: FileFilter,
     replacements: Map[String, String],
+    rules: Seq[(Regex, Match => String)],
     log: Logger): File = {
+
+    def replacement(replacements: Map[String, String])(m: Match): String =
+      ((key: String) => replacements.getOrElse(
+        key,
+        sys.error("No replacement value defined for: " + key)))(m.group(1))
+
     transformDirectory(
       sourceDir, targetDir, fileFilter.accept,
-      SiteHelpers.transformFile(replaceVariable(Variable, replacements ++ defaultReplacements)),
+      SiteHelpers.transformFile(replaceVariable(Seq((Variable, replacement(replacements ++ defaultReplacements)(_))) ++ rules)),
       cacheFile, log)
   }
 
@@ -109,10 +119,11 @@ object PreprocessPlugin extends AutoPlugin {
   /**
    * Simple variable replacement in a string.
    */
-  private[sbt] def replaceVariable(regex: Regex, replacements: Map[String, String])
+  private[sbt] def replaceVariable(rules: Seq[(Regex, Match => String)])
     (input: String): String = {
-    def replacement(key: String): String = replacements.getOrElse(
-      key, sys.error("No replacement value defined for: " + key))
-    regex.replaceAllIn(input, m => replacement(m.group(1)))
+    rules.foldLeft(input) {
+      case (line, (regex, replace)) =>
+        regex.replaceAllIn(line, replace)
+      }
   }
 }

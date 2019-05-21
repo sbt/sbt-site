@@ -1,6 +1,6 @@
 # Hello, GitBook!
 
-The sbt site plugin can build your http://gitbook.com[GitBook] documentation.
+The sbt site plugin can build your https://gitbook.com[GitBook] documentation.
 
 ## First Section
 

@@ -25,7 +25,7 @@ object JekyllPlugin extends AutoPlugin {
       Seq(
         checkGems := RubyHelpers.checkGems(requiredGems.value, streams.value),
         requiredGems := Map.empty,
-        includeFilter := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "CNAME" | ".nojekyll"),
+        includeFilter := ("*.html" | "*.png" | "*.js" | "*.css" | "*.gif" | "*.svg" | "*.xml" | "CNAME" | ".nojekyll"),
         mappings := {
           val _ = checkGems.value
           generate(sourceDirectory.value, target.value, includeFilter.value, streams.value)

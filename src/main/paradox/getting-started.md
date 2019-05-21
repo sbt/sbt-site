@@ -55,6 +55,12 @@ To disable browser auto-open, use the key `previewLaunchBrowser`:
 previewLaunchBrowser := false
 ```
 
+In case the page to start preview from isn't the site root, set `previewPath` to the desired path: 
+
+```sbt
+previewPath := "docs/index.html"
+```
+
 ## Packaging and Publishing
 
 To create a zip package of the site run `package-site`.
@@ -66,5 +72,5 @@ To also include this zip file as an artifact when running `publish`, add the fol
 Once you have generated and packaged your site the next step is to publish it. The @ref:[publishing](publishing.md) section discusses several mechanisms, such as [sbt-ghpages].
 
 [apidoc]: api-documentation.md
-[sbt file mappings]: http://www.scala-sbt.org/0.13/docs/Mapping-Files.html
-[sbt-ghpages]: http://github.com/sbt/sbt-ghpages
+[sbt file mappings]: https://www.scala-sbt.org/0.13/docs/Mapping-Files.html
+[sbt-ghpages]: https://github.com/sbt/sbt-ghpages
