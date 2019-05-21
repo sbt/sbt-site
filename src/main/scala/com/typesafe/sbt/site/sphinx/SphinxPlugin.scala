@@ -137,7 +137,7 @@ object SphinxPlugin extends AutoPlugin {
       (epub ** "*.epub").get pair Path.rebase(epub, t)
     }
     val mapping = htmlMapping ++ pdfMapping ++ epubMapping
-    Sync(CacheStore(cache))(mapping)
+    Sync.sync(CacheStore(cache))(mapping)
     s.log.info("Sphinx documentation generated: %s" format t)
     t
   }

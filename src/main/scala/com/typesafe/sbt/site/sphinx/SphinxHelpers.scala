@@ -110,7 +110,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
         if (!incremental) IO.delete(target)
         val logger = sphinxLogger(log)
         val buildOptions = if (!incremental) Seq("-a", "-E") else Seq.empty[String]
-        val colourOptions = if (!log.ansiCodesSupported) Seq("-N") else Seq.empty[String]
+        val colourOptions = Seq("-N")
         val tagOptions = tags flatMap (Seq("-t", _))
         val propertyOptions = (properties map { case (k, v) => "-D%s=%s" format (k, v) }).toSeq
         val command = Seq("sphinx-build") ++ buildOptions ++ colourOptions ++ Seq("-b", builder, "-d", doctrees.absolutePath) ++ tagOptions ++ propertyOptions ++ Seq(src.absolutePath, target.absolutePath)

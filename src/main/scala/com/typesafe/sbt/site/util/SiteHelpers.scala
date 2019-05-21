@@ -24,7 +24,7 @@ object SiteHelpers {
 
   def copySite(dir: File, cacheDir: File, maps: Seq[(File, String)]): File = {
     val concrete = maps map { case (file, dest) => (file, dir / dest) }
-    Sync(CacheStore(cacheDir / "make-site"))(concrete)
+    Sync.sync(CacheStore(cacheDir / "make-site"))(concrete)
     dir
   }
 

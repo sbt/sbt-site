@@ -54,7 +54,7 @@ object AsciidoctorPlugin extends AutoPlugin {
     val attributes = new util.HashMap[String, AnyRef]()
     attributes.put("project-version", version)
     options.setAttributes(attributes)
-    asciidoctor.renderDirectory(new AsciiDocDirectoryWalker(input.getAbsolutePath), options)
+    asciidoctor.convertDirectory(new AsciiDocDirectoryWalker(input.getAbsolutePath), options)
     val inputImages = input / "images"
     if (inputImages.exists()) {
       val outputImages = output / "images"
