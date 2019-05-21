@@ -23,6 +23,6 @@ sbt 0.13
 :   @@ snip[laikaSbtPluginCustomization](../../../sbt-test/laika_0.13/blog-post/build.sbt) { #laikaSbtPluginCustomization }
 
 sbt 1.x
-:   @@ snip[laikaSbtPluginCustomization](../../../sbt-test/laika_1.x/blog-post/build.sbt) { #laikaSbtPluginCustomization }
+:   @@ snip[laikaSbtPluginCustomization](../../../sbt-test/laika/blog-post/build.sbt) { #laikaSbtPluginCustomization }
 
 [Laika]: https://github.com/planet42/Laika
