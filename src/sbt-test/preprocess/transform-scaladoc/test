@@ -1,2 +1,2 @@
 > makeSite
-$ must-mirror target/site/api/App.html expected/App.html
+> checkContent

@@ -17,3 +17,11 @@ preprocessRules in Preprocess := Seq(
   ("\\.java\\.scala".r, _ => ".java")
 )
 //#preprocessRules
+
+TaskKey[Unit]("checkContent") := {
+  val dest = (target in makeSite).value / (siteSubdirName in Preprocess).value
+  val app = dest / "App.html"
+  assert(app.exists, s"${app.getAbsolutePath} did not exist")
+  val content = IO.readLines(app)
+  assert(!content.exists(_.contains(".java.scala")), s"Found not replaced file suffix in:\n${content.mkString("\n")}")
+}
