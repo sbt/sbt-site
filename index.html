@@ -5,38 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.3.2, mkdocs-material=2.2.2">
+<meta name="generator" content="Paradox, paradox-material-theme=1.3.3, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
+<meta name="lang:search.language" content="">
+<meta name="lang:search.pipeline.stopwords" content="true">
+<meta name="lang:search.pipeline.trimmer" content="true">
 <meta name="lang:search.result.none" content="No matching documents">
 <meta name="lang:search.result.one" content="1 matching document">
 <meta name="lang:search.result.other" content="# matching documents">
-<meta name="lang:search.language" content="">
 <meta name="lang:search.tokenizer" content="[\s\-]+">
 
 
 <meta name="description" content="sbt-site">
 <link rel="shortcut icon" href="img/favicon.png">
 <title>sbt-site</title>
-<link rel="stylesheet" href="assets/stylesheets/application.7a4cdee3.css">
+<link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
 <link rel="stylesheet" href="lib/prettify/prettify.css">
-<script src="lib/modernizr/modernizr.min.js"></script>
+<script src="assets/javascripts/modernizr.1aa3b519.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
 <style>
 body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}
 code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/fonts/font-awesome.css">
+<link rel="stylesheet" href="assets/fonts/material-icons.css">
 <link rel="stylesheet" href="assets/stylesheets/paradox-material-theme.css">
 </head>
 <body
 >
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
-<input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
-<label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
 <header class="md-header" data-md-component="header">
 <nav class="md-header-nav md-grid">
 <div class="md-flex">
@@ -46,7 +48,7 @@ code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 </a>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
@@ -54,14 +56,14 @@ sbt-site
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="search"></label>
-<div class="md-search__inner">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
 <form class="md-search__form" name="search">
-<input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
-<label class="md-icon md-search__icon" for="search"></label>
-<button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+<input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+<label class="md-icon md-search__icon" for="__search"></label>
+<button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">&#xE5CD;</button>
 </form>
 <div class="md-search__output">
 <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -105,9 +107,10 @@ sbt/sbt-site
 <div class="md-sidebar__inner">
 <nav class="md-nav md-nav--primary" data-md-level="0" style="visibility: hidden">
 <label class="md-nav__title md-nav__title--site" for="drawer">
+<a href="index.html" title="sbt-site" class="md-nav__button md-logo">
 <span class="md-nav__button md-logo">
 <img src="img/sbt-logo.svg" width="24" height="24">
-</span>
+</a>
 <a href="index.html" title="sbt-site">
 sbt-site
 </a>
@@ -147,7 +150,7 @@ sbt/sbt-site
   <li><a href="migration-guide.html" class="page">Migration Guide</a></li>
   <li><a href="notes/index.html" class="page">Release Notes</a>
   <ul>
-    <li><a href="notes/1.3.2.html" class="page">Release 1.3.2</a></li>
+    <li><a href="notes/1.3.2.html" class="page">Release 1.3.3</a></li>
     <li><a href="notes/1.3.1.html" class="page">Release 1.3.1</a></li>
     <li><a href="notes/1.3.0.html" class="page">Release 1.3.0</a></li>
     <li><a href="notes/1.2.1.html" class="page">Release 1.2.1</a></li>
@@ -161,11 +164,14 @@ sbt/sbt-site
 <nav class="md-nav md-nav--secondary">
 </nav>
 
-<div class="md-nav__title--site md-version" title="Version">
-<i class="md-icon">label_outline</i> 1.3.2
-</div>
 </nav>
-
+<ul style="display: none">
+<li class="md-nav__item md-version" id="project.version">
+<label class="md-nav__link" for="__version">
+<i class="md-icon" title="Version">label_outline</i> 1.3.3
+</label>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -174,7 +180,7 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#sbt-site" name="sbt-site" class="anchor"><span class="anchor-link"></span></a>sbt-site</h1>
 <p>This sbt plugin generates project websites from static content as well as <a href="generators/index.html">third-party generators</a> and can optionally include generated Scaladoc. It is designed to work hand-in-hand with publishing plugins like <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages</a>.</p>
-<p>Before upgrading please consult the <a href="https://github.com/sbt/sbt-site/tree/master/notes">release notes</a>. Instructions for upgrading from a version before 1.x.x can be found in the <a href="migration-guide.html#from-version-0.x.x-to-1.x.x">migration guide</a>.</p><div class="callout note "><div class="callout-title">Note</div>
+<p>Before upgrading please consult the <a href="https://github.com/sbt/sbt-site/tree/v1.3.3/notes">release notes</a>. Instructions for upgrading from a version before 1.x.x can be found in the <a href="migration-guide.html#from-version-0.x.x-to-1.x.x">migration guide</a>.</p><div class="callout note "><div class="callout-title">Note</div>
 <ul>
   <li>Version 1.3+ is cross published to both sbt 0.13 and sbt 1.x.</li>
   <li>As of sbt-site version 1.x.x, sbt version 0.13.10+ or 1.0.0-RC2+ is supported.</li>
@@ -192,7 +198,7 @@ sbt/sbt-site
   </ul></li>
   <li><a href="preprocess.html" class="page">Preprocessing</a>
   <ul>
-    <li><a href="preprocess.html#variable-substitution" class="header">Variable Substitution</a></li>
+    <li><a href="preprocess.html#substitution" class="header">Substitution</a></li>
     <li><a href="preprocess.html#preprocessing-markdown-files-with-tut" class="header">Preprocessing Markdown files with tut</a></li>
   </ul></li>
   <li><a href="api-documentation.html" class="page">API documentation</a>
@@ -234,7 +240,7 @@ sbt/sbt-site
   </ul></li>
   <li><a href="notes/index.html" class="page">Release Notes</a>
   <ul>
-    <li><a href="notes/1.3.2.html" class="page">Release 1.3.2</a>
+    <li><a href="notes/1.3.2.html" class="page">Release 1.3.3</a>
     <ul>
       <li><a href="notes/1.3.2.html#enhancements" class="header">Enhancements</a></li>
     </ul></li>
@@ -283,13 +289,13 @@ sbt/sbt-site
 </div>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/main/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.3.2
+1.3.3
 </span>
 </div>
 </article>
@@ -328,7 +334,7 @@ and
 </footer>
 
 </div>
-<script src="assets/javascripts/application.5165553b.js"></script>
+<script src="assets/javascripts/application.583bbe55.js"></script>
 <script src="assets/javascripts/paradox-material-theme.js"></script>
 <script>app.initialize({version:"0.17",url:{base:"."}})</script>
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>

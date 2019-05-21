@@ -5,38 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.3.2, mkdocs-material=2.2.2">
+<meta name="generator" content="Paradox, paradox-material-theme=1.3.3, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
+<meta name="lang:search.language" content="">
+<meta name="lang:search.pipeline.stopwords" content="true">
+<meta name="lang:search.pipeline.trimmer" content="true">
 <meta name="lang:search.result.none" content="No matching documents">
 <meta name="lang:search.result.one" content="1 matching document">
 <meta name="lang:search.result.other" content="# matching documents">
-<meta name="lang:search.language" content="">
 <meta name="lang:search.tokenizer" content="[\s\-]+">
 
 
 <meta name="description" content="sbt-site">
 <link rel="shortcut icon" href="img/favicon.png">
 <title>Preprocessing · sbt-site</title>
-<link rel="stylesheet" href="assets/stylesheets/application.7a4cdee3.css">
+<link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
 <link rel="stylesheet" href="lib/prettify/prettify.css">
-<script src="lib/modernizr/modernizr.min.js"></script>
+<script src="assets/javascripts/modernizr.1aa3b519.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
 <style>
 body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}
 code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/fonts/font-awesome.css">
+<link rel="stylesheet" href="assets/fonts/material-icons.css">
 <link rel="stylesheet" href="assets/stylesheets/paradox-material-theme.css">
 </head>
 <body
 >
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
-<input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
-<label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
 <header class="md-header" data-md-component="header">
 <nav class="md-header-nav md-grid">
 <div class="md-flex">
@@ -46,7 +48,7 @@ code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 </a>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
@@ -59,14 +61,14 @@ Preprocessing
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="search"></label>
-<div class="md-search__inner">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
 <form class="md-search__form" name="search">
-<input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
-<label class="md-icon md-search__icon" for="search"></label>
-<button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+<input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+<label class="md-icon md-search__icon" for="__search"></label>
+<button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">&#xE5CD;</button>
 </form>
 <div class="md-search__output">
 <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -110,9 +112,10 @@ sbt/sbt-site
 <div class="md-sidebar__inner">
 <nav class="md-nav md-nav--primary" data-md-level="0" style="visibility: hidden">
 <label class="md-nav__title md-nav__title--site" for="drawer">
+<a href="index.html" title="sbt-site" class="md-nav__button md-logo">
 <span class="md-nav__button md-logo">
 <img src="img/sbt-logo.svg" width="24" height="24">
-</span>
+</a>
 <a href="index.html" title="sbt-site">
 sbt-site
 </a>
@@ -152,7 +155,7 @@ sbt/sbt-site
   <li><a href="migration-guide.html" class="page">Migration Guide</a></li>
   <li><a href="notes/index.html" class="page">Release Notes</a>
   <ul>
-    <li><a href="notes/1.3.2.html" class="page">Release 1.3.2</a></li>
+    <li><a href="notes/1.3.2.html" class="page">Release 1.3.3</a></li>
     <li><a href="notes/1.3.1.html" class="page">Release 1.3.1</a></li>
     <li><a href="notes/1.3.0.html" class="page">Release 1.3.0</a></li>
     <li><a href="notes/1.2.1.html" class="page">Release 1.2.1</a></li>
@@ -164,21 +167,24 @@ sbt/sbt-site
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="toc">Table of contents</label>
+<label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
   <li><a href="preprocess.html#preprocessing" class="header">Preprocessing</a>
   <ul>
-    <li><a href="preprocess.html#variable-substitution" class="header">Variable Substitution</a></li>
+    <li><a href="preprocess.html#substitution" class="header">Substitution</a></li>
     <li><a href="preprocess.html#preprocessing-markdown-files-with-tut" class="header">Preprocessing Markdown files with tut</a></li>
   </ul></li>
 </ul>
 </nav>
 
-<div class="md-nav__title--site md-version" title="Version">
-<i class="md-icon">label_outline</i> 1.3.2
-</div>
 </nav>
-
+<ul style="display: none">
+<li class="md-nav__item md-version" id="project.version">
+<label class="md-nav__link" for="__version">
+<i class="md-icon" title="Version">label_outline</i> 1.3.3
+</label>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -186,11 +192,11 @@ sbt/sbt-site
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="toc">Table of contents</label>
+<label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
   <li><a href="preprocess.html#preprocessing" class="header">Preprocessing</a>
   <ul>
-    <li><a href="preprocess.html#variable-substitution" class="header">Variable Substitution</a></li>
+    <li><a href="preprocess.html#substitution" class="header">Substitution</a></li>
     <li><a href="preprocess.html#preprocessing-markdown-files-with-tut" class="header">Preprocessing Markdown files with tut</a></li>
   </ul></li>
 </ul>
@@ -203,22 +209,26 @@ sbt/sbt-site
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
 <h1><a href="#preprocessing" name="preprocessing" class="anchor"><span class="anchor-link"></span></a>Preprocessing</h1>
-<p>sbt-site supports basic variable substitution via the <code>PreprocessPlugin</code> if for example you need to replace a version string in a source file or a generated HTML file. More advanced preprocessing, such as interpreting code snippets with <a href="https://github.com/tpolecat/tut">tut</a>, is possible via additional configuration as shown below.</p>
-<h2><a href="#variable-substitution" name="variable-substitution" class="anchor"><span class="anchor-link"></span></a>Variable Substitution</h2>
+<p>sbt-site supports simple variable and Regular Expression substitution via the <code>PreprocessPlugin</code> if for example you need to replace a version string in a source file or a generated HTML file. More advanced preprocessing, such as interpreting code snippets with <a href="https://github.com/tpolecat/tut">tut</a>, is possible via additional configuration as shown below.</p>
+<h2><a href="#substitution" name="substitution" class="anchor"><span class="anchor-link"></span></a>Substitution</h2>
 <p>The <code>PreprocessPlugin</code> reads files from an input directory, substitute variables and writes them to an output directory. In addition to preprocessing static content it is also possible to use the plugin either before or after invoking a <a href="generators/index.html">site generator</a>. To enable, add this to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(PreprocessPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(PreprocessPlugin)</code></pre>
 <p>By default files are read from <code>src/site-preprocess</code> but this is configurable by setting <code>sourceDirectory</code>:</p>
-<pre class="prettyprint"><code class="language-sbt">sourceDirectory in Preprocess := sourceDirectory.value / &quot;site-preprocess&quot;</code></pre>
-<p>Variables are delimited by surrounding the name with <code>@</code> symbols (e.g. <code>@VERSION@</code>). Values are assigned to variables via the setting <code>preprocessVars: [Map[String, String]]</code>. For example:</p>
-<pre class="prettyprint"><code class="language-sbt">preprocessVars in Preprocess := Map(&quot;VERSION&quot; -&gt; version.value, &quot;DATE&quot; -&gt; new Date().toString)</code></pre><div class="callout note "><div class="callout-title">Note</div>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L24" target="_blank" title="Go to snippet source"></a><code class="language-sbt">sourceDirectory in Preprocess := sourceDirectory.value / &quot;site-preprocess&quot;</code></pre>
+<p>Variables are delimited by surrounding the name with <code>@</code> symbols (e.g. <code>@VERSION@</code>). Values are assigned to variables via the setting <code>preprocessVars: Map[String, String]</code>. For example:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L12" target="_blank" title="Go to snippet source"></a><code class="language-sbt">preprocessVars in Preprocess := Map(&quot;VERSION&quot; -&gt; version.value, &quot;DATE&quot; -&gt; new Date().toString)</code></pre><div class="callout note "><div class="callout-title">Note</div>
 <p>The plugin will generate an error if a variable is found in the source file with no matching value in <code>preprocessVars</code>.</p></div>
+<p>More advanced substitution patterns can be used by providing Regular Expression rules via the setting <code>preprocessRules: Seq[(Regex, Match =&gt; String)]</code>. For example Scaladoc used to (before 2.12.9 and 2.13.0) prepend &ldquo;.scala&rdquo; to source links of Java files. The following preprocessing rule will find and fix such links:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/preprocess/transform-scaladoc/build.sbt#L16-L18" target="_blank" title="Go to snippet source"></a><code class="language-sbt">preprocessRules in Preprocess := Seq(
+  (&quot;\\.java\\.scala&quot;.r, _ =&gt; &quot;.java&quot;)
+)</code></pre>
 <p>The setting <code>preprocessIncludeFilter</code> is used to define the filename extensions that should be processed when <code>makeSite</code> is run.</p>
-<pre class="prettyprint"><code class="language-sbt">preprocessIncludeFilter := &quot;*.md&quot; | &quot;*.markdown&quot;</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L20" target="_blank" title="Go to snippet source"></a><code class="language-sbt">preprocessIncludeFilter := &quot;*.md&quot; | &quot;*.markdown&quot;</code></pre>
 <p>The default filter is:</p>
-<pre class="prettyprint"><code class="language-scala">&quot;*.txt&quot; | &quot;*.html&quot; | &quot;*.md&quot; | &quot;*.rst&quot;</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/main/scala/com/typesafe/sbt/site/preprocess/PreprocessPlugin.scala#L34" target="_blank" title="Go to snippet source"></a><code class="language-scala">&quot;*.txt&quot; | &quot;*.html&quot; | &quot;*.md&quot; | &quot;*.rst&quot;</code></pre>
 <h2><a href="#preprocessing-markdown-files-with-tut" name="preprocessing-markdown-files-with-tut" class="anchor"><span class="anchor-link"></span></a>Preprocessing Markdown files with tut</h2>
 <p>The <a href="https://github.com/tpolecat/tut">tut</a> sbt plugin allows you to write documentation with fenced code blocks that is typechecked and run as part of your build. For example this markdown snippet:</p>
-<pre class="prettyprint"><code class="language-md">Here is how you add numbers:
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/site/plays-nice-with-tut/src/main/tut/index.md#L4-L8" target="_blank" title="Go to snippet source"></a><code class="language-md">Here is how you add numbers:
 
 ```tut
 1 + 1
@@ -232,7 +242,7 @@ res0: Int = 2
 ```
 </code></pre>
 <p>The following example shows how to use it to preprocess a collection of markdown files before running a site generator.</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(ParadoxSitePlugin, TutPlugin)
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/site/plays-nice-with-tut/build.sbt#L4-L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(ParadoxSitePlugin, TutPlugin)
 sourceDirectory in Paradox := tutTargetDirectory.value
 makeSite := makeSite.dependsOn(tut).value</code></pre>
 <p>The example uses the Paradox site generator but can be adapted to any site generator which understands markdown by configuring its <code>sourceDirectory</code> accordingly. For Jekyll, this would be:</p>
@@ -240,13 +250,13 @@ makeSite := makeSite.dependsOn(tut).value</code></pre>
 </code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/preprocess.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/main/paradox/preprocess.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.3.2
+1.3.3
 </span>
 </div>
 </article>
@@ -298,7 +308,7 @@ and
 </footer>
 
 </div>
-<script src="assets/javascripts/application.5165553b.js"></script>
+<script src="assets/javascripts/application.583bbe55.js"></script>
 <script src="assets/javascripts/paradox-material-theme.js"></script>
 <script>app.initialize({version:"0.17",url:{base:"."}})</script>
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>

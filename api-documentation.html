@@ -5,38 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.3.2, mkdocs-material=2.2.2">
+<meta name="generator" content="Paradox, paradox-material-theme=1.3.3, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
+<meta name="lang:search.language" content="">
+<meta name="lang:search.pipeline.stopwords" content="true">
+<meta name="lang:search.pipeline.trimmer" content="true">
 <meta name="lang:search.result.none" content="No matching documents">
 <meta name="lang:search.result.one" content="1 matching document">
 <meta name="lang:search.result.other" content="# matching documents">
-<meta name="lang:search.language" content="">
 <meta name="lang:search.tokenizer" content="[\s\-]+">
 
 
 <meta name="description" content="sbt-site">
 <link rel="shortcut icon" href="img/favicon.png">
 <title>API documentation · sbt-site</title>
-<link rel="stylesheet" href="assets/stylesheets/application.7a4cdee3.css">
+<link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="lib/material__tabs/dist/mdc.tabs.min.css">
 <link rel="stylesheet" href="lib/prettify/prettify.css">
-<script src="lib/modernizr/modernizr.min.js"></script>
+<script src="assets/javascripts/modernizr.1aa3b519.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
 <style>
 body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}
 code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/fonts/font-awesome.css">
+<link rel="stylesheet" href="assets/fonts/material-icons.css">
 <link rel="stylesheet" href="assets/stylesheets/paradox-material-theme.css">
 </head>
 <body
 >
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
-<input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
-<label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
 <header class="md-header" data-md-component="header">
 <nav class="md-header-nav md-grid">
 <div class="md-flex">
@@ -46,7 +48,7 @@ code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 </a>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
@@ -59,14 +61,14 @@ API documentation
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="search"></label>
-<div class="md-search__inner">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
 <form class="md-search__form" name="search">
-<input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
-<label class="md-icon md-search__icon" for="search"></label>
-<button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+<input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+<label class="md-icon md-search__icon" for="__search"></label>
+<button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">&#xE5CD;</button>
 </form>
 <div class="md-search__output">
 <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -110,9 +112,10 @@ sbt/sbt-site
 <div class="md-sidebar__inner">
 <nav class="md-nav md-nav--primary" data-md-level="0" style="visibility: hidden">
 <label class="md-nav__title md-nav__title--site" for="drawer">
+<a href="index.html" title="sbt-site" class="md-nav__button md-logo">
 <span class="md-nav__button md-logo">
 <img src="img/sbt-logo.svg" width="24" height="24">
-</span>
+</a>
 <a href="index.html" title="sbt-site">
 sbt-site
 </a>
@@ -152,7 +155,7 @@ sbt/sbt-site
   <li><a href="migration-guide.html" class="page">Migration Guide</a></li>
   <li><a href="notes/index.html" class="page">Release Notes</a>
   <ul>
-    <li><a href="notes/1.3.2.html" class="page">Release 1.3.2</a></li>
+    <li><a href="notes/1.3.2.html" class="page">Release 1.3.3</a></li>
     <li><a href="notes/1.3.1.html" class="page">Release 1.3.1</a></li>
     <li><a href="notes/1.3.0.html" class="page">Release 1.3.0</a></li>
     <li><a href="notes/1.2.1.html" class="page">Release 1.2.1</a></li>
@@ -164,7 +167,7 @@ sbt/sbt-site
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="toc">Table of contents</label>
+<label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
   <li><a href="api-documentation.html#api-documentation" class="header">API documentation</a>
   <ul>
@@ -175,11 +178,14 @@ sbt/sbt-site
 </ul>
 </nav>
 
-<div class="md-nav__title--site md-version" title="Version">
-<i class="md-icon">label_outline</i> 1.3.2
-</div>
 </nav>
-
+<ul style="display: none">
+<li class="md-nav__item md-version" id="project.version">
+<label class="md-nav__link" for="__version">
+<i class="md-icon" title="Version">label_outline</i> 1.3.3
+</label>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -187,7 +193,7 @@ sbt/sbt-site
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="toc">Table of contents</label>
+<label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
   <li><a href="api-documentation.html#api-documentation" class="header">API documentation</a>
   <ul>
@@ -207,13 +213,13 @@ sbt/sbt-site
 <h1><a href="#api-documentation" name="api-documentation" class="anchor"><span class="anchor-link"></span></a>API documentation</h1>
 <h2><a href="#scaladoc" name="scaladoc" class="anchor"><span class="anchor-link"></span></a>Scaladoc</h2>
 <p>To include Scaladoc with your site, add the following line to your <code>build.sbt</code>:</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(SiteScaladocPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/scaladoc/can-add-scaladoc/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(SiteScaladocPlugin)</code></pre>
 <p>This will default to putting the Scaladoc under the <code>latest/api</code> directory on the website. You can change this with the <code>siteSubdirName</code> key in the <code>SiteScaladoc</code> scope:</p>
-<pre class="prettyprint"><code class="language-sbt">// Puts Scaladoc output in `target/site/api/latest`
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/scaladoc/can-add-scaladoc/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts Scaladoc output in `target/site/api/latest`
 siteSubdirName in SiteScaladoc := &quot;api/latest&quot;</code></pre>
 <h2><a href="#aggregating-api-documentation-with-sbt-unidoc" name="aggregating-api-documentation-with-sbt-unidoc" class="anchor"><span class="anchor-link"></span></a>Aggregating API documentation with sbt-unidoc</h2>
 <p><a href="https://github.com/sbt/sbt-unidoc">sbt-unidoc</a> allows to aggregate Scaladoc or Javadoc from sub-projects into a unified view. The following example shows how you can add aggregated Scaladoc to your site:</p>
-<pre class="prettyprint"><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 lazy val root = project.in(file(&quot;.&quot;))
@@ -225,7 +231,7 @@ lazy val root = project.in(file(&quot;.&quot;))
   .aggregate(cats, kittens)</code></pre>
 <h2><a href="#scaladoc-from-multiple-projects" name="scaladoc-from-multiple-projects" class="anchor"><span class="anchor-link"></span></a>Scaladoc from multiple projects</h2>
 <p>In case you want to include the Scaladoc separate for each sub-product there are several options. If you only have a few sub-projects the simplest solution is to manually include the scaladoc for each project:</p>
-<pre class="prettyprint"><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 // Define a `Configuration` for each project.
@@ -238,7 +244,7 @@ lazy val siteWithScaladoc = project.in(file(&quot;site/scaladoc&quot;))
     SiteScaladocPlugin.scaladocSettings(Kittens, mappings in (Compile, packageDoc) in kittens, &quot;api/kittens&quot;)
   )</code></pre>
 <p>For projects with many such sub-projects, a more maintainable approach is to configure it in a more programatic way:</p>
-<pre class="prettyprint"><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 lazy val scaladocSiteProjects = List((cats, Cats), (kittens, Kittens))
@@ -255,13 +261,13 @@ val siteWithScaladocAlt = project.in(file(&quot;site/scaladoc-alternative&quot;)
   .settings(scaladocSiteSettings)</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/api-documentation.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/main/paradox/api-documentation.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.3.2
+1.3.3
 </span>
 </div>
 </article>
@@ -313,7 +319,7 @@ and
 </footer>
 
 </div>
-<script src="assets/javascripts/application.5165553b.js"></script>
+<script src="assets/javascripts/application.583bbe55.js"></script>
 <script src="assets/javascripts/paradox-material-theme.js"></script>
 <script>app.initialize({version:"0.17",url:{base:"."}})</script>
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>

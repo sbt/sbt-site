@@ -99,9 +99,9 @@ function initParadoxMaterialTheme() {
       if (link && link.classList.contains('active')) {
         var toc = document.querySelector('nav.md-nav--primary > .md-nav--secondary')
         if (toc && toc.children.length > 0) {
-          var input = createNavToggle('toc', false)
+          var input = createNavToggle('__toc', false)
           var labelText = nestedNav ? 'Table of contents' : link ? link.textContent : '???'
-          var label = createNavLabel('toc', true, document.createTextNode(labelText))
+          var label = createNavLabel('__toc', true, document.createTextNode(labelText))
 
           if (nestedNav) {
             var node = nestedNav.children[1]
@@ -126,22 +126,28 @@ function initParadoxMaterialTheme() {
     }
 
     visitList(root, 'nav-' + rootIndex, 1)
+    var projectVersion = document.getElementById("project.version")
+    if (projectVersion) {
+      root.appendChild(projectVersion)
+    }
     root.parentNode.style.visibility = 'visible'
   })
 
-  document.querySelectorAll('.md-nav--secondary > ul').forEach(tocRoot => {
+  document.querySelectorAll('.md-sidebar--secondary .md-nav--secondary > ul').forEach(tocRoot => {
     function visitListItem(item) {
       item.classList.add('md-nav__item')
       item.querySelectorAll(':scope> a').forEach(link => {
         link.classList.add('md-nav__link')
         link.setAttribute('data-md-state', '')
       })
+      item.querySelectorAll(':scope > ul').forEach(list => {
+        visitList(list)
+      })
     }
 
     function visitList(list) {
       list.classList.add('md-nav__list')
-
-      list.querySelectorAll('li').forEach(item => {
+      list.querySelectorAll(':scope > li').forEach(item => {
         visitListItem(item)
       })
     }
@@ -149,7 +155,7 @@ function initParadoxMaterialTheme() {
     var parent = tocRoot.parentNode
     parent.removeChild(tocRoot)
 
-    tocRoot.querySelectorAll('ul').forEach(list => {
+    tocRoot.querySelectorAll(':scope > li > ul').forEach(list => {
       parent.append(list)
       list.setAttribute('data-md-scrollfix', '')
       visitList(list)
