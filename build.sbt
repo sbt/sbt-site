@@ -7,7 +7,7 @@ name := "sbt-site"
 
 organization := "com.typesafe.sbt"
 
-version := "1.3.3-SNAPSHOT"
+version := "1.3.3"
 crossSbtVersions := List("0.13.17", "1.1.6")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
