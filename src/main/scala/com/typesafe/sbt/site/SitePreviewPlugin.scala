@@ -48,9 +48,8 @@ object SitePreviewPlugin extends AutoPlugin {
 
       Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value) run { server =>
         if (browser)
-          Browser open(server.portBindings.head.url)
           Browser open(server.portBindings.head.url + "/" + path)
-     }
+      }
     },
     previewFixedPort := Some(4000),
     previewLaunchBrowser := true,
