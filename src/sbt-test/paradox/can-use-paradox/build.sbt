@@ -1,7 +1,7 @@
 name := "test"
 
 //#enablePlugin
-enablePlugins(ParadoxSitePlugin)
+enablePlugins(ParadoxPlugin, ParadoxSitePlugin)
 //#enablePlugin
 
 siteSubdirName in Paradox := "docs"

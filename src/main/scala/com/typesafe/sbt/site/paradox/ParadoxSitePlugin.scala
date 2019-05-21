@@ -25,6 +25,6 @@ object ParadoxSitePlugin extends AutoPlugin {
       siteSubdirName in siteNameConfig := ""
     ) ++
     SiteHelpers.watchSettings(ThisScope.in(config, paradox.key)) ++
-    SiteHelpers.addMappingsToSiteDir((target in (config, paradox)).map(SiteHelpers.selectSubpaths(_, AllPassFilter)), siteSubdirName in siteNameConfig)
+    SiteHelpers.addMappingsToSiteDir((paradox in config).map(SiteHelpers.selectSubpaths(_, AllPassFilter)), siteSubdirName in siteNameConfig)
   }
 }
