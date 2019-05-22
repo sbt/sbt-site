@@ -12,6 +12,6 @@ Asciidoctor / sourceDirectory := sourceDirectory.value / "asciimd"
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Asciidoctor` scope:
 
-@@ snip[siteSubdirName]/src(/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt) { #siteSubdirName }
+@@ snip[siteSubdirName](/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt) { #siteSubdirName }
 
 [Asciidoctor]: http://asciidoctor.org
