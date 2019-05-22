@@ -2,6 +2,7 @@ package com.typesafe.sbt.site
 
 import java.nio.file.Files
 
+import sbt.Defaults.ConfigGlobal
 import sbt.Keys.{excludeFilter, includeFilter, sourceDirectory, watchSources}
 import sbt.internal.io.Source
 import sbt.util.CacheStoreFactory
@@ -50,7 +51,7 @@ object Compat {
 
   def watchSettings(config: Configuration): Seq[Setting[_]] =
     Seq(
-      watchSources += new Source(
+      ConfigGlobal / watchSources += new Source(
         base = (sourceDirectory in config).value,
         includeFilter = (includeFilter in config).value,
         excludeFilter = (excludeFilter in config).value

@@ -5,6 +5,10 @@
 
 Only sbt >1.1.6 is supported.
 
+### ParadoxSitePlugin
+
+`ParadoxPlugin` is enabled whenever `ParadoxSitePlugin` is enabled.
+
 
 <a id="from-version-0.x.x-to-1.x.x" />
 ## Migrating from version 0.x.x to 1.x.x
