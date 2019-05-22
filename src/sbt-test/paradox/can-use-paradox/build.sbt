@@ -1,10 +1,10 @@
 name := "test"
 
 //#enablePlugin
-enablePlugins(ParadoxPlugin, ParadoxSitePlugin)
+enablePlugins(ParadoxSitePlugin)
 //#enablePlugin
 
-siteSubdirName in Paradox := "docs"
+Paradox / siteSubdirName := "docs"
 
 //#paradoxTheme
 paradoxTheme := Some(builtinParadoxTheme("generic"))
@@ -17,7 +17,7 @@ paradoxProperties ++= Map(
 //#paradoxProperties
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Paradox).value
+  val dest = (makeSite / target).value / (Paradox / siteSubdirName ).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)

@@ -2,21 +2,23 @@
 
 The sbt-site plugin has direct support for building [Paradox] projects.
 
-To enable Paradox site generation, simply enable the associated plugin in your `build.sbt` file:
+To enable Paradox site generation, enable the `ParadoxSitePlugin` plugin in your `build.sbt` file:
 
 @@ snip[enablePlugin](/src/sbt-test/paradox/can-use-paradox/build.sbt) { #enablePlugin }
 
-This assumes you have a Paradox project under the `src/paradox` directory. To change this, set the `sourceDirectory` key in the `Paradox` scope:
+This assumes you have a Paradox project under the `src/main/paradox` directory.
+To change this, set the `sourceDirectory` key in the `paradox` task scope:
 
 ```sbt
-Paradox / sourceDirectory := sourceDirectory.value / "doc"
+paradox / sourceDirectory := sourceDirectory.value / "doc"
 ```
 
 If you are configuring Paradox from scratch remember to also configure a theme:
 
 @@ snip[paradoxTheme](/src/sbt-test/paradox/can-use-paradox/build.sbt) { #paradoxTheme }
 
-Note that Paradox settings such as `paradoxProperties` should be scoped to `Paradox` instead of `Compile` as used in the [Paradox documentation]. For example to configure an `@extref` link prefix use:
+Note that all of the Paradox settings mentioned in the [Paradox documentation] are reused by sbt-site.
+For example to configure an `@extref` link prefix use:
 
 @@ snip[paradoxProperties](/src/sbt-test/paradox/can-use-paradox/build.sbt) { #paradoxProperties }
 
