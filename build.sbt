@@ -12,7 +12,7 @@ organizationHomepage := Some(url("https://www.scala-sbt.org/"))
 homepage := Some(url("https://www.scala-sbt.org/sbt-site/"))
 
 version := "1.4.0-SNAPSHOT"
-crossSbtVersions := List("1.2.8")
+crossSbtVersions := List("1.1.6")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
@@ -41,20 +41,20 @@ addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.5.4")
 
 libraryDependencies +=
   Defaults.sbtPluginExtra(
-    "org.planet42" % "laika-sbt" % "0.10.0",
+    "org.planet42" % "laika-sbt" % "0.8.0",
     (sbtBinaryVersion in pluginCrossBuild).value,
     (scalaBinaryVersion in pluginCrossBuild).value
   )
 
 enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
-sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
+Paradox / sourceDirectory := sourceDirectory.value / "main" / "paradox"
 ParadoxMaterialThemePlugin.paradoxMaterialThemeSettings(Paradox)
-paradoxMaterialTheme in Paradox ~= {
+Paradox / paradoxMaterialTheme ~= {
   _.withFavicon("img/favicon.png")
    .withLogo("img/sbt-logo.svg")
    .withRepository(uri("https://github.com/sbt/sbt-site"))
 }
-version in Paradox := {
+Paradox / version := {
   if (isSnapshot.value) "git tag -l".!!.split("\r?\n").last.substring(1)
   else version.value
 }
@@ -65,7 +65,7 @@ git.remoteRepo := scmInfo.value.get.connection.replace("scm:git:", "")
 //#ghpages-publish
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
-  val sbtBinVersion = (sbtBinaryVersion in pluginCrossBuild).value
+  val sbtBinVersion = (pluginCrossBuild / sbtBinaryVersion).value
   val base = sbtTestDirectory.value
 
   def isCompatible(directory: File): Boolean = {

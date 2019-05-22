@@ -2,11 +2,11 @@ package com.typesafe.sbt.site
 
 import java.nio.file.Files
 
-import sbt._
-import sbt.Keys._
-import sbt.util.CacheStoreFactory
-import FileInfo.Style
+import sbt.Keys.{excludeFilter, includeFilter, sourceDirectory, watchSources}
 import sbt.internal.io.Source
+import sbt.util.CacheStoreFactory
+import sbt.util.FileInfo.Style
+import sbt.{ChangeReport, Configuration, File, FileFilter, Setting, State}
 
 object Compat {
 
@@ -50,7 +50,7 @@ object Compat {
 
   def watchSettings(config: Configuration): Seq[Setting[_]] =
     Seq(
-      watchSources in Global += new Source(
+      watchSources += new Source(
         base = (sourceDirectory in config).value,
         includeFilter = (includeFilter in config).value,
         excludeFilter = (excludeFilter in config).value

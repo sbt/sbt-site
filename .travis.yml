@@ -11,7 +11,7 @@ dist: trusty
 jdk: oraclejdk8
 matrix:
   include:
-  - env: SBT_CROSS_VERSION="1.2.8"
+  - env: SBT_CROSS_VERSION="1.1.6"
 
 addons:
   apt:
@@ -62,5 +62,5 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: $TRAVIS_PULL_REQUEST = false && $SBT_CROSS_VERSION = 1.2*
+    condition: $TRAVIS_PULL_REQUEST = false && $SBT_CROSS_VERSION = 1.1*
 #travis-deploy

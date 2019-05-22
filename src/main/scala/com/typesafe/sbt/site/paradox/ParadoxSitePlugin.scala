@@ -10,7 +10,7 @@ import com.typesafe.sbt.web.SbtWeb
 
 /** Paradox generator. */
 object ParadoxSitePlugin extends AutoPlugin {
-  override def requires = SitePlugin && SbtWeb
+  override def requires = SitePlugin && SbtWeb && ParadoxPlugin
   override def trigger = noTrigger
   object autoImport {
     val Paradox = config("paradox")

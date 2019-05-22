@@ -1,5 +1,11 @@
 # Migration Guide
 
+<a id="from-version-1.3.x-to-1.4.x" />
+## Migrating from version 1.3.x to 1.4.x
+
+Only sbt >1.1.6 is supported.
+
+
 <a id="from-version-0.x.x-to-1.x.x" />
 ## Migrating from version 0.x.x to 1.x.x
 
