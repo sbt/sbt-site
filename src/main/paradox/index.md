@@ -6,10 +6,9 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
 
 @@@ note
 
+* Version 1.4+ is published for sbt 1.2.x.
 * Version 1.3+ is cross published to both sbt 0.13 and sbt 1.x.
 * As of sbt-site version 1.x.x, sbt version 0.13.10+ or 1.0.0-RC2+ is supported.
-* For earlier 0.13.x releases, use [version 0.8.2][0.8.2].
-* For sbt 0.12, use [version 0.7.2][0.7.2].
 
 @@@
 
@@ -28,6 +27,4 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
 
 @@@
 
-[0.7.2]: https://github.com/sbt/sbt-site/tree/v0.7.2
-[0.8.2]: https://github.com/sbt/sbt-site/tree/v0.8.2
 [sbt-ghpages]: https://github.com/sbt/sbt-ghpages

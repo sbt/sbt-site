@@ -10,13 +10,13 @@ mechanisms to be supported in the future.
 Set up the plugin by adding the following to `project/plugins.sbt` (check the
 [sbt-ghpages project][sbt-ghpages] for the most recent version).
 
-@@ snip[sbt-ghpages](../../../project/plugins.sbt) { #sbt-ghpages }
+@@ snip[sbt-ghpages](/project/plugins.sbt) { #sbt-ghpages }
 
 Then configure your sbt build to use a special remote when running on Travis CI
 and otherwise fall back to the normal Git remote configured via the `scmInfo`
 setting.
 
-@@ snip[ghpages-publish](../../../build.sbt) { #scm-info #ghpages-publish }
+@@ snip[ghpages-publish](/build.sbt) { #scm-info #ghpages-publish }
 
 At this point you should be able to run `sbt ghpagesPushSite` to publish your
 site.
@@ -113,7 +113,7 @@ created and explicitly disable publishing for pull request. The `before_deploy`
 step takes care of setting up the environment so that `git push` automatically
 finds the deploy key.
 
-@@ snip[travis-deploy](../../../.travis.yml) { #travis-deploy }
+@@ snip[travis-deploy](/.travis.yml) { #travis-deploy }
 
 @@@ note
 
