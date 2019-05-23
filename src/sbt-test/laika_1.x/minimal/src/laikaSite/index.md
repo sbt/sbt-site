@@ -1,3 +1,0 @@
-# Test Minimal
-
-test 

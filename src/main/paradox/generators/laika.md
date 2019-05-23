@@ -3,12 +3,12 @@
 The sbt-site plugin has support for building [Laika] projects.
 To enable Laika site generation, simply enable the associated plugin in your `build.sbt` file:
 
-@@ snip[enablePlugin](../../../sbt-test/laika_0.13/minimal/build.sbt) { #enablePlugin }
+@@ snip[enablePlugin](/src/sbt-test/laika/minimal/build.sbt) { #enablePlugin }
 
 This plugin assumes you have a Laika project under the `src/laika` directory. To change this, set the `sourceDirectory` key in the `LaikaSite` scope:
 
 ```sbt
-sourceDirectory in LaikaSite := sourceDirectory.value / "doc"
+LaikaSite / sourceDirectory := sourceDirectory.value / "doc"
 ```
 
 This plugin use [Laika](https://github.com/planet42/Laika) sbt plugin internally and redefine default values for several Laika sbt keys which related to `sourceDirectory` in order to both work in harmony.
@@ -19,10 +19,7 @@ From other hand you can customize other aspects of Laika's behavior through basi
 [Laika sbt plugin](https://planet42.github.io/Laika/using-laika/sbt.html) keys and hooks.
 For example in order to add custom block directives you can include such code to your build.sbt:
 
-sbt 0.13
-:   @@ snip[laikaSbtPluginCustomization](../../../sbt-test/laika_0.13/blog-post/build.sbt) { #laikaSbtPluginCustomization }
-
-sbt 1.x
-:   @@ snip[laikaSbtPluginCustomization](../../../sbt-test/laika_1.x/blog-post/build.sbt) { #laikaSbtPluginCustomization }
+sbt
+:   @@ snip[laikaSbtPluginCustomization](/src/sbt-test/laika/blog-post/build.sbt) { #laikaSbtPluginCustomization }
 
 [Laika]: https://github.com/planet42/Laika

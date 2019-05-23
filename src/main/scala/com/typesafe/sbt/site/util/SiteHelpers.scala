@@ -13,7 +13,7 @@ object SiteHelpers {
   import SitePlugin.autoImport.siteMappings
   /** Convenience functions to add a task of mappings to a site under a nested directory. */
   def addMappingsToSiteDir(
-    mappings: TaskKey[Seq[(File, String)]],
+    mappings: Def.Initialize[Task[Seq[(File, String)]]],
     nestedDirectory: SettingKey[String]): Setting[_] =
     siteMappings ++= {
       for ((f, d) <- mappings.value) yield (f, nestedDirectory.value + "/" + d)
@@ -44,7 +44,10 @@ object SiteHelpers {
       ))
 
   def watchSettings(config: Configuration): Seq[Setting[_]] =
-    Compat.watchSettings(config)
+    Compat.watchSettings(ThisScope.in(config))
+
+  def watchSettings(scope: Scope): Seq[Setting[_]] =
+    Compat.watchSettings(scope)
 
   /**
    * Transform a file, line by line.

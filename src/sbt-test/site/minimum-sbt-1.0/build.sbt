@@ -1,6 +1,6 @@
 name := "test"
 
-enablePlugins(ParadoxSitePlugin)
+enablePlugins(ParadoxPlugin, ParadoxSitePlugin)
 
 TaskKey[Unit]("checkContent") := {
   val dest = (target in makeSite).value

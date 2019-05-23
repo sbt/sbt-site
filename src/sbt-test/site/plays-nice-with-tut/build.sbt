@@ -1,8 +1,8 @@
 name := "test"
 
 //#tut
-enablePlugins(ParadoxSitePlugin, TutPlugin)
-sourceDirectory in Paradox := tutTargetDirectory.value
+enablePlugins(ParadoxPlugin, ParadoxSitePlugin, TutPlugin)
+sourceDirectory in (Compile, paradox) := tutTargetDirectory.value
 makeSite := makeSite.dependsOn(tut).value
 //#tut
 

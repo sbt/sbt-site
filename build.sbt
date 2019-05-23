@@ -6,9 +6,13 @@ enablePlugins(SbtPlugin)
 name := "sbt-site"
 
 organization := "com.typesafe.sbt"
+organizationName := "sbt"
+organizationHomepage := Some(url("https://www.scala-sbt.org/"))
 
-version := "1.3.3"
-crossSbtVersions := List("0.13.17", "1.1.6")
+homepage := Some(url("https://www.scala-sbt.org/sbt-site/"))
+
+version := "1.4.0"
+crossSbtVersions := List("1.1.6")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
@@ -26,44 +30,31 @@ libraryDependencies ++= Seq(
   "ws.unfiltered"  %% "unfiltered-filter" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-jetty" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-specs2" % unfilteredVersion % "test",
-  "org.foundweekends" %% "pamflet-library" % "0.7.1",
-  "org.yaml"        % "snakeyaml"        % "1.13",
-  "com.typesafe"    % "config"           % "1.2.1", // Last version to support Java 1.6
-  "org.asciidoctor" % "asciidoctorj"     % "1.5.4.1",
-  "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.4.1"
+  "org.foundweekends" %% "pamflet-library" % "0.8.0",
+  "org.yaml"        % "snakeyaml"        % "1.24",
+  "com.typesafe"    % "config"           % "1.3.4",
+  "org.asciidoctor" % "asciidoctorj"     % "1.6.2",
+  "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.16"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.3.2")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.5.5")
 
-libraryDependencies ++= {
-  if ((sbtBinaryVersion in pluginCrossBuild).value == "0.13") {
-    Seq(
-      Defaults.sbtPluginExtra(
-        "org.planet42" % "laika-sbt" % "0.7.0",
-        (sbtBinaryVersion in pluginCrossBuild).value,
-        (scalaBinaryVersion in pluginCrossBuild).value
-      )
-    )
-  } else {
-    Seq(
-      Defaults.sbtPluginExtra(
-        "org.planet42" % "laika-sbt" % "0.8.0",
-        (sbtBinaryVersion in pluginCrossBuild).value,
-        (scalaBinaryVersion in pluginCrossBuild).value
-      )
-    )
-  }
-}
+libraryDependencies +=
+  Defaults.sbtPluginExtra(
+    "org.planet42" % "laika-sbt" % "0.8.0",
+    (sbtBinaryVersion in pluginCrossBuild).value,
+    (scalaBinaryVersion in pluginCrossBuild).value
+  )
 
 enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
-sourceDirectory in Paradox := sourceDirectory.value / "main" / "paradox"
+Paradox / sourceDirectory := sourceDirectory.value / "main" / "paradox"
 ParadoxMaterialThemePlugin.paradoxMaterialThemeSettings(Paradox)
-paradoxMaterialTheme in Paradox ~= {
+Paradox / paradoxMaterialTheme ~= {
   _.withFavicon("img/favicon.png")
    .withLogo("img/sbt-logo.svg")
    .withRepository(uri("https://github.com/sbt/sbt-site"))
 }
-version in Paradox := {
+Paradox / version := {
   if (isSnapshot.value) "git tag -l".!!.split("\r?\n").last.substring(1)
   else version.value
 }
@@ -74,7 +65,7 @@ git.remoteRepo := scmInfo.value.get.connection.replace("scm:git:", "")
 //#ghpages-publish
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
-  val sbtBinVersion = (sbtBinaryVersion in pluginCrossBuild).value
+  val sbtBinVersion = (pluginCrossBuild / sbtBinaryVersion).value
   val base = sbtTestDirectory.value
 
   def isCompatible(directory: File): Boolean = {
