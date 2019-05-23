@@ -1,5 +1,3 @@
-import scala.sys.process._
-
 sbtPlugin := true
 enablePlugins(SbtPlugin)
 
@@ -47,16 +45,10 @@ libraryDependencies +=
   )
 
 enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
-Paradox / sourceDirectory := sourceDirectory.value / "main" / "paradox"
-ParadoxMaterialThemePlugin.paradoxMaterialThemeSettings(Paradox)
-Paradox / paradoxMaterialTheme ~= {
+Compile / paradoxMaterialTheme ~= {
   _.withFavicon("img/favicon.png")
    .withLogo("img/sbt-logo.svg")
    .withRepository(uri("https://github.com/sbt/sbt-site"))
-}
-Paradox / version := {
-  if (isSnapshot.value) "git tag -l".!!.split("\r?\n").last.substring(1)
-  else version.value
 }
 
 //#ghpages-publish
