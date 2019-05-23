@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.3.3, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=1.4.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -155,6 +155,8 @@ sbt/sbt-site
   <li><a href="../migration-guide.html" class="page">Migration Guide</a></li>
   <li><a href="../notes/index.html" class="page">Release Notes</a>
   <ul>
+    <li><a href="../notes/1.4.0.html" class="page">Release 1.4.0</a></li>
+    <li><a href="../notes/1.3.3.html" class="page">Release 1.3.3</a></li>
     <li><a href="../notes/1.3.2.html" class="page">Release 1.3.3</a></li>
     <li><a href="../notes/1.3.1.html" class="page">Release 1.3.1</a></li>
     <li><a href="../notes/1.3.0.html" class="page">Release 1.3.0</a></li>
@@ -173,7 +175,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.3.3
+<i class="md-icon" title="Version">label_outline</i> 1.4.0
 </label>
 </li>
 </ul>
@@ -185,22 +187,22 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#asciidoctor" name="asciidoctor" class="anchor"><span class="anchor-link"></span></a>Asciidoctor</h1>
 <p>The sbt-site plugin has direct support for building <a href="http://asciidoctor.org">Asciidoctor</a> projects. To enable Asciidoctor site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(AsciidoctorPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(AsciidoctorPlugin)</code></pre>
 <p>This assumes you have an Asciidoctor project under the <code>src/asciidoctor</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Asciidoctor</code> scope:</p>
-<pre class="prettyprint"><code class="language-sbt">sourceDirectory in Asciidoctor := sourceDirectory.value / &quot;asciimd&quot;
+<pre class="prettyprint"><code class="language-sbt">Asciidoctor / sourceDirectory := sourceDirectory.value / &quot;asciimd&quot;
 </code></pre>
 <p>Similarly, the output can be redirected to a subdirectory of <code>target/site</code> via the <code>siteSubdirName</code> key in <code>Asciidoctor</code> scope:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/asciimd`
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/asciimd`
 siteSubdirName in Asciidoctor := &quot;asciimd&quot;</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.3.3/src/main/paradox/generators/asciidoctor.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/main/paradox/generators/asciidoctor.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.3.3
+1.4.0
 </span>
 </div>
 </article>

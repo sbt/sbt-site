@@ -20,7 +20,7 @@
 
 <meta name="description" content="sbt-site">
 <link rel="shortcut icon" href="../img/favicon.png">
-<title>Laika · sbt-site</title>
+<title>Release 1.4.0 · sbt-site</title>
 <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="../lib/material__tabs/dist/mdc.tabs.min.css">
 <link rel="stylesheet" href="../lib/prettify/prettify.css">
@@ -56,7 +56,7 @@ code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 sbt-site
 </span>
 <span class="md-header-nav__topic">
-Laika
+Release 1.4.0
 </span>
 </div>
 </div>
@@ -144,7 +144,7 @@ sbt/sbt-site
     <li><a href="../generators/gitbook.html" class="page">GitBook</a></li>
     <li><a href="../generators/hugo.html" class="page">Hugo</a></li>
     <li><a href="../generators/jekyll.html" class="page">Jekyll</a></li>
-    <li><a href="../generators/laika.html" class="active page">Laika</a></li>
+    <li><a href="../generators/laika.html" class="page">Laika</a></li>
     <li><a href="../generators/nanoc.html" class="page">Nanoc</a></li>
     <li><a href="../generators/pamflet.html" class="page">Pamflet</a></li>
     <li><a href="../generators/paradox.html" class="page">Paradox</a></li>
@@ -155,7 +155,7 @@ sbt/sbt-site
   <li><a href="../migration-guide.html" class="page">Migration Guide</a></li>
   <li><a href="../notes/index.html" class="page">Release Notes</a>
   <ul>
-    <li><a href="../notes/1.4.0.html" class="page">Release 1.4.0</a></li>
+    <li><a href="../notes/1.4.0.html" class="active page">Release 1.4.0</a></li>
     <li><a href="../notes/1.3.3.html" class="page">Release 1.3.3</a></li>
     <li><a href="../notes/1.3.2.html" class="page">Release 1.3.3</a></li>
     <li><a href="../notes/1.3.1.html" class="page">Release 1.3.1</a></li>
@@ -169,6 +169,14 @@ sbt/sbt-site
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="../notes/1.4.0.html#release-1-4-0" class="header">Release 1.4.0</a>
+  <ul>
+    <li><a href="../notes/1.4.0.html#breaking-changes" class="header">Breaking changes</a></li>
+    <li><a href="../notes/1.4.0.html#enhancements" class="header">Enhancements</a></li>
+  </ul></li>
+</ul>
 </nav>
 
 </nav>
@@ -182,26 +190,38 @@ sbt/sbt-site
 </div>
 </div>
 </div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="../notes/1.4.0.html#release-1-4-0" class="header">Release 1.4.0</a>
+  <ul>
+    <li><a href="../notes/1.4.0.html#breaking-changes" class="header">Breaking changes</a></li>
+    <li><a href="../notes/1.4.0.html#enhancements" class="header">Enhancements</a></li>
+  </ul></li>
+</ul>
+</nav>
+
+</div>
+</div>
+</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#laika" name="laika" class="anchor"><span class="anchor-link"></span></a>Laika</h1>
-<p>The sbt-site plugin has support for building <a href="https://github.com/planet42/Laika">Laika</a> projects. To enable Laika site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/laika/minimal/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(LaikaSitePlugin)</code></pre>
-<p>This plugin assumes you have a Laika project under the <code>src/laika</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>LaikaSite</code> scope:</p>
-<pre class="prettyprint"><code class="language-sbt">LaikaSite / sourceDirectory := sourceDirectory.value / &quot;doc&quot;
-</code></pre>
-<p>This plugin use <a href="https://github.com/planet42/Laika">Laika</a> sbt plugin internally and redefine default values for several Laika sbt keys which related to <code>sourceDirectory</code> in order to both work in harmony. Default setting of Laika sbt will be included automatically once you enable this plugin, you don&rsquo;t need to include them manually and doing so may result in conflict.</p>
-<p>From other hand you can customize other aspects of Laika&rsquo;s behavior through basic <a href="https://planet42.github.io/Laika/using-laika/sbt.html">Laika sbt plugin</a> keys and hooks. For example in order to add custom block directives you can include such code to your build.sbt:</p>
-<dl>
-  <dt>sbt</dt>
-  <dd>
-  <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/laika/blog-post/build.sbt#L12-L13" target="_blank" title="Go to snippet source"></a><code class="language-sbt">laikaBlockDirectives in LaikaSite += CustomDirectives.postsToc
-laikaSiteRenderers in LaikaSite += CustomDirectives.postsRenderer</code></pre></dd>
-</dl>
+<h1><a href="#release-1-4-0" name="release-1-4-0" class="anchor"><span class="anchor-link"></span></a>Release 1.4.0</h1>
+<p>See the <a href="https://github.com/sbt/sbt-site/milestone/8?closed=1">1.4.0 milestone</a> for the full list of related tickets and PRs.</p>
+<h2><a href="#breaking-changes" name="breaking-changes" class="anchor"><span class="anchor-link"></span></a>Breaking changes</h2>
+<ul>
+  <li>sbt-site is published for sbt &gt;1.1.6, only</li>
+  <li>upgrade to Paradox 0.5.x (with its breaking changes)</li>
+  <li>Paradox integration has been changed to reuse settings from <code>sbt-paradox</code> plugin. Take a look at the <a href="../migration-guide.html">migration guide</a> to see what actions need to be taken when upgrading.</li>
+</ul>
+<h2><a href="#enhancements" name="enhancements" class="anchor"><span class="anchor-link"></span></a>Enhancements</h2>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/main/paradox/generators/laika.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/main/paradox/notes/1.4.0.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -217,7 +237,7 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="../generators/jekyll.html" title="Jekyll" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<a href="../notes/index.html" title="Release Notes" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
 <div class="md-flex__cell md-flex__cell--shrink">
 <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
 </div>
@@ -226,17 +246,17 @@ Edit this page
 <span class="md-footer-nav__direction">
 Previous
 </span>
-Jekyll
+Release Notes
 </span>
 </div>
 </a>
-<a href="../generators/nanoc.html" title="Nanoc" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="../notes/1.3.3.html" title="Release 1.3.3" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Nanoc
+Release 1.3.3
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
