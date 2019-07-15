@@ -25,6 +25,7 @@ object SphinxPlugin extends AutoPlugin {
         sphinxProperties := Map.empty,
         sphinxEnv := Map.empty,
         sphinxIncremental := false,
+        sphinxWarningIsError := false,
         includeFilter in generate := AllPassFilter,
         excludeFilter in generate := HiddenFileFilter,
         sphinxInputs := combineSphinxInputs.value,
@@ -78,6 +79,7 @@ object SphinxPlugin extends AutoPlugin {
       (includeFilter in generate).value,
       (excludeFilter in generate).value,
       sphinxIncremental.value,
+      sphinxWarningIsError.value,
       sphinxTags.value,
       sphinxProperties.value,
       sphinxEnv.value

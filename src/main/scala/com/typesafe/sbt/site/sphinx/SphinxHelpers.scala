@@ -8,7 +8,7 @@ import com.typesafe.sbt.site.Compat.{Process, _}
 /**
  * Combined inputs for Sphinx runner.
  */
-case class SphinxInputs(src: File, include: FileFilter, exclude: FileFilter, incremental: Boolean, tags: Seq[String], properties: Map[String, String], env: Map[String, String])
+case class SphinxInputs(src: File, include: FileFilter, exclude: FileFilter, incremental: Boolean, warningIsError: Boolean, tags: Seq[String], properties: Map[String, String], env: Map[String, String])
 
 object SphinxRunner {
   /**
@@ -55,16 +55,16 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
   }
 
   def generateHtml(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File = {
-    sphinxBuild("html", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.tags, inputs.properties, inputs.env, log)
+    sphinxBuild("html", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.warningIsError, inputs.tags, inputs.properties, inputs.env, log)
   }
 
   def generatePdf(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): Seq[File] = {
-    val latexOutput = sphinxBuild("latex", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.tags, inputs.properties, inputs.env, log)
+    val latexOutput = sphinxBuild("latex", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.warningIsError, inputs.tags, inputs.properties, inputs.env, log)
     makePdf(latexOutput, log)
   }
 
   def generateEpub(inputs: SphinxInputs, target: File, cacheDir: File, log: Logger): File = {
-    sphinxBuild("epub", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.tags, inputs.properties, inputs.env, log)
+    sphinxBuild("epub", inputs.src, inputs.include, inputs.exclude, target, cacheDir, inputs.incremental, inputs.warningIsError, inputs.tags, inputs.properties, inputs.env, log)
   }
 
   /**
@@ -97,7 +97,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
    * Run sphinx-build with a given builder (html or latex).
    * @return output directory
    */
-  private def sphinxBuild(builder: String, src: File, include: FileFilter, exclude: FileFilter, baseTarget: File, cacheDir: File, incremental: Boolean, tags: Seq[String], properties: Map[String, String], env: Map[String,String], log: Logger): File = {
+  private def sphinxBuild(builder: String, src: File, include: FileFilter, exclude: FileFilter, baseTarget: File, cacheDir: File, incremental: Boolean, warningIsError: Boolean, tags: Seq[String], properties: Map[String, String], env: Map[String,String], log: Logger): File = {
     val target = baseTarget / builder
     val doctrees = baseTarget / "doctrees" / builder
     val cache = cacheDir / "sphinx" / builder
@@ -110,10 +110,11 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
         if (!incremental) IO.delete(target)
         val logger = sphinxLogger(log)
         val buildOptions = if (!incremental) Seq("-a", "-E") else Seq.empty[String]
+        val warningOptions = if (warningIsError) Seq("-W") else Seq.empty[String]
         val colourOptions = Seq("-N")
         val tagOptions = tags flatMap (Seq("-t", _))
         val propertyOptions = (properties map { case (k, v) => "-D%s=%s" format (k, v) }).toSeq
-        val command = Seq("sphinx-build") ++ buildOptions ++ colourOptions ++ Seq("-b", builder, "-d", doctrees.absolutePath) ++ tagOptions ++ propertyOptions ++ Seq(src.absolutePath, target.absolutePath)
+        val command = Seq("sphinx-build") ++ buildOptions ++ warningOptions ++ colourOptions ++ Seq("-b", builder, "-d", doctrees.absolutePath) ++ tagOptions ++ propertyOptions ++ Seq(src.absolutePath, target.absolutePath)
         log.debug("Command: " + command.mkString(" "))
         log.debug("Environment: " + env)
         val exitCode = Process(command, src, env.toSeq : _*) ! logger
