@@ -14,7 +14,7 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "$project.version$")
 
 ## Adding Content to Your Site
 
-When you run `makeSite`, your project's webpage is generated in the `target/site` directory. By default, all files under `src/site` are included in `target/site`. If your site mainly contains static content but you want to replace for example a version string in some of the pages you can use @ref:[preprocessing](preprocess.md) to substitute variables.
+When you run `makeSite`, your project's webpage is generated in the `target/site` directory. By default, all files under `src/site` that match the includeFilter setting (by default *.html, *.css, *.png, *.jpg, *.gif, *.swf) are included in `target/site`. If your site mainly contains static content but you want to replace for example a version string in some of the pages you can use @ref:[preprocessing](preprocess.md) to substitute variables.
 
 In addition to static content, you can also generated content as part of the build process and add it to your site. sbt-site has support for adding @ref:[Scaladoc][apidoc] and provides several @ref:[site generators](generators/index.md) such as Jekyll and Sphinx which can be used for managing your site's content.
 
