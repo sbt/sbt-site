@@ -1,11 +1,14 @@
 package com.typesafe.sbt.site.asciidoctor
 
 import java.util
-import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
+
 import com.typesafe.sbt.site.SitePlugin
+import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.util.SiteHelpers
 import org.asciidoctor.Asciidoctor.Factory
-import org.asciidoctor.{AsciiDocDirectoryWalker, Options, SafeMode}
+import org.asciidoctor.Options
+import org.asciidoctor.SafeMode
+import org.asciidoctor.jruby.AsciiDocDirectoryWalker
 import sbt.Keys._
 import sbt._
 
@@ -14,11 +17,13 @@ object AsciidoctorPlugin extends AutoPlugin {
   override def requires = SitePlugin
   override def trigger = noTrigger
 
-  object autoImport {
+  object autoImport extends AsciidoctorKeys {
     val Asciidoctor = config("asciidoctor")
   }
   import autoImport._
-
+  override lazy val globalSettings = Seq(
+    asciidoctorAttributes := Map()
+  )
   override def projectSettings = asciidoctorSettings(Asciidoctor)
 
   /** Creates settings necessary for running Asciidoctor in the given configuration. */
@@ -26,7 +31,12 @@ object AsciidoctorPlugin extends AutoPlugin {
     inConfig(config)(
       Seq(
         includeFilter := AllPassFilter,
-        mappings := generate(sourceDirectory.value, target.value, includeFilter.value, version.value),
+        mappings := generate(
+          sourceDirectory.value,
+          target.value,
+          includeFilter.value,
+          version.value,
+          asciidoctorAttributes.value),
         siteSubdirName := ""
       )
     ) ++
@@ -36,10 +46,11 @@ object AsciidoctorPlugin extends AutoPlugin {
 
   /** Run asciidoctor in new ClassLoader. */
   private[sbt] def generate(
-    input: File,
-    output: File,
-    includeFilter: FileFilter,
-    version: String): Seq[(File, String)] = {
+      input: File,
+      output: File,
+      includeFilter: FileFilter,
+      version: String,
+      userSetAsciidoctorAttributes: Map[String, String]): Seq[(File, String)] = {
     val oldContextClassLoader = Thread.currentThread().getContextClassLoader
     Thread.currentThread().setContextClassLoader(this.getClass.getClassLoader)
     val asciidoctor = Factory.create()
@@ -49,10 +60,17 @@ object AsciidoctorPlugin extends AutoPlugin {
     options.setToDir(output.getAbsolutePath)
     options.setDestinationDir(output.getAbsolutePath)
     options.setSafe(SafeMode.UNSAFE)
+
     //pass project.version to asciidoctor as attribute project-version
     //need to do this explicitly through HashMap because otherwise JRuby complains
     val attributes = new util.HashMap[String, AnyRef]()
     attributes.put("project-version", version)
+
+    // Add user configured attributes into the mix
+    userSetAsciidoctorAttributes.foreach { case (key, value) =>
+      attributes.put(key, value)
+    }
+
     options.setAttributes(attributes)
     asciidoctor.convertDirectory(new AsciiDocDirectoryWalker(input.getAbsolutePath), options)
     val inputImages = input / "images"

@@ -14,4 +14,17 @@ Similarly, the output can be redirected to a subdirectory of `target/site` via t
 
 @@ snip[siteSubdirName](/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt) { #siteSubdirName }
 
+## Attributes
+
+Asciidoctor allows the rendering of documents to be inflenced by [attributes](https://asciidoctor.org/docs/user-manual/#attributes).
+
+You can configure attributes by setting `asciidoctorAttributes`.
+
+```sbt
+asciidoctorAttributes := Map(
+  "skip-front-matter" -> "", // attribute without value can be set to empty string
+  "lang" -> "nl" // attribute with value
+)
+```
+
 [Asciidoctor]: http://asciidoctor.org
