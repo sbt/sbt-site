@@ -9,7 +9,6 @@ organizationHomepage := Some(url("https://www.scala-sbt.org/"))
 
 homepage := Some(url("https://www.scala-sbt.org/sbt-site/"))
 
-version := "1.4.1-SNAPSHOT"
 crossSbtVersions := List("1.1.6")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))

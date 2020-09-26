@@ -24,31 +24,24 @@ object SitePreviewPlugin extends AutoPlugin {
       val portOption = previewFixedPort.value
       val browser = previewLaunchBrowser.value
       val path = previewPath.value
+      val ui = interactionService.value
 
-      val port = portOption getOrElse Port.any
-      val server = createServer(file, port) start()
-      val sLog = streams.value.log
-      sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
-      // TODO: use something from sbt-web?
-      @annotation.tailrec def waitForKey(): Unit = {
-        try { Thread sleep 500 } catch { case _: InterruptedException => () }
-        if(System.in.available <= 0)
-          waitForKey()
-      }
-      if(browser)
-        Browser open ("http://localhost:%d/%s".format(port, path))
-      waitForKey()
-      server stop()
-      server destroy()
+      val port = portOption.getOrElse(Port.any)
+      val server = createServer(file, port).start()
+      if (browser)
+        Browser.open("http://localhost:%d/%s".format(port, path))
+      ui.readLine(s"SitePreviewPlugin server started on port $port. Press enter to exit. ", mask = false)
+      server.stop()
+      server.destroy()
     },
     previewAuto := {
-      val port = previewFixedPort.value getOrElse Port.any
+      val port = previewFixedPort.value.getOrElse(Port.any)
       val browser = previewLaunchBrowser.value
       val path = previewPath.value
 
-      Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value) run { server =>
+      Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value).run { server =>
         if (browser)
-          Browser open(server.portBindings.head.url + "/" + path)
+          Browser.open(server.portBindings.head.url + "/" + path)
       }
     },
     previewFixedPort := Some(4000),
