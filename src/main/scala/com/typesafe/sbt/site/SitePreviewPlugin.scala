@@ -6,6 +6,7 @@ import unfiltered.util._
 
 object SitePreviewPlugin extends AutoPlugin {
   override def requires = SitePlugin
+
   override def trigger = allRequirements
 
   object autoImport {
@@ -15,6 +16,7 @@ object SitePreviewPlugin extends AutoPlugin {
     val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
     val previewPath = SettingKey[String]("previewPath", "path to open on `previewSite` and `previewAuto`") in previewSite
   }
+
   import SitePlugin.autoImport._
   import autoImport._
 
@@ -24,15 +26,18 @@ object SitePreviewPlugin extends AutoPlugin {
       val portOption = previewFixedPort.value
       val browser = previewLaunchBrowser.value
       val path = previewPath.value
-      val ui = interactionService.value
 
       val port = portOption.getOrElse(Port.any)
       val server = createServer(file, port).start()
+      val sLog = streams.value.log
+      sLog.info(s"SitePreviewPlugin server started on port $port. Press any key to exit.")
       if (browser)
         Browser.open("http://localhost:%d/%s".format(port, path))
-      ui.readLine(s"SitePreviewPlugin server started on port $port. Press enter to exit. ", mask = false)
-      server.stop()
-      server.destroy()
+      try System.in.read
+      finally {
+        server.stop()
+        server.destroy()
+      }
     },
     previewAuto := {
       val port = previewFixedPort.value.getOrElse(Port.any)
