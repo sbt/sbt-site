@@ -1,3 +1,5 @@
+dist: xenial
+jdk: openjdk8
 language: scala
 
 before_script:
@@ -6,9 +8,6 @@ before_script:
 script:
   - sbt ";^^$SBT_CROSS_VERSION; update; compile; runScriptedTest; makeSite"
 
-sudo: false
-dist: trusty
-jdk: oraclejdk8
 matrix:
   include:
   - env: SBT_CROSS_VERSION="1.1.6"
@@ -23,7 +22,7 @@ before_install:
   - rvm install 2.4.4
 
 install:
-  - gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-rdoc --no-ri
+  - gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-document
   - npm install -g gitbook-cli@2.3.2
   - gitbook install 3.2.3
   - |
@@ -40,9 +39,11 @@ before_cache:
   - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
 
 cache:
-  directories:
+  - apt
+  - directories:
+    - $HOME/.cache/coursier/v1
     - $HOME/.ivy2/cache
-    - $HOME/.sbt/boot/
+    - $HOME/.sbt
 
 #travis-deploy
 before_deploy:
