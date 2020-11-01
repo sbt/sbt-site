@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.4.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -175,7 +175,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.0
+<i class="md-icon" title="Version">label_outline</i> 1.4.1
 </label>
 </li>
 </ul>
@@ -188,25 +188,25 @@ sbt/sbt-site
 <h1><a href="#paradox" name="paradox" class="anchor"><span class="anchor-link"></span></a>Paradox</h1>
 <p>The sbt-site plugin has direct support for building <a href="https://github.com/lightbend/paradox">Paradox</a> projects.</p>
 <p>To enable Paradox site generation, enable the <code>ParadoxSitePlugin</code> plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/paradox/can-use-paradox/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(ParadoxSitePlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/paradox/can-use-paradox/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(ParadoxSitePlugin)</code></pre>
 <p>This assumes you have a Paradox project under the <code>src/main/paradox</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>paradox</code> task scope:</p>
 <pre class="prettyprint"><code class="language-sbt">paradox / sourceDirectory := sourceDirectory.value / &quot;doc&quot;
 </code></pre>
 <p>If you are configuring Paradox from scratch remember to also configure a theme:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/paradox/can-use-paradox/build.sbt#L10" target="_blank" title="Go to snippet source"></a><code class="language-sbt">paradoxTheme := Some(builtinParadoxTheme(&quot;generic&quot;))</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/paradox/can-use-paradox/build.sbt#L10" target="_blank" title="Go to snippet source"></a><code class="language-sbt">paradoxTheme := Some(builtinParadoxTheme(&quot;generic&quot;))</code></pre>
 <p>Note that all of the Paradox settings mentioned in the <a href="https://developer.lightbend.com/docs/paradox/latest/">Paradox documentation</a> are reused by sbt-site. For example to configure an <code>@extref</code> link prefix use:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/paradox/can-use-paradox/build.sbt#L14-L16" target="_blank" title="Go to snippet source"></a><code class="language-sbt">paradoxProperties ++= Map(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/paradox/can-use-paradox/build.sbt#L14-L16" target="_blank" title="Go to snippet source"></a><code class="language-sbt">paradoxProperties ++= Map(
   &quot;extref.rfc.base_url&quot; -&gt; &quot;https://tools.ietf.org/html/rfc%s&quot;
 )</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/main/paradox/generators/paradox.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/generators/paradox.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.0
+1.4.1
 </span>
 </div>
 </article>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.4.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -183,7 +183,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.0
+<i class="md-icon" title="Version">label_outline</i> 1.4.1
 </label>
 </li>
 </ul>
@@ -290,7 +290,7 @@ siteSubdirName in SiteScaladoc := &quot;jekyll-goodness/api&quot;
 <pre class="prettyprint"><code class="language-scala">addMappingsToSiteDir(mappings: TaskKey[Seq[(File, String)]], nestedDirectory: SettingKey[String])
 </code></pre>
 <p>The following examples show how you can define nested directory via a custom setting or by scoping <code>siteSubdirName</code> to either an sbt key or configuration:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
 val someDirName = settingKey[String](&quot;Some dir name&quot;)
 someDirName := &quot;someFancySource&quot;
 
@@ -303,13 +303,13 @@ addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in Sc
 <p>In the <code>PreprocessPlugin</code>, the key <code>preprocessExts: SettingKey[Set[String]]</code> has been replaced by <code>preprocessIncludeFilter: SettingKey[FileFilter]</code>.</p>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.0
+1.4.1
 </span>
 </div>
 </article>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.4.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -175,7 +175,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.0
+<i class="md-icon" title="Version">label_outline</i> 1.4.1
 </label>
 </li>
 </ul>
@@ -187,27 +187,27 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#jekyll" name="jekyll" class="anchor"><span class="anchor-link"></span></a>Jekyll</h1>
 <p>The sbt-site plugin has direct support for running <a href="https://jekyllrb.com">Jekyll</a>. This is useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(JekyllPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(JekyllPlugin)</code></pre>
 <p>This assumes you have a Jekyll project in the <code>src/jekyll</code> directory. To change this, set the key <code>sourceDirectory</code> in the <code>Jekyll</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">Jekyll / sourceDirectory := sourceDirectory.value / &quot;hyde&quot;
 </code></pre>
 <p>To redirect the output to a subdirectory of <code>target/site</code>, use the <code>siteSubdirName</code> key in <code>Jekyll</code> scope:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/notJekyllButHyde`
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/notJekyllButHyde`
 siteSubdirName in Jekyll := &quot;notJekyllButHyde&quot;</code></pre>
 <p>One common issue with Jekyll is ensuring that everyone uses the same version for generating a website. There is special support for ensuring the version of gems. To do so, add the following to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L21-L24" target="_blank" title="Go to snippet source"></a><code class="language-sbt">requiredGems := Map(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L21-L24" target="_blank" title="Go to snippet source"></a><code class="language-sbt">requiredGems := Map(
   &quot;jekyll&quot; -&gt; &quot;2.5.3&quot;,
   &quot;liquid&quot; -&gt; &quot;2.3.0&quot;
 )</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/main/paradox/generators/jekyll.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/generators/jekyll.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.0
+1.4.1
 </span>
 </div>
 </article>

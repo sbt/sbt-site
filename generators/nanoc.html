@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site">
-<meta name="generator" content="Paradox, paradox-material-theme=1.4.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -175,7 +175,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.0
+<i class="md-icon" title="Version">label_outline</i> 1.4.1
 </label>
 </li>
 </ul>
@@ -187,22 +187,22 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#nanoc" name="nanoc" class="anchor"><span class="anchor-link"></span></a>Nanoc</h1>
 <p>The sbt-site plugin has direct support for building <a href="https://nanoc.ws/">Nanoc</a> projects. To enable Nanoc site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(NanocPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(NanocPlugin)</code></pre>
 <p>This assumes you have a Nanoc project under the <code>src/nanoc</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Nanoc</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">Nanoc / sourceDirectory := sourceDirectory.value / &quot;conan&quot;
 </code></pre>
 <p>Similarly, the output can be redirected to a subdirectory of <code>target/site</code> via the <code>siteSubdirName</code> key in <code>Nanoc</code> scope:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/conan`
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/conan`
 siteSubdirName in Nanoc := &quot;conan&quot;</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.0/src/main/paradox/generators/nanoc.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/generators/nanoc.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.0
+1.4.1
 </span>
 </div>
 </article>
