@@ -1,0 +1,12 @@
+# Config for https://github.com/release-drafter/release-drafter
+name-template: 'sbt-site $NEXT_PATCH_VERSION'
+tag-template: 'v$NEXT_PATCH_VERSION'
+change-template: '- $TITLE #$NUMBER by @$AUTHOR'
+template: |
+  ## Changes
+
+  $CHANGES
+
+  ## Contributors
+
+  $CONTRIBUTORS
