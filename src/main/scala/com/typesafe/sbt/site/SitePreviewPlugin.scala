@@ -6,6 +6,7 @@ import unfiltered.util._
 
 object SitePreviewPlugin extends AutoPlugin {
   override def requires = SitePlugin
+
   override def trigger = allRequirements
 
   object autoImport {
@@ -15,6 +16,7 @@ object SitePreviewPlugin extends AutoPlugin {
     val previewLaunchBrowser = SettingKey[Boolean]("previewLaunchBrowser") in previewSite
     val previewPath = SettingKey[String]("previewPath", "path to open on `previewSite` and `previewAuto`") in previewSite
   }
+
   import SitePlugin.autoImport._
   import autoImport._
 
@@ -25,30 +27,26 @@ object SitePreviewPlugin extends AutoPlugin {
       val browser = previewLaunchBrowser.value
       val path = previewPath.value
 
-      val port = portOption getOrElse Port.any
-      val server = createServer(file, port) start()
+      val port = portOption.getOrElse(Port.any)
+      val server = createServer(file, port).start()
       val sLog = streams.value.log
-      sLog.info("SitePreviewPlugin server started on port %d. Press any key to exit." format port)
-      // TODO: use something from sbt-web?
-      @annotation.tailrec def waitForKey(): Unit = {
-        try { Thread sleep 500 } catch { case _: InterruptedException => () }
-        if(System.in.available <= 0)
-          waitForKey()
+      sLog.info(s"SitePreviewPlugin server started on port $port. Press any key to exit.")
+      if (browser)
+        Browser.open("http://localhost:%d/%s".format(port, path))
+      try System.in.read
+      finally {
+        server.stop()
+        server.destroy()
       }
-      if(browser)
-        Browser open ("http://localhost:%d/%s".format(port, path))
-      waitForKey()
-      server stop()
-      server destroy()
     },
     previewAuto := {
-      val port = previewFixedPort.value getOrElse Port.any
+      val port = previewFixedPort.value.getOrElse(Port.any)
       val browser = previewLaunchBrowser.value
       val path = previewPath.value
 
-      Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value) run { server =>
+      Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value).run { server =>
         if (browser)
-          Browser open(server.portBindings.head.url + "/" + path)
+          Browser.open(server.portBindings.head.url + "/" + path)
       }
     },
     previewFixedPort := Some(4000),
