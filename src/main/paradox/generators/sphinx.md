@@ -14,4 +14,4 @@ Similarly, the output can be redirected to a subdirectory of `target/site` via t
 
 @@ snip[siteSubdirName](/src/sbt-test/sphinx/can-use-sphinx/build.sbt) { #siteSubdirName }
 
-[Sphinx]: http://sphinx-doc.org
+[Sphinx]: http://www.sphinx-doc.org
