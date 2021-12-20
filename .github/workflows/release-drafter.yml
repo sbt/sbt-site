@@ -11,8 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Drafts your next Release notes as Pull Requests are merged
-      # https://github.com/raboof/release-drafter/releases
-      # fork of https://github.com/release-drafter/release-drafter/releases
-      - uses: raboof/release-drafter@v5
+      # https://github.com/release-drafter/release-drafter/releases
+      - uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
