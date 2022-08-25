@@ -39,8 +39,8 @@ addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.5.5")
 libraryDependencies +=
   Defaults.sbtPluginExtra(
     "org.planet42" % "laika-sbt" % "0.8.0",
-    (sbtBinaryVersion in pluginCrossBuild).value,
-    (scalaBinaryVersion in pluginCrossBuild).value
+    (pluginCrossBuild / sbtBinaryVersion).value,
+    (pluginCrossBuild / scalaBinaryVersion).value
   )
 
 enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
