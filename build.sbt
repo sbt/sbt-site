@@ -20,15 +20,15 @@ scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 resolvers += Resolver.sonatypeRepo("releases")
 
-val unfilteredVersion = "0.10.4"
+val unfilteredVersion = "0.12.0-M7" // using milestone for scala-xml 2.x.x
 
 libraryDependencies ++= Seq(
   "ws.unfiltered"  %% "unfiltered-directives" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-filter" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-jetty" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-specs2" % unfilteredVersion % "test",
-  "org.foundweekends" %% "pamflet-library" % "0.9.0",
-  "org.yaml"        % "snakeyaml"        % "1.30",
+  "org.foundweekends" %% "pamflet-library" % "0.10.0",
+  "org.yaml"        % "snakeyaml"        % "1.33",
   "com.typesafe"    % "config"           % "1.4.2",
   "org.asciidoctor" % "asciidoctorj"     % "2.1.0",
   "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.18"
