@@ -51,4 +51,4 @@ jobs:
 #          gitbook install 3.2.3
 
       - name: sbt test
-        run: sbt "^^${{ sbtCrossVersion }}; compile; runScriptedTest; makeSite"
+        run: sbt "^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
