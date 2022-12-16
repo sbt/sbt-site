@@ -1,3 +1,6 @@
+This project does not use Travis anymore, see .github/workflows instead.
+This file is kept only to remember how things were set up until all parts work again.
+
 dist: xenial
 jdk: openjdk8
 language: scala
