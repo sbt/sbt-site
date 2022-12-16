@@ -13,6 +13,8 @@ frontend which includes support for GitFlow. The images below are taken from Sou
 
 ## Release
 
+This needs to be renovated to work without Bintray, e.g. with sbt-ci-release
+
 0. Make sure you have [BinTray](https://bintray.com/sbt) credentials for the "sbt" organization. You won't be able to
 publish without them.
 1. Make sure the working directory is clean and up-to-date with the remote, and the tests pass (e.g. `sbt scripted`).
