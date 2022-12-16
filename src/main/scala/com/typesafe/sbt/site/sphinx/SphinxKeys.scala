@@ -16,6 +16,8 @@ trait SphinxKeys {
       "sphinx-properties", "-D options that should be passed when running Sphinx.")
   val sphinxIncremental = SettingKey[Boolean](
       "sphinx-incremental", "Use incremental Sphinx building. Off by default.")
+  val sphinxWarningIsError = SettingKey[Boolean](
+      "sphinx-warningiserror", "Treat warnings as errors. Off by default.")
   val sphinxInputs = TaskKey[SphinxInputs](
       "sphinx-inputs", "Combined inputs for the Sphinx runner.")
   val sphinxRunner = TaskKey[SphinxRunner](
