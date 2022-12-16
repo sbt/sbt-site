@@ -44,7 +44,7 @@ object SitePreviewPlugin extends AutoPlugin {
       val browser = previewLaunchBrowser.value
       val path = previewPath.value
 
-      Preview(port, (target in previewAuto).value, makeSite, Compat.genSources, state.value).run { server =>
+      Preview(port, (target in previewAuto).value, (thisProjectRef.value / makeSite), Compat.genSources, state.value).run { server =>
         if (browser)
           Browser.open(server.portBindings.head.url + "/" + path)
       }
