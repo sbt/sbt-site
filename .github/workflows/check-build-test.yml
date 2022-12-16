@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { sbtCrossVersion: "1.6.0", jvmName: "temurin:1.8.0"  }
+          - { sbtCrossVersion: "1.1.6", jvmName: "temurin:1.8.0"  }
           # { jvmName: "temurin:1.11.0" }
           # { jvmName: "temurin:1.17.0" }
     steps:
@@ -51,4 +51,4 @@ jobs:
 #          gitbook install 3.2.3
 
       - name: sbt test
-        run: sbt "^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
+        run: sbt ";^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
