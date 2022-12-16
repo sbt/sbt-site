@@ -42,7 +42,7 @@ object GitBookPlugin extends AutoPlugin {
     ) ++
       SiteHelpers.directorySettings(config) ++
       SiteHelpers.watchSettings(config) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+      SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   /** Run gitbook commands. */
   private[sbt] def generate(src: File, target: File, inc: FileFilter, exc: FileFilter, installDir: Option[File], s: TaskStreams): Seq[(File, String)] = {

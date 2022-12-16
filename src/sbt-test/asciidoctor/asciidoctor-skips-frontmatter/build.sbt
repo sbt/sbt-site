@@ -6,14 +6,14 @@ enablePlugins(AsciidoctorPlugin)
 
 //#siteSubdirName
 // Puts output in `target/site/asciimd`
-siteSubdirName in Asciidoctor := "asciimd"
-asciidoctorAttributes in Asciidoctor := Map(
+Asciidoctor / siteSubdirName := "asciimd"
+Asciidoctor / asciidoctorAttributes := Map(
   "skip-front-matter" -> "", // skip-front-matter is a flag that just has to be present.
   "lang" -> "nl")
 //#siteSubdirName
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Asciidoctor).value
+  val dest = (makeSite / target).value / (Asciidoctor / siteSubdirName).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)

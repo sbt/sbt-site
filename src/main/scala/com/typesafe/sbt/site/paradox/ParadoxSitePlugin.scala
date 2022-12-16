@@ -22,9 +22,9 @@ object ParadoxSitePlugin extends AutoPlugin {
   def paradoxSettings(config: Configuration): Seq[Setting[_]] = {
     val siteNameConfig = if (config == Compile) Paradox else config
     List(
-      siteSubdirName in siteNameConfig := ""
+      siteNameConfig / siteSubdirName := ""
     ) ++
     SiteHelpers.watchSettings(ThisScope.in(config, paradox.key)) ++
-    SiteHelpers.addMappingsToSiteDir((paradox in config).map(SiteHelpers.selectSubpaths(_, AllPassFilter)), siteSubdirName in siteNameConfig)
+    SiteHelpers.addMappingsToSiteDir((config / paradox).map(SiteHelpers.selectSubpaths(_, AllPassFilter)), siteNameConfig / siteSubdirName)
   }
 }

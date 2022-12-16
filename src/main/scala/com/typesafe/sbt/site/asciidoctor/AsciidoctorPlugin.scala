@@ -42,7 +42,7 @@ object AsciidoctorPlugin extends AutoPlugin {
     ) ++
       SiteHelpers.directorySettings(config) ++
       SiteHelpers.watchSettings(config) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+      SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   /** Run asciidoctor in new ClassLoader. */
   private[sbt] def generate(

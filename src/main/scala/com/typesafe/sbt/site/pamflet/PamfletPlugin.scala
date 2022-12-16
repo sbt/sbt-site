@@ -23,14 +23,14 @@ object PamfletPlugin extends AutoPlugin {
       inConfig(config)(
         Seq(
           includeFilter := AllPassFilter,
-          pamfletFencePlugins := (pamfletFencePlugins in config).?.value.getOrElse(Nil),
+          pamfletFencePlugins := (config / pamfletFencePlugins).?.value.getOrElse(Nil),
           mappings := generate(sourceDirectory.value, target.value, includeFilter.value, pamfletFencePlugins.value),
           siteSubdirName := ""
         )
       ) ++
         SiteHelpers.directorySettings(config) ++
         SiteHelpers.watchSettings(config) ++
-        SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+        SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   /** Run pamflet in sbt's JVM. */
   private[sbt] def generate(

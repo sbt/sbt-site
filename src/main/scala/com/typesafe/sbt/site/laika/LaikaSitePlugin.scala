@@ -28,19 +28,19 @@ object LaikaSitePlugin extends AutoPlugin {
       inConfig(config)(
         Def.settings(
           LaikaPlugin.projectSettings,
-          target in laikaSite := target.value,
+          laikaSite / target := target.value,
           includeFilter := AllPassFilter,
           excludeFilter := HiddenFileFilter,
           mappings := {
             generate(laikaSite.value, includeFilter.value, excludeFilter.value)
           },
           siteSubdirName := "",
-          sourceDirectories in Laika := Seq(sourceDirectory.value)
+          Laika / sourceDirectories := Seq(sourceDirectory.value)
         )
       ) ++
         SiteHelpers.directorySettings(config) ++
         SiteHelpers.watchSettings(config) ++
-        SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+        SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   private def generate(target: File, inc: FileFilter, exc: FileFilter): Seq[(File, String)] = {
     // Figure out what was generated.

@@ -35,7 +35,7 @@ object JekyllPlugin extends AutoPlugin {
     ) ++
       SiteHelpers.directorySettings(config) ++
       SiteHelpers.watchSettings(config) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+      SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   /** Run jekyll via fork. TODO - Add command line args and the like. */
   private[sbt] def generate(
