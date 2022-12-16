@@ -18,7 +18,7 @@ object SiteScaladocPlugin extends AutoPlugin {
 
   def scaladocSettings(
     config: Configuration,
-    scaladocMappings: TaskKey[Seq[(File, String)]] = (mappings in (Compile, packageDoc)),
+    scaladocMappings: TaskKey[Seq[(File, String)]] = Compile / packageDoc / mappings,
     scaladocDir: String = "latest/api"
   ): Seq[Setting[_]] =
     inConfig(config)(
@@ -27,5 +27,5 @@ object SiteScaladocPlugin extends AutoPlugin {
         mappings := scaladocMappings.value
       )
     ) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+      SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 }

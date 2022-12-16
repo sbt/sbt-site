@@ -25,14 +25,14 @@ object SphinxPlugin extends AutoPlugin {
         sphinxProperties := Map.empty,
         sphinxEnv := Map.empty,
         sphinxIncremental := false,
-        includeFilter in generate := AllPassFilter,
-        excludeFilter in generate := HiddenFileFilter,
+        generate / includeFilter := AllPassFilter,
+        generate / excludeFilter := HiddenFileFilter,
         sphinxInputs := combineSphinxInputs.value,
         sphinxRunner := SphinxRunner(),
         installPackages := installPackagesTask.value,
-        enableOutput in generateHtml := true,
-        enableOutput in generatePdf := false,
-        enableOutput in generateEpub := false,
+        generateHtml / enableOutput := true,
+        generatePdf / enableOutput := false,
+        generateEpub / enableOutput := false,
         generateHtml := generateHtmlTask.value,
         generatePdf := generatePdfTask.value,
         generateEpub := generateEpubTask.value,
@@ -40,7 +40,7 @@ object SphinxPlugin extends AutoPlugin {
         generatedPdf := seqIfEnabled(generatePdf).value,
         generatedEpub := ifEnabled(generateEpub).value,
         generate := generateTask.value,
-        includeFilter in Sphinx := AllPassFilter,
+        Sphinx / includeFilter := AllPassFilter,
         mappings := mappingsTask.value,
         version := SiteHelpers.shortVersion(version.value),
         sphinxEnv := defaultEnvTask.value,
@@ -50,7 +50,7 @@ object SphinxPlugin extends AutoPlugin {
       propertiesSettings(config) ++
       SiteHelpers.directorySettings(config) ++
       SiteHelpers.watchSettings(config) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+      SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   def defaultEnvTask = installPackages map {
     pkgs => Map("PYTHONPATH" -> Path.makeString(pkgs))
@@ -58,8 +58,8 @@ object SphinxPlugin extends AutoPlugin {
 
   // For now, we default to passing the version in as a property.
   def propertiesSettings(config: Configuration) = Seq(
-    sphinxProperties in config ++= Map(
-      "version" → (version in config).value,
+    config / sphinxProperties ++= Map(
+      "version" → (config / version).value,
       "release" → version.value
     )
   )
@@ -75,8 +75,8 @@ object SphinxPlugin extends AutoPlugin {
   def combineSphinxInputs = Def.task {
     SphinxInputs(
       sourceDirectory.value,
-      (includeFilter in generate).value,
-      (excludeFilter in generate).value,
+      (generate / includeFilter).value,
+      (generate / excludeFilter).value,
       sphinxIncremental.value,
       sphinxTags.value,
       sphinxProperties.value,
@@ -118,7 +118,7 @@ object SphinxPlugin extends AutoPlugin {
     f: Task[S] => Task[T],
     nil: T): Def.Initialize[Task[T]] = Def.task{
     val t = key.taskValue
-    if ((enableOutput in key in key.scope).value) f(t) else task {nil}
+    if ((key.scope / key / enableOutput).value) f(t) else task {nil}
   }.flatMap(identity(_))
 
   def generateTask = Def.task {
@@ -137,7 +137,7 @@ object SphinxPlugin extends AutoPlugin {
       (epub ** "*.epub").get pair Path.rebase(epub, t)
     }
     val mapping = htmlMapping ++ pdfMapping ++ epubMapping
-    Sync(CacheStore(cache))(mapping)
+    Sync.sync(CacheStore(cache))(mapping)
     s.log.info("Sphinx documentation generated: %s" format t)
     t
   }

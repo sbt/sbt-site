@@ -8,7 +8,7 @@ import sbt._
 object SitePlugin extends AutoPlugin {
   override def trigger = allRequirements
   object autoImport extends SiteKeys {
-    def publishSite(): SettingsDefinition = addArtifact(artifact in packageSite, packageSite)
+    def publishSite(): SettingsDefinition = addArtifact(packageSite / artifact, packageSite)
     val addMappingsToSiteDir = com.typesafe.sbt.site.util.SiteHelpers.addMappingsToSiteDir _
   }
   import autoImport._
@@ -18,11 +18,11 @@ object SitePlugin extends AutoPlugin {
     siteMappings := (siteMappings ?? Seq.empty).value,
     siteDirectory := target.value / "site",
     siteSourceDirectory := sourceDirectory.value / "site",
-    includeFilter in makeSite := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf",
-    siteMappings ++= SiteHelpers.selectSubpaths(siteSourceDirectory.value, (includeFilter in makeSite).value),
+    makeSite / includeFilter := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf",
+    siteMappings ++= SiteHelpers.selectSubpaths(siteSourceDirectory.value, (makeSite / includeFilter).value),
     makeSite := SiteHelpers.copySite(siteDirectory.value, streams.value.cacheDirectory, siteMappings.value),
-    artifact in packageSite := SiteHelpers.siteArtifact(moduleName.value),
-    artifactPath in packageSite := Defaults.artifactPathSetting(artifact in packageSite).value,
-    packageSite := SiteHelpers.createSiteZip(makeSite.value, (artifactPath in packageSite).value, streams.value)
+    packageSite / artifact := SiteHelpers.siteArtifact(moduleName.value),
+    packageSite / artifactPath := Defaults.artifactPathSetting(packageSite / artifact).value,
+    packageSite := SiteHelpers.createSiteZip(makeSite.value, (packageSite / artifactPath).value, streams.value)
   )
 }
