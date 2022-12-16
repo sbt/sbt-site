@@ -32,7 +32,7 @@ jobs:
         uses: coursier/cache-action@v6.4.1
 
       - name: Ruby caches
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
@@ -49,6 +49,15 @@ jobs:
           sudo gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-document
 #          npm install -g gitbook-cli@2.3.2
 #          gitbook install 3.2.3
+
+      - name: Install Hugo 0.20
+        run: |-
+          mkdir download
+          wget https://github.com/spf13/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O download/hugo.tgz
+          tar xvf download/hugo.tgz
+          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 $HOME/bin/hugo
+          chmod +x $HOME/bin/hugo
+          rm -rf download/
 
       - name: sbt test
         run: sbt ";^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
