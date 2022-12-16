@@ -31,10 +31,10 @@ jobs:
       - name: Cache Coursier cache
         uses: coursier/cache-action@v6.4.1
 
-      - name: Install Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: v16.x
+#      - name: Install Node
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: v16.x
 
       - name: Ruby caches
         uses: actions/cache@v3
@@ -52,18 +52,18 @@ jobs:
       - name: Install Jekyll, Nanoc, Asciidoctor
         run: |-
           sudo gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-document
-          npm install -g gitbook-cli@2.3.2
-          gitbook install 3.2.3
+#          npm install -g gitbook-cli@2.3.2
+#          gitbook install 3.2.3
 
-      - name: Install Hugo 0.20
-        run: |-
-          mkdir download
-          wget https://github.com/gohugoio/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O download/hugo.tgz
-          tar xvf download/hugo.tgz
-          mkdir ${PWD}/bin
-          export PATH=${PATH}:${PWD}/bin
-          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 ${PWD}/bin/hugo
-          chmod +x ${PWD}/bin/hugo
+#      - name: Install Hugo 0.20
+#        run: |-
+#          mkdir download
+#          wget https://github.com/gohugoio/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O download/hugo.tgz
+#          tar xvf download/hugo.tgz
+#          mkdir ${PWD}/bin
+#          export PATH=${PATH}:${PWD}/bin
+#          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 ${PWD}/bin/hugo
+#          chmod +x ${PWD}/bin/hugo
 
       - name: sbt test
         run: sbt ";^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
