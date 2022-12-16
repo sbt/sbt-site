@@ -38,7 +38,7 @@ jobs:
 
       - name: Intall Jekyll, Nanoc, Asciidoctor, Gitbook
         run: |-
-          gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-document
+          sudo gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-document
           npm install -g gitbook-cli@2.3.2
           gitbook install 3.2.3
 
