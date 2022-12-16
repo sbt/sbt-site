@@ -24,14 +24,14 @@ object SiteHelpers {
 
   def copySite(dir: File, cacheDir: File, maps: Seq[(File, String)]): File = {
     val concrete = maps map { case (file, dest) => (file, dir / dest) }
-    Sync(CacheStore(cacheDir / "make-site"))(concrete)
+    Sync.sync(CacheStore(cacheDir / "make-site"))(concrete)
     dir
   }
 
   def siteArtifact(name: String) = Artifact(name, Artifact.DocType, "zip", "site")
 
   def createSiteZip(siteDir: File, zipPath: File, s: TaskStreams): File = {
-    IO.zip(Path.allSubpaths(siteDir), zipPath)
+    IO.zip(Path.allSubpaths(siteDir), zipPath, Some(System.currentTimeMillis()))
     s.log.info("Site packaged: " + zipPath)
     zipPath
   }
