@@ -55,9 +55,13 @@ jobs:
           mkdir download
           wget https://github.com/spf13/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O download/hugo.tgz
           tar xvf download/hugo.tgz
-          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 $HOME/bin/hugo
-          chmod +x $HOME/bin/hugo
-          rm -rf download/
+          mkdir ${PWD}/bin
+          export PATH=${PATH}:${PWD}/bin
+          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 ${PWD}/bin/hugo
+          chmod +x ${PWD}/bin/hugo
+
+      - name: asciidoctor
+        run: sbt ";^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
 
       - name: sbt test
         run: sbt ";^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
