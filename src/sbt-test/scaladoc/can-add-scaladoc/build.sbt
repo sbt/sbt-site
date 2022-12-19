@@ -15,7 +15,7 @@ scalaVersion := "2.12.17"
 
 TaskKey[Unit]("checkContent") := {
   val dest = (makeSite / target).value / (SiteScaladoc / siteSubdirName).value
-  val index = dest / "index.html"
+  val index = dest / "cats" / "preowned" / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)
   assert(content.exists(_.contains("cats.preowned.Meow")), s"Did not find expected content in:\n${content.mkString("\n")}")

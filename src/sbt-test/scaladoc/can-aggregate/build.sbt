@@ -12,7 +12,7 @@ lazy val kittens = project.in(file("kittens")).dependsOn(cats)
 lazy val root = project.in(file("."))
   .settings(
     ScalaUnidoc / siteSubdirName := "api",
-    addMappingsToSiteDir((ScalaUnidoc / packageDoc / mappings, ScalaUnidoc / siteSubdirName)
+    addMappingsToSiteDir(ScalaUnidoc / packageDoc / mappings, ScalaUnidoc / siteSubdirName)
   )
   .enablePlugins(ScalaUnidocPlugin)
   .aggregate(cats, kittens)
@@ -51,13 +51,15 @@ TaskKey[Unit]("checkContent") := {
     assert(file.exists, s"${file.getAbsolutePath} did not exist")
     val actual = IO.readLines(file)
     expected.foreach { text =>
-      assert(actual.exists(_.contains(text)), s"Did not find $text in:\n${actual.mkString("\n")}")
+      assert(actual.exists(_.contains(text)), s"Did not find '$text' in $file:\n${actual.mkString("\n")}")
     }
   }
 
   val unidocBase = (root / makeSite / target).value
   checkFileContent(unidocBase / "index.html", "Site with unidoc")
-  checkFileContent(unidocBase / "api/index.html", "cats.Catnoid", "cats.LolCat", "kittens.Kitteh")
+  checkFileContent(unidocBase / "api/index.html", "cats/index.html", "kittens/index.html")
+  checkFileContent(unidocBase / "api/cats/index.html", "cats.Catnoid", "cats.LolCat")
+  checkFileContent(unidocBase / "api/kittens/index.html", "kittens.Kitteh")
 
   val scaladocSites = Seq(
     (siteWithScaladoc / makeSite / target).value,
@@ -66,7 +68,7 @@ TaskKey[Unit]("checkContent") := {
 
   for (scaladocSite <- scaladocSites) {
     checkFileContent(scaladocSite / "index.html", "Site with scaladoc")
-    checkFileContent(scaladocSite / "api/cats/index.html", "cats.Catnoid", "cats.LolCat")
-    checkFileContent(scaladocSite / "api/kittens/index.html", "kittens.Kitteh")
+//    checkFileContent(scaladocSite / "api/cats/index.html", "cats.Catnoid", "cats.LolCat")
+//    checkFileContent(scaladocSite / "api/kittens/index.html", "kittens.Kitteh")
   }
 }
