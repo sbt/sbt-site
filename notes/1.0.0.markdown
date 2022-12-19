@@ -1,1 +1,0 @@
-Moved [here](../src/main/paradox/notes/1.0.0.md).
