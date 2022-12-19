@@ -4,11 +4,9 @@ on:
   pull_request:
   push:
     branches:
-      - develop
-      - master
       - main
       - release-*
-    tags-ignore: [ v.* ]
+    tags-ignore: ["v*"]
 
 permissions:
   contents: read
@@ -65,5 +63,5 @@ jobs:
 #          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 ${PWD}/bin/hugo
 #          chmod +x ${PWD}/bin/hugo
 
-      - name: sbt test
+      - name: sbt runScriptedTest
         run: sbt ";^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
