@@ -4,6 +4,7 @@ enablePlugins(SbtPlugin)
 name := "sbt-site"
 
 organization := "com.typesafe.sbt"
+// TODO: organization := "com.github.sbt"
 organizationName := "sbt"
 organizationHomepage := Some(url("https://www.scala-sbt.org/"))
 
@@ -16,8 +17,13 @@ licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause")
 scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "scm:git:git@github.com:sbt/sbt-site.git"))
 //#scm-info
 
-scalacOptions ++= Seq("-deprecation", "-unchecked")
-
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-unchecked",
+  "-encoding",
+  "UTF-8",
+  "-release",
+  "11")
 resolvers ++= Resolver.sonatypeOssRepos("releases")
 
 val unfilteredVersion = "0.10.4"
