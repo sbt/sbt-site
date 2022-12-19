@@ -1,4 +1,4 @@
-scalacOptions in (Compile, doc) ++= Seq(
+Compile  / doc / scalacOptions ++= Seq(
   "-sourcepath", baseDirectory.value.toString,
   "-doc-source-url", {
     val branch = if (isSnapshot.value) "master" else s"v${version.value}"
@@ -8,9 +8,9 @@ scalacOptions in (Compile, doc) ++= Seq(
 
 enablePlugins(PreprocessPlugin)
 
-sourceDirectory in Preprocess := (target in (Compile, doc)).value
-siteSubdirName in Preprocess := "api"
-makeSite := makeSite.dependsOn(doc in Compile).value
+Preprocess / sourceDirectory := (Compile / doc / target).value
+Preprocess / siteSubdirName := "api"
+makeSite := makeSite.dependsOn(Compile / doc).value
 
 //#preprocessRules
 preprocessRules in Preprocess := Seq(
@@ -19,7 +19,7 @@ preprocessRules in Preprocess := Seq(
 //#preprocessRules
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Preprocess).value
+  val dest = (makeSite / target).value / (Preprocess / siteSubdirName).value
   val app = dest / "App.html"
   assert(app.exists, s"${app.getAbsolutePath} did not exist")
   val content = IO.readLines(app)

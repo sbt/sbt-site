@@ -3,7 +3,7 @@ name := "test"
 version := "0.0-ABCD"
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value
+  val dest = (makeSite / target).value
   val readme = dest / "README.html"
   assert(readme.exists, s"${readme.getAbsolutePath} did not exist")
   val content = IO.readLines(readme)

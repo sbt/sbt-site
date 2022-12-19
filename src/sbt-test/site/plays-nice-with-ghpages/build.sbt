@@ -7,7 +7,7 @@ enablePlugins(GhpagesPlugin)
 git.remoteRepo := "git@github.com:metasim/sbt-site.git"
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value
+  val dest = (makeSite / target).value
   val readme = dest / "README.html"
   assert(readme.exists, s"${readme.getAbsolutePath} did not exist")
   val content = IO.readLines(readme)

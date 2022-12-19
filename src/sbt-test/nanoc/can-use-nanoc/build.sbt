@@ -6,11 +6,11 @@ enablePlugins(NanocPlugin)
 
 //#siteSubdirName
 // Puts output in `target/site/conan`
-siteSubdirName in Nanoc := "conan"
+Nanoc / siteSubdirName := "conan"
 //#siteSubdirName
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Nanoc).value
+  val dest = (makeSite / target).value / (Nanoc / siteSubdirName).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)

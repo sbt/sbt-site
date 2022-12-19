@@ -6,11 +6,11 @@ enablePlugins(SphinxPlugin)
 
 //#siteSubdirName
 // Puts output in `target/site/giza`
-siteSubdirName in Sphinx := "giza"
+Sphinx / siteSubdirName := "giza"
 //#siteSubdirName
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Sphinx).value
+  val dest = (makeSite / target).value / (Sphinx / siteSubdirName).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)

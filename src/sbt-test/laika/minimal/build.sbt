@@ -4,10 +4,10 @@ name := "test"
 enablePlugins(LaikaSitePlugin)
 //#enablePlugin
 
-siteSubdirName in LaikaSite := "minimal"
+LaikaSite / siteSubdirName := "minimal"
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in LaikaSite).value
+  val dest = (makeSite / target).value / (LaikaSite / siteSubdirName).value
 
   val expectedFilesAndWords = Map(
     dest / "index.html" -> Seq("test", "Minimal")

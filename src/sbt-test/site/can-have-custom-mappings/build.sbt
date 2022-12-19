@@ -16,15 +16,15 @@ mappings in makeSite ++= Seq(
 val someDirName = settingKey[String]("Some dir name")
 someDirName := "someFancySource"
 
-addMappingsToSiteDir(mappings in (Compile, packageSrc), someDirName)
+addMappingsToSiteDir(Compile / packageSrc / mappings, someDirName)
 
 // Or using siteSubdirName scoped to a sbt task or a configuration
-siteSubdirName in ScalaUnidoc := "api"
-addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)
+ScalaUnidoc / siteSubdirName := "api"
+addMappingsToSiteDir(ScalaUnidoc/ packageDoc / mappings, ScalaUnidoc / siteSubdirName)
 //#addMappingsToSiteDir
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value
+  val dest = (makeSite / target).value
   val readme = dest / "README.html"
   assert(readme.exists, s"${readme.getAbsolutePath} did not exist")
   val content = IO.readLines(readme)

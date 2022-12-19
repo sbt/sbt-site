@@ -6,7 +6,7 @@ Before upgrading please consult the @github:[release notes](/notes/). Instructio
 
 @@@ note
 
-* Version 1.5+ is published for sbt >= 1.4.9.
+* Version 1.5+ is published for sbt >= 1.4.9 and requires Java 11+.
 * Version 1.4+ is published for sbt 1.2.x.
 * Version 1.3+ is cross published to both sbt 0.13 and sbt 1.x.
 * As of sbt-site version 1.x.x, sbt version 0.13.10+ or 1.0.0-RC2+ is supported.

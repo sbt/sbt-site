@@ -3,12 +3,12 @@ name := "test"
 enablePlugins(GitBookPlugin)
 
 //#gitbookInstallDir
-gitbookInstallDir in GitBook := Some(baseDirectory.value / "node_modules" / "gitbook")
+GitBook / gitbookInstallDir := Some(baseDirectory.value / "node_modules" / "gitbook")
 //#gitbookInstallDir
 
 TaskKey[Unit]("checkContent") := {
-  val installDir = (gitbookInstallDir in GitBook).value
-  val dest = (target in makeSite).value / (siteSubdirName in GitBook).value
+  val installDir = (GitBook / gitbookInstallDir).value
+  val dest = (makeSite / target).value / (GitBook / siteSubdirName).value
 
   assert(installDir.isDefined, "gitbookInstallDir setting is not defined")
 

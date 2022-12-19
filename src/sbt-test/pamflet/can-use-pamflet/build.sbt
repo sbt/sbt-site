@@ -6,11 +6,11 @@ enablePlugins(PamfletPlugin)
 
 //#siteSubdirName
 // Puts output in `target/site/parchment`
-siteSubdirName in Pamflet := "parchment"
+Pamflet / siteSubdirName := "parchment"
 //#siteSubdirName
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Pamflet).value
+  val dest = (makeSite / target).value / (Pamflet / siteSubdirName).value
   val index = dest / "Pamphlet+Testing.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)
