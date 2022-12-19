@@ -4,17 +4,17 @@ name := "test"
 enablePlugins(LaikaSitePlugin)
 //#enablePlugin
 
-sourceDirectory in LaikaSite := sourceDirectory.value / "blog"
+LaikaSite / sourceDirectory := sourceDirectory.value / "blog"
 
-siteSubdirName in LaikaSite := "blog"
+LaikaSite / siteSubdirName := "blog"
 
 //#laikaSbtPluginCustomization
-laikaBlockDirectives in LaikaSite += CustomDirectives.postsToc
-laikaSiteRenderers in LaikaSite += CustomDirectives.postsRenderer
+LaikaSite / laikaBlockDirectives += CustomDirectives.postsToc
+LaikaSite / laikaSiteRenderers += CustomDirectives.postsRenderer
 //#laikaSbtPluginCustomization
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in LaikaSite).value
+  val dest = (makeSite / target).value / (LaikaSite / siteSubdirName).value
 
   val expectedFilesAndWords = Map(
     dest / "index.html" -> Seq("Start Bootstrap Template", "Blog Post Title", "Second Post Title"),

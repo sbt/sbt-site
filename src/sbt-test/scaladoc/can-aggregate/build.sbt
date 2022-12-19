@@ -1,6 +1,6 @@
 name := "scaladoc subproject test"
 
-scalaVersion in ThisBuild := "2.10.6"
+ThisBuild / scalaVersion := "2.12.17"
 
 //#subprojects
 lazy val cats = project.in(file("cats"))
@@ -11,8 +11,8 @@ lazy val kittens = project.in(file("kittens")).dependsOn(cats)
 //#unidoc-site
 lazy val root = project.in(file("."))
   .settings(
-    siteSubdirName in ScalaUnidoc := "api",
-    addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)
+    ScalaUnidoc / siteSubdirName := "api",
+    addMappingsToSiteDir((ScalaUnidoc / packageDoc / mappings, ScalaUnidoc / siteSubdirName)
   )
   .enablePlugins(ScalaUnidocPlugin)
   .aggregate(cats, kittens)
@@ -26,8 +26,8 @@ val Kittens = config("kittens")
 
 lazy val siteWithScaladoc = project.in(file("site/scaladoc"))
   .settings(
-    SiteScaladocPlugin.scaladocSettings(Cats, mappings in (Compile, packageDoc) in cats, "api/cats"),
-    SiteScaladocPlugin.scaladocSettings(Kittens, mappings in (Compile, packageDoc) in kittens, "api/kittens")
+    SiteScaladocPlugin.scaladocSettings(Cats, cats / Compile / packageDoc / mappings, "api/cats"),
+    SiteScaladocPlugin.scaladocSettings(Kittens, kittens / Compile / packageDoc / mappings, "api/kittens")
   )
 //#scaladoc-site
 
@@ -37,7 +37,7 @@ lazy val scaladocSiteProjects = List((cats, Cats), (kittens, Kittens))
 lazy val scaladocSiteSettings = scaladocSiteProjects.flatMap { case (project, conf) =>
   SiteScaladocPlugin.scaladocSettings(
     conf,
-    mappings in (Compile, packageDoc) in project,
+    project / Compile / packageDoc / mappings,
     s"api/${project.id}"
   )
 }
@@ -55,13 +55,13 @@ TaskKey[Unit]("checkContent") := {
     }
   }
 
-  val unidocBase = (target in makeSite in root).value
+  val unidocBase = (root / makeSite / target).value
   checkFileContent(unidocBase / "index.html", "Site with unidoc")
   checkFileContent(unidocBase / "api/index.html", "cats.Catnoid", "cats.LolCat", "kittens.Kitteh")
 
   val scaladocSites = Seq(
-    (target in makeSite in siteWithScaladoc).value,
-    (target in makeSite in siteWithScaladocAlt).value
+    (siteWithScaladoc / makeSite / target).value,
+    (siteWithScaladocAlt / makeSite / target).value
   )
 
   for (scaladocSite <- scaladocSites) {

@@ -4,11 +4,11 @@ name := "test"
 enablePlugins(GitBookPlugin)
 //#enablePlugin
 
-sourceDirectory in GitBook := baseDirectory.value
+GitBook / sourceDirectory := baseDirectory.value
 
 //#siteSubdirName
 // Puts output in `target/site/book`
-siteSubdirName in GitBook := "book"
+GitBook / siteSubdirName := "book"
 //#siteSubdirName
 
 val gitHeadPath = ".git/HEAD"
@@ -19,7 +19,7 @@ initialize := {
 }
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in GitBook).value
+  val dest = (makeSite / target).value / (GitBook / siteSubdirName).value
 
   val generatedGitFile = baseDirectory.value / gitHeadPath
   assert(generatedGitFile.exists, s"${generatedGitFile.getAbsolutePath} did not exist")

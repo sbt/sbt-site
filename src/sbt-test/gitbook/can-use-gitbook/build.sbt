@@ -13,11 +13,11 @@ def gitbookProject(version: String)(project: Project): Project = project
   .enablePlugins(GitBookPlugin)
   .settings(
     checkContentTask,
-    siteSubdirName in GitBook := "docs"
+    GitBook / siteSubdirName := "docs"
   )
 
 def checkContentTask = checkContent := {
-  val dest = (target in makeSite).value / (siteSubdirName in GitBook).value
+  val dest = (makeSite / target).value / (GitBook / siteSubdirName).value
 
   val expectedFilesAndWords = Map(
     dest / "index.html" -> Seq("sbt", "GitBook", "User"),

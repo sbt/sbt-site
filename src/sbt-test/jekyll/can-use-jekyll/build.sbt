@@ -6,7 +6,7 @@ enablePlugins(JekyllPlugin)
 
 //#siteSubdirName
 // Puts output in `target/site/notJekyllButHyde`
-siteSubdirName in Jekyll := "notJekyllButHyde"
+Jekyll / siteSubdirName := "notJekyllButHyde"
 //#siteSubdirName
 
 /* FIXME: This currently fails
@@ -26,7 +26,7 @@ requiredGems := Map(
 */
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Jekyll).value
+  val dest = (makeSite / target).value / (Jekyll / siteSubdirName).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)

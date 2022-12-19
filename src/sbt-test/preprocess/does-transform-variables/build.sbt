@@ -9,10 +9,10 @@ name := "preprocess test"
 version := "0.0-ABCD"
 
 //#preprocessVars
-preprocessVars in Preprocess := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
+Preprocess / preprocessVars := Map("VERSION" -> version.value, "DATE" -> new Date().toString)
 //#preprocessVars
 
-preprocessRules in Preprocess := Seq(
+Preprocess / preprocessRules := Seq(
   ("Author: ([a-z]+)".r, _.group(0).toUpperCase)
 )
 
@@ -21,11 +21,11 @@ preprocessIncludeFilter := "*.md" | "*.markdown"
 //#preprocessIncludeFilter
 
 //#sourceDirectory
-sourceDirectory in Preprocess := sourceDirectory.value / "site-preprocess"
+Preprocess / sourceDirectory := sourceDirectory.value / "site-preprocess"
 //#sourceDirectory
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Preprocess).value
+  val dest = (makeSite / target).value / (Preprocess / siteSubdirName).value
   val readme = dest / "README.md"
   assert(readme.exists, s"${readme.getAbsolutePath} did not exist")
   val content = IO.readLines(readme)

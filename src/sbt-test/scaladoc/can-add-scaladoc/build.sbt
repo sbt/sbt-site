@@ -6,15 +6,15 @@ enablePlugins(SiteScaladocPlugin)
 
 //#siteSubdirName
 // Puts Scaladoc output in `target/site/api/latest`
-siteSubdirName in SiteScaladoc := "api/latest"
+SiteScaladoc / siteSubdirName := "api/latest"
 //#siteSubdirName
 
 version := "0.0.meow"
 
-scalaVersion := "2.10.6"
+scalaVersion := "2.12.17"
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in SiteScaladoc).value
+  val dest = (makeSite / target).value / (SiteScaladoc / siteSubdirName).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)

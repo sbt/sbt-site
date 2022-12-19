@@ -6,19 +6,19 @@ val Site2 = config("site2")
 
 PamfletPlugin.pamfletSettings(Site1)
 
-sourceDirectory in Site1 := sourceDirectory.value / "pamflet-site-1"
+Site1 / sourceDirectory := sourceDirectory.value / "pamflet-site-1"
 
-siteSubdirName in Site1 := "chapter1"
+Site1 / siteSubdirName := "chapter1"
 
 PamfletPlugin.pamfletSettings(Site2)
 
-sourceDirectory in Site2 := sourceDirectory.value / "pamflet-site-2"
+Site2 / sourceDirectory := sourceDirectory.value / "pamflet-site-2"
 
-siteSubdirName in Site2 := "chapter2"
+Site2 / siteSubdirName := "chapter2"
 
 TaskKey[Unit]("checkContent") := {
-  val dest1 = (target in makeSite).value / (siteSubdirName in Site1).value
-  val dest2 = (target in makeSite).value / (siteSubdirName in Site2).value
+  val dest1 = (makeSite / target).value / (Site1 / siteSubdirName).value
+  val dest2 = (makeSite / target).value / (Site2 / siteSubdirName).value
   for ((dest, i) ← Seq(dest1, dest2).zipWithIndex) {
     val index = dest / s"Pamphlet+Testing+${i+1}.html"
     assert(index.exists, s"${index.getAbsolutePath} did not exist")

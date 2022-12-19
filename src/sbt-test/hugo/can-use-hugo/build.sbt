@@ -5,17 +5,17 @@ enablePlugins(HugoPlugin)
 //#enablePlugin
 
 //#baseURL
-baseURL in Hugo := uri("https://yourdomain.com")
+Hugo / baseURL := uri("https://yourdomain.com")
 //#baseURL
 
-siteSubdirName in Hugo := "thisIsHugo"
+Hugo / siteSubdirName := "thisIsHugo"
 
 //#extraEnv
-extraEnv in Hugo := Map("MY_ENV" -> "Is set!", "MY_OTHER_ENV" -> "Is also set.")
+Hugo / extraEnv := Map("MY_ENV" -> "Is set!", "MY_OTHER_ENV" -> "Is also set.")
 //#extraEnv
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Hugo).value
+  val dest = (makeSite / target).value / (Hugo / siteSubdirName).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val content = IO.readLines(index)

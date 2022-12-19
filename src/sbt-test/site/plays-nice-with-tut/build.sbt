@@ -2,12 +2,12 @@ name := "test"
 
 //#tut
 enablePlugins(ParadoxPlugin, ParadoxSitePlugin, TutPlugin)
-sourceDirectory in (Compile, paradox) := tutTargetDirectory.value
+Compile / paradox / sourceDirectory := tutTargetDirectory.value
 makeSite := makeSite.dependsOn(tut).value
 //#tut
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value
+  val dest = (makeSite / target).value
 
   def checkFileContent(file: File, expected: String) = {
     assert(file.exists, s"${file.getAbsolutePath} did not exist")

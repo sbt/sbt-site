@@ -10,15 +10,15 @@ ParadoxPlugin.paradoxSettings(Site1)
 ParadoxSitePlugin.paradoxSettings(Site1)
 
 // Customize the source directory
-sourceDirectory in (Site1, paradox) := sourceDirectory.value / "paradox-site-1"
+Site1 / paradox / sourceDirectory := sourceDirectory.value / "paradox-site-1"
 
 // Customize the output subdirectory
-siteSubdirName in Site1 := "chapter1"
+Site1 / siteSubdirName := "chapter1"
 
 // Same as above, but for config `Site2` keep the default source directory
 ParadoxPlugin.paradoxSettings(Site2)
 ParadoxSitePlugin.paradoxSettings(Site2)
-siteSubdirName in Site2 := "chapter2"
+Site2 / siteSubdirName := "chapter2"
 
 // Global Paradox settings
 enablePlugins(ParadoxPlugin)
@@ -26,7 +26,7 @@ paradoxTheme := Some(builtinParadoxTheme("generic"))
 //#advanced-usage
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value
+  val dest = (makeSite / target).value
   for (i <- 1 to 2) {
     val chapter = dest / s"chapter$i" / "index.html"
     assert(chapter.exists, s"${chapter.getAbsolutePath} did not exist")
