@@ -4,6 +4,7 @@ enablePlugins(SbtPlugin)
 name := "sbt-site"
 
 organization := "com.typesafe.sbt"
+// TODO: organization := "com.github.sbt"
 organizationName := "sbt"
 organizationHomepage := Some(url("https://www.scala-sbt.org/"))
 
