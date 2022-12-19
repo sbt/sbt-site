@@ -6,7 +6,7 @@ import sbt.Keys
 /** Shim for backwards compatibility in `sbt-ghpages`*/
 object SbtSite {
   object SiteKeys {
-    @deprecated("Please upgrade to AutoPlugin and use `mappings in makeSite`", "1.0")
-    val siteMappings = Keys.mappings in SitePlugin.autoImport.makeSite
+    @deprecated("Please upgrade to AutoPlugin and use `makeSite / mappings`", "1.0")
+    val siteMappings = SitePlugin.autoImport.makeSite / Keys.mappings
   }
 }

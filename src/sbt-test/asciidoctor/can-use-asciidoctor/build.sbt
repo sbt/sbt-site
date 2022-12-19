@@ -6,11 +6,11 @@ enablePlugins(AsciidoctorPlugin)
 
 //#siteSubdirName
 // Puts output in `target/site/asciimd`
-siteSubdirName in Asciidoctor := "asciimd"
+Asciidoctor / siteSubdirName := "asciimd"
 //#siteSubdirName
 
 TaskKey[Unit]("checkContent") := {
-  val dest = (target in makeSite).value / (siteSubdirName in Asciidoctor).value
+  val dest = (makeSite / target).value / (Asciidoctor / siteSubdirName).value
   val index = dest / "index.html"
   assert(index.exists, s"${index.getAbsolutePath} did not exist")
   val diagram = dest / "asciidoctor-diagram-process.png"

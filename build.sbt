@@ -9,7 +9,7 @@ organizationHomepage := Some(url("https://www.scala-sbt.org/"))
 
 homepage := Some(url("https://www.scala-sbt.org/sbt-site/"))
 
-crossSbtVersions := List("1.1.6")
+crossSbtVersions := List("1.4.9")
 
 licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause"))
 //#scm-info
@@ -18,7 +18,7 @@ scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "scm:git:git@git
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
-resolvers += Resolver.sonatypeRepo("releases")
+resolvers ++= Resolver.sonatypeOssRepos("releases")
 
 val unfilteredVersion = "0.9.1"
 
@@ -39,8 +39,8 @@ addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.5.5")
 libraryDependencies +=
   Defaults.sbtPluginExtra(
     "org.planet42" % "laika-sbt" % "0.8.0",
-    (sbtBinaryVersion in pluginCrossBuild).value,
-    (scalaBinaryVersion in pluginCrossBuild).value
+    (pluginCrossBuild / sbtBinaryVersion).value,
+    (pluginCrossBuild / scalaBinaryVersion).value
   )
 
 enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)

@@ -14,7 +14,7 @@ Therefore when upgrading remove the `Paradox` configuration scope from all of th
 Note that sbt-site setting `siteSubdirName` is still configured under the `Paradox` configuration scope.
 
 The default Paradox source directory has been changed to match the one defined in the `sbt-paradox`, which is `src/main/paradox`.
-To keep the previous default, add the following to the build: `sourceDirectory in paradox := sourceDirectory.value`
+To keep the previous default, add the following to the build: `paradox / sourceDirectory := sourceDirectory.value`
 
 <a id="from-version-0.x.x-to-1.x.x" />
 ## Migrating from version 0.x.x to 1.x.x

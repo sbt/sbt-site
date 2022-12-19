@@ -52,9 +52,9 @@ object Compat {
   def watchSettings(scope: Scope): Seq[Setting[_]] =
     Seq(
       ConfigGlobal / watchSources += new Source(
-        base = (sourceDirectory in scope).value,
-        includeFilter = (includeFilter in scope).value,
-        excludeFilter = (excludeFilter in scope).value
+        base = (scope / sourceDirectory).value,
+        includeFilter = (scope / includeFilter).value,
+        excludeFilter = (scope / excludeFilter).value
       )
     )
 

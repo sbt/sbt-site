@@ -36,7 +36,7 @@ object PreprocessPlugin extends AutoPlugin {
           ,
         preprocessVars := Map("VERSION" -> version.value),
         preprocessRules := Seq.empty,
-        includeFilter in Preprocess := AllPassFilter,
+        Preprocess / includeFilter := AllPassFilter,
         sourceDirectory := sourceDirectory.value / "site-preprocess",
         target := target.value / Preprocess.name,
         preprocess := simplePreprocess(
@@ -47,7 +47,7 @@ object PreprocessPlugin extends AutoPlugin {
       )
     ) ++
       SiteHelpers.watchSettings(config) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+      SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   /**
    * Simple preprocessing of all files in a directory using `@variable@` replacements.

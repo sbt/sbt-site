@@ -42,7 +42,7 @@ object HugoPlugin extends AutoPlugin {
     ) ++
       SiteHelpers.directorySettings(config) ++
       SiteHelpers.watchSettings(config) ++
-      SiteHelpers.addMappingsToSiteDir(mappings in config, siteSubdirName in config)
+      SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   /** Run hugo via fork. */
   private[sbt] def generate(
