@@ -53,7 +53,7 @@ Compile / paradoxMaterialTheme ~= {
 
 //#ghpages-publish
 enablePlugins(GhpagesPlugin)
-git.remoteRepo := scmInfo.value.get.connection.replace("scm:git:", "")
+// git.remoteRepo := scmInfo.value.get.connection.replace("scm:git:", "")
 //#ghpages-publish
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
