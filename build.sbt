@@ -17,8 +17,13 @@ licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause")
 scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "scm:git:git@github.com:sbt/sbt-site.git"))
 //#scm-info
 
-scalacOptions ++= Seq("-deprecation", "-unchecked")
-
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-unchecked",
+  "-encoding",
+  "UTF-8",
+  "-release",
+  "11")
 resolvers ++= Resolver.sonatypeOssRepos("releases")
 
 val unfilteredVersion = "0.10.4"
@@ -53,7 +58,7 @@ Compile / paradoxMaterialTheme ~= {
 
 //#ghpages-publish
 enablePlugins(GhpagesPlugin)
-// git.remoteRepo := scmInfo.value.get.connection.replace("scm:git:", "")
+git.remoteRepo := "git@github.com:sbt/sbt-site.git"
 //#ghpages-publish
 
 TaskKey[Unit]("runScriptedTest") := Def.taskDyn {
