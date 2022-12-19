@@ -20,7 +20,7 @@ scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 resolvers ++= Resolver.sonatypeOssRepos("releases")
 
-val unfilteredVersion = "0.9.1"
+val unfilteredVersion = "0.10.4"
 
 libraryDependencies ++= Seq(
   "ws.unfiltered"  %% "unfiltered-directives" % unfilteredVersion,
@@ -28,13 +28,13 @@ libraryDependencies ++= Seq(
   "ws.unfiltered"  %% "unfiltered-jetty" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-specs2" % unfilteredVersion % "test",
   "org.foundweekends" %% "pamflet-library" % "0.8.0",
-  "org.yaml"        % "snakeyaml"        % "1.24",
-  "com.typesafe"    % "config"           % "1.3.4",
+  "org.yaml"        % "snakeyaml"        % "1.33",
+  "com.typesafe"    % "config"           % "1.4.2",
   "org.asciidoctor" % "asciidoctorj"     % "2.1.0",
   "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.18"
 )
 
-addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.5.5")
+addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.3")
 
 libraryDependencies +=
   Defaults.sbtPluginExtra(

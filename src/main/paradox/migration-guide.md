@@ -72,7 +72,7 @@ The following examples show how you can define nested directory via a custom set
 
 In the `PreprocessPlugin`, the key `preprocessExts: SettingKey[Set[String]]` has been replaced by `preprocessIncludeFilter: SettingKey[FileFilter]`.
 
-[Preprocess]: preprocess.md#variable-substitution
+[Preprocess]: preprocess.md#substitution
 [Jekyll]: generators/jekyll.md
 [Sphinx]: generators/sphinx.md
 [Pamflet]: generators/pamflet.md

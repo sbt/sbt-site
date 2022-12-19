@@ -1,5 +1,7 @@
 # Release Notes
 
+See [GitHub Releases](https://github.com/sbt/sbt-site/releases)
+
 @@toc { depth=1 }
 
 @@@ index

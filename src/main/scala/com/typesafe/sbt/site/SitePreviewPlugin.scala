@@ -28,11 +28,11 @@ object SitePreviewPlugin extends AutoPlugin {
       val path = previewPath.value
 
       val port = portOption.getOrElse(Port.any)
+      val url = s"http://localhost:$port/$path"
       val server = createServer(file, port).start()
       val sLog = streams.value.log
-      sLog.info(s"SitePreviewPlugin server started on port $port. Press any key to exit.")
-      if (browser)
-        Browser.open("http://localhost:%d/%s".format(port, path))
+      sLog.info(s"SitePreviewPlugin serving at $url  Press return to exit.")
+      if (browser) Browser.open(url)
       try System.in.read
       finally {
         server.stop()
