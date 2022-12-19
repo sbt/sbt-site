@@ -183,7 +183,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
 </label>
 </li>
 </ul>
@@ -215,6 +215,7 @@ sbt/sbt-site
 <p>This project uses <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">GitFlow</a> for branch management. This means that PRs should be merged onto <code>develop</code>, not <code>master</code>. New releases are prepared from a <code>release/vX.Y.Z</code> branch, and <code>master</code> is only updated from <code>release/...</code> branches (there are also <code>hotfix</code> branches, but they aren&rsquo;t common).</p>
 <p>An easy way to use GitFlow is to make use of the support built-in to the <a href="https://www.sourcetreeapp.com">SourceTree</a> frontend which includes support for GitFlow. The images below are taken from SourceTree. There are <a href="https://danielkummer.github.io/git-flow-cheatsheet/">other ways to use GitFlow</a> if you don&rsquo;t want to use SourceTree.</p>
 <h2><a href="#release" name="release" class="anchor"><span class="anchor-link"></span></a>Release</h2>
+<p>This needs to be renovated to work without Bintray, e.g. with sbt-ci-release</p>
 <ol>
   <li>Make sure you have <a href="https://bintray.com/sbt">BinTray</a> credentials for the &ldquo;sbt&rdquo; organization. You won&rsquo;t be able to publish without them.</li>
   <li>Make sure the working directory is clean and up-to-date with the remote, and the tests pass (e.g. <code>sbt scripted</code>). Some people like to run <code>git clean -fdx</code>.</li>
@@ -235,13 +236,13 @@ sbt/sbt-site
 </ol>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/notes/release-process.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/notes/release-process.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.1
+1.5.0-M1
 </span>
 </div>
 </article>

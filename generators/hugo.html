@@ -175,7 +175,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
 </label>
 </li>
 </ul>
@@ -187,23 +187,23 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#hugo" name="hugo" class="anchor"><span class="anchor-link"></span></a>Hugo</h1>
 <p>The sbt-site plugin has support for building <a href="https://gohugo.io/">Hugo</a> projects. To enable Hugo site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/hugo/can-use-hugo/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(HugoPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/hugo/can-use-hugo/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(HugoPlugin)</code></pre>
 <p>The <code>hugo</code> binary must be installed on your <code>$PATH</code> in order to be accessible to sbt-site. In addition, this plugin assumes you have a Hugo project under the <code>src/hugo</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Hugo</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">Hugo / sourceDirectory := sourceDirectory.value / &quot;doc&quot;
 </code></pre>
 <p>You may also change the <a href="https://gohugo.io/overview/configuration/">base-url</a> that gets passed to the <code>hugo</code> command by adjusting the following setting:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/hugo/can-use-hugo/build.sbt#L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">baseURL in Hugo := uri(&quot;https://yourdomain.com&quot;)</code></pre>
-<p>To export environment variables when forking the <code>hugo</code> process, for example to render with Hugo&rsquo;s <a href="https://hugodocs.info/functions/getenv/">getenv function</a>, use:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/hugo/can-use-hugo/build.sbt#L14" target="_blank" title="Go to snippet source"></a><code class="language-sbt">extraEnv in Hugo := Map(&quot;MY_ENV&quot; -&gt; &quot;Is set!&quot;, &quot;MY_OTHER_ENV&quot; -&gt; &quot;Is also set.&quot;)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/hugo/can-use-hugo/build.sbt#L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">Hugo / baseURL := uri(&quot;https://yourdomain.com&quot;)</code></pre>
+<p>To export environment variables when forking the <code>hugo</code> process, for example to render with Hugo&rsquo;s <a href="https://gohugo.io/functions/getenv/">getenv function</a>, use:</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/hugo/can-use-hugo/build.sbt#L14" target="_blank" title="Go to snippet source"></a><code class="language-sbt">Hugo / extraEnv := Map(&quot;MY_ENV&quot; -&gt; &quot;Is set!&quot;, &quot;MY_OTHER_ENV&quot; -&gt; &quot;Is also set.&quot;)</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/generators/hugo.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/generators/hugo.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.1
+1.5.0-M1
 </span>
 </div>
 </article>

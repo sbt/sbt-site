@@ -183,7 +183,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
 </label>
 </li>
 </ul>
@@ -217,7 +217,7 @@ sbt/sbt-site
 <h3><a href="#paradoxsiteplugin" name="paradoxsiteplugin" class="anchor"><span class="anchor-link"></span></a>ParadoxSitePlugin</h3>
 <p><code>ParadoxPlugin</code> is enabled whenever <code>ParadoxSitePlugin</code> is enabled.</p>
 <p>Paradox integration now uses the same configuration scopes as the <code>sbt-paradox</code> plugin. Therefore when upgrading remove the <code>Paradox</code> configuration scope from all of the <code>sbt-paradox</code> settings. Note that sbt-site setting <code>siteSubdirName</code> is still configured under the <code>Paradox</code> configuration scope.</p>
-<p>The default Paradox source directory has been changed to match the one defined in the <code>sbt-paradox</code>, which is <code>src/main/paradox</code>. To keep the previous default, add the following to the build: <code>sourceDirectory in paradox := sourceDirectory.value</code></p>
+<p>The default Paradox source directory has been changed to match the one defined in the <code>sbt-paradox</code>, which is <code>src/main/paradox</code>. To keep the previous default, add the following to the build: <code>paradox / sourceDirectory := sourceDirectory.value</code></p>
 <a id="from-version-0.x.x-to-1.x.x" />
 <h2><a href="#migrating-from-version-0-x-x-to-1-x-x" name="migrating-from-version-0-x-x-to-1-x-x" class="anchor"><span class="anchor-link"></span></a>Migrating from version 0.x.x to 1.x.x</h2>
 <p>The 1.x.x release of sbt-site marks the conversion to the <a href="https://www.scala-sbt.org/0.13/docs/Plugins.html"><code>AutoPlugin</code></a> facility, first introduced in sbt 0.13.5.</p>
@@ -240,7 +240,7 @@ sbt/sbt-site
       <td><em>automatic</em></td>
     </tr>
     <tr>
-      <td><a href="preprocess.html#variable-substitution">Preprocess</a> </td>
+      <td><a href="preprocess.html#substitution">Preprocess</a> </td>
       <td><code>site.preprocessSite()</code> </td>
       <td><code>enablePlugins(PreprocessPlugin)</code></td>
     </tr>
@@ -290,26 +290,26 @@ siteSubdirName in SiteScaladoc := &quot;jekyll-goodness/api&quot;
 <pre class="prettyprint"><code class="language-scala">addMappingsToSiteDir(mappings: TaskKey[Seq[(File, String)]], nestedDirectory: SettingKey[String])
 </code></pre>
 <p>The following examples show how you can define nested directory via a custom setting or by scoping <code>siteSubdirName</code> to either an sbt key or configuration:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
 val someDirName = settingKey[String](&quot;Some dir name&quot;)
 someDirName := &quot;someFancySource&quot;
 
-addMappingsToSiteDir(mappings in (Compile, packageSrc), someDirName)
+addMappingsToSiteDir(Compile / packageSrc / mappings, someDirName)
 
 // Or using siteSubdirName scoped to a sbt task or a configuration
-siteSubdirName in ScalaUnidoc := &quot;api&quot;
-addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)</code></pre>
+ScalaUnidoc / siteSubdirName := &quot;api&quot;
+addMappingsToSiteDir(ScalaUnidoc/ packageDoc / mappings, ScalaUnidoc / siteSubdirName)</code></pre>
 <h3><a href="#miscellaneous" name="miscellaneous" class="anchor"><span class="anchor-link"></span></a>Miscellaneous</h3>
 <p>In the <code>PreprocessPlugin</code>, the key <code>preprocessExts: SettingKey[Set[String]]</code> has been replaced by <code>preprocessIncludeFilter: SettingKey[FileFilter]</code>.</p>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.1
+1.5.0-M1
 </span>
 </div>
 </article>

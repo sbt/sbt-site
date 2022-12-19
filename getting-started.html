@@ -185,7 +185,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.4.1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
 </label>
 </li>
 </ul>
@@ -218,7 +218,7 @@ sbt/sbt-site
 <p>This page will help you get started with sbt-site and teach you the basic concepts.</p>
 <h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
 <p>To enable the plugin in your sbt project, add the following to your <code>project/plugins.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.typesafe.sbt&quot; % &quot;sbt-site&quot; % &quot;1.4.1&quot;)
+<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.typesafe.sbt&quot; % &quot;sbt-site&quot; % &quot;1.5.0-M1&quot;)
 </code></pre>
 <h2><a href="#adding-content-to-your-site" name="adding-content-to-your-site" class="anchor"><span class="anchor-link"></span></a>Adding Content to Your Site</h2>
 <p>When you run <code>makeSite</code>, your project&rsquo;s webpage is generated in the <code>target/site</code> directory. By default, all files under <code>src/site</code> that match the includeFilter setting (by default *.html, *.css, *.png, *.jpg, *.gif, *.swf) are included in <code>target/site</code>. If your site mainly contains static content but you want to replace for example a version string in some of the pages you can use <a href="preprocess.html">preprocessing</a> to substitute variables.</p>
@@ -227,20 +227,20 @@ sbt/sbt-site
 <pre class="prettyprint"><code class="language-sbt">siteSourceDirectory := target.value / &quot;generated-stuff&quot;
 </code></pre>
 <p>Additional files outside of <code>siteSourceDirectory</code> can be added via <a href="https://www.scala-sbt.org/0.13/docs/Mapping-Files.html">sbt file mappings</a>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L8-L11" target="_blank" title="Go to snippet source"></a><code class="language-sbt">mappings in makeSite ++= Seq(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L8-L11" target="_blank" title="Go to snippet source"></a><code class="language-sbt">mappings in makeSite ++= Seq(
   file(&quot;LICENSE&quot;) -&gt; &quot;LICENSE&quot;,
   file(&quot;src/assets/favicon.ico&quot;) -&gt; &quot;favicon.ico&quot;
 )</code></pre>
 <p>If you want to add files from an sbt task to a site sub-directory use the provided <code>addMappingsToSiteDir</code>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
 val someDirName = settingKey[String](&quot;Some dir name&quot;)
 someDirName := &quot;someFancySource&quot;
 
-addMappingsToSiteDir(mappings in (Compile, packageSrc), someDirName)
+addMappingsToSiteDir(Compile / packageSrc / mappings, someDirName)
 
 // Or using siteSubdirName scoped to a sbt task or a configuration
-siteSubdirName in ScalaUnidoc := &quot;api&quot;
-addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)</code></pre><div class="callout note "><div class="callout-title">Note</div>
+ScalaUnidoc / siteSubdirName := &quot;api&quot;
+addMappingsToSiteDir(ScalaUnidoc/ packageDoc / mappings, ScalaUnidoc / siteSubdirName)</code></pre><div class="callout note "><div class="callout-title">Note</div>
 <p><code>addMappingsToSiteDir</code> requires that the site sub-directory name is passed via a setting&rsquo;s key. In most cases this can be achieved by scoping sbt-site&rsquo;s <code>siteSubdirName</code> setting&rsquo;s key to the task providing the mappings as shown above.</p></div>
 <h2><a href="#previewing-the-site" name="previewing-the-site" class="anchor"><span class="anchor-link"></span></a>Previewing the Site</h2>
 <p>To preview your generated site, you can run <code>previewSite</code> which launches a static web server, or <code>previewAuto</code> which launches a dynamic server updating its content at each modification in your source files. Both launch the server on port 4000 and attempts to connect your browser to <a href="http://localhost:4000/">http://localhost:4000/</a>. To change the server port, use the key <code>previewFixedPort</code>:</p>
@@ -255,17 +255,17 @@ addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in Sc
 <h2><a href="#packaging-and-publishing" name="packaging-and-publishing" class="anchor"><span class="anchor-link"></span></a>Packaging and Publishing</h2>
 <p>To create a zip package of the site run <code>package-site</code>.</p>
 <p>To also include this zip file as an artifact when running <code>publish</code>, add the following to your <code>build.sbt</code>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt#L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">publishSite</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt#L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">publishSite</code></pre>
 <p>Once you have generated and packaged your site the next step is to publish it. The <a href="publishing.html">publishing</a> section discusses several mechanisms, such as <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages</a>.</p>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.4.1
+1.5.0-M1
 </span>
 </div>
 </article>
