@@ -1,4 +1,4 @@
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.4.0")
+addSbtPlugin("com.github.sbt" % "sbt-site" % "1.5.0-M3")
 //#sbt-ghpages
 addSbtPlugin("com.github.sbt" % "sbt-ghpages" % "0.7.0")
 //#sbt-ghpages
