@@ -165,7 +165,6 @@ sbt/sbt-site
     <li><a href="notes/1.1.0.html" class="page">Release 1.1.0</a></li>
     <li><a href="notes/1.0.0.html" class="page">Release 1.0.0</a></li>
     <li><a href="notes/0.8.2.html" class="page">Release 0.8.2</a></li>
-    <li><a href="notes/release-process.html" class="page">Release Process for <code>sbt-site</code></a></li>
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
@@ -183,7 +182,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M3
 </label>
 </li>
 </ul>
@@ -214,23 +213,23 @@ sbt/sbt-site
 <p>sbt-site supports simple variable and Regular Expression substitution via the <code>PreprocessPlugin</code> if for example you need to replace a version string in a source file or a generated HTML file. More advanced preprocessing, such as interpreting code snippets with <a href="https://github.com/tpolecat/tut">tut</a>, is possible via additional configuration as shown below.</p>
 <h2><a href="#substitution" name="substitution" class="anchor"><span class="anchor-link"></span></a>Substitution</h2>
 <p>The <code>PreprocessPlugin</code> reads files from an input directory, substitute variables and writes them to an output directory. In addition to preprocessing static content it is also possible to use the plugin either before or after invoking a <a href="generators/index.html">site generator</a>. To enable, add this to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/preprocess/does-transform-variables/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(PreprocessPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(PreprocessPlugin)</code></pre>
 <p>By default files are read from <code>src/site-preprocess</code> but this is configurable by setting <code>sourceDirectory</code>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/preprocess/does-transform-variables/build.sbt#L24" target="_blank" title="Go to snippet source"></a><code class="language-sbt">Preprocess / sourceDirectory := sourceDirectory.value / &quot;site-preprocess&quot;</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L24" target="_blank" title="Go to snippet source"></a><code class="language-sbt">Preprocess / sourceDirectory := sourceDirectory.value / &quot;site-preprocess&quot;</code></pre>
 <p>Variables are delimited by surrounding the name with <code>@</code> symbols (e.g. <code>@VERSION@</code>). Values are assigned to variables via the setting <code>preprocessVars: Map[String, String]</code>. For example:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/preprocess/does-transform-variables/build.sbt#L12" target="_blank" title="Go to snippet source"></a><code class="language-sbt">Preprocess / preprocessVars := Map(&quot;VERSION&quot; -&gt; version.value, &quot;DATE&quot; -&gt; new Date().toString)</code></pre><div class="callout note "><div class="callout-title">Note</div>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L12" target="_blank" title="Go to snippet source"></a><code class="language-sbt">Preprocess / preprocessVars := Map(&quot;VERSION&quot; -&gt; version.value, &quot;DATE&quot; -&gt; new Date().toString)</code></pre><div class="callout note "><div class="callout-title">Note</div>
 <p>The plugin will generate an error if a variable is found in the source file with no matching value in <code>preprocessVars</code>.</p></div>
 <p>More advanced substitution patterns can be used by providing Regular Expression rules via the setting <code>preprocessRules: Seq[(Regex, Match =&gt; String)]</code>. For example Scaladoc used to (before 2.12.9 and 2.13.0) prepend &ldquo;.scala&rdquo; to source links of Java files. The following preprocessing rule will find and fix such links:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/preprocess/transform-scaladoc/build.sbt#L16-L18" target="_blank" title="Go to snippet source"></a><code class="language-sbt">preprocessRules in Preprocess := Seq(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/preprocess/transform-scaladoc/build.sbt#L16-L18" target="_blank" title="Go to snippet source"></a><code class="language-sbt">preprocessRules in Preprocess := Seq(
   (&quot;\\.java\\.scala&quot;.r, _ =&gt; &quot;.java&quot;)
 )</code></pre>
 <p>The setting <code>preprocessIncludeFilter</code> is used to define the filename extensions that should be processed when <code>makeSite</code> is run.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/preprocess/does-transform-variables/build.sbt#L20" target="_blank" title="Go to snippet source"></a><code class="language-sbt">preprocessIncludeFilter := &quot;*.md&quot; | &quot;*.markdown&quot;</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/preprocess/does-transform-variables/build.sbt#L20" target="_blank" title="Go to snippet source"></a><code class="language-sbt">preprocessIncludeFilter := &quot;*.md&quot; | &quot;*.markdown&quot;</code></pre>
 <p>The default filter is:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/scala/com/typesafe/sbt/site/preprocess/PreprocessPlugin.scala#L34" target="_blank" title="Go to snippet source"></a><code class="language-scala">&quot;*.txt&quot; | &quot;*.html&quot; | &quot;*.md&quot; | &quot;*.rst&quot;</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/scala/com/typesafe/sbt/site/preprocess/PreprocessPlugin.scala#L34" target="_blank" title="Go to snippet source"></a><code class="language-scala">&quot;*.txt&quot; | &quot;*.html&quot; | &quot;*.md&quot; | &quot;*.rst&quot;</code></pre>
 <h2><a href="#preprocessing-markdown-files-with-tut" name="preprocessing-markdown-files-with-tut" class="anchor"><span class="anchor-link"></span></a>Preprocessing Markdown files with tut</h2>
 <p>The <a href="https://github.com/tpolecat/tut">tut</a> sbt plugin allows you to write documentation with fenced code blocks that is typechecked and run as part of your build. For example this markdown snippet:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/plays-nice-with-tut/src/main/tut/index.md#L4-L8" target="_blank" title="Go to snippet source"></a><code class="language-md">Here is how you add numbers:
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/site/plays-nice-with-tut/src/main/tut/index.md#L4-L8" target="_blank" title="Go to snippet source"></a><code class="language-md">Here is how you add numbers:
 
 ```tut
 1 + 1
@@ -244,7 +243,7 @@ res0: Int = 2
 ```
 </code></pre>
 <p>The following example shows how to use it to preprocess a collection of markdown files before running a site generator.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/plays-nice-with-tut/build.sbt#L4-L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(ParadoxPlugin, ParadoxSitePlugin, TutPlugin)
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/site/plays-nice-with-tut/build.sbt#L4-L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(ParadoxPlugin, ParadoxSitePlugin, TutPlugin)
 Compile / paradox / sourceDirectory := tutTargetDirectory.value
 makeSite := makeSite.dependsOn(tut).value</code></pre>
 <p>The example uses the Paradox site generator but can be adapted to any site generator which understands markdown by configuring its <code>sourceDirectory</code> accordingly. For Jekyll, this would be:</p>
@@ -252,13 +251,13 @@ makeSite := makeSite.dependsOn(tut).value</code></pre>
 </code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/preprocess.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/paradox/preprocess.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-M1
+1.5.0-M3
 </span>
 </div>
 </article>

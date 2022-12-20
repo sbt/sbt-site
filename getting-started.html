@@ -165,7 +165,6 @@ sbt/sbt-site
     <li><a href="notes/1.1.0.html" class="page">Release 1.1.0</a></li>
     <li><a href="notes/1.0.0.html" class="page">Release 1.0.0</a></li>
     <li><a href="notes/0.8.2.html" class="page">Release 0.8.2</a></li>
-    <li><a href="notes/release-process.html" class="page">Release Process for <code>sbt-site</code></a></li>
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
@@ -185,7 +184,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M3
 </label>
 </li>
 </ul>
@@ -218,8 +217,9 @@ sbt/sbt-site
 <p>This page will help you get started with sbt-site and teach you the basic concepts.</p>
 <h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
 <p>To enable the plugin in your sbt project, add the following to your <code>project/plugins.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.typesafe.sbt&quot; % &quot;sbt-site&quot; % &quot;1.5.0-M1&quot;)
+<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-site&quot; % &quot;1.5.0-M3&quot;)
 </code></pre>
+<p><strong>The group ID changed to <code>com.github.sbt</code> with sbt-site version 1.5.0.</strong></p>
 <h2><a href="#adding-content-to-your-site" name="adding-content-to-your-site" class="anchor"><span class="anchor-link"></span></a>Adding Content to Your Site</h2>
 <p>When you run <code>makeSite</code>, your project&rsquo;s webpage is generated in the <code>target/site</code> directory. By default, all files under <code>src/site</code> that match the includeFilter setting (by default *.html, *.css, *.png, *.jpg, *.gif, *.swf) are included in <code>target/site</code>. If your site mainly contains static content but you want to replace for example a version string in some of the pages you can use <a href="preprocess.html">preprocessing</a> to substitute variables.</p>
 <p>In addition to static content, you can also generated content as part of the build process and add it to your site. sbt-site has support for adding <a href="api-documentation.html">Scaladoc</a> and provides several <a href="generators/index.html">site generators</a> such as Jekyll and Sphinx which can be used for managing your site&rsquo;s content.</p>
@@ -227,12 +227,12 @@ sbt/sbt-site
 <pre class="prettyprint"><code class="language-sbt">siteSourceDirectory := target.value / &quot;generated-stuff&quot;
 </code></pre>
 <p>Additional files outside of <code>siteSourceDirectory</code> can be added via <a href="https://www.scala-sbt.org/0.13/docs/Mapping-Files.html">sbt file mappings</a>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L8-L11" target="_blank" title="Go to snippet source"></a><code class="language-sbt">mappings in makeSite ++= Seq(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/site/can-have-custom-mappings/build.sbt#L8-L11" target="_blank" title="Go to snippet source"></a><code class="language-sbt">mappings in makeSite ++= Seq(
   file(&quot;LICENSE&quot;) -&gt; &quot;LICENSE&quot;,
   file(&quot;src/assets/favicon.ico&quot;) -&gt; &quot;favicon.ico&quot;
 )</code></pre>
 <p>If you want to add files from an sbt task to a site sub-directory use the provided <code>addMappingsToSiteDir</code>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
 val someDirName = settingKey[String](&quot;Some dir name&quot;)
 someDirName := &quot;someFancySource&quot;
 
@@ -255,17 +255,17 @@ addMappingsToSiteDir(ScalaUnidoc/ packageDoc / mappings, ScalaUnidoc / siteSubdi
 <h2><a href="#packaging-and-publishing" name="packaging-and-publishing" class="anchor"><span class="anchor-link"></span></a>Packaging and Publishing</h2>
 <p>To create a zip package of the site run <code>package-site</code>.</p>
 <p>To also include this zip file as an artifact when running <code>publish</code>, add the following to your <code>build.sbt</code>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt#L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">publishSite</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt#L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">publishSite</code></pre>
 <p>Once you have generated and packaged your site the next step is to publish it. The <a href="publishing.html">publishing</a> section discusses several mechanisms, such as <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages</a>.</p>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-M1
+1.5.0-M3
 </span>
 </div>
 </article>

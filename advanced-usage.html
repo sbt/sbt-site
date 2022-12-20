@@ -165,7 +165,6 @@ sbt/sbt-site
     <li><a href="notes/1.1.0.html" class="page">Release 1.1.0</a></li>
     <li><a href="notes/1.0.0.html" class="page">Release 1.0.0</a></li>
     <li><a href="notes/0.8.2.html" class="page">Release 0.8.2</a></li>
-    <li><a href="notes/release-process.html" class="page">Release Process for <code>sbt-site</code></a></li>
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
@@ -182,7 +181,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M3
 </label>
 </li>
 </ul>
@@ -212,7 +211,7 @@ sbt/sbt-site
 <p>Here are listed examples of a more advanced usage.</p>
 <h2><a href="#running-a-site-generator-on-multiple-source-directories" name="running-a-site-generator-on-multiple-source-directories" class="anchor"><span class="anchor-link"></span></a>Running a Site Generator on Multiple Source Directories</h2>
 <p>If you need to run a generator on more than one source directory, bypassing the <code>AutoPlugin</code> system and defining one or more sbt <code>Configuration</code>s is necessary. For example, suppose you have two Paradox source directories and want them each generated as a subdirectory under <code>target/site</code>. A <code>build.sbt</code> might look something like this:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/site/can-run-generator-twice/build.sbt#L4-L25" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define two `Configuration` instances.
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/site/can-run-generator-twice/build.sbt#L4-L25" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define two `Configuration` instances.
 val Site1 = config(&quot;site1&quot;)
 val Site2 = config(&quot;site2&quot;)
 
@@ -237,13 +236,13 @@ paradoxTheme := Some(builtinParadoxTheme(&quot;generic&quot;))</code></pre>
 <p>The other generators follow a similar pattern, e.g. <code>JekyllPlugin.jekyllSettings(config(&quot;foo&quot;))</code>.</p>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/advanced-usage.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/paradox/advanced-usage.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-M1
+1.5.0-M3
 </span>
 </div>
 </article>

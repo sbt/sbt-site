@@ -165,7 +165,6 @@ sbt/sbt-site
     <li><a href="../notes/1.1.0.html" class="page">Release 1.1.0</a></li>
     <li><a href="../notes/1.0.0.html" class="page">Release 1.0.0</a></li>
     <li><a href="../notes/0.8.2.html" class="page">Release 0.8.2</a></li>
-    <li><a href="../notes/release-process.html" class="page">Release Process for <code>sbt-site</code></a></li>
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
@@ -175,7 +174,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-M1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-M3
 </label>
 </li>
 </ul>
@@ -187,24 +186,24 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#gitbook" name="gitbook" class="anchor"><span class="anchor-link"></span></a>GitBook</h1>
 <p>The sbt-site plugin has direct support for building <a href="https://www.gitbook.com">GitBook</a> projects. To enable GitBook site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/gitbook/ignore-dot-files/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(GitBookPlugin)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/gitbook/ignore-dot-files/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(GitBookPlugin)</code></pre>
 <p>This assumes you have a GitBook project under the <code>src/gitbook</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>GitBook</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">GitBook / sourceDirectory := sourceDirectory.value / &quot;doc&quot;
 </code></pre>
 <p>Similarly, the output can be redirected to a subdirectory of <code>target/site</code> via the <code>siteSubdirName</code> key in <code>GitBook</code> scope:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/gitbook/ignore-dot-files/build.sbt#L10-L11" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/book`
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/gitbook/ignore-dot-files/build.sbt#L10-L11" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/book`
 GitBook / siteSubdirName := &quot;book&quot;</code></pre>
 <p>The plugin can also be configured to manage all GitBook setup and installation by configuring a dedicated directory in which GitBook&rsquo;s npm packages can be installed.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/sbt-test/gitbook/can-manage-installation/build.sbt#L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">GitBook / gitbookInstallDir := Some(baseDirectory.value / &quot;node_modules&quot; / &quot;gitbook&quot;)</code></pre>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/gitbook/can-manage-installation/build.sbt#L6" target="_blank" title="Go to snippet source"></a><code class="language-sbt">GitBook / gitbookInstallDir := Some(baseDirectory.value / &quot;node_modules&quot; / &quot;gitbook&quot;)</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M1/src/main/paradox/generators/gitbook.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/paradox/generators/gitbook.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-M1
+1.5.0-M3
 </span>
 </div>
 </article>
