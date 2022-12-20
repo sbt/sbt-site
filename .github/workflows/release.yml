@@ -1,7 +1,9 @@
 name: Release
 on:
   push:
-    branches: [main, develop]
+    branches:
+      - main
+      - release-*
     tags: ["v*"]
 
 permissions:
@@ -9,6 +11,7 @@ permissions:
 
 jobs:
   release:
+    name: Release to Sonatype
     if: github.repository == 'sbt/sbt-site'
     runs-on: ubuntu-22.04
     steps:
@@ -32,21 +35,24 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
 
-#  documentation:
-#    if: github.repository == 'sbt/sbt-site'
-#    runs-on: ubuntu-22.04
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3.1.0
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Cache Coursier cache
-#        uses: coursier/cache-action@v6.4.0
-#
-#      - name: Set up JDK 11
-#        uses: coursier/setup-action@v1.3.0
-#        with:
-#          jvm: temurin:1.11.0.17
-#
-#      - run: sbt ghpagesPushSite
+  documentation:
+    name: Release Documentation
+    if: github.repository == 'sbt/sbt-site'
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Cache Coursier cache
+        uses: coursier/cache-action@v6.4.0
+
+      - name: Set up JDK 11
+        uses: coursier/setup-action@v1.3.0
+        with:
+          jvm: temurin:1.11.0.17
+
+      - run: sbt ghpagesPushSite

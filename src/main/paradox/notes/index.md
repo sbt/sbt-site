@@ -16,6 +16,5 @@ See [GitHub Releases](https://github.com/sbt/sbt-site/releases)
  - [1.1.0](1.1.0.md)
  - [1.0.0](1.0.0.md)
  - [0.8.2](0.8.2.md)
- - [process](release-process.md)
 
 @@@
