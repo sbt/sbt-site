@@ -6,9 +6,6 @@ on:
       - release-*
     tags: ["v*"]
 
-permissions:
-  contents: read
-
 jobs:
   release:
     name: Release to Sonatype
@@ -39,8 +36,6 @@ jobs:
     name: Release Documentation
     if: github.repository == 'sbt/sbt-site'
     runs-on: ubuntu-22.04
-    permissions:
-      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3.1.0
