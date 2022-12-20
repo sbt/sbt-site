@@ -1,4 +1,4 @@
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % sys.props("project.version"))
+addSbtPlugin("com.github.sbt" % "sbt-site" % sys.props("project.version"))
 
 resolvers += "jgit-repo" at "https://download.eclipse.org/jgit/maven"
 
