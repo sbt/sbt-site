@@ -55,6 +55,10 @@ jobs:
         with:
           jvm: temurin:1.11.0.17
 
-      - run: sbt ghpagesPushSite
+      - name: sbt ghpages
+        run: |-
+          git config --global user.name "sbt-site bot"
+          git config --global user.email "sbt-site@scala-sbt.org"
+          sbt ghpagesPushSite
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

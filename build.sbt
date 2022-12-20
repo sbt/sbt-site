@@ -16,6 +16,13 @@ licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause")
 scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "scm:git:git@github.com:sbt/sbt-site.git"))
 //#scm-info
 
+developers += Developer(
+  "contributors",
+  "Contributors",
+  "https://gitter.im/sbt/sbt-site",
+  url("https://github.com/sbt/sbt-site/graphs/contributors")
+)
+
 scalacOptions ++= Seq(
   "-deprecation",
   "-unchecked",
