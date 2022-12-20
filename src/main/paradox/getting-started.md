@@ -8,9 +8,11 @@ To enable the plugin in your sbt project, add the following to your `project/plu
 
 @@@ vars
 ```sbt
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "$project.version$")
+addSbtPlugin("com.github.sbt" % "sbt-site" % "$project.version$")
 ```
 @@@
+
+**The group ID changed to `com.github.sbt` with sbt-site version 1.5.0.**
 
 ## Adding Content to Your Site
 
