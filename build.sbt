@@ -38,8 +38,13 @@ libraryDependencies ++= Seq(
   "ws.unfiltered"  %% "unfiltered-directives" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-filter" % unfilteredVersion,
   "ws.unfiltered"  %% "unfiltered-jetty" % unfilteredVersion,
-  "ws.unfiltered"  %% "unfiltered-specs2" % unfilteredVersion % "test",
-  "org.foundweekends" %% "pamflet-library" % "0.8.0",
+  "ws.unfiltered"  %% "unfiltered-specs2" % unfilteredVersion % Test,
+  "org.foundweekends" %% "pamflet-library" % "0.10.0",
+).map(
+  // Force sbt-site to Scala XML 2.1
+  _.exclude("org.scala-lang.modules", "scala-xml_2.12")
+) ++ Seq(
+  "org.scala-lang.modules" %% "scala-xml" % "2.1.0",
   "org.yaml"        % "snakeyaml"        % "1.33",
   "com.typesafe"    % "config"           % "1.4.2",
   "org.asciidoctor" % "asciidoctorj"     % "2.1.0",
