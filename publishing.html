@@ -182,7 +182,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-M3
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC1
 </label>
 </li>
 </ul>
@@ -213,9 +213,9 @@ sbt/sbt-site
 <p>The following sections show you how to configure publishing of your site. To publish a generated site to <a href="https://pages.github.com">GitHub Pages</a> you can use the <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages</a> plugin. For sites hosted on S3 one option is to use <a href="https://github.com/sbt/sbt-s3">sbt-s3</a>. We expect other publishing mechanisms to be supported in the future.</p>
 <h2><a href="#publishing-to-github-pages-using-sbt-ghpages" name="publishing-to-github-pages-using-sbt-ghpages" class="anchor"><span class="anchor-link"></span></a>Publishing to GitHub Pages using sbt-ghpages</h2>
 <p>Set up the plugin by adding the following to <code>project/plugins.sbt</code> (check the <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages project</a> for the most recent version).</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/project/plugins.sbt#L3" target="_blank" title="Go to snippet source"></a><code class="language-sbt">addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-ghpages&quot; % &quot;0.7.0&quot;)</code></pre>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/project/plugins.sbt#L3" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-ghpages&quot; % &quot;0.7.0&quot;)</code></pre>
 <p>Then configure your sbt build to use a special remote when running on Travis CI and otherwise fall back to the normal Git remote configured via the <code>scmInfo</code> setting.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/build.sbt#L16" target="_blank" title="Go to snippet source"></a><code class="language-sbt">scmInfo := Some(ScmInfo(url(&quot;https://github.com/sbt/sbt-site&quot;), &quot;scm:git:git@github.com:sbt/sbt-site.git&quot;))
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/build.sbt#L16" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">scmInfo := Some(ScmInfo(url(&quot;https://github.com/sbt/sbt-site&quot;), &quot;scm:git:git@github.com:sbt/sbt-site.git&quot;))
 enablePlugins(GhpagesPlugin)
 git.remoteRepo := scmInfo.value.get.connection.replace(&quot;scm:git:&quot;, &quot;&quot;)</code></pre>
 <p>At this point you should be able to run <code>sbt ghpagesPushSite</code> to publish your site.</p><div class="callout note "><div class="callout-title">Note</div>
@@ -259,7 +259,7 @@ Commit all changes to your .travis.yml.
 $ echo project/travis-deploy-key &gt;&gt; .git/info/exclude
 </code></pre>
 <p>Finally, configure a deploy step in <code>.travis.yml</code> using the script provider. For a complete set of options and triggers see the <a href="https://docs.travis-ci.com/user/deployment">Travis deployment documentation</a>. In this example, we publishing when a tag is created and explicitly disable publishing for pull request. The <code>before_deploy</code> step takes care of setting up the environment so that <code>git push</code> automatically finds the deploy key.</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/.travis.yml#L52-L69" target="_blank" title="Go to snippet source"></a><code class="language-yml">before_deploy:
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/.travis.yml#L52-L69" target="_blank" title="Go to snippet source">source</a><code class="language-yml">before_deploy:
   # Record minimal build information via the Git user ident
   - git config --global user.name &quot;$USER&quot;
   - git config --global user.email &quot;$TRAVIS_BUILD_NUMBER@$TRAVIS_COMMIT&quot;
@@ -281,13 +281,13 @@ deploy:
 <p>At this point, it would also be a good idea to run <code>travis lint</code> to check that the resulting <code>.travis.yml</code> is correct.</p></div>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/paradox/publishing.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/main/paradox/publishing.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-M3
+1.5.0-RC1
 </span>
 </div>
 </article>

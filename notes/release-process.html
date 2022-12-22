@@ -20,7 +20,7 @@
 
 <meta name="description" content="sbt-site">
 <link rel="shortcut icon" href="../img/favicon.png">
-<title>Paradox · sbt-site</title>
+<title>Release Process for sbt-site · sbt-site</title>
 <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="../lib/material__tabs/dist/mdc.tabs.min.css">
 <link rel="stylesheet" href="../lib/prettify/prettify.css">
@@ -56,7 +56,7 @@ code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}
 sbt-site
 </span>
 <span class="md-header-nav__topic">
-Paradox
+Release Process for sbt-site
 </span>
 </div>
 </div>
@@ -147,7 +147,7 @@ sbt/sbt-site
     <li><a href="../generators/laika.html" class="page">Laika</a></li>
     <li><a href="../generators/nanoc.html" class="page">Nanoc</a></li>
     <li><a href="../generators/pamflet.html" class="page">Pamflet</a></li>
-    <li><a href="../generators/paradox.html" class="active page">Paradox</a></li>
+    <li><a href="../generators/paradox.html" class="page">Paradox</a></li>
     <li><a href="../generators/sphinx.html" class="page">Sphinx</a></li>
   </ul></li>
   <li><a href="../publishing.html" class="page">Publishing</a></li>
@@ -165,47 +165,83 @@ sbt/sbt-site
     <li><a href="../notes/1.1.0.html" class="page">Release 1.1.0</a></li>
     <li><a href="../notes/1.0.0.html" class="page">Release 1.0.0</a></li>
     <li><a href="../notes/0.8.2.html" class="page">Release 0.8.2</a></li>
+    <li><a href="../notes/release-process.html" class="active page">Release Process for <code>sbt-site</code></a></li>
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="../notes/release-process.html#release-process-for-sbt-site" class="header">Release Process for <code>sbt-site</code></a>
+  <ul>
+    <li><a href="../notes/release-process.html#branch-management" class="header">Branch Management</a></li>
+    <li><a href="../notes/release-process.html#release" class="header">Release</a></li>
+  </ul></li>
+</ul>
 </nav>
 
 </nav>
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC1
+<i class="md-icon" title="Version">label_outline</i> 1.4.1
 </label>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="../notes/release-process.html#release-process-for-sbt-site" class="header">Release Process for <code>sbt-site</code></a>
+  <ul>
+    <li><a href="../notes/release-process.html#branch-management" class="header">Branch Management</a></li>
+    <li><a href="../notes/release-process.html#release" class="header">Release</a></li>
+  </ul></li>
+</ul>
+</nav>
+
+</div>
+</div>
+</div>
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#paradox" name="paradox" class="anchor"><span class="anchor-link"></span></a>Paradox</h1>
-<p>The sbt-site plugin has direct support for building <a href="https://github.com/lightbend/paradox">Paradox</a> projects.</p>
-<p>To enable Paradox site generation, enable the <code>ParadoxSitePlugin</code> plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/paradox/can-use-paradox/build.sbt#L4" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(ParadoxSitePlugin)</code></pre>
-<p>This assumes you have a Paradox project under the <code>src/main/paradox</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>paradox</code> task scope:</p>
-<pre class="prettyprint"><code class="language-sbt">paradox / sourceDirectory := sourceDirectory.value / &quot;doc&quot;
-</code></pre>
-<p>If you are configuring Paradox from scratch remember to also configure a theme:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/paradox/can-use-paradox/build.sbt#L10" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">paradoxTheme := Some(builtinParadoxTheme(&quot;generic&quot;))</code></pre>
-<p>Note that all of the Paradox settings mentioned in the <a href="https://developer.lightbend.com/docs/paradox/latest/">Paradox documentation</a> are reused by sbt-site. For example to configure an <code>@extref</code> link prefix use:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/paradox/can-use-paradox/build.sbt#L14-L16" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">paradoxProperties ++= Map(
-  &quot;extref.rfc.base_url&quot; -&gt; &quot;https://tools.ietf.org/html/rfc%s&quot;
-)</code></pre>
+<h1><a href="#release-process-for-sbt-site" name="release-process-for-sbt-site" class="anchor"><span class="anchor-link"></span></a>Release Process for <code>sbt-site</code></h1>
+<h2><a href="#branch-management" name="branch-management" class="anchor"><span class="anchor-link"></span></a>Branch Management</h2>
+<p>This project uses <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">GitFlow</a> for branch management. This means that PRs should be merged onto <code>develop</code>, not <code>master</code>. New releases are prepared from a <code>release/vX.Y.Z</code> branch, and <code>master</code> is only updated from <code>release/...</code> branches (there are also <code>hotfix</code> branches, but they aren&rsquo;t common).</p>
+<p>An easy way to use GitFlow is to make use of the support built-in to the <a href="https://www.sourcetreeapp.com">SourceTree</a> frontend which includes support for GitFlow. The images below are taken from SourceTree. There are <a href="https://danielkummer.github.io/git-flow-cheatsheet/">other ways to use GitFlow</a> if you don&rsquo;t want to use SourceTree.</p>
+<h2><a href="#release" name="release" class="anchor"><span class="anchor-link"></span></a>Release</h2>
+<ol>
+  <li>Make sure you have <a href="https://bintray.com/sbt">BinTray</a> credentials for the &ldquo;sbt&rdquo; organization. You won&rsquo;t be able to publish without them.</li>
+  <li>Make sure the working directory is clean and up-to-date with the remote, and the tests pass (e.g. <code>sbt scripted</code>). Some people like to run <code>git clean -fdx</code>.</li>
+  <li>Start the release branch process:<br/> <img src="images/release-branch.png" /><br/> Give the release branch a version name with the form <code>v&lt;X&gt;.&lt;Y&gt;.&lt;Z&gt;</code>:<br/> <img src="images/release-version-name.png" /><br/> You should now be on the release branch:<br/> <img src="images/release-branch.png" /></li>
+  <li>Create the file <code>src/main/paradox/notes/&lt;X&gt;.&lt;Y&gt;.&lt;Z&gt;.md</code>. Sometimes this file already exists if PR submitters are super awesome. Go through the commit logs and collect the major new features, bug fixes, deprecations, and anything else relevant to users. Making note of breaking changes is particularly important. See previous release notes for format/content conventions.</li>
+  <li>Edit the <code>version</code> setting in <code>build.sbt</code> to match <code>&quot;&lt;X&gt;.&lt;Y&gt;.&lt;Z&gt;&quot;</code></li>
+  <li>Commit your current changes onto the release branch.<br/> <img src="images/release-preparation.png" /></li>
+  <li>Run <code>sbt bintrayWhoami</code> to confirm your publishing credentials are set up. <a href="https://www.scala-sbt.org/0.13/docs/Bintray-For-Plugins.html">See sbt documentation</a> on how to get set up with Bintray.</li>
+  <li>Run <code>sbt ^publish</code> to build the packages and stage artifacts on Bintray.</li>
+  <li>Confirm the plugin is properly <a href="https://bintray.com/sbt/sbt-plugin-releases/sbt-site/view">staged for release on Bintray</a>. You should see a message that looks looks like this:<br/> <img src="images/bintray-notice.png" /></li>
+  <li>Run <code>sbt ^bintrayRelease</code>. This moves the plugin from the staged release to published release on Bintray.</li>
+  <li>Finish release per GitFlow process:<br/> <img src="images/finish-release.png" /><br/> Accept the defaults:<br/> <img src="images/finish-release-defaults.png" /><br/> GitFlow will merge release onto <code>master</code> and <code>develop</code>, and switch the current branch to <code>develop</code>.  <img src="images/before-push.png" /><br/> You must push changes yourself to both <code>develop</code> <strong>and</strong> <code>master</code>.<br/> <img src="images/after-push.png" /></li>
+  <li>Create a <a href="https://github.com/sbt/sbt-site/tags">release entry</a> in GitHub. Because GitFlow automatically adds a tag  to the history, GitHub picks it up as a release&hellip;  <img src="images/add-release-notes.png" /><br/> &hellip;but we have to copy the release notes from our <code>src/main/paradox/notes/&lt;X&gt;.&lt;Y&gt;.&lt;Z&gt;.md</code> file manually.<br/> <img src="images/github-release-notes.png" /></li>
+  <li>Monitor the <a href="https://travis-ci.org/sbt/sbt-site">TravicCI build</a> and make sure it <a href="https://www.scala-sbt.org/sbt-site/getting-started.html">updates the manual</a> with the latest version.</li>
+  <li>Announce release using <a href="https://github.com/n8han/herald"><code>herald</code></a>. Also announce release on Twitter, including <code>#scala</code> and <code>@scala_sbt</code> and major contributor handles (if available). Provide a link to the GitHub release page in tweet.<br/> <img src="images/tweet.png" /></li>
+  <li>Announce on <code>#sbt-site</code> and <code>#sbt-dev</code> Gitter channels.</li>
+  <li><strong>Important</strong>: On the <code>develop</code> branch, edit the <code>version</code> setting in <code>build.sbt</code> to match <code>&quot;&lt;X&gt;.&lt;Y+1&gt;.0-SNAPSHOT&quot;</code>. Commit and push.</li>
+</ol>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/main/paradox/generators/paradox.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.4.1/src/main/paradox/notes/release-process.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-RC1
+1.4.1
 </span>
 </div>
 </article>
@@ -215,7 +251,7 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="../generators/pamflet.html" title="Pamflet" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<a href="../notes/0.8.2.html" title="Release 0.8.2" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
 <div class="md-flex__cell md-flex__cell--shrink">
 <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
 </div>
@@ -224,21 +260,8 @@ Edit this page
 <span class="md-footer-nav__direction">
 Previous
 </span>
-Pamflet
+Release 0.8.2
 </span>
-</div>
-</a>
-<a href="../generators/sphinx.html" title="Sphinx" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-Next
-</span>
-Sphinx
-</span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
 </div>
 </a>
 </nav>

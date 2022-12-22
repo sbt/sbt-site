@@ -182,7 +182,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-M3
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC1
 </label>
 </li>
 </ul>
@@ -289,7 +289,7 @@ siteSubdirName in SiteScaladoc := &quot;jekyll-goodness/api&quot;
 <pre class="prettyprint"><code class="language-scala">addMappingsToSiteDir(mappings: TaskKey[Seq[(File, String)]], nestedDirectory: SettingKey[String])
 </code></pre>
 <p>The following examples show how you can define nested directory via a custom setting or by scoping <code>siteSubdirName</code> to either an sbt key or configuration:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Define a custom setting and set it to the directory path
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Define a custom setting and set it to the directory path
 val someDirName = settingKey[String](&quot;Some dir name&quot;)
 someDirName := &quot;someFancySource&quot;
 
@@ -302,13 +302,13 @@ addMappingsToSiteDir(ScalaUnidoc/ packageDoc / mappings, ScalaUnidoc / siteSubdi
 <p>In the <code>PreprocessPlugin</code>, the key <code>preprocessExts: SettingKey[Set[String]]</code> has been replaced by <code>preprocessIncludeFilter: SettingKey[FileFilter]</code>.</p>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-M3
+1.5.0-RC1
 </span>
 </div>
 </article>

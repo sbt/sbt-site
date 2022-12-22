@@ -183,7 +183,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-M3
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC1
 </label>
 </li>
 </ul>
@@ -214,13 +214,13 @@ sbt/sbt-site
 <h1><a href="#api-documentation" name="api-documentation" class="anchor"><span class="anchor-link"></span></a>API documentation</h1>
 <h2><a href="#scaladoc" name="scaladoc" class="anchor"><span class="anchor-link"></span></a>Scaladoc</h2>
 <p>To include Scaladoc with your site, add the following line to your <code>build.sbt</code>:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/scaladoc/can-add-scaladoc/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(SiteScaladocPlugin)</code></pre>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/scaladoc/can-add-scaladoc/build.sbt#L4" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(SiteScaladocPlugin)</code></pre>
 <p>This will default to putting the Scaladoc under the <code>latest/api</code> directory on the website. You can change this with the <code>siteSubdirName</code> key in the <code>SiteScaladoc</code> scope:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/scaladoc/can-add-scaladoc/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts Scaladoc output in `target/site/api/latest`
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/scaladoc/can-add-scaladoc/build.sbt#L8-L9" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Puts Scaladoc output in `target/site/api/latest`
 SiteScaladoc / siteSubdirName := &quot;api/latest&quot;</code></pre>
 <h2><a href="#aggregating-api-documentation-with-sbt-unidoc" name="aggregating-api-documentation-with-sbt-unidoc" class="anchor"><span class="anchor-link"></span></a>Aggregating API documentation with sbt-unidoc</h2>
 <p><a href="https://github.com/sbt/sbt-unidoc">sbt-unidoc</a> allows to aggregate Scaladoc or Javadoc from sub-projects into a unified view. The following example shows how you can add aggregated Scaladoc to your site:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 lazy val root = project.in(file(&quot;.&quot;))
@@ -232,7 +232,7 @@ lazy val root = project.in(file(&quot;.&quot;))
   .aggregate(cats, kittens)</code></pre>
 <h2><a href="#scaladoc-from-multiple-projects" name="scaladoc-from-multiple-projects" class="anchor"><span class="anchor-link"></span></a>Scaladoc from multiple projects</h2>
 <p>In case you want to include the Scaladoc separate for each sub-product there are several options. If you only have a few sub-projects the simplest solution is to manually include the scaladoc for each project:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 // Define a `Configuration` for each project.
@@ -245,7 +245,7 @@ lazy val siteWithScaladoc = project.in(file(&quot;site/scaladoc&quot;))
     SiteScaladocPlugin.scaladocSettings(Kittens, kittens / Compile / packageDoc / mappings, &quot;api/kittens&quot;)
   )</code></pre>
 <p>For projects with many such sub-projects, a more maintainable approach is to configure it in a more programatic way:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source"></a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 lazy val scaladocSiteProjects = List((cats, Cats), (kittens, Kittens))
@@ -262,13 +262,13 @@ val siteWithScaladocAlt = project.in(file(&quot;site/scaladoc-alternative&quot;)
   .settings(scaladocSiteSettings)</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-M3/src/main/paradox/api-documentation.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/main/paradox/api-documentation.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-M3
+1.5.0-RC1
 </span>
 </div>
 </article>
