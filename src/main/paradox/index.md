@@ -2,14 +2,13 @@
 
 This sbt plugin generates project websites from static content as well as @ref:[third-party generators](generators/index.md) and can optionally include generated Scaladoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
-Before upgrading please consult the @github:[release notes](/notes/). Instructions for upgrading from a version before 1.x.x can be found in the @ref:[migration guide](migration-guide.md#from-version-0.x.x-to-1.x.x).
+Before upgrading please consult the @github:[release notes](/notes/). Instructions for upgrading from older versions can be found in the @ref:[migration guide](migration-guide.md).
 
 @@@ note
 
 * Version 1.5+ is published for sbt >= 1.4.9 and requires Java 11+.
 * Version 1.4+ is published for sbt 1.2.x.
 * Version 1.3+ is cross published to both sbt 0.13 and sbt 1.x.
-* As of sbt-site version 1.x.x, sbt version 0.13.10+ or 1.0.0-RC2+ is supported.
 
 @@@
 

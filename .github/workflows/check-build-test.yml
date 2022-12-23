@@ -64,4 +64,4 @@ jobs:
 #          chmod +x ${PWD}/bin/hugo
 
       - name: sbt runScriptedTest
-        run: sbt ";^^${{ matrix.sbtCrossVersion }}; compile; runScriptedTest; makeSite"
+        run: sbt ";^^${{ matrix.sbtCrossVersion }}; test; scripted; makeSite"
