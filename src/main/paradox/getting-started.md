@@ -28,11 +28,11 @@ siteSourceDirectory := target.value / "generated-stuff"
 
 Additional files outside of `siteSourceDirectory` can be added via [sbt file mappings]:
 
-@@ snip[mappings](../../sbt-test/site/can-have-custom-mappings/build.sbt) { #mappings }
+@@ snip[mappings](/core/src/sbt-test/site/can-have-custom-mappings/build.sbt) { #mappings }
 
 If you want to add files from an sbt task to a site sub-directory use the provided `addMappingsToSiteDir`:
 
-@@ snip[addMappingsToSiteDir](../../sbt-test/site/can-have-custom-mappings/build.sbt) { #addMappingsToSiteDir }
+@@ snip[addMappingsToSiteDir](/core/src/sbt-test/site/can-have-custom-mappings/build.sbt) { #addMappingsToSiteDir }
 
 @@@ note
 
@@ -69,7 +69,7 @@ To create a zip package of the site run `package-site`.
 
 To also include this zip file as an artifact when running `publish`, add the following to your `build.sbt`:
 
-@@ snip[publishSite](/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt) { #publishSite }
+@@ snip[publishSite](/core/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt) { #publishSite }
 
 Once you have generated and packaged your site the next step is to publish it. The @ref:[publishing](publishing.md) section discusses several mechanisms, such as [sbt-ghpages].
 
