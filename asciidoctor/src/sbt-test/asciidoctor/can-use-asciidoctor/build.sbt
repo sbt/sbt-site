@@ -1,7 +1,7 @@
 name := "test"
 
 //#enablePlugin
-enablePlugins(AsciidoctorPlugin)
+enablePlugins(SitePreviewPlugin, AsciidoctorPlugin)
 //#enablePlugin
 
 //#siteSubdirName

@@ -3,7 +3,6 @@ package com.typesafe.sbt.site.paradox
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers
-import sbt.Keys._
 import sbt._
 import com.lightbend.paradox.sbt.ParadoxPlugin
 import com.typesafe.sbt.web.SbtWeb

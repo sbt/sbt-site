@@ -6,7 +6,7 @@ import sbt._
 
 /** Primary plugin for generating static website in sbt. Automatically loads when added to project.. */
 object SitePlugin extends AutoPlugin {
-  override def trigger = allRequirements
+  override def trigger = noTrigger
   object autoImport extends SiteKeys {
     def publishSite(): SettingsDefinition = addArtifact(packageSite / artifact, packageSite)
     val addMappingsToSiteDir = com.typesafe.sbt.site.util.SiteHelpers.addMappingsToSiteDir _

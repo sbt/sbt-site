@@ -1,7 +1,7 @@
 name := "test"
 
 //#enablePlugin
-enablePlugins(GitBookPlugin)
+enablePlugins(SitePreviewPlugin, GitBookPlugin)
 //#enablePlugin
 
 GitBook / sourceDirectory := baseDirectory.value

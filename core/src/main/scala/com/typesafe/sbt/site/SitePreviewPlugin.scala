@@ -7,7 +7,7 @@ import unfiltered.util._
 object SitePreviewPlugin extends AutoPlugin {
   override def requires = SitePlugin
 
-  override def trigger = allRequirements
+  override def trigger = noTrigger
 
   object autoImport {
     val previewSite = TaskKey[Unit]("previewSite", "Launches a jetty server that serves your generated site from the target directory")

@@ -2,7 +2,15 @@
 
 ## Migrating from version 1.4.x to 1.5.x
 
-TBD
+To cut down on dependencies, sbt-site is now spilt into separate modules per site generator. Three generators are available as specific sbt plugins:
+* `addSbtPlugin("com.github.sbt" % "sbt-site-asciidoctor" % "1.5.0")`
+* `addSbtPlugin("com.github.sbt" % "sbt-site-gitbook" % "1.5.0")`
+* `addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.5.0")`
+
+The `previewSite` plugin does not enable itself anymore, you need to explicitly enable the parts of sbt-site you need on the sbt project/module containing the documentation. To allow `previewSite` with Paradox for example
+```scala
+.enablePlugins(SitePreviewPlugin, ParadoxSitePlugin)
+```
 
 ## Migrating from version 1.3.x to 1.4.x
 

@@ -53,7 +53,7 @@ lazy val root = project
     }
   )
   .aggregate(core, asciidoctor, gitbook, paradox)
-  .enablePlugins(ParadoxSitePlugin, ParadoxMaterialThemePlugin)
+  .enablePlugins(SitePreviewPlugin, ParadoxSitePlugin, ParadoxMaterialThemePlugin)
 
 lazy val core = project
   .in(file("core"))
@@ -102,10 +102,13 @@ lazy val gitbook = project
   .settings(pluginSettings)
   .settings(commonSettings)
 
+// https://github.com/sbt/sbt-site/issues/182
 // lazy val hugo = project...
 
+// https://github.com/sbt/sbt-site/issues/183
 // lazy val jekyll = project...
 
+// https://github.com/sbt/sbt-site/issues/204
 // lazy val laika = project...
 //libraryDependencies +=
 //  Defaults.sbtPluginExtra(
@@ -114,8 +117,10 @@ lazy val gitbook = project
 //    (pluginCrossBuild / scalaBinaryVersion).value
 //  )
 
+// https://github.com/sbt/sbt-site/issues/205
 // lazy val nanoc = project...
 
+// https://github.com/sbt/sbt-site/issues/206
 // lazy val pamflet = project...
 //val pamfletDependencies = Seq(
 //  "org.foundweekends" %% "pamflet-library" % "0.10.0",
@@ -134,6 +139,7 @@ lazy val paradox = project
   .settings(pluginSettings)
   .settings(commonSettings)
 
+// https://github.com/sbt/sbt-site/issues/186
 //lazy val sphinx = project...
 
 //#ghpages-publish
