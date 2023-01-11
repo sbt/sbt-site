@@ -7,6 +7,8 @@ To cut down on dependencies, sbt-site is now spilt into separate modules per sit
 * `addSbtPlugin("com.github.sbt" % "sbt-site-gitbook" % "1.5.0")`
 * `addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.5.0")`
 
+**The integrations with Jekyll, Hugo, Sphinx, Pamflet, and Nanoc are not available with sbt-site 1.5.0 (see ["revive" issues](https://github.com/sbt/sbt-site/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+revive)).**
+
 The `previewSite` plugin does not enable itself anymore, you need to explicitly enable the parts of sbt-site you need on the sbt project/module containing the documentation. To allow `previewSite` with Paradox for example
 ```scala
 .enablePlugins(SitePreviewPlugin, ParadoxSitePlugin)
