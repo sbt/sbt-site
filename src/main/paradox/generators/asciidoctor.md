@@ -1,8 +1,18 @@
 # Asciidoctor
 
-The sbt-site plugin has direct support for building [Asciidoctor] projects. To enable Asciidoctor site generation, simply enable the associated plugin in your `build.sbt` file:
+The sbt-site plugin has direct support for building [Asciidoctor] projects.
 
-@@ snip[enablePlugin](/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt) { #enablePlugin }
+To enable the "sbt site Asciidoctor" plugin in your sbt project, add the following to your `project/plugins.sbt` file:
+
+@@@ vars
+```sbt
+addSbtPlugin("com.github.sbt" % "sbt-site-asciidoctor" % "$project.version$")
+```
+@@@
+
+And enable the associated plugin in your `build.sbt` file:
+
+@@ snip[enablePlugin](/asciidoctor/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt) { #enablePlugin }
 
 This assumes you have an Asciidoctor project under the `src/asciidoctor` directory. To change this, set the `sourceDirectory` key in the `Asciidoctor` scope:
 
@@ -12,7 +22,7 @@ Asciidoctor / sourceDirectory := sourceDirectory.value / "asciimd"
 
 Similarly, the output can be redirected to a subdirectory of `target/site` via the `siteSubdirName` key in `Asciidoctor` scope:
 
-@@ snip[siteSubdirName](/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt) { #siteSubdirName }
+@@ snip[siteSubdirName](/asciidoctor/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt) { #siteSubdirName }
 
 ## Attributes
 

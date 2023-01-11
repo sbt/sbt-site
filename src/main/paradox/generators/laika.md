@@ -3,7 +3,9 @@
 The sbt-site plugin has support for building [Laika] projects.
 To enable Laika site generation, simply enable the associated plugin in your `build.sbt` file:
 
-@@ snip[enablePlugin](/src/sbt-test/laika/minimal/build.sbt) { #enablePlugin }
+## The Laika integration is not (yet) included in this version of sbt-site.
+
+@@ snip[enablePlugin](/laika/src/sbt-test/laika/minimal/build.sbt) { #enablePlugin }
 
 This plugin assumes you have a Laika project under the `src/laika` directory. To change this, set the `sourceDirectory` key in the `LaikaSite` scope:
 
@@ -20,6 +22,6 @@ From other hand you can customize other aspects of Laika's behavior through basi
 For example in order to add custom block directives you can include such code to your build.sbt:
 
 sbt
-:   @@ snip[laikaSbtPluginCustomization](/src/sbt-test/laika/blog-post/build.sbt) { #laikaSbtPluginCustomization }
+:   @@ snip[laikaSbtPluginCustomization](/laika/src/sbt-test/laika/blog-post/build.sbt) { #laikaSbtPluginCustomization }
 
 [Laika]: https://github.com/planet42/Laika

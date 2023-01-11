@@ -4,15 +4,15 @@ This page will help you get started with sbt-site and teach you the basic concep
 
 ## Setup
 
-To enable the plugin in your sbt project, add the following to your `project/plugins.sbt` file:
+To enable the plugin in your sbt project, add the sbt-site module for the site generator you use to your `project/plugins.sbt` file:
 
 @@@ vars
 ```sbt
-addSbtPlugin("com.github.sbt" % "sbt-site" % "$project.version$")
+addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "$project.version$")
 ```
 @@@
 
-**The group ID changed to `com.github.sbt` with sbt-site version 1.5.0.**
+**The group ID changed to `com.github.sbt` with sbt-site version 1.5.0 and the plugin was split into modules per site generator.**
 
 ## Adding Content to Your Site
 
@@ -28,11 +28,11 @@ siteSourceDirectory := target.value / "generated-stuff"
 
 Additional files outside of `siteSourceDirectory` can be added via [sbt file mappings]:
 
-@@ snip[mappings](../../sbt-test/site/can-have-custom-mappings/build.sbt) { #mappings }
+@@ snip[mappings](/core/src/sbt-test/site/can-have-custom-mappings/build.sbt) { #mappings }
 
 If you want to add files from an sbt task to a site sub-directory use the provided `addMappingsToSiteDir`:
 
-@@ snip[addMappingsToSiteDir](../../sbt-test/site/can-have-custom-mappings/build.sbt) { #addMappingsToSiteDir }
+@@ snip[addMappingsToSiteDir](/core/src/sbt-test/site/can-have-custom-mappings/build.sbt) { #addMappingsToSiteDir }
 
 @@@ note
 
@@ -69,9 +69,11 @@ To create a zip package of the site run `package-site`.
 
 To also include this zip file as an artifact when running `publish`, add the following to your `build.sbt`:
 
-@@ snip[publishSite](/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt) { #publishSite }
+@@ snip[publishSite](/core/src/sbt-test/site/can-package-and-publish-zip-file/build.sbt) { #publishSite }
 
-Once you have generated and packaged your site the next step is to publish it. The @ref:[publishing](publishing.md) section discusses several mechanisms, such as [sbt-ghpages].
+Once you have generated and packaged your site the next step is to publish it. The @ref:[publishing](publishing.md) section discusses several mechanisms, such as [sbt-ghpages]. You may need to exclude the Scala XML dependency.
+
+@@ snip[shpages](/project/plugins.sbt) { #sbt-ghpages }
 
 [apidoc]: api-documentation.md
 [sbt file mappings]: https://www.scala-sbt.org/0.13/docs/Mapping-Files.html
