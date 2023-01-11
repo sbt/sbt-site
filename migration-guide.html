@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="sbt-site">
+<meta name="description" content="sbt-site-root">
 <meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -18,7 +18,7 @@
 <meta name="lang:search.tokenizer" content="[\s\-]+">
 
 
-<meta name="description" content="sbt-site">
+<meta name="description" content="sbt-site-root">
 <link rel="shortcut icon" href="img/favicon.png">
 <title>Migration Guide · sbt-site</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
@@ -172,8 +172,8 @@ sbt/sbt-site
 <ul>
   <li><a href="migration-guide.html#migration-guide" class="header">Migration Guide</a>
   <ul>
+    <li><a href="migration-guide.html#migrating-from-version-1-4-x-to-1-5-x" class="header">Migrating from version 1.4.x to 1.5.x</a></li>
     <li><a href="migration-guide.html#migrating-from-version-1-3-x-to-1-4-x" class="header">Migrating from version 1.3.x to 1.4.x</a></li>
-    <li><a href="migration-guide.html#migrating-from-version-0-x-x-to-1-x-x" class="header">Migrating from version 0.x.x to 1.x.x</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -182,7 +182,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC2
 </label>
 </li>
 </ul>
@@ -197,8 +197,8 @@ sbt/sbt-site
 <ul>
   <li><a href="migration-guide.html#migration-guide" class="header">Migration Guide</a>
   <ul>
+    <li><a href="migration-guide.html#migrating-from-version-1-4-x-to-1-5-x" class="header">Migrating from version 1.4.x to 1.5.x</a></li>
     <li><a href="migration-guide.html#migrating-from-version-1-3-x-to-1-4-x" class="header">Migrating from version 1.3.x to 1.4.x</a></li>
-    <li><a href="migration-guide.html#migrating-from-version-0-x-x-to-1-x-x" class="header">Migrating from version 0.x.x to 1.x.x</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -210,105 +210,27 @@ sbt/sbt-site
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
 <h1><a href="#migration-guide" name="migration-guide" class="anchor"><span class="anchor-link"></span></a>Migration Guide</h1>
-<a id="from-version-1.3.x-to-1.4.x" />
+<h2><a href="#migrating-from-version-1-4-x-to-1-5-x" name="migrating-from-version-1-4-x-to-1-5-x" class="anchor"><span class="anchor-link"></span></a>Migrating from version 1.4.x to 1.5.x</h2>
+<p>To cut down on dependencies, sbt-site is now spilt into separate modules per site generator. Three generators are available as specific sbt plugins: * <code>addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-site-asciidoctor&quot; % &quot;1.5.0&quot;)</code> * <code>addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-site-gitbook&quot; % &quot;1.5.0&quot;)</code> * <code>addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-site-paradox&quot; % &quot;1.5.0&quot;)</code></p>
+<p><strong>The integrations with Jekyll, Hugo, Sphinx, Pamflet, and Nanoc are not available with sbt-site 1.5.0 (see <a href="https://github.com/sbt/sbt-site/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+revive">&ldquo;revive&rdquo; issues</a>).</strong></p>
+<p>The <code>previewSite</code> plugin does not enable itself anymore, you need to explicitly enable the parts of sbt-site you need on the sbt project/module containing the documentation. To allow <code>previewSite</code> with Paradox for example</p>
+<pre class="prettyprint"><code class="language-scala">.enablePlugins(SitePreviewPlugin, ParadoxSitePlugin)
+</code></pre>
 <h2><a href="#migrating-from-version-1-3-x-to-1-4-x" name="migrating-from-version-1-3-x-to-1-4-x" class="anchor"><span class="anchor-link"></span></a>Migrating from version 1.3.x to 1.4.x</h2>
 <p>Only sbt &gt;1.1.6 is supported.</p>
 <h3><a href="#paradoxsiteplugin" name="paradoxsiteplugin" class="anchor"><span class="anchor-link"></span></a>ParadoxSitePlugin</h3>
 <p><code>ParadoxPlugin</code> is enabled whenever <code>ParadoxSitePlugin</code> is enabled.</p>
 <p>Paradox integration now uses the same configuration scopes as the <code>sbt-paradox</code> plugin. Therefore when upgrading remove the <code>Paradox</code> configuration scope from all of the <code>sbt-paradox</code> settings. Note that sbt-site setting <code>siteSubdirName</code> is still configured under the <code>Paradox</code> configuration scope.</p>
 <p>The default Paradox source directory has been changed to match the one defined in the <code>sbt-paradox</code>, which is <code>src/main/paradox</code>. To keep the previous default, add the following to the build: <code>paradox / sourceDirectory := sourceDirectory.value</code></p>
-<a id="from-version-0.x.x-to-1.x.x" />
-<h2><a href="#migrating-from-version-0-x-x-to-1-x-x" name="migrating-from-version-0-x-x-to-1-x-x" class="anchor"><span class="anchor-link"></span></a>Migrating from version 0.x.x to 1.x.x</h2>
-<p>The 1.x.x release of sbt-site marks the conversion to the <a href="https://www.scala-sbt.org/0.13/docs/Plugins.html"><code>AutoPlugin</code></a> facility, first introduced in sbt 0.13.5.</p>
-<p>Because sbt best practices have evolved with the introduction of <code>AutoPlugin</code>, this upgrade to sbt-site has resulted in a number of &ldquo;breaking changes&rdquo; insofar as the way site generation is configured (the same functionality remains).</p>
-<h3><a href="#enabling-generators" name="enabling-generators" class="anchor"><span class="anchor-link"></span></a>Enabling Generators</h3>
-<p>The biggest of the breaking changes is the use of <code>enablePlugins(&lt;plugin object&gt;)</code> instead of calls of the form <code>site.xyzSupport()</code>.</p>
-<p>The base plugin (<code>SitePlugin</code>) is enabled by default, so files in the <code>src/site</code> directory are processed according to the default settings. Invocation of other generators must be adjusted accordingly.</p>
-<table>
-  <thead>
-    <tr>
-      <th>Generator </th>
-      <th>Previous (0.x) </th>
-      <th>New (1.x)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Base </td>
-      <td><code>site.settings</code> </td>
-      <td><em>automatic</em></td>
-    </tr>
-    <tr>
-      <td><a href="preprocess.html#substitution">Preprocess</a> </td>
-      <td><code>site.preprocessSite()</code> </td>
-      <td><code>enablePlugins(PreprocessPlugin)</code></td>
-    </tr>
-    <tr>
-      <td><a href="generators/jekyll.html">Jekyll</a> </td>
-      <td><code>site.jekyllSupport()</code> </td>
-      <td><code>enablePlugins(JekyllPlugin)</code></td>
-    </tr>
-    <tr>
-      <td><a href="generators/sphinx.html">Sphinx</a> </td>
-      <td><code>site.sphinxSupport()</code> </td>
-      <td><code>enablePlugins(SphinxPlugin)</code></td>
-    </tr>
-    <tr>
-      <td><a href="generators/pamflet.html">Pamflet</a> </td>
-      <td><code>site.pamfletSupport()</code> </td>
-      <td><code>enablePlugins(PamfletPlugin)</code></td>
-    </tr>
-    <tr>
-      <td><a href="generators/nanoc.html">Nanoc</a> </td>
-      <td><code>site.nanocSupport()</code> </td>
-      <td><code>enablePlugins(NanocPlugin)</code></td>
-    </tr>
-    <tr>
-      <td><a href="generators/asciidoctor.html">Asciidoctor</a> </td>
-      <td><code>site.asciidoctorSupport()</code> </td>
-      <td><code>enablePlugins(AsciidoctorPlugin)</code></td>
-    </tr>
-    <tr>
-      <td><a href="api-documentation.html#scaladoc">Scaladoc</a> </td>
-      <td><code>site.includeScaladoc()</code> </td>
-      <td><code>enablePlugins(SiteScaladocPlugin)</code></td>
-    </tr>
-  </tbody>
-</table>
-<h3><a href="#configuring-site-subdirectory" name="configuring-site-subdirectory" class="anchor"><span class="anchor-link"></span></a>Configuring Site Subdirectory</h3>
-<p>Each of the generators can be instructed to populate a subdirectory under the <code>target/site</code> destination. This is done by setting the <code>siteSubdirName</code> key in the configuration scope of the generator. For example, the following <code>build.sbt</code> fragment enables the Jekyll and Scaladoc generators, and configures their output to be <code>target/site/jekyll-goodness</code> and <code>target/site/jekyll-goodness/api</code>, respectively.</p>
-<pre class="prettyprint"><code class="language-sbt">enablePlugins(JekyllPlugin, SiteScaladocPlugin)
-siteSubdirName in Jekyll := &quot;jekyll-goodness&quot;
-siteSubdirName in SiteScaladoc := &quot;jekyll-goodness/api&quot;
-</code></pre>
-<h3><a href="#adding-custom-mappings-to-a-site-directory" name="adding-custom-mappings-to-a-site-directory" class="anchor"><span class="anchor-link"></span></a>Adding Custom Mappings to a Site Directory</h3>
-<p>Content added using:</p>
-<pre class="prettyprint"><code class="language-scala">site.addMappingsToSiteDir(mappings: TaskKey[Seq[(File,String)]], nestedDirectory: String)
-</code></pre>
-<p>has been replaced with:</p>
-<pre class="prettyprint"><code class="language-scala">addMappingsToSiteDir(mappings: TaskKey[Seq[(File, String)]], nestedDirectory: SettingKey[String])
-</code></pre>
-<p>The following examples show how you can define nested directory via a custom setting or by scoping <code>siteSubdirName</code> to either an sbt key or configuration:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/site/can-have-custom-mappings/build.sbt#L15-L23" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Define a custom setting and set it to the directory path
-val someDirName = settingKey[String](&quot;Some dir name&quot;)
-someDirName := &quot;someFancySource&quot;
-
-addMappingsToSiteDir(Compile / packageSrc / mappings, someDirName)
-
-// Or using siteSubdirName scoped to a sbt task or a configuration
-ScalaUnidoc / siteSubdirName := &quot;api&quot;
-addMappingsToSiteDir(ScalaUnidoc/ packageDoc / mappings, ScalaUnidoc / siteSubdirName)</code></pre>
-<h3><a href="#miscellaneous" name="miscellaneous" class="anchor"><span class="anchor-link"></span></a>Miscellaneous</h3>
-<p>In the <code>PreprocessPlugin</code>, the key <code>preprocessExts: SettingKey[Set[String]]</code> has been replaced by <code>preprocessIncludeFilter: SettingKey[FileFilter]</code>.</p>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/migration-guide.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-RC1
+1.5.0-RC2
 </span>
 </div>
 </article>

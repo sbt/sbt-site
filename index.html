@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="sbt-site">
+<meta name="description" content="sbt-site-root">
 <meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -18,7 +18,7 @@
 <meta name="lang:search.tokenizer" content="[\s\-]+">
 
 
-<meta name="description" content="sbt-site">
+<meta name="description" content="sbt-site-root">
 <link rel="shortcut icon" href="img/favicon.png">
 <title>sbt-site</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
@@ -169,7 +169,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC2
 </label>
 </li>
 </ul>
@@ -181,12 +181,11 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#sbt-site" name="sbt-site" class="anchor"><span class="anchor-link"></span></a>sbt-site</h1>
 <p>This sbt plugin generates project websites from static content as well as <a href="generators/index.html">third-party generators</a> and can optionally include generated Scaladoc. It is designed to work hand-in-hand with publishing plugins like <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages</a>.</p>
-<p>Before upgrading please consult the <a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/notes">release notes</a>. Instructions for upgrading from a version before 1.x.x can be found in the <a href="migration-guide.html#from-version-0.x.x-to-1.x.x">migration guide</a>.</p><div class="callout note "><div class="callout-title">Note</div>
+<p>Before upgrading please consult the <a href="https://github.com/sbt/sbt-site/tree/master/notes">release notes</a>. Instructions for upgrading from older versions can be found in the <a href="migration-guide.html">migration guide</a>.</p><div class="callout note "><div class="callout-title">Note</div>
 <ul>
   <li>Version 1.5+ is published for sbt &gt;= 1.4.9 and requires Java 11+.</li>
   <li>Version 1.4+ is published for sbt 1.2.x.</li>
   <li>Version 1.3+ is cross published to both sbt 0.13 and sbt 1.x.</li>
-  <li>As of sbt-site version 1.x.x, sbt version 0.13.10+ or 1.0.0-RC2+ is supported.</li>
 </ul></div>
 <div class="toc ">
 <ul>
@@ -200,7 +199,6 @@ sbt/sbt-site
   <li><a href="preprocess.html" class="page">Preprocessing</a>
   <ul>
     <li><a href="preprocess.html#substitution" class="header">Substitution</a></li>
-    <li><a href="preprocess.html#preprocessing-markdown-files-with-tut" class="header">Preprocessing Markdown files with tut</a></li>
   </ul></li>
   <li><a href="api-documentation.html" class="page">API documentation</a>
   <ul>
@@ -215,13 +213,31 @@ sbt/sbt-site
       <li><a href="generators/asciidoctor.html#attributes" class="header">Attributes</a></li>
     </ul></li>
     <li><a href="generators/gitbook.html" class="page">GitBook</a></li>
-    <li><a href="generators/hugo.html" class="page">Hugo</a></li>
-    <li><a href="generators/jekyll.html" class="page">Jekyll</a></li>
-    <li><a href="generators/laika.html" class="page">Laika</a></li>
-    <li><a href="generators/nanoc.html" class="page">Nanoc</a></li>
-    <li><a href="generators/pamflet.html" class="page">Pamflet</a></li>
+    <li><a href="generators/hugo.html" class="page">Hugo</a>
+    <ul>
+      <li><a href="generators/hugo.html#the-hugo-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Hugo integration is not (yet) included in this version of sbt-site.</a></li>
+    </ul></li>
+    <li><a href="generators/jekyll.html" class="page">Jekyll</a>
+    <ul>
+      <li><a href="generators/jekyll.html#the-jekyll-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Jekyll integration is not (yet) included in this version of sbt-site.</a></li>
+    </ul></li>
+    <li><a href="generators/laika.html" class="page">Laika</a>
+    <ul>
+      <li><a href="generators/laika.html#the-laika-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Laika integration is not (yet) included in this version of sbt-site.</a></li>
+    </ul></li>
+    <li><a href="generators/nanoc.html" class="page">Nanoc</a>
+    <ul>
+      <li><a href="generators/nanoc.html#the-nanoc-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The nanoc integration is not (yet) included in this version of sbt-site.</a></li>
+    </ul></li>
+    <li><a href="generators/pamflet.html" class="page">Pamflet</a>
+    <ul>
+      <li><a href="generators/pamflet.html#the-pamflet-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Pamflet integration is not (yet) included in this version of sbt-site.</a></li>
+    </ul></li>
     <li><a href="generators/paradox.html" class="page">Paradox</a></li>
-    <li><a href="generators/sphinx.html" class="page">Sphinx</a></li>
+    <li><a href="generators/sphinx.html" class="page">Sphinx</a>
+    <ul>
+      <li><a href="generators/sphinx.html#the-sphinx-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Sphinx integration is not (yet) included in this version of sbt-site.</a></li>
+    </ul></li>
   </ul></li>
   <li><a href="publishing.html" class="page">Publishing</a>
   <ul>
@@ -234,16 +250,10 @@ sbt/sbt-site
   </ul></li>
   <li><a href="migration-guide.html" class="page">Migration Guide</a>
   <ul>
+    <li><a href="migration-guide.html#migrating-from-version-1-4-x-to-1-5-x" class="header">Migrating from version 1.4.x to 1.5.x</a></li>
     <li><a href="migration-guide.html#migrating-from-version-1-3-x-to-1-4-x" class="header">Migrating from version 1.3.x to 1.4.x</a>
     <ul>
       <li><a href="migration-guide.html#paradoxsiteplugin" class="header">ParadoxSitePlugin</a></li>
-    </ul></li>
-    <li><a href="migration-guide.html#migrating-from-version-0-x-x-to-1-x-x" class="header">Migrating from version 0.x.x to 1.x.x</a>
-    <ul>
-      <li><a href="migration-guide.html#enabling-generators" class="header">Enabling Generators</a></li>
-      <li><a href="migration-guide.html#configuring-site-subdirectory" class="header">Configuring Site Subdirectory</a></li>
-      <li><a href="migration-guide.html#adding-custom-mappings-to-a-site-directory" class="header">Adding Custom Mappings to a Site Directory</a></li>
-      <li><a href="migration-guide.html#miscellaneous" class="header">Miscellaneous</a></li>
     </ul></li>
   </ul></li>
   <li><a href="notes/index.html" class="page">Release Notes</a>
@@ -301,13 +311,13 @@ sbt/sbt-site
 </div>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/main/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-RC1
+1.5.0-RC2
 </span>
 </div>
 </article>

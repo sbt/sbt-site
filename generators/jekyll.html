@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="sbt-site">
+<meta name="description" content="sbt-site-root">
 <meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -18,7 +18,7 @@
 <meta name="lang:search.tokenizer" content="[\s\-]+">
 
 
-<meta name="description" content="sbt-site">
+<meta name="description" content="sbt-site-root">
 <link rel="shortcut icon" href="../img/favicon.png">
 <title>Jekyll · sbt-site</title>
 <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
@@ -168,16 +168,39 @@ sbt/sbt-site
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="../generators/jekyll.html#jekyll" class="header">Jekyll</a>
+  <ul>
+    <li><a href="../generators/jekyll.html#the-jekyll-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Jekyll integration is not (yet) included in this version of sbt-site.</a></li>
+  </ul></li>
+</ul>
 </nav>
 
 </nav>
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC1
+<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC2
 </label>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">Table of contents</label>
+<ul>
+  <li><a href="../generators/jekyll.html#jekyll" class="header">Jekyll</a>
+  <ul>
+    <li><a href="../generators/jekyll.html#the-jekyll-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Jekyll integration is not (yet) included in this version of sbt-site.</a></li>
+  </ul></li>
+</ul>
+</nav>
+
 </div>
 </div>
 </div>
@@ -186,27 +209,28 @@ sbt/sbt-site
 <div class="md-content__searchable">
 <h1><a href="#jekyll" name="jekyll" class="anchor"><span class="anchor-link"></span></a>Jekyll</h1>
 <p>The sbt-site plugin has direct support for running <a href="https://jekyllrb.com">Jekyll</a>. This is useful for supporting custom Jekyll plugins that are not allowed when publishing to GitHub, or hosting a Jekyll site on your own server. To add Jekyll support, enable the associated plugin:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L4" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(JekyllPlugin)</code></pre>
+<h2><a href="#the-jekyll-integration-is-not-yet-included-in-this-version-of-sbt-site-" name="the-jekyll-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="anchor"><span class="anchor-link"></span></a>The Jekyll integration is not (yet) included in this version of sbt-site.</h2>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/jekyll/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(JekyllPlugin)</code></pre>
 <p>This assumes you have a Jekyll project in the <code>src/jekyll</code> directory. To change this, set the key <code>sourceDirectory</code> in the <code>Jekyll</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">Jekyll / sourceDirectory := sourceDirectory.value / &quot;hyde&quot;
 </code></pre>
 <p>To redirect the output to a subdirectory of <code>target/site</code>, use the <code>siteSubdirName</code> key in <code>Jekyll</code> scope:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L8-L9" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Puts output in `target/site/notJekyllButHyde`
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/jekyll/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/notJekyllButHyde`
 Jekyll / siteSubdirName := &quot;notJekyllButHyde&quot;</code></pre>
 <p>One common issue with Jekyll is ensuring that everyone uses the same version for generating a website. There is special support for ensuring the version of gems. To do so, add the following to your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L21-L24" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">requiredGems := Map(
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/jekyll/src/sbt-test/jekyll/can-use-jekyll/build.sbt#L21-L24" target="_blank" title="Go to snippet source"></a><code class="language-sbt">requiredGems := Map(
   &quot;jekyll&quot; -&gt; &quot;2.5.3&quot;,
   &quot;liquid&quot; -&gt; &quot;2.3.0&quot;
 )</code></pre>
 </div>
 <div>
-<a href="https://github.com/sbt/sbt-site/tree/v1.5.0-RC1/src/main/paradox/generators/jekyll.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/sbt/sbt-site/tree/master/src/main/paradox/generators/jekyll.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-RC1
+1.5.0-RC2
 </span>
 </div>
 </article>
