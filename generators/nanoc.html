@@ -181,7 +181,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC2
+<i class="md-icon" title="Version">label_outline</i> 1.5.0+0-d0f02895+20230513-0747*
 </label>
 </li>
 </ul>
@@ -210,12 +210,12 @@ sbt/sbt-site
 <h1><a href="#nanoc" name="nanoc" class="anchor"><span class="anchor-link"></span></a>Nanoc</h1>
 <p>The sbt-site plugin has direct support for building <a href="https://nanoc.ws/">Nanoc</a> projects. To enable Nanoc site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
 <h2><a href="#the-nanoc-integration-is-not-yet-included-in-this-version-of-sbt-site-" name="the-nanoc-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="anchor"><span class="anchor-link"></span></a>The nanoc integration is not (yet) included in this version of sbt-site.</h2>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/nanoc/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(NanocPlugin)</code></pre>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/nanoc/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L4" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(NanocPlugin)</code></pre>
 <p>This assumes you have a Nanoc project under the <code>src/nanoc</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Nanoc</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">Nanoc / sourceDirectory := sourceDirectory.value / &quot;conan&quot;
 </code></pre>
 <p>Similarly, the output can be redirected to a subdirectory of <code>target/site</code> via the <code>siteSubdirName</code> key in <code>Nanoc</code> scope:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/nanoc/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/conan`
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/nanoc/src/sbt-test/nanoc/can-use-nanoc/build.sbt#L8-L9" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Puts output in `target/site/conan`
 Nanoc / siteSubdirName := &quot;conan&quot;</code></pre>
 </div>
 <div>
@@ -225,7 +225,7 @@ Edit this page
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-RC2
+1.5.0+0-d0f02895+20230513-0747*
 </span>
 </div>
 </article>

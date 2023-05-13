@@ -181,7 +181,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC2
+<i class="md-icon" title="Version">label_outline</i> 1.5.0+0-d0f02895+20230513-0747*
 </label>
 </li>
 </ul>
@@ -210,7 +210,7 @@ sbt/sbt-site
 <h1><a href="#laika" name="laika" class="anchor"><span class="anchor-link"></span></a>Laika</h1>
 <p>The sbt-site plugin has support for building <a href="https://github.com/planet42/Laika">Laika</a> projects. To enable Laika site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
 <h2><a href="#the-laika-integration-is-not-yet-included-in-this-version-of-sbt-site-" name="the-laika-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="anchor"><span class="anchor-link"></span></a>The Laika integration is not (yet) included in this version of sbt-site.</h2>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/laika/src/sbt-test/laika/minimal/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(LaikaSitePlugin)</code></pre>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/laika/src/sbt-test/laika/minimal/build.sbt#L4" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(LaikaSitePlugin)</code></pre>
 <p>This plugin assumes you have a Laika project under the <code>src/laika</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>LaikaSite</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">LaikaSite / sourceDirectory := sourceDirectory.value / &quot;doc&quot;
 </code></pre>
@@ -219,7 +219,7 @@ sbt/sbt-site
 <dl>
   <dt>sbt</dt>
   <dd>
-  <pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/laika/src/sbt-test/laika/blog-post/build.sbt#L12-L13" target="_blank" title="Go to snippet source"></a><code class="language-sbt">LaikaSite / laikaBlockDirectives += CustomDirectives.postsToc
+  <pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/laika/src/sbt-test/laika/blog-post/build.sbt#L12-L13" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">LaikaSite / laikaBlockDirectives += CustomDirectives.postsToc
 LaikaSite / laikaSiteRenderers += CustomDirectives.postsRenderer</code></pre></dd>
 </dl>
 </div>
@@ -230,7 +230,7 @@ Edit this page
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-RC2
+1.5.0+0-d0f02895+20230513-0747*
 </span>
 </div>
 </article>

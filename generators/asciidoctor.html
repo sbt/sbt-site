@@ -181,7 +181,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0-RC2
+<i class="md-icon" title="Version">label_outline</i> 1.5.0+0-d0f02895+20230513-0747*
 </label>
 </li>
 </ul>
@@ -210,15 +210,15 @@ sbt/sbt-site
 <h1><a href="#asciidoctor" name="asciidoctor" class="anchor"><span class="anchor-link"></span></a>Asciidoctor</h1>
 <p>The sbt-site plugin has direct support for building <a href="http://asciidoctor.org">Asciidoctor</a> projects.</p>
 <p>To enable the &ldquo;sbt site Asciidoctor&rdquo; plugin in your sbt project, add the following to your <code>project/plugins.sbt</code> file:</p>
-<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-site-asciidoctor&quot; % &quot;1.5.0-RC2&quot;)
+<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-site-asciidoctor&quot; % &quot;1.5.0+0-d0f02895+20230513-0747-SNAPSHOT&quot;)
 </code></pre>
 <p>And enable the associated plugin in your <code>build.sbt</code> file:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/asciidoctor/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L4" target="_blank" title="Go to snippet source"></a><code class="language-sbt">enablePlugins(SitePreviewPlugin, AsciidoctorPlugin)</code></pre>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/asciidoctor/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L4" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(SitePreviewPlugin, AsciidoctorPlugin)</code></pre>
 <p>This assumes you have an Asciidoctor project under the <code>src/asciidoctor</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Asciidoctor</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">Asciidoctor / sourceDirectory := sourceDirectory.value / &quot;asciimd&quot;
 </code></pre>
 <p>Similarly, the output can be redirected to a subdirectory of <code>target/site</code> via the <code>siteSubdirName</code> key in <code>Asciidoctor</code> scope:</p>
-<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/sbt/sbt-site/tree/master/asciidoctor/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L8-L9" target="_blank" title="Go to snippet source"></a><code class="language-sbt">// Puts output in `target/site/asciimd`
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/asciidoctor/src/sbt-test/asciidoctor/can-use-asciidoctor/build.sbt#L8-L9" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Puts output in `target/site/asciimd`
 Asciidoctor / siteSubdirName := &quot;asciimd&quot;</code></pre>
 <h2><a href="#attributes" name="attributes" class="anchor"><span class="anchor-link"></span></a>Attributes</h2>
 <p>Asciidoctor allows the rendering of documents to be inflenced by <a href="https://asciidoctor.org/docs/user-manual/#attributes">attributes</a>.</p>
@@ -236,7 +236,7 @@ Edit this page
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0-RC2
+1.5.0+0-d0f02895+20230513-0747*
 </span>
 </div>
 </article>
