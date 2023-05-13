@@ -1,4 +1,4 @@
-addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.5.0-RC2")
+addSbtPlugin("com.github.sbt" % "sbt-site-paradox" % "1.5.0")
 //#sbt-ghpages
 addSbtPlugin(
   ("com.github.sbt" % "sbt-ghpages" % "0.7.0")
