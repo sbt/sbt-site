@@ -10,7 +10,7 @@ import com.typesafe.sbt.web.SbtWeb
 /** Paradox generator. */
 object ParadoxSitePlugin extends AutoPlugin {
   override def requires = SitePlugin && SbtWeb && ParadoxPlugin
-  override def trigger = noTrigger
+  override def trigger  = noTrigger
   object autoImport {
     val Paradox = config("paradox")
   }
@@ -23,7 +23,10 @@ object ParadoxSitePlugin extends AutoPlugin {
     List(
       siteNameConfig / siteSubdirName := ""
     ) ++
-    SiteHelpers.watchSettings(ThisScope.in(config, paradox.key)) ++
-    SiteHelpers.addMappingsToSiteDir((config / paradox).map(SiteHelpers.selectSubpaths(_, AllPassFilter)), siteNameConfig / siteSubdirName)
+      SiteHelpers.watchSettings(ThisScope.in(config, paradox.key)) ++
+      SiteHelpers.addMappingsToSiteDir(
+        (config / paradox).map(SiteHelpers.selectSubpaths(_, AllPassFilter)),
+        siteNameConfig / siteSubdirName
+      )
   }
 }

@@ -6,5 +6,6 @@ trait AsciidoctorKeys {
   val asciidoctorAttributes = SettingKey[Map[String, String]](
     "asciidoctor-attributes",
     "Asciidoctor allows the rendering process to be influenced by so-called attributes. " +
-        "You can read more about attributes here: https://asciidoctor.org/docs/user-manual/#attributes")
+      "You can read more about attributes here: https://asciidoctor.org/docs/user-manual/#attributes"
+  )
 }

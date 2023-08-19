@@ -15,8 +15,12 @@ object Compat {
   val Process = scala.sys.process.Process
   type ProcessLogger = scala.sys.process.ProcessLogger
 
-  def cached(cacheBaseDirectory: File, inStyle: Style, outStyle: Style)(action: (ChangeReport[File], ChangeReport[File]) => Set[File]): Set[File] => Set[File] =
-    sbt.util.FileFunction.cached(CacheStoreFactory(cacheBaseDirectory), inStyle = inStyle, outStyle = outStyle)(action = action)
+  def cached(cacheBaseDirectory: File, inStyle: Style, outStyle: Style)(
+      action: (ChangeReport[File], ChangeReport[File]) => Set[File]
+  ): Set[File] => Set[File] =
+    sbt.util.FileFunction.cached(CacheStoreFactory(cacheBaseDirectory), inStyle = inStyle, outStyle = outStyle)(action =
+      action
+    )
 
   val genSources: State => Seq[File] = {
     import scala.collection.JavaConverters._
@@ -27,26 +31,32 @@ object Compat {
       src => f.get(src).asInstanceOf[A]
     }
 
-    val baseField = sourceField[File]("base")
+    val baseField    = sourceField[File]("base")
     val includeField = sourceField[FileFilter]("includeFilter")
     val excludeField = sourceField[FileFilter]("excludeFilter")
 
-    (s: State) => Preview.runTask(watchSources, s).flatMap { src =>
-      val base = baseField(src)
-      val include = includeField(src)
-      val exclude = excludeField(src)
+    (s: State) =>
+      Preview.runTask(watchSources, s).flatMap { src =>
+        val base    = baseField(src)
+        val include = includeField(src)
+        val exclude = excludeField(src)
 
-      try {
-        Files.find(
-          base.toPath,
-          64,
-          (f, _) => include.accept(f.toFile) && !exclude.accept(f.toFile)
-        ).iterator().asScala.map(_.toFile).toList
-      } catch {
-        case _: java.nio.file.NoSuchFileException =>
-          Nil
+        try {
+          Files
+            .find(
+              base.toPath,
+              64,
+              (f, _) => include.accept(f.toFile) && !exclude.accept(f.toFile)
+            )
+            .iterator()
+            .asScala
+            .map(_.toFile)
+            .toList
+        } catch {
+          case _: java.nio.file.NoSuchFileException =>
+            Nil
+        }
       }
-    }
   }
 
   def watchSettings(scope: Scope): Seq[Setting[_]] =

@@ -12,7 +12,7 @@ import scala.util.matching.Regex.Match
 /** Provides ability to map values to `@` delimited variables. */
 object PreprocessPlugin extends AutoPlugin {
   override def requires = SitePlugin
-  override def trigger = noTrigger
+  override def trigger  = noTrigger
   object autoImport extends PreprocessKeys {
     val Preprocess = config("preprocess")
   }
@@ -27,49 +27,59 @@ object PreprocessPlugin extends AutoPlugin {
   def preprocessSettings(config: Configuration): Seq[Setting[_]] =
     inConfig(config)(
       Seq(
-        siteSourceDirectory := siteSourceDirectory.value,
-        siteDirectory := siteDirectory.value,
+        siteSourceDirectory     := siteSourceDirectory.value,
+        siteDirectory           := siteDirectory.value,
         preprocessIncludeFilter :=
-          //#preprocessIncludeFilter
+          // #preprocessIncludeFilter
           "*.txt" | "*.html" | "*.md" | "*.rst"
-          //#preprocessIncludeFilter
-          ,
-        preprocessVars := Map("VERSION" -> version.value),
-        preprocessRules := Seq.empty,
+        // #preprocessIncludeFilter
+        ,
+        preprocessVars             := Map("VERSION" -> version.value),
+        preprocessRules            := Seq.empty,
         Preprocess / includeFilter := AllPassFilter,
-        sourceDirectory := sourceDirectory.value / "site-preprocess",
-        target := target.value / Preprocess.name,
+        sourceDirectory            := sourceDirectory.value / "site-preprocess",
+        target                     := target.value / Preprocess.name,
         preprocess := simplePreprocess(
-          sourceDirectory.value, target.value, streams.value.cacheDirectory, preprocessIncludeFilter.value,
-          preprocessVars.value, preprocessRules.value, streams.value.log),
-        mappings := gatherMappings(preprocess.value, includeFilter.value),
+          sourceDirectory.value,
+          target.value,
+          streams.value.cacheDirectory,
+          preprocessIncludeFilter.value,
+          preprocessVars.value,
+          preprocessRules.value,
+          streams.value.log
+        ),
+        mappings       := gatherMappings(preprocess.value, includeFilter.value),
         siteSubdirName := ""
       )
     ) ++
       SiteHelpers.watchSettings(config) ++
       SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
-  /**
-   * Simple preprocessing of all files in a directory using `@variable@` replacements.
-   */
+  /** Simple preprocessing of all files in a directory using `@variable@` replacements.
+    */
   private[sbt] def simplePreprocess(
-    sourceDir: File,
-    targetDir: File,
-    cacheFile: File,
-    fileFilter: FileFilter,
-    replacements: Map[String, String],
-    rules: Seq[(Regex, Match => String)],
-    log: Logger): File = {
+      sourceDir: File,
+      targetDir: File,
+      cacheFile: File,
+      fileFilter: FileFilter,
+      replacements: Map[String, String],
+      rules: Seq[(Regex, Match => String)],
+      log: Logger
+  ): File = {
 
     def replacement(replacements: Map[String, String])(m: Match): String =
-      ((key: String) => replacements.getOrElse(
-        key,
-        sys.error("No replacement value defined for: " + key)))(m.group(1))
+      ((key: String) => replacements.getOrElse(key, sys.error("No replacement value defined for: " + key)))(m.group(1))
 
     transformDirectory(
-      sourceDir, targetDir, fileFilter.accept,
-      SiteHelpers.transformFile(replaceVariable(Seq((Variable, replacement(replacements ++ defaultReplacements)(_))) ++ rules)),
-      cacheFile, log)
+      sourceDir,
+      targetDir,
+      fileFilter.accept,
+      SiteHelpers.transformFile(
+        replaceVariable(Seq((Variable, replacement(replacements ++ defaultReplacements)(_))) ++ rules)
+      ),
+      cacheFile,
+      log
+    )
   }
 
   /** Find out what was generated. */
@@ -77,16 +87,17 @@ object PreprocessPlugin extends AutoPlugin {
     output ** includeFilter --- output pair Path.relativeTo(output)
   }
 
-  /**
-   * Create a transformed version of all files in a directory, given a predicate and a transform function for each file.
-   */
+  /** Create a transformed version of all files in a directory, given a predicate and a transform function for each
+    * file.
+    */
   private[sbt] def transformDirectory(
-    sourceDir: File,
-    targetDir: File,
-    transformable: File => Boolean,
-    transform: (File, File) => Unit,
-    cache: File,
-    log: Logger): File = {
+      sourceDir: File,
+      targetDir: File,
+      transformable: File => Boolean,
+      transform: (File, File) => Unit,
+      cache: File,
+      log: Logger
+  ): File = {
     val runTransform = Compat.cached(cache, FilesInfo.hash, FilesInfo.exists) { (in, out) =>
       val map = Path.rebase(sourceDir, targetDir)
       if (in.removed.nonEmpty || in.modified.nonEmpty) {
@@ -98,8 +109,7 @@ object PreprocessPlugin extends AutoPlugin {
           if (source.isFile) {
             if (transformable(source)) {
               transform(source, target)
-            }
-            else {
+            } else {
               IO.copyFile(source, target)
             }
           }
@@ -107,8 +117,7 @@ object PreprocessPlugin extends AutoPlugin {
         }
         log.info("Directory preprocessed: " + targetDir)
         updated
-      }
-      else {
+      } else {
         Set.empty
       }
     }
@@ -116,14 +125,12 @@ object PreprocessPlugin extends AutoPlugin {
     runTransform(sources)
     targetDir
   }
-  /**
-   * Simple variable replacement in a string.
-   */
-  private[sbt] def replaceVariable(rules: Seq[(Regex, Match => String)])
-    (input: String): String = {
-    rules.foldLeft(input) {
-      case (line, (regex, replace)) =>
-        regex.replaceAllIn(line, replace)
-      }
+
+  /** Simple variable replacement in a string.
+    */
+  private[sbt] def replaceVariable(rules: Seq[(Regex, Match => String)])(input: String): String = {
+    rules.foldLeft(input) { case (line, (regex, replace)) =>
+      regex.replaceAllIn(line, replace)
+    }
   }
 }

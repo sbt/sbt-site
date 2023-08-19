@@ -15,7 +15,7 @@ import sbt._
 /** Asciidoctor generator. */
 object AsciidoctorPlugin extends AutoPlugin {
   override def requires = SitePlugin
-  override def trigger = noTrigger
+  override def trigger  = noTrigger
 
   object autoImport extends AsciidoctorKeys {
     val Asciidoctor = config("asciidoctor")
@@ -36,7 +36,8 @@ object AsciidoctorPlugin extends AutoPlugin {
           target.value,
           includeFilter.value,
           version.value,
-          asciidoctorAttributes.value),
+          asciidoctorAttributes.value
+        ),
         siteSubdirName := ""
       )
     ) ++
@@ -50,7 +51,8 @@ object AsciidoctorPlugin extends AutoPlugin {
       output: File,
       includeFilter: FileFilter,
       version: String,
-      userSetAsciidoctorAttributes: Map[String, String]): Seq[(File, String)] = {
+      userSetAsciidoctorAttributes: Map[String, String]
+  ): Seq[(File, String)] = {
     val oldContextClassLoader = Thread.currentThread().getContextClassLoader
     Thread.currentThread().setContextClassLoader(this.getClass.getClassLoader)
     val asciidoctor = Factory.create()
@@ -61,8 +63,8 @@ object AsciidoctorPlugin extends AutoPlugin {
     options.setDestinationDir(output.getAbsolutePath)
     options.setSafe(SafeMode.UNSAFE)
 
-    //pass project.version to asciidoctor as attribute project-version
-    //need to do this explicitly through HashMap because otherwise JRuby complains
+    // pass project.version to asciidoctor as attribute project-version
+    // need to do this explicitly through HashMap because otherwise JRuby complains
     val attributes = new util.HashMap[String, AnyRef]()
     attributes.put("project-version", version)
 
