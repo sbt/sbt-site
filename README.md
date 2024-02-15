@@ -8,6 +8,7 @@ For version 1.5.0 we removed the integrations with [Jekyll], [Sphinx], [Pamflet]
 
 The documentation is available at <https://www.scala-sbt.org/sbt-site/>
 
+
 ## License
 
 sbt-site is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for specifics and copyright declaration.
