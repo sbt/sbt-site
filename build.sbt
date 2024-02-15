@@ -1,24 +1,32 @@
-inThisBuild(Seq(
-  organization := "com.github.sbt",
-  organizationName := "sbt",
-  organizationHomepage := Some(url("https://www.scala-sbt.org/")),
-
-  homepage := Some(url("https://www.scala-sbt.org/sbt-site/")),
-  licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause")),
-  //#scm-info
-  scmInfo := Some(ScmInfo(url("https://github.com/sbt/sbt-site"), "scm:git:git@github.com:sbt/sbt-site.git")),
-  //#scm-info
-  developers += Developer(
-    "contributors",
-    "Contributors",
-    "https://gitter.im/sbt/sbt-site",
-    url("https://github.com/sbt/sbt-site/graphs/contributors")
-  ),
-  resolvers ++= Resolver.sonatypeOssRepos("releases")
-))
+inThisBuild(
+  Seq(
+    organization         := "com.github.sbt",
+    organizationName     := "sbt",
+    organizationHomepage := Some(url("https://www.scala-sbt.org/")),
+    homepage             := Some(url("https://www.scala-sbt.org/sbt-site/")),
+    licenses += ("BSD 3-Clause", url(
+      "https://opensource.org/licenses/BSD-3-Clause"
+    )),
+    // #scm-info
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/sbt/sbt-site"),
+        "scm:git:git@github.com:sbt/sbt-site.git"
+      )
+    ),
+    // #scm-info
+    developers += Developer(
+      "contributors",
+      "Contributors",
+      "https://gitter.im/sbt/sbt-site",
+      url("https://github.com/sbt/sbt-site/graphs/contributors")
+    ),
+    resolvers ++= Resolver.sonatypeOssRepos("releases")
+  )
+)
 
 val pluginSettings = Seq(
-  sbtPlugin := true,
+  sbtPlugin        := true,
   crossSbtVersions := List("1.4.9"),
   scriptedLaunchOpts += "-Dproject.version=" + version.value
   // scriptedBufferLog := false
@@ -37,23 +45,32 @@ val commonSettings = Seq(
 
 val unfilteredVersion = "0.10.4"
 
+addCommandAlias("prepare", ";+clean;+scalafmtAll;+compile;+test;+scripted")
+
 lazy val root = project
   .in(file("."))
   .settings(
-    publish / skip := true,
+    publish / skip            := true,
     Compile / publishArtifact := false
   )
   .settings(
     name := "sbt-site-root",
-    publishTo := Some(Resolver.file("Unused transient repository", file("target/unusedrepo"))),
+    publishTo := Some(
+      Resolver.file("Unused transient repository", file("target/unusedrepo"))
+    ),
     Compile / paradoxMaterialTheme ~= {
       _.withFavicon("img/favicon.png")
         .withLogo("img/sbt-logo.svg")
         .withRepository(uri("https://github.com/sbt/sbt-site"))
     }
   )
-  .aggregate(core, asciidoctor, gitbook, paradox)
-  .enablePlugins(SitePreviewPlugin, ParadoxSitePlugin, ParadoxMaterialThemePlugin)
+  .aggregate(core, asciidoctor, gitbook, paradox, nanoc)
+  .enablePlugins(
+    SitePreviewPlugin,
+    ParadoxSitePlugin,
+    ParadoxMaterialThemePlugin,
+    NanocPlugin
+  )
 
 lazy val core = project
   .in(file("core"))
@@ -64,9 +81,9 @@ lazy val core = project
     name := "sbt-site",
     libraryDependencies ++= Seq(
       "ws.unfiltered" %% "unfiltered-directives" % unfilteredVersion,
-      "ws.unfiltered" %% "unfiltered-filter" % unfilteredVersion,
-      "ws.unfiltered" %% "unfiltered-jetty" % unfilteredVersion,
-      "ws.unfiltered" %% "unfiltered-specs2" % unfilteredVersion % Test,
+      "ws.unfiltered" %% "unfiltered-filter"     % unfilteredVersion,
+      "ws.unfiltered" %% "unfiltered-jetty"      % unfilteredVersion,
+      "ws.unfiltered" %% "unfiltered-specs2"     % unfilteredVersion % Test
     ).map(
       // Force sbt-site to Scala XML 2.1
       _.exclude("org.scala-lang.modules", "scala-xml_2.12")
@@ -80,7 +97,7 @@ lazy val asciidoctor = project
   .settings(
     name := "sbt-site-asciidoctor",
     libraryDependencies ++= Seq(
-      "org.asciidoctor" % "asciidoctorj" % "2.1.0",
+      "org.asciidoctor" % "asciidoctorj"         % "2.1.0",
       "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.18"
     )
   )
@@ -117,8 +134,18 @@ lazy val gitbook = project
 //    (pluginCrossBuild / scalaBinaryVersion).value
 //  )
 
-// https://github.com/sbt/sbt-site/issues/205
-// lazy val nanoc = project...
+lazy val nanoc = project
+  .in(file("nanoc"))
+  .settings(
+    name := "sbt-site-nanoc",
+    libraryDependencies ++= Seq(
+      "org.yaml" % "snakeyaml" % "2.0"
+    )
+  )
+  .dependsOn(core)
+  .enablePlugins(SbtPlugin)
+  .settings(pluginSettings)
+  .settings(commonSettings)
 
 // https://github.com/sbt/sbt-site/issues/206
 // lazy val pamflet = project...

@@ -6,15 +6,17 @@ import com.typesafe.sbt.site.{Compat, SitePlugin}
 import com.typesafe.sbt.site.Compat._
 import sbt.Keys._
 import sbt._
-/**
- * Utility/support functions.
- */
+
+/** Utility/support functions.
+  */
 object SiteHelpers {
   import SitePlugin.autoImport.siteMappings
+
   /** Convenience functions to add a task of mappings to a site under a nested directory. */
   def addMappingsToSiteDir(
-    mappings: Def.Initialize[Task[Seq[(File, String)]]],
-    nestedDirectory: SettingKey[String]): Setting[_] =
+      mappings: Def.Initialize[Task[Seq[(File, String)]]],
+      nestedDirectory: SettingKey[String]
+  ): Setting[_] =
     siteMappings ++= {
       for ((f, d) <- mappings.value) yield (f, nestedDirectory.value + "/" + d)
     }
@@ -40,8 +42,9 @@ object SiteHelpers {
     inConfig(config)(
       Seq(
         sourceDirectory := sourceDirectory.value / config.name,
-        target := target.value / config.name
-      ))
+        target          := target.value / config.name
+      )
+    )
 
   def watchSettings(config: Configuration): Seq[Setting[_]] =
     Compat.watchSettings(ThisScope.in(config))
@@ -49,9 +52,8 @@ object SiteHelpers {
   def watchSettings(scope: Scope): Seq[Setting[_]] =
     Compat.watchSettings(scope)
 
-  /**
-   * Transform a file, line by line.
-   */
+  /** Transform a file, line by line.
+    */
   def transformFile(transform: String => String)(source: File, target: File): Unit = {
     IO.reader(source) { reader =>
       IO.writer(target, "", IO.defaultCharset) { writer =>
@@ -61,11 +63,10 @@ object SiteHelpers {
     }
   }
 
-  /**
-    * Get short X.Y version
+  /** Get short X.Y version
     */
   def shortVersion(full: String): String = full match {
     case VersionNumber(Seq(x, y, _*), _, _) => s"$x.$y"
-    case _ => full
+    case _                                  => full
   }
 }

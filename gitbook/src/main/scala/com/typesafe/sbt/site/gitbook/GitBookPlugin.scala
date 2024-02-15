@@ -12,11 +12,12 @@ import com.typesafe.config.ConfigFactory
 /** GitBook site generator */
 object GitBookPlugin extends AutoPlugin {
   override def requires = SitePlugin
-  override def trigger = noTrigger
+  override def trigger  = noTrigger
 
   object autoImport {
     val GitBook = config("gitbook")
-    val gitbookInstallDir = TaskKey[Option[File]]("gitbook-install-dir", "Directory in which to install Gitbook; useful in CI environment")
+    val gitbookInstallDir =
+      TaskKey[Option[File]]("gitbook-install-dir", "Directory in which to install Gitbook; useful in CI environment")
   }
   import autoImport._
 
@@ -26,8 +27,8 @@ object GitBookPlugin extends AutoPlugin {
   def gitbookSettings(config: Configuration): Seq[Setting[_]] =
     inConfig(config)(
       Seq(
-        includeFilter := AllPassFilter,
-        excludeFilter := HiddenFileFilter,
+        includeFilter     := AllPassFilter,
+        excludeFilter     := HiddenFileFilter,
         gitbookInstallDir := None,
         mappings := generate(
           sourceDirectory.value,
@@ -45,7 +46,14 @@ object GitBookPlugin extends AutoPlugin {
       SiteHelpers.addMappingsToSiteDir(config / mappings, config / siteSubdirName)
 
   /** Run gitbook commands. */
-  private[sbt] def generate(src: File, target: File, inc: FileFilter, exc: FileFilter, installDir: Option[File], s: TaskStreams): Seq[(File, String)] = {
+  private[sbt] def generate(
+      src: File,
+      target: File,
+      inc: FileFilter,
+      exc: FileFilter,
+      installDir: Option[File],
+      s: TaskStreams
+  ): Seq[(File, String)] = {
     val runEnv = installDir.map("HOME" -> _.getAbsolutePath).toSeq
     def run(cmd: String*) =
       Process(cmd.toSeq, Some(src), runEnv: _*) ! s.log match {
@@ -56,11 +64,13 @@ object GitBookPlugin extends AutoPlugin {
     def install(installDir: File): String = {
       if (!installDir.exists) {
         IO.write(installDir / ".gitignore", "*")
-        IO.write(installDir / ".gitconfig",
+        IO.write(
+          installDir / ".gitconfig",
           """|# Enables installation from networks where git:// access is blocked
              |[url "https://github.com/"]
              |  insteadOf = git://github.com/
-             |""".stripMargin)
+             |""".stripMargin
+        )
       }
 
       val installPath = installDir.getAbsolutePath
@@ -77,8 +87,7 @@ object GitBookPlugin extends AutoPlugin {
       case Some(output) =>
         run(gitbook, "build")
         if (output.getCanonicalPath != target.getCanonicalPath) {
-          s.log.warn(
-            s"""|The output directory in book.json resolves to ${output}
+          s.log.warn(s"""|The output directory in book.json resolves to ${output}
                 |which does not match the target ${target}.
                 |We are going to copy the files over, but you might want to remove
                 |the 'output' setting in ${bookJson(src)} so the clean task cleans.""".stripMargin)
@@ -98,8 +107,8 @@ object GitBookPlugin extends AutoPlugin {
 
   private[sbt] def outputDir(src: File): Option[File] = {
     val bookConfig = ConfigFactory.parseFile(bookJson(src))
-    val version = Try(bookConfig.getString("gitbook").split("[.]").head.toInt).toOption
-    val output = Try(bookConfig.getString("output")).getOrElse("_book")
+    val version    = Try(bookConfig.getString("gitbook").split("[.]").head.toInt).toOption
+    val output     = Try(bookConfig.getString("output")).getOrElse("_book")
 
     /*
      * Version 3 does not support configuring the output directory in book.json
