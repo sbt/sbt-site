@@ -1,3 +1,2 @@
-# 2022-12-16 ennru: Ignore in GH workflow
-# > makeSite
-# > checkContent
+> makeSite
+> checkContent

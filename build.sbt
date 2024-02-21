@@ -52,7 +52,7 @@ lazy val root = project
         .withRepository(uri("https://github.com/sbt/sbt-site"))
     }
   )
-  .aggregate(core, asciidoctor, gitbook, paradox)
+  .aggregate(core, asciidoctor, gitbook, paradox, sphinx)
   .enablePlugins(SitePreviewPlugin, ParadoxSitePlugin, ParadoxMaterialThemePlugin)
 
 lazy val core = project
@@ -139,8 +139,15 @@ lazy val paradox = project
   .settings(pluginSettings)
   .settings(commonSettings)
 
-// https://github.com/sbt/sbt-site/issues/186
-//lazy val sphinx = project...
+lazy val sphinx = project
+  .in(file("sphinx"))
+  .settings(
+    name := "sbt-site-sphinx",
+  )
+  .dependsOn(core)
+  .enablePlugins(SbtPlugin)
+  .settings(pluginSettings)
+  .settings(commonSettings)
 
 //#ghpages-publish
 enablePlugins(GhpagesPlugin)
