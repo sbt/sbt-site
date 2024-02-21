@@ -19,7 +19,7 @@ inThisBuild(Seq(
 
 val pluginSettings = Seq(
   sbtPlugin := true,
-  crossSbtVersions := List("1.4.9"),
+  crossSbtVersions := List("1.9.7"),
   scriptedLaunchOpts += "-Dproject.version=" + version.value
   // scriptedBufferLog := false
 )
