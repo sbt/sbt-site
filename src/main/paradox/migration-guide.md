@@ -1,5 +1,9 @@
 # Migration Guide
 
+## Migrating from version 1.5.x to 1.6.x
+
+Only sbt >=1.9.7 is supported.
+
 ## Migrating from version 1.4.x to 1.5.x
 
 To cut down on dependencies, sbt-site is now spilt into separate modules per site generator. Three generators are available as specific sbt plugins:

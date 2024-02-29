@@ -19,7 +19,7 @@ inThisBuild(Seq(
 
 val pluginSettings = Seq(
   sbtPlugin := true,
-  crossSbtVersions := List("1.4.9"),
+  crossSbtVersions := List("1.9.7"),
   scriptedLaunchOpts += "-Dproject.version=" + version.value
   // scriptedBufferLog := false
 )
@@ -67,11 +67,6 @@ lazy val core = project
       "ws.unfiltered" %% "unfiltered-filter" % unfilteredVersion,
       "ws.unfiltered" %% "unfiltered-jetty" % unfilteredVersion,
       "ws.unfiltered" %% "unfiltered-specs2" % unfilteredVersion % Test,
-    ).map(
-      // Force sbt-site to Scala XML 2.1
-      _.exclude("org.scala-lang.modules", "scala-xml_2.12")
-    ) ++ Seq(
-      "org.scala-lang.modules" %% "scala-xml" % "2.1.0"
     )
   )
 
@@ -132,7 +127,7 @@ lazy val paradox = project
   .in(file("paradox"))
   .settings(
     name := "sbt-site-paradox",
-    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.3")
+    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.6")
   )
   .dependsOn(core)
   .enablePlugins(SbtPlugin)
