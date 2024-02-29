@@ -47,9 +47,10 @@ jobs:
         with:
           jvm: ${{ matrix.jvmName }}
 
-      - name: Install Jekyll, Nanoc, Asciidoctor
+      - name: Install Jekyll, Nanoc, Asciidoctor, sphinx
         run: |-
           sudo gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-document
+          pip3 install --user sphinx
 #          npm install -g gitbook-cli@2.3.2
 #          gitbook install 3.2.3
 

@@ -1,1 +1,1 @@
-addSbtPlugin("com.github.sbt" % "sbt-site" % sys.props("project.version"))
+addSbtPlugin("com.github.sbt" % "sbt-site-sphinx" % sys.props("project.version"))
