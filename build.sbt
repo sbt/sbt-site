@@ -35,7 +35,7 @@ val commonSettings = Seq(
   )
 )
 
-val unfilteredVersion = "0.10.4"
+val unfilteredVersion = "0.12.0"
 
 lazy val root = project
   .in(file("."))
