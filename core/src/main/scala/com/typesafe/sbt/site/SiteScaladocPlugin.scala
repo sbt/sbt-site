@@ -20,7 +20,7 @@ object SiteScaladocPlugin extends AutoPlugin {
     config: Configuration,
     scaladocMappings: TaskKey[Seq[(File, String)]] = Compile / packageDoc / mappings,
     scaladocDir: String = "latest/api"
-  ): Seq[Setting[_]] =
+  ): Seq[Setting[?]] =
     inConfig(config)(
       Seq(
         siteSubdirName := scaladocDir,

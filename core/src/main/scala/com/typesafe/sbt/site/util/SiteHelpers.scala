@@ -14,7 +14,7 @@ object SiteHelpers {
   /** Convenience functions to add a task of mappings to a site under a nested directory. */
   def addMappingsToSiteDir(
     mappings: Def.Initialize[Task[Seq[(File, String)]]],
-    nestedDirectory: SettingKey[String]): Setting[_] =
+    nestedDirectory: SettingKey[String]): Setting[?] =
     siteMappings ++= {
       for ((f, d) <- mappings.value) yield (f, nestedDirectory.value + "/" + d)
     }
@@ -36,17 +36,17 @@ object SiteHelpers {
     zipPath
   }
 
-  def directorySettings(config: Configuration): Seq[Setting[_]] =
+  def directorySettings(config: Configuration): Seq[Setting[?]] =
     inConfig(config)(
       Seq(
         sourceDirectory := sourceDirectory.value / config.name,
         target := target.value / config.name
       ))
 
-  def watchSettings(config: Configuration): Seq[Setting[_]] =
+  def watchSettings(config: Configuration): Seq[Setting[?]] =
     Compat.watchSettings(ThisScope.in(config))
 
-  def watchSettings(scope: Scope): Seq[Setting[_]] =
+  def watchSettings(scope: Scope): Seq[Setting[?]] =
     Compat.watchSettings(scope)
 
   /**

@@ -20,7 +20,7 @@ object SitePreviewPlugin extends AutoPlugin {
   import SitePlugin.autoImport._
   import autoImport._
 
-  override val projectSettings: Seq[Setting[_]] = Seq(
+  override val projectSettings: Seq[Setting[?]] = Seq(
     previewSite := {
       val file = makeSite.value
       val portOption = previewFixedPort.value

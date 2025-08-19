@@ -27,7 +27,7 @@ object AsciidoctorPlugin extends AutoPlugin {
   override def projectSettings = asciidoctorSettings(Asciidoctor)
 
   /** Creates settings necessary for running Asciidoctor in the given configuration. */
-  def asciidoctorSettings(config: Configuration): Seq[Setting[_]] =
+  def asciidoctorSettings(config: Configuration): Seq[Setting[?]] =
     inConfig(config)(
       Seq(
         includeFilter := AllPassFilter,

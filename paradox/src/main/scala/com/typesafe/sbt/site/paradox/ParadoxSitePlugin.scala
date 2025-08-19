@@ -18,7 +18,7 @@ object ParadoxSitePlugin extends AutoPlugin {
   import autoImport._
   import ParadoxPlugin.autoImport._
   override def projectSettings = paradoxSettings(Compile)
-  def paradoxSettings(config: Configuration): Seq[Setting[_]] = {
+  def paradoxSettings(config: Configuration): Seq[Setting[?]] = {
     val siteNameConfig = if (config == Compile) Paradox else config
     List(
       siteNameConfig / siteSubdirName := ""

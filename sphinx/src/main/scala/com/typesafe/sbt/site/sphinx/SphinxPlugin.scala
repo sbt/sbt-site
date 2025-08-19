@@ -17,7 +17,7 @@ object SphinxPlugin extends AutoPlugin {
   import autoImport._
   override def projectSettings = sphinxSettings(Sphinx)
 
-  def sphinxSettings(config: Configuration): Seq[Setting[_]] =
+  def sphinxSettings(config: Configuration): Seq[Setting[?]] =
     inConfig(config)(
       Seq(
         sphinxPackages := Seq.empty,
