@@ -49,7 +49,7 @@ object Compat {
     }
   }
 
-  def watchSettings(scope: Scope): Seq[Setting[_]] =
+  def watchSettings(scope: Scope): Seq[Setting[?]] =
     Seq(
       ConfigGlobal / watchSources += new Source(
         base = (scope / sourceDirectory).value,

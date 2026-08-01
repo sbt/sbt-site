@@ -23,7 +23,7 @@ object GitBookPlugin extends AutoPlugin {
   override def projectSettings = gitbookSettings(GitBook)
 
   /** Creates settings necessary for running GitBook in the given configuration. */
-  def gitbookSettings(config: Configuration): Seq[Setting[_]] =
+  def gitbookSettings(config: Configuration): Seq[Setting[?]] =
     inConfig(config)(
       Seq(
         includeFilter := AllPassFilter,

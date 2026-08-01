@@ -24,7 +24,7 @@ object PreprocessPlugin extends AutoPlugin {
 
   override def projectSettings = preprocessSettings(Preprocess)
 
-  def preprocessSettings(config: Configuration): Seq[Setting[_]] =
+  def preprocessSettings(config: Configuration): Seq[Setting[?]] =
     inConfig(config)(
       Seq(
         siteSourceDirectory := siteSourceDirectory.value,
