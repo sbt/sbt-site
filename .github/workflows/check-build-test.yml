@@ -14,55 +14,58 @@ permissions:
 jobs:
   test:
     name: Build and Test
-    runs-on: ubuntu-22.04
+
     strategy:
       fail-fast: false
       matrix:
         include:
-          - { sbtCrossVersion: "1.9.7", jvmName: "temurin:1.11.0"  }
-          # { jvmName: "temurin:1.11.0" }
-          # { jvmName: "temurin:1.17.0" }
+          - os: ubuntu-22.04
+            java: 11
+            distribution: temurin
+    runs-on: "${{ matrix.os }}"
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v7.0.1
 
-      - name: Cache Coursier cache
-        uses: coursier/cache-action@v6.4.1
-
-#      - name: Install Node
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: v16.x
+      #      - name: Install Node
+      #        uses: actions/setup-node@v1
+      #        with:
+      #          node-version: v16.x
 
       - name: Ruby caches
-        uses: actions/cache@v3
+        uses: actions/cache@v6.1.0
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      - name: Set up JDK ${{ matrix.jvmName }}
-        uses: coursier/setup-action@v1.3.0
+      - name: Setup JDK
+        uses: actions/setup-java@v5.7.0
         with:
-          jvm: ${{ matrix.jvmName }}
+          distribution: "${{ matrix.distribution }}"
+          java-version: "${{ matrix.java }}"
+          cache: "sbt"
+
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1.5.6
 
       - name: Install Jekyll, Nanoc, Asciidoctor, sphinx
         run: |-
           sudo gem install jekyll:3.8.4 nanoc:4.0.2 asciidoctor --no-document
           pip3 install --user sphinx
-#          npm install -g gitbook-cli@2.3.2
-#          gitbook install 3.2.3
+      #          npm install -g gitbook-cli@2.3.2
+      #          gitbook install 3.2.3
 
-#      - name: Install Hugo 0.20
-#        run: |-
-#          mkdir download
-#          wget https://github.com/gohugoio/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O download/hugo.tgz
-#          tar xvf download/hugo.tgz
-#          mkdir ${PWD}/bin
-#          export PATH=${PATH}:${PWD}/bin
-#          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 ${PWD}/bin/hugo
-#          chmod +x ${PWD}/bin/hugo
+      #      - name: Install Hugo 0.20
+      #        run: |-
+      #          mkdir download
+      #          wget https://github.com/gohugoio/hugo/releases/download/v0.20.1/hugo_0.20.1_linux-64bit.tar.gz -O download/hugo.tgz
+      #          tar xvf download/hugo.tgz
+      #          mkdir ${PWD}/bin
+      #          export PATH=${PATH}:${PWD}/bin
+      #          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 ${PWD}/bin/hugo
+      #          chmod +x ${PWD}/bin/hugo
 
       - name: sbt runScriptedTest
-        run: sbt ";^^${{ matrix.sbtCrossVersion }}; test; scripted; makeSite"
+        run: sbt -v "; test; scripted; makeSite"
