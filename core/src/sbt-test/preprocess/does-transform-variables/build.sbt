@@ -4,6 +4,8 @@ import java.util.Date
 enablePlugins(PreprocessPlugin)
 //#enablePlugin
 
+scalaVersion := "2.12.20"
+
 name := "preprocess test"
 
 version := "0.0-ABCD"

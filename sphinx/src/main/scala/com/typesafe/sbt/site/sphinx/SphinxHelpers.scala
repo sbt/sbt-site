@@ -74,7 +74,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
   private def easyInstall(src: File, baseTarget: File, log: Logger): File = {
     val name = src.getName
     val target = baseTarget / "packages" / name
-    val empty = (target * "*.egg").get.isEmpty
+    val empty = (target * "*.egg").get().isEmpty
     if (empty) {
       log.info("Installing Sphinx custom package '%s'..." format name)
       IO.withTemporaryDirectory { tmp =>
@@ -119,10 +119,10 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
         val exitCode = Process(command, src, env.toSeq : _*) ! logger
         if (exitCode != 0) sys.error("Failed to build Sphinx %s documentation." format desc)
         log.info("Sphinx %s documentation generated: %s" format (desc, target))
-        target.allPaths.get.toSet
+        target.allPaths.get().toSet
       } else Set.empty
     }
-    val inputs = src.descendantsExcept(include, exclude).get.toSet
+    val inputs = src.descendantsExcept(include, exclude).get().toSet
     cached(inputs)
     target
   }
@@ -132,12 +132,12 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
    * @return PDF file
    */
   private def makePdf(latexBase: File, log: Logger): Seq[File] = {
-    val texFiles = (latexBase * "*.tex").get
+    val texFiles = (latexBase * "*.tex").get()
     val pdfFiles = texFiles map { tex =>
       val (base, ext) = tex.baseAndExt
       latexBase / (base + ".pdf")
     }
-    val outofdate = (texFiles, pdfFiles).zipped.exists { case (tex, pdf) => tex.lastModified > pdf.lastModified }
+    val outofdate = texFiles.zip(pdfFiles).exists { case (tex, pdf) => tex.lastModified > pdf.lastModified }
     if(outofdate) {
       log.info("Generating Sphinx pdf documentation...")
       val logger = sphinxLogger(log)

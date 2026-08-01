@@ -11,6 +11,8 @@ import org.asciidoctor.SafeMode
 import org.asciidoctor.jruby.AsciiDocDirectoryWalker
 import sbt.Keys._
 import sbt._
+import sbtcompat.PluginCompat
+import sbtcompat.PluginCompat.{ *, given }
 
 /** Asciidoctor generator. */
 object AsciidoctorPlugin extends AutoPlugin {
@@ -31,12 +33,15 @@ object AsciidoctorPlugin extends AutoPlugin {
     inConfig(config)(
       Seq(
         includeFilter := AllPassFilter,
-        mappings := generate(
-          sourceDirectory.value,
-          target.value,
-          includeFilter.value,
-          version.value,
-          asciidoctorAttributes.value),
+        mappings := Def.uncached {
+          implicit val conv: xsbti.FileConverter = fileConverter.value
+          PluginCompat.toFileRefsMapping(generate(
+            sourceDirectory.value,
+            target.value,
+            includeFilter.value,
+            version.value,
+            asciidoctorAttributes.value))
+        },
         siteSubdirName := ""
       )
     ) ++

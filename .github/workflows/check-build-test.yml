@@ -20,8 +20,13 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            java: 11
+            java: 17
             distribution: temurin
+            scalaV: "2.12.x"
+          - os: ubuntu-22.04
+            java: 17
+            distribution: temurin
+            scalaV: "3.x"
     runs-on: "${{ matrix.os }}"
     steps:
       - name: Checkout
@@ -68,4 +73,4 @@ jobs:
       #          chmod +x ${PWD}/bin/hugo
 
       - name: sbt runScriptedTest
-        run: sbt -v "; test; scripted; makeSite"
+        run: sbt -v "++${{ matrix.scalaV }}; test; scripted; makeSite"

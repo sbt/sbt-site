@@ -1,3 +1,7 @@
+import sbtcompat.PluginCompat
+
+scalaVersion := "2.12.20"
+
 name := "test"
 
 version := "0.0-ABCD"
@@ -5,10 +9,13 @@ version := "0.0-ABCD"
 enablePlugins(ScalaUnidocPlugin)
 
 //#mappings
-makeSite / mappings ++= Seq(
-  file("LICENSE") -> "LICENSE",
-  file("src/assets/favicon.ico") -> "favicon.ico"
-)
+makeSite / mappings ++= {
+  implicit val conv: xsbti.FileConverter = fileConverter.value
+  PluginCompat.toFileRefsMapping(Seq(
+    file("LICENSE") -> "LICENSE",
+    file("src/assets/favicon.ico") -> "favicon.ico"
+  ))
+}
 //#mappings
 
 //#addMappingsToSiteDir
@@ -35,6 +42,6 @@ TaskKey[Unit]("checkContent") := {
   assert(favicon.exists, s"${favicon.getAbsolutePath} did not exist")
   val fancy = dest / someDirName.value / "cats" / "preowned" / "Meow.scala"
   assert(fancy.exists, s"${fancy.getAbsolutePath} did not exist")
-  val unidoc = dest / (siteSubdirName in ScalaUnidoc).value / "index.html"
+  val unidoc = dest / (ScalaUnidoc / siteSubdirName).value / "index.html"
   assert(unidoc.exists, s"${unidoc.getAbsolutePath} did not exist")
 }

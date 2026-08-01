@@ -3,9 +3,11 @@ package com.typesafe.sbt.site.paradox
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers
+import sbt.Keys._
 import sbt._
 import com.lightbend.paradox.sbt.ParadoxPlugin
 import com.typesafe.sbt.web.SbtWeb
+import sbtcompat.PluginCompat
 
 /** Paradox generator. */
 object ParadoxSitePlugin extends AutoPlugin {
@@ -23,7 +25,13 @@ object ParadoxSitePlugin extends AutoPlugin {
     List(
       siteNameConfig / siteSubdirName := ""
     ) ++
-    SiteHelpers.watchSettings(ThisScope.in(config, paradox.key)) ++
-    SiteHelpers.addMappingsToSiteDir((config / paradox).map(SiteHelpers.selectSubpaths(_, AllPassFilter)), siteNameConfig / siteSubdirName)
+    SiteHelpers.watchSettings(ThisScope.copy(config = Select(config), task = Select(paradox.key))) ++
+    SiteHelpers.addMappingsToSiteDir(
+      Def.task {
+        implicit val conv: xsbti.FileConverter = fileConverter.value
+        PluginCompat.toFileRefsMapping(SiteHelpers.selectSubpaths((config / paradox).value, AllPassFilter))
+      },
+      siteNameConfig / siteSubdirName
+    )
   }
 }

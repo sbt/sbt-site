@@ -1,3 +1,5 @@
+ThisBuild / scalaVersion := "2.12.20"
+
 name := "test"
 
 val checkContent = taskKey[Unit]("checkContent")
@@ -12,6 +14,7 @@ def gitbookProject(version: String)(project: Project): Project = project
   .in(file(version))
   .enablePlugins(GitBookPlugin)
   .settings(
+    name := s"test-$version",
     checkContentTask,
     GitBook / siteSubdirName := "docs"
   )

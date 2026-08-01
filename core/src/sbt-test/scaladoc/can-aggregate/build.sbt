@@ -1,5 +1,3 @@
-name := "scaladoc subproject test"
-
 ThisBuild / scalaVersion := "2.12.17"
 
 //#subprojects
