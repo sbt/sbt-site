@@ -14,7 +14,6 @@ inThisBuild(Seq(
     "https://gitter.im/sbt/sbt-site",
     url("https://github.com/sbt/sbt-site/graphs/contributors")
   ),
-  resolvers ++= Resolver.sonatypeOssRepos("releases")
 ))
 
 val pluginSettings = Seq(
