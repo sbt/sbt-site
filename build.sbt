@@ -34,7 +34,7 @@ val commonSettings = Seq(
   )
 )
 
-val unfilteredVersion = "0.12.0"
+val unfilteredVersion = "0.12.1"
 
 lazy val root = project
   .in(file("."))
@@ -74,7 +74,7 @@ lazy val asciidoctor = project
   .settings(
     name := "sbt-site-asciidoctor",
     libraryDependencies ++= Seq(
-      "org.asciidoctor" % "asciidoctorj" % "2.1.0",
+      "org.asciidoctor" % "asciidoctorj" % "2.5.13",
       "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.18"
     )
   )
@@ -88,7 +88,7 @@ lazy val gitbook = project
   .settings(
     name := "sbt-site-gitbook",
     libraryDependencies ++= Seq(
-      "com.typesafe" % "config" % "1.4.2"
+      "com.typesafe" % "config" % "1.4.9"
     )
   )
   .dependsOn(core)
@@ -126,7 +126,7 @@ lazy val paradox = project
   .in(file("paradox"))
   .settings(
     name := "sbt-site-paradox",
-    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.6")
+    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.7")
   )
   .dependsOn(core)
   .enablePlugins(SbtPlugin)
