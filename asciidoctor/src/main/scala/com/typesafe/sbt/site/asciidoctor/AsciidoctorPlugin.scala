@@ -1,11 +1,10 @@
 package com.typesafe.sbt.site.asciidoctor
 
-import java.util
-
 import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.util.SiteHelpers
 import org.asciidoctor.Asciidoctor.Factory
+import org.asciidoctor.Attributes
 import org.asciidoctor.Options
 import org.asciidoctor.SafeMode
 import org.asciidoctor.jruby.AsciiDocDirectoryWalker
@@ -56,22 +55,25 @@ object AsciidoctorPlugin extends AutoPlugin {
     val asciidoctor = Factory.create()
     asciidoctor.requireLibrary("asciidoctor-diagram")
     if (!output.exists) output.mkdirs()
-    val options = new Options
-    options.setToDir(output.getAbsolutePath)
-    options.setDestinationDir(output.getAbsolutePath)
-    options.setSafe(SafeMode.UNSAFE)
 
     //pass project.version to asciidoctor as attribute project-version
     //need to do this explicitly through HashMap because otherwise JRuby complains
-    val attributes = new util.HashMap[String, AnyRef]()
-    attributes.put("project-version", version)
+    val attributes = Attributes
+      .builder()
+      .attribute("project-version", version)
 
     // Add user configured attributes into the mix
     userSetAsciidoctorAttributes.foreach { case (key, value) =>
-      attributes.put(key, value)
+      attributes.attribute(key, value)
     }
 
-    options.setAttributes(attributes)
+    val options = Options
+      .builder()
+      .toDir(output)
+      .safe(SafeMode.UNSAFE)
+      .attributes(attributes.build())
+      .build()
+
     asciidoctor.convertDirectory(new AsciiDocDirectoryWalker(input.getAbsolutePath), options)
     val inputImages = input / "images"
     if (inputImages.exists()) {
