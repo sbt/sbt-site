@@ -37,33 +37,30 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
 
-  # https://github.com/sbt/sbt-site/issues/200
-  # documentation:
-  #   name: Release Documentation
-  #   if: github.event.repository.fork == false
-  #   runs-on: ubuntu-22.04
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v7.0.1
-  #       with:
-  #         fetch-depth: 0
+  documentation:
+    name: Release Documentation
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
-  #     - name: Setup JDK
-  #       uses: actions/setup-java@v5.7.0
-  #       with:
-  #         distribution: "temurin"
-  #         java-version: "11"
-  #         cache: sbt
+      - name: Setup JDK
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          cache: sbt
 
-  #     - name: Setup sbt
-  #       uses: sbt/setup-sbt@v1.5.6
+      - name: Setup sbt
+        uses: sbt/setup-sbt@bfea3c5f48abd221b04a6df4798aa5eb8b6a2baf # v1.5.6
 
-  #     - name: sbt ghpages
-  #       run: |-
-  #         git config --global user.name "sbt-site bot"
-  #         git config --global user.email "sbt-site@scala-sbt.org"
-  #         sbt ghpagesPushSite
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: sbt makeSite
+
+      - uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
+        with:
+          folder: target/site
+        if: ${{ github.repository_owner == 'sbt' }}
