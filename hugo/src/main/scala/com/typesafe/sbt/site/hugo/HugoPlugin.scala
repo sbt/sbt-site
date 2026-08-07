@@ -52,7 +52,7 @@ object HugoPlugin extends AutoPlugin {
     baseURL: URI,
     envVars: Map[String, String],
     s: TaskStreams): Seq[(File, String)] = {
-    Process(Seq("hugo", "-d", target.getAbsolutePath, "--baseURL", baseURL.toString), Some(src), envVars.toSeq: _*) ! s.log match {
+    Process(Seq("hugo", "-d", target.getAbsolutePath, "--baseURL", baseURL.toString), Some(src), envVars.toSeq*) ! s.log match {
       case 0 => ()
       case n => sys.error("Could not run hugo binary, error: " + n)
     }

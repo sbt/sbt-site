@@ -53,7 +53,7 @@ object GitBookPlugin extends AutoPlugin {
   private[sbt] def generate(src: File, target: File, inc: FileFilter, exc: FileFilter, installDir: Option[File], s: TaskStreams): Seq[(File, String)] = {
     val runEnv = installDir.map("HOME" -> _.getAbsolutePath).toSeq
     def run(cmd: String*) =
-      Process(cmd.toSeq, Some(src), runEnv: _*) ! s.log match {
+      Process(cmd.toSeq, Some(src), runEnv*) ! s.log match {
         case 0 => ()
         case n => sys.error(s"Could not run `${cmd.mkString(" ")}`, error: $n")
       }

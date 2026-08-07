@@ -63,10 +63,10 @@ object Preview {
     } }
 
   def mapFileToLastModified(files: Seq[File]): Map[File, Long] =
-    Map(files.filter(!_.toString.endsWith("~")).map(file => file -> file.lastModified()): _*)
+    Map(files.filter(!_.toString.endsWith("~")).map(file => file -> file.lastModified())*)
 
   def runTask[A](task: TaskKey[A], state: State): A = {
-    val extracted = Project extract state
+    val extracted = Project.extract(state)
     val (_, result) = extracted.runTask(task, state)
     result
   }
