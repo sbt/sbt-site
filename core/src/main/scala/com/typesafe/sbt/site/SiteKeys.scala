@@ -9,6 +9,7 @@ import sbtcompat.PluginCompat
  * @since 10/29/15
  */
 trait SiteKeys {
+  @transient
   val makeSite = TaskKey[File]("make-site", "Generates a static website for a project.")
   val packageSite = TaskKey[PluginCompat.FileRef]("package-site", "Create a zip file of the website.")
   val siteSubdirName = SettingKey[String]("siteSubdirName",
