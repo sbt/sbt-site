@@ -75,7 +75,7 @@ lazy val root = project
         .withRepository(uri("https://github.com/sbt/sbt-site"))
     }
   )
-  .aggregate(core, asciidoctor, gitbook, paradox, sphinx)
+  .aggregate(core, asciidoctor, gitbook, paradox, sphinx, pamflet)
   .enablePlugins(SitePreviewPlugin, ParadoxSitePlugin, ParadoxMaterialThemePlugin)
 
 lazy val core = project
@@ -138,13 +138,18 @@ lazy val gitbook = project
 // https://github.com/sbt/sbt-site/issues/205
 // lazy val nanoc = project...
 
-// https://github.com/sbt/sbt-site/issues/206
-// lazy val pamflet = project...
-//val pamfletDependencies = Seq(
-//  "org.foundweekends" %% "pamflet-library" % "0.10.0",
-//  "org.scala-lang.modules" %% "scala-xml" % "2.1.0",
-//  "org.yaml" % "snakeyaml" % "1.33",
-//)
+lazy val pamflet = project
+  .in(file("pamflet"))
+  .settings(
+    name := "sbt-site-pamflet",
+    libraryDependencies ++= Seq(
+      "org.foundweekends" %% "pamflet-library" % "0.13.0",
+    )
+  )
+  .dependsOn(core)
+  .enablePlugins(SbtPlugin)
+  .settings(pluginSettings)
+  .settings(commonSettings)
 
 lazy val paradox = project
   .in(file("paradox"))
