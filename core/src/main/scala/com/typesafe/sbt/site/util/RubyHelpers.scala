@@ -27,7 +27,7 @@ object RubyHelpers {
       gem: String,
       version: String,
       current: Option[String]): Option[String] = current match {
-      case Some(v) if v contains version => None
+      case Some(v) if v.contains(version) => None
       case Some(v) => Some(
         "This build requires the gem [%s (%s)] but found version (%s) instead." format(gem, version, v))
       case None => Some(

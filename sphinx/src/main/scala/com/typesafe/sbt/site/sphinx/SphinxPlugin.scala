@@ -64,8 +64,8 @@ object SphinxPlugin extends AutoPlugin {
   // For now, we default to passing the version in as a property.
   def propertiesSettings(config: Configuration) = Seq(
     config / sphinxProperties ++= Map(
-      "version" → (config / version).value,
-      "release" → version.value
+      "version" -> (config / version).value,
+      "release" -> version.value
     )
   )
 
@@ -114,7 +114,7 @@ object SphinxPlugin extends AutoPlugin {
   }
 
   def ifEnabled[T](key: TaskKey[T]): Def.Initialize[Task[Option[T]]] = ifEnabled0[T, Option[T]](
-    key, _ map Some.apply, None)
+    key, _.map(Some.apply), None)
   def seqIfEnabled[T](key: TaskKey[Seq[T]]): Def.Initialize[Task[Seq[T]]] = ifEnabled0[Seq[T], Seq[T]](
     key, identity, Nil)
 

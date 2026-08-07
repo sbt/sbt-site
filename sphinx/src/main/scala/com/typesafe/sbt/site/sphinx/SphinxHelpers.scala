@@ -116,7 +116,7 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
         val command = Seq("sphinx-build") ++ buildOptions ++ colourOptions ++ Seq("-b", builder, "-d", doctrees.absolutePath) ++ tagOptions ++ propertyOptions ++ Seq(src.absolutePath, target.absolutePath)
         log.debug("Command: " + command.mkString(" "))
         log.debug("Environment: " + env)
-        val exitCode = Process(command, src, env.toSeq : _*) ! logger
+        val exitCode = Process(command, src, env.toSeq*) ! logger
         if (exitCode != 0) sys.error("Failed to build Sphinx %s documentation." format desc)
         log.info("Sphinx %s documentation generated: %s" format (desc, target))
         target.allPaths.get().toSet
@@ -160,8 +160,8 @@ private[sphinx] class CommandLineSphinxRunner extends SphinxRunner {
       def out(e: => String): Unit = redirect(e)
       def buffer[T](f: => T): T = f
       def redirect(message: String): Unit = {
-        if (message contains "ERROR") log.error(message)
-        else if (message contains "WARNING") log.warn(message)
+        if (message.contains("ERROR")) log.error(message)
+        else if (message.contains("WARNING")) log.warn(message)
         else log.debug(message)
       }
     }
