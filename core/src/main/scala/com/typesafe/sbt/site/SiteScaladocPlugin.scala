@@ -4,6 +4,7 @@ import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
+import sbtcompat.PluginCompat
 
 /** Simple plugin for adding Scaladoc to the site content. */
 object SiteScaladocPlugin extends AutoPlugin {
@@ -18,7 +19,7 @@ object SiteScaladocPlugin extends AutoPlugin {
 
   def scaladocSettings(
     config: Configuration,
-    scaladocMappings: TaskKey[Seq[(File, String)]] = Compile / packageDoc / mappings,
+    scaladocMappings: TaskKey[Seq[(PluginCompat.FileRef, String)]] = Compile / packageDoc / mappings,
     scaladocDir: String = "latest/api"
   ): Seq[Setting[?]] =
     inConfig(config)(

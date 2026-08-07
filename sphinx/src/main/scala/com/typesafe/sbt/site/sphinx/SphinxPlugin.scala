@@ -6,6 +6,8 @@ import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
+import sbtcompat.PluginCompat
+import sbtcompat.PluginCompat.{ *, given }
 /** Sphinx generator. */
 object SphinxPlugin extends AutoPlugin {
   override def requires = SitePlugin
@@ -23,27 +25,30 @@ object SphinxPlugin extends AutoPlugin {
         sphinxPackages := Seq.empty,
         sphinxTags := Seq.empty,
         sphinxProperties := Map.empty,
-        sphinxEnv := Map.empty,
+        sphinxEnv := Def.uncached(Map.empty),
         sphinxIncremental := false,
         generate / includeFilter := AllPassFilter,
         generate / excludeFilter := HiddenFileFilter,
-        sphinxInputs := combineSphinxInputs.value,
-        sphinxRunner := SphinxRunner(),
-        installPackages := installPackagesTask.value,
+        sphinxInputs := Def.uncached(combineSphinxInputs.value),
+        sphinxRunner := Def.uncached(SphinxRunner()),
+        installPackages := Def.uncached(installPackagesTask.value),
         generateHtml / enableOutput := true,
         generatePdf / enableOutput := false,
         generateEpub / enableOutput := false,
-        generateHtml := generateHtmlTask.value,
-        generatePdf := generatePdfTask.value,
-        generateEpub := generateEpubTask.value,
-        generatedHtml := ifEnabled(generateHtml).value,
-        generatedPdf := seqIfEnabled(generatePdf).value,
-        generatedEpub := ifEnabled(generateEpub).value,
-        generate := generateTask.value,
+        generateHtml := Def.uncached(generateHtmlTask.value),
+        generatePdf := Def.uncached(generatePdfTask.value),
+        generateEpub := Def.uncached(generateEpubTask.value),
+        generatedHtml := Def.uncached(ifEnabled(generateHtml).value),
+        generatedPdf := Def.uncached(seqIfEnabled(generatePdf).value),
+        generatedEpub := Def.uncached(ifEnabled(generateEpub).value),
+        generate := Def.uncached(generateTask.value),
         Sphinx / includeFilter := AllPassFilter,
-        mappings := mappingsTask.value,
+        mappings := Def.uncached {
+          implicit val conv: xsbti.FileConverter = fileConverter.value
+          PluginCompat.toFileRefsMapping(mappingsTask.value)
+        },
         version := SiteHelpers.shortVersion(version.value),
-        sphinxEnv := defaultEnvTask.value,
+        sphinxEnv := Def.uncached(defaultEnvTask.value),
         siteSubdirName := ""
       )
     ) ++
@@ -116,10 +121,10 @@ object SphinxPlugin extends AutoPlugin {
   private[this] def ifEnabled0[S, T](
     key: TaskKey[S],
     f: Task[S] => Task[T],
-    nil: T): Def.Initialize[Task[T]] = Def.task{
+    nil: T): Def.Initialize[Task[T]] = Def.taskDyn {
     val t = key.taskValue
-    if ((key.scope / key / enableOutput).value) f(t) else task {nil}
-  }.flatMap(identity(_))
+    if ((key.scope / key / enableOutput).value) Def.value(f(t)) else Def.task { nil }
+  }
 
   def generateTask = Def.task {
     val htmlOutput = generatedHtml.value
@@ -130,11 +135,11 @@ object SphinxPlugin extends AutoPlugin {
     val t = target.value / "docs"
     val cache = cacheDir / "sphinx" / "docs"
     val htmlMapping = htmlOutput.toSeq flatMap { html =>
-      (html ** AllPassFilter).get pair Path.rebase(html, t)
+      (html ** AllPassFilter).get() pair Path.rebase(html, t)
     }
-    val pdfMapping = pdfOutputs map { pdf => (pdf, t / pdf.name) }
+    val pdfMapping = pdfOutputs map { pdf => (pdf, t / pdf.getName) }
     val epubMapping = epubOutput.toSeq flatMap { epub =>
-      (epub ** "*.epub").get pair Path.rebase(epub, t)
+      (epub ** "*.epub").get() pair Path.rebase(epub, t)
     }
     val mapping = htmlMapping ++ pdfMapping ++ epubMapping
     Sync.sync(CacheStore(cache))(mapping)

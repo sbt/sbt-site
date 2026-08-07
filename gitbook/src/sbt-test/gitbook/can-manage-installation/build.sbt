@@ -1,9 +1,13 @@
+import sbtcompat.PluginCompat.{ *, given }
+
+scalaVersion := "2.12.20"
+
 name := "test"
 
 enablePlugins(GitBookPlugin)
 
 //#gitbookInstallDir
-GitBook / gitbookInstallDir := Some(baseDirectory.value / "node_modules" / "gitbook")
+GitBook / gitbookInstallDir := Def.uncached(Some(baseDirectory.value / "node_modules" / "gitbook"))
 //#gitbookInstallDir
 
 TaskKey[Unit]("checkContent") := {

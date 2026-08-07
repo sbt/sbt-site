@@ -1,9 +1,13 @@
+import sbtcompat.PluginCompat
+
+scalaVersion := "2.12.20"
+
 name := "test"
 version := "0.0-ABCD"
 
 publishTo := Some(Resolver.file("file", file("target/release")))
 //#publishSite
-publishSite
+publishSite()
 //#publishSite
 
 def artifactFlavour = Def.task {
@@ -11,8 +15,9 @@ def artifactFlavour = Def.task {
 }
 
 TaskKey[Unit]("checkPackageSite") := {
+  implicit val conv: xsbti.FileConverter = fileConverter.value
   val siteZipName = s"${artifactFlavour.value}-${version.value}-site.zip"
-  val siteZipFile = packageSite.value
+  val siteZipFile = PluginCompat.toFile(packageSite.value)
 
   assert(siteZipFile.exists, s"${siteZipFile.getAbsolutePath} did not exist")
   assert(siteZipFile.getName == siteZipName, s"${siteZipFile.getName} did not match expected '$siteZipName")
@@ -32,8 +37,10 @@ TaskKey[Unit]("checkPackageSite") := {
 }
 
 TaskKey[Unit]("checkPublishSite") := {
-  val publishedZipFile = file("target/release") / name.value / artifactFlavour.value / version.value / packageSite.value.getName
-  checkFileContent(publishedZipFile, packageSite.value)
+  implicit val conv: xsbti.FileConverter = fileConverter.value
+  val siteZipFile = PluginCompat.toFile(packageSite.value)
+  val publishedZipFile = file("target/release") / name.value / artifactFlavour.value / version.value / siteZipFile.getName
+  checkFileContent(publishedZipFile, siteZipFile)
 }
 
 def checkFileContent(actual: File, expected: File) = {

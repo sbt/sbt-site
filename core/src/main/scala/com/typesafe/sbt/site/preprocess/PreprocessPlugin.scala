@@ -5,6 +5,8 @@ import com.typesafe.sbt.site.SitePlugin.autoImport._
 import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
+import sbtcompat.PluginCompat
+import sbtcompat.PluginCompat.{ *, given }
 
 import scala.util.matching.Regex
 import scala.util.matching.Regex.Match
@@ -39,10 +41,13 @@ object PreprocessPlugin extends AutoPlugin {
         Preprocess / includeFilter := AllPassFilter,
         sourceDirectory := sourceDirectory.value / "site-preprocess",
         target := target.value / Preprocess.name,
-        preprocess := simplePreprocess(
+        preprocess := Def.uncached(simplePreprocess(
           sourceDirectory.value, target.value, streams.value.cacheDirectory, preprocessIncludeFilter.value,
-          preprocessVars.value, preprocessRules.value, streams.value.log),
-        mappings := gatherMappings(preprocess.value, includeFilter.value),
+          preprocessVars.value, preprocessRules.value, streams.value.log)),
+        mappings := {
+          implicit val conv: xsbti.FileConverter = fileConverter.value
+          PluginCompat.toFileRefsMapping(gatherMappings(preprocess.value, includeFilter.value))
+        },
         siteSubdirName := ""
       )
     ) ++
@@ -112,7 +117,7 @@ object PreprocessPlugin extends AutoPlugin {
         Set.empty
       }
     }
-    val sources = (sourceDir ** AllPassFilter).get.toSet
+    val sources = (sourceDir ** AllPassFilter).get().toSet
     runTransform(sources)
     targetDir
   }

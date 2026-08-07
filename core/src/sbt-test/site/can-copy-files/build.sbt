@@ -1,3 +1,5 @@
+scalaVersion := "2.12.20"
+
 name := "test"
 
 version := "0.0-ABCD"

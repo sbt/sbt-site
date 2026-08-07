@@ -2,12 +2,12 @@ package com.typesafe.sbt.site
 
 import java.nio.file.Files
 
-import sbt.Defaults.ConfigGlobal
 import sbt.Keys.{excludeFilter, includeFilter, sourceDirectory, watchSources}
 import sbt.internal.io.Source
 import sbt.util.CacheStoreFactory
 import sbt.util.FileInfo.Style
-import sbt.{ChangeReport, Scope, File, FileFilter, Setting, State}
+import sbt.{ChangeReport, Def, Scope, File, FileFilter, Setting, State, ThisScope, Zero}
+import sbtcompat.PluginCompat.{ *, given }
 
 object Compat {
 
@@ -51,11 +51,11 @@ object Compat {
 
   def watchSettings(scope: Scope): Seq[Setting[?]] =
     Seq(
-      ConfigGlobal / watchSources += new Source(
+      (ThisScope.copy(config = Zero) / watchSources) += Def.uncached(new Source(
         base = (scope / sourceDirectory).value,
         includeFilter = (scope / includeFilter).value,
         excludeFilter = (scope / excludeFilter).value
-      )
+      ))
     )
 
   val CacheStore = sbt.util.CacheStore

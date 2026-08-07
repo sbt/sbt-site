@@ -8,6 +8,8 @@ import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers
 import scala.util.Try
 import com.typesafe.config.ConfigFactory
+import sbtcompat.PluginCompat
+import sbtcompat.PluginCompat.{ *, given }
 
 /** GitBook site generator */
 object GitBookPlugin extends AutoPlugin {
@@ -28,15 +30,18 @@ object GitBookPlugin extends AutoPlugin {
       Seq(
         includeFilter := AllPassFilter,
         excludeFilter := HiddenFileFilter,
-        gitbookInstallDir := None,
-        mappings := generate(
-          sourceDirectory.value,
-          target.value,
-          includeFilter.value,
-          excludeFilter.value,
-          gitbookInstallDir.value,
-          streams.value
-        ),
+        gitbookInstallDir := Def.uncached(None),
+        mappings := Def.uncached {
+          implicit val conv: xsbti.FileConverter = fileConverter.value
+          PluginCompat.toFileRefsMapping(generate(
+            sourceDirectory.value,
+            target.value,
+            includeFilter.value,
+            excludeFilter.value,
+            gitbookInstallDir.value,
+            streams.value
+          ))
+        },
         siteSubdirName := ""
       )
     ) ++

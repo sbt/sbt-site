@@ -1,7 +1,13 @@
+def scala212 = "2.12.20"
+def scala3 = "3.8.4"
+
 inThisBuild(Seq(
   organization := "com.github.sbt",
   organizationName := "sbt",
   organizationHomepage := Some(url("https://www.scala-sbt.org/")),
+
+  crossScalaVersions := Seq(scala212, scala3),
+  scalaVersion := scala3,
 
   homepage := Some(url("https://www.scala-sbt.org/sbt-site/")),
   licenses += ("BSD 3-Clause", url("https://opensource.org/licenses/BSD-3-Clause")),
@@ -18,20 +24,39 @@ inThisBuild(Seq(
 
 val pluginSettings = Seq(
   sbtPlugin := true,
-  crossSbtVersions := List("1.9.7"),
-  scriptedLaunchOpts += "-Dproject.version=" + version.value
+  scriptedLaunchOpts += "-Dproject.version=" + version.value,
+  addSbtPlugin("com.github.sbt" % "sbt2-compat" % "0.2.0"),
   // scriptedBufferLog := false
+  (pluginCrossBuild / sbtVersion) := {
+    scalaBinaryVersion.value match {
+      case "2.12" => "1.9.7"
+      case _      => "2.0.4"
+    }
+  },
+  scriptedSbt := {
+    scalaBinaryVersion.value match {
+      case "2.12" => "1.12.14"
+      case _      => "2.0.4"
+    }
+  },
 )
 
 val commonSettings = Seq(
-  scalacOptions ++= Seq(
-    "-deprecation",
-    "-unchecked",
-    "-encoding",
-    "UTF-8",
-    "-release",
-    "11"
-  )
+  scalacOptions ++= {
+    scalaBinaryVersion.value match {
+      case "2.12" =>
+        Seq(
+          "-deprecation",
+          "-unchecked",
+          "-encoding",
+          "UTF-8",
+          "-Xsource:3",
+          "-release",
+          "8"
+        )
+      case _ => Nil
+    }
+  }
 )
 
 val unfilteredVersion = "0.12.1"
@@ -39,11 +64,10 @@ val unfilteredVersion = "0.12.1"
 lazy val root = project
   .in(file("."))
   .settings(
-    publish / skip := true,
-    Compile / publishArtifact := false
-  )
-  .settings(
     name := "sbt-site-root",
+    publish / skip := true,
+    Compile / publishArtifact := false,
+    crossScalaVersions := Nil,
     publishTo := Some(Resolver.file("Unused transient repository", file("target/unusedrepo"))),
     Compile / paradoxMaterialTheme ~= {
       _.withFavicon("img/favicon.png")
@@ -124,14 +148,14 @@ lazy val gitbook = project
 
 lazy val paradox = project
   .in(file("paradox"))
-  .settings(
-    name := "sbt-site-paradox",
-    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.10.7")
-  )
   .dependsOn(core)
   .enablePlugins(SbtPlugin)
-  .settings(pluginSettings)
-  .settings(commonSettings)
+  .settings(
+    name := "sbt-site-paradox",
+    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.11.0-M4"),
+    pluginSettings,
+    commonSettings,
+  )
 
 lazy val sphinx = project
   .in(file("sphinx"))

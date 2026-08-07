@@ -6,6 +6,8 @@ import com.typesafe.sbt.site.{Compat, SitePlugin}
 import com.typesafe.sbt.site.Compat._
 import sbt.Keys._
 import sbt._
+import sbtcompat.PluginCompat
+import sbtcompat.PluginCompat.{ *, given }
 /**
  * Utility/support functions.
  */
@@ -13,27 +15,28 @@ object SiteHelpers {
   import SitePlugin.autoImport.siteMappings
   /** Convenience functions to add a task of mappings to a site under a nested directory. */
   def addMappingsToSiteDir(
-    mappings: Def.Initialize[Task[Seq[(File, String)]]],
+    mappings: Def.Initialize[Task[Seq[(PluginCompat.FileRef, String)]]],
     nestedDirectory: SettingKey[String]): Setting[?] =
-    siteMappings ++= {
+    siteMappings ++= Def.uncached {
       for ((f, d) <- mappings.value) yield (f, nestedDirectory.value + "/" + d)
     }
 
   def selectSubpaths(dir: File, filter: FileFilter): Seq[(File, String)] =
     Path.selectSubpaths(dir, filter).toSeq
 
-  def copySite(dir: File, cacheDir: File, maps: Seq[(File, String)]): File = {
-    val concrete = maps map { case (file, dest) => (file, dir / dest) }
+  def copySite(dir: File, cacheDir: File, maps: Seq[(PluginCompat.FileRef, String)])(implicit conv: xsbti.FileConverter): File = {
+    val concrete = maps map { case (ref, dest) => (PluginCompat.toFile(ref), dir / dest) }
     Sync.sync(CacheStore(cacheDir / "make-site"))(concrete)
     dir
   }
 
   def siteArtifact(name: String) = Artifact(name, Artifact.DocType, "zip", "site")
 
-  def createSiteZip(siteDir: File, zipPath: File, s: TaskStreams): File = {
-    IO.zip(Path.allSubpaths(siteDir), zipPath, Some(System.currentTimeMillis()))
-    s.log.info("Site packaged: " + zipPath)
-    zipPath
+  def createSiteZip(siteDir: File, zipPath: PluginCompat.ArtifactPath, s: TaskStreams)(implicit conv: xsbti.FileConverter): PluginCompat.FileRef = {
+    val zipFile = PluginCompat.artifactPathToFile(zipPath)
+    IO.zip(Path.allSubpaths(siteDir), zipFile, Some(System.currentTimeMillis()))
+    s.log.info("Site packaged: " + zipFile)
+    PluginCompat.toFileRef(zipFile)
   }
 
   def directorySettings(config: Configuration): Seq[Setting[?]] =
@@ -44,7 +47,7 @@ object SiteHelpers {
       ))
 
   def watchSettings(config: Configuration): Seq[Setting[?]] =
-    Compat.watchSettings(ThisScope.in(config))
+    Compat.watchSettings(ThisScope.copy(config = Select(config)))
 
   def watchSettings(scope: Scope): Seq[Setting[?]] =
     Compat.watchSettings(scope)

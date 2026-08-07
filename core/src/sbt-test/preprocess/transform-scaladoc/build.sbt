@@ -1,3 +1,7 @@
+import sbtcompat.PluginCompat.{ *, given }
+
+scalaVersion := "2.12.20"
+
 Compile  / doc / scalacOptions ++= Seq(
   "-sourcepath", baseDirectory.value.toString,
   "-doc-source-url", {
@@ -10,10 +14,10 @@ enablePlugins(PreprocessPlugin)
 
 Preprocess / sourceDirectory := (Compile / doc / target).value
 Preprocess / siteSubdirName := "api"
-makeSite := makeSite.dependsOn(Compile / doc).value
+makeSite := Def.uncached(makeSite.dependsOn(Compile / doc).value)
 
 //#preprocessRules
-preprocessRules in Preprocess := Seq(
+Preprocess / preprocessRules := Seq(
   ("\\.java\\.scala".r, _ => ".java")
 )
 //#preprocessRules
