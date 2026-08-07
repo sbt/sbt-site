@@ -10,7 +10,9 @@ object SitePreviewPlugin extends AutoPlugin {
   override def trigger = noTrigger
 
   object autoImport {
+    @transient
     val previewSite = TaskKey[Unit]("previewSite", "Launches a jetty server that serves your generated site from the target directory")
+    @transient
     val previewAuto = TaskKey[Unit]("previewAuto", "Launches an automatic jetty server that serves your generated site from the target directory")
     val previewFixedPort = previewSite / SettingKey[Option[Int]]("previewFixedPort")
     val previewLaunchBrowser = previewSite / SettingKey[Boolean]("previewLaunchBrowser")
