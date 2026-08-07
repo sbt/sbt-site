@@ -14,7 +14,7 @@ enablePlugins(PreprocessPlugin)
 
 Preprocess / sourceDirectory := (Compile / doc / target).value
 Preprocess / siteSubdirName := "api"
-makeSite := Def.uncached(makeSite.dependsOn(Compile / doc).value)
+makeSite := makeSite.dependsOn(Compile / doc).value
 
 //#preprocessRules
 Preprocess / preprocessRules := Seq(

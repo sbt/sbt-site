@@ -27,7 +27,7 @@ object SitePlugin extends AutoPlugin {
         SiteHelpers.selectSubpaths(siteSourceDirectory.value, (makeSite / includeFilter).value)
       )
     },
-    makeSite := Def.uncached {
+    makeSite := {
       implicit val conv: xsbti.FileConverter = fileConverter.value
       SiteHelpers.copySite(siteDirectory.value, streams.value.cacheDirectory, siteMappings.value)
     },
