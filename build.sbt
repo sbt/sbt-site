@@ -30,13 +30,13 @@ val pluginSettings = Seq(
   (pluginCrossBuild / sbtVersion) := {
     scalaBinaryVersion.value match {
       case "2.12" => "1.9.7"
-      case _      => "2.0.4"
+      case _      => "2.0.6"
     }
   },
   scriptedSbt := {
     scalaBinaryVersion.value match {
-      case "2.12" => "1.12.14"
-      case _      => "2.0.4"
+      case "2.12" => "1.12.15"
+      case _      => (pluginCrossBuild / sbtVersion).value
     }
   },
 )
