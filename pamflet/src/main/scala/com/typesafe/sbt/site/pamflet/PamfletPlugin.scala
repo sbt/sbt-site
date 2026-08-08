@@ -5,7 +5,9 @@ import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.util.SiteHelpers
 import sbt.Keys._
 import sbt._
+import sbtcompat.PluginCompat
 import pamflet._
+import xsbti.FileConverter
 
 /** Pamflet generator. */
 object PamfletPlugin extends AutoPlugin {
@@ -19,12 +21,15 @@ object PamfletPlugin extends AutoPlugin {
   import autoImport._
   override def projectSettings = pamfletSettings(Pamflet)
 
-  def pamfletSettings(config: Configuration): Seq[Setting[_]] =
+  def pamfletSettings(config: Configuration): Seq[Setting[?]] =
       inConfig(config)(
         Seq(
           includeFilter := AllPassFilter,
           pamfletFencePlugins := (config / pamfletFencePlugins).?.value.getOrElse(Nil),
-          mappings := generate(sourceDirectory.value, target.value, includeFilter.value, pamfletFencePlugins.value),
+          mappings := {
+            implicit val converter: FileConverter = fileConverter.value
+            PluginCompat.toFileRefsMapping(generate(sourceDirectory.value, target.value, includeFilter.value, pamfletFencePlugins.value))
+          },
           siteSubdirName := ""
         )
       ) ++

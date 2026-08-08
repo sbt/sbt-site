@@ -1,1 +1,1 @@
-addSbtPlugin("com.github.sbt" % "sbt-site" % sys.props("project.version"))
+addSbtPlugin("com.github.sbt" % "sbt-site-pamflet" % sys.props("project.version"))
