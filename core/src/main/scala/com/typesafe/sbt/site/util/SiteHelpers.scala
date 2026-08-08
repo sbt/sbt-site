@@ -34,7 +34,8 @@ object SiteHelpers {
 
   def createSiteZip(siteDir: File, zipPath: PluginCompat.ArtifactPath, s: TaskStreams)(implicit conv: xsbti.FileConverter): PluginCompat.FileRef = {
     val zipFile = PluginCompat.artifactPathToFile(zipPath)
-    IO.zip(Path.allSubpaths(siteDir), zipFile, Some(System.currentTimeMillis()))
+    val midnight = (System.currentTimeMillis() / 86400000) * 86400000
+    IO.zip(Path.allSubpaths(siteDir), zipFile, Some(midnight))
     s.log.info("Site packaged: " + zipFile)
     PluginCompat.toFileRef(zipFile)
   }
