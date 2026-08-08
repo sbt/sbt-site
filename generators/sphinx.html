@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site-root">
-<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.7.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -168,39 +168,16 @@ sbt/sbt-site
   </ul></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">Table of contents</label>
-<ul>
-  <li><a href="../generators/sphinx.html#sphinx" class="header">Sphinx</a>
-  <ul>
-    <li><a href="../generators/sphinx.html#the-sphinx-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Sphinx integration is not (yet) included in this version of sbt-site.</a></li>
-  </ul></li>
-</ul>
 </nav>
 
 </nav>
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0
+<i class="md-icon" title="Version">label_outline</i> 1.7.0+30-2cab7d2e*
 </label>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">Table of contents</label>
-<ul>
-  <li><a href="../generators/sphinx.html#sphinx" class="header">Sphinx</a>
-  <ul>
-    <li><a href="../generators/sphinx.html#the-sphinx-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Sphinx integration is not (yet) included in this version of sbt-site.</a></li>
-  </ul></li>
-</ul>
-</nav>
-
 </div>
 </div>
 </div>
@@ -208,14 +185,17 @@ sbt/sbt-site
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
 <h1><a href="#sphinx" name="sphinx" class="anchor"><span class="anchor-link"></span></a>Sphinx</h1>
-<p>The sbt-site plugin has direct support for building <a href="https://www.sphinx-doc.org">Sphinx</a> projects. To enable Sphinx site generation, simply enable the associated plugin in your <code>build.sbt</code> file:</p>
-<h2><a href="#the-sphinx-integration-is-not-yet-included-in-this-version-of-sbt-site-" name="the-sphinx-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="anchor"><span class="anchor-link"></span></a>The Sphinx integration is not (yet) included in this version of sbt-site.</h2>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/sphinx/src/sbt-test/sphinx/can-use-sphinx/build.sbt#L4" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(SphinxPlugin)</code></pre>
+<p>The sbt-site plugin has direct support for building <a href="https://www.sphinx-doc.org">Sphinx</a> projects.</p>
+<p>To enable the &ldquo;sbt site Sphinx&rdquo; plugin in your sbt project, add the following to your <code>project/plugins.sbt</code> file:</p>
+<pre class="prettyprint"><code class="language-sbt">addSbtPlugin(&quot;com.github.sbt&quot; % &quot;sbt-site-sphinx&quot; % &quot;1.7.0+30-2cab7d2e-SNAPSHOT&quot;)
+</code></pre>
+<p>And enable the <code>SphinxPlugin</code> plugin in your <code>build.sbt</code> file:</p>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/sphinx/src/sbt-test/sphinx/can-use-sphinx/build.sbt#L6" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">enablePlugins(SphinxPlugin)</code></pre>
 <p>This assumes you have a Sphinx project under the <code>src/sphinx</code> directory. To change this, set the <code>sourceDirectory</code> key in the <code>Sphinx</code> scope:</p>
 <pre class="prettyprint"><code class="language-sbt">Sphinx / sourceDirectory := sourceDirectory.value / &quot;androsphinx&quot;
 </code></pre>
 <p>Similarly, the output can be redirected to a subdirectory of <code>target/site</code> via the <code>siteSubdirName</code> key in <code>Sphinx</code> scope:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/sphinx/src/sbt-test/sphinx/can-use-sphinx/build.sbt#L8-L9" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Puts output in `target/site/giza`
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/sphinx/src/sbt-test/sphinx/can-use-sphinx/build.sbt#L10-L11" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">// Puts output in `target/site/giza`
 Sphinx / siteSubdirName := &quot;giza&quot;</code></pre>
 </div>
 <div>
@@ -225,7 +205,7 @@ Edit this page
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0
+1.7.0+30-2cab7d2e*
 </span>
 </div>
 </article>
@@ -269,7 +249,7 @@ Publishing
 Powered by
 <a href="https://github.com/lightbend/paradox">Paradox</a>
 and
-<a href="https://jonas.github.io/paradox-material-theme/">Paradox Material Theme</a>
+<a href="https://sbt.github.io/sbt-paradox-material-theme/">Paradox Material Theme</a>
 
 </div>
 </div>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site-root">
-<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.7.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -183,7 +183,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0
+<i class="md-icon" title="Version">label_outline</i> 1.7.0+30-2cab7d2e*
 </label>
 </li>
 </ul>
@@ -220,7 +220,7 @@ sbt/sbt-site
 SiteScaladoc / siteSubdirName := &quot;api/latest&quot;</code></pre>
 <h2><a href="#aggregating-api-documentation-with-sbt-unidoc" name="aggregating-api-documentation-with-sbt-unidoc" class="anchor"><span class="anchor-link"></span></a>Aggregating API documentation with sbt-unidoc</h2>
 <p><a href="https://github.com/sbt/sbt-unidoc">sbt-unidoc</a> allows to aggregate Scaladoc or Javadoc from sub-projects into a unified view. The following example shows how you can add aggregated Scaladoc to your site:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/core/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/core/src/sbt-test/scaladoc/can-aggregate/build.sbt#L4-L6" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 lazy val root = project.in(file(&quot;.&quot;))
@@ -232,7 +232,7 @@ lazy val root = project.in(file(&quot;.&quot;))
   .aggregate(cats, kittens)</code></pre>
 <h2><a href="#scaladoc-from-multiple-projects" name="scaladoc-from-multiple-projects" class="anchor"><span class="anchor-link"></span></a>Scaladoc from multiple projects</h2>
 <p>In case you want to include the Scaladoc separate for each sub-product there are several options. If you only have a few sub-projects the simplest solution is to manually include the scaladoc for each project:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/core/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/core/src/sbt-test/scaladoc/can-aggregate/build.sbt#L4-L6" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 // Define a `Configuration` for each project.
@@ -245,7 +245,7 @@ lazy val siteWithScaladoc = project.in(file(&quot;site/scaladoc&quot;))
     SiteScaladocPlugin.scaladocSettings(Kittens, kittens / Compile / packageDoc / mappings, &quot;api/kittens&quot;)
   )</code></pre>
 <p>For projects with many such sub-projects, a more maintainable approach is to configure it in a more programatic way:</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/core/src/sbt-test/scaladoc/can-aggregate/build.sbt#L6-L8" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/sbt/sbt-site/tree/master/core/src/sbt-test/scaladoc/can-aggregate/build.sbt#L4-L6" target="_blank" title="Go to snippet source">source</a><code class="language-sbt">lazy val cats = project.in(file(&quot;cats&quot;))
 lazy val kittens = project.in(file(&quot;kittens&quot;)).dependsOn(cats)
 
 lazy val scaladocSiteProjects = List((cats, Cats), (kittens, Kittens))
@@ -268,7 +268,7 @@ Edit this page
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0
+1.7.0+30-2cab7d2e*
 </span>
 </div>
 </article>
@@ -312,7 +312,7 @@ Site Generators
 Powered by
 <a href="https://github.com/lightbend/paradox">Paradox</a>
 and
-<a href="https://jonas.github.io/paradox-material-theme/">Paradox Material Theme</a>
+<a href="https://sbt.github.io/sbt-paradox-material-theme/">Paradox Material Theme</a>
 
 </div>
 </div>

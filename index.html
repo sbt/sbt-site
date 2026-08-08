@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="sbt-site-root">
-<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.7.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -169,7 +169,7 @@ sbt/sbt-site
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 1.5.0
+<i class="md-icon" title="Version">label_outline</i> 1.7.0+30-2cab7d2e*
 </label>
 </li>
 </ul>
@@ -183,6 +183,7 @@ sbt/sbt-site
 <p>This sbt plugin generates project websites from static content as well as <a href="generators/index.html">third-party generators</a> and can optionally include generated Scaladoc. It is designed to work hand-in-hand with publishing plugins like <a href="https://github.com/sbt/sbt-ghpages">sbt-ghpages</a>.</p>
 <p>Before upgrading please consult the <a href="https://github.com/sbt/sbt-site/tree/master/notes">release notes</a>. Instructions for upgrading from older versions can be found in the <a href="migration-guide.html">migration guide</a>.</p><div class="callout note "><div class="callout-title">Note</div>
 <ul>
+  <li>Version 1.6+ is published for sbt &gt;= 1.9.7 and requires Java 11+.</li>
   <li>Version 1.5+ is published for sbt &gt;= 1.4.9 and requires Java 11+.</li>
   <li>Version 1.4+ is published for sbt 1.2.x.</li>
   <li>Version 1.3+ is cross published to both sbt 0.13 and sbt 1.x.</li>
@@ -234,10 +235,7 @@ sbt/sbt-site
       <li><a href="generators/pamflet.html#the-pamflet-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Pamflet integration is not (yet) included in this version of sbt-site.</a></li>
     </ul></li>
     <li><a href="generators/paradox.html" class="page">Paradox</a></li>
-    <li><a href="generators/sphinx.html" class="page">Sphinx</a>
-    <ul>
-      <li><a href="generators/sphinx.html#the-sphinx-integration-is-not-yet-included-in-this-version-of-sbt-site-" class="header">The Sphinx integration is not (yet) included in this version of sbt-site.</a></li>
-    </ul></li>
+    <li><a href="generators/sphinx.html" class="page">Sphinx</a></li>
   </ul></li>
   <li><a href="publishing.html" class="page">Publishing</a>
   <ul>
@@ -250,6 +248,7 @@ sbt/sbt-site
   </ul></li>
   <li><a href="migration-guide.html" class="page">Migration Guide</a>
   <ul>
+    <li><a href="migration-guide.html#migrating-from-version-1-5-x-to-1-6-x" class="header">Migrating from version 1.5.x to 1.6.x</a></li>
     <li><a href="migration-guide.html#migrating-from-version-1-4-x-to-1-5-x" class="header">Migrating from version 1.4.x to 1.5.x</a></li>
     <li><a href="migration-guide.html#migrating-from-version-1-3-x-to-1-4-x" class="header">Migrating from version 1.3.x to 1.4.x</a>
     <ul>
@@ -317,7 +316,7 @@ Edit this page
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-1.5.0
+1.7.0+30-2cab7d2e*
 </span>
 </div>
 </article>
@@ -348,7 +347,7 @@ Getting Started
 Powered by
 <a href="https://github.com/lightbend/paradox">Paradox</a>
 and
-<a href="https://jonas.github.io/paradox-material-theme/">Paradox Material Theme</a>
+<a href="https://sbt.github.io/sbt-paradox-material-theme/">Paradox Material Theme</a>
 
 </div>
 </div>
