@@ -19,11 +19,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-22.04
+          - os: ubuntu-24.04
             java: 17
             distribution: temurin
             scalaV: "2.12.x"
-          - os: ubuntu-22.04
+          - os: ubuntu-24.04
             java: 17
             distribution: temurin
             scalaV: "3.x"
