@@ -2,7 +2,7 @@
 
 This sbt plugin generates project websites from static content, [GitBook], [Paradox], and/or [Asciidoctor], and can optionally include generated Scaladoc. It is designed to work hand-in-hand with publishing plugins like [sbt-ghpages].
 
-For version 1.5.0 we removed the integrations with [Jekyll], [Sphinx], [Pamflet], [Nanoc], [Hugo], and [Laika] as they require updates. Please see the ["revive" issues](https://github.com/sbt/sbt-site/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+revive).
+For version 1.5.0 we removed the integrations with [Jekyll], [Sphinx], [Nanoc], [Hugo], and [Laika] as they require updates. Please see the ["revive" issues](https://github.com/sbt/sbt-site/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+revive).
 
 ## Documentation
 
@@ -14,7 +14,6 @@ sbt-site is released under a "BSD 3-Clause" license. See [LICENSE](LICENSE) for 
 
 [sbt-ghpages]: https://github.com/sbt/sbt-ghpages
 [Jekyll]: https://jekyllrb.com
-[Pamflet]: http://www.foundweekends.org/pamflet/
 [Nanoc]: https://nanoc.ws/
 [Asciidoctor]: http://asciidoctor.org
 [Sphinx]: http://sphinx-doc.org
