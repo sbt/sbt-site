@@ -52,7 +52,7 @@ val commonSettings = Seq(
           "UTF-8",
           "-Xsource:3",
           "-release",
-          "8"
+          "11"
         )
       case _ => Nil
     }
@@ -157,7 +157,7 @@ lazy val paradox = project
   .enablePlugins(SbtPlugin)
   .settings(
     name := "sbt-site-paradox",
-    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.11.0"),
+    addSbtPlugin("com.lightbend.paradox" % "sbt-paradox" % "0.11.1"),
     pluginSettings,
     commonSettings,
   )

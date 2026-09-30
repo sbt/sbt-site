@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-24.04
-            java: 17
+            java: 11
             distribution: temurin
             scalaV: "2.12.x"
           - os: ubuntu-24.04
