@@ -98,7 +98,7 @@ lazy val asciidoctor = project
   .settings(
     name := "sbt-site-asciidoctor",
     libraryDependencies ++= Seq(
-      "org.asciidoctor" % "asciidoctorj" % "2.5.13",
+      "org.asciidoctor" % "asciidoctorj" % "3.0.1",
       "org.asciidoctor" % "asciidoctorj-diagram" % "1.5.18"
     )
   )
