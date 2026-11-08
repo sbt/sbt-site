@@ -54,9 +54,7 @@ object Preview {
     new ResponseStreamer { def stream(os:OutputStream): Unit = {
       val is = url.openStream
       try {
-        val buf = new Array[Byte](1024)
-        Iterator.continually(is.read(buf)).takeWhile(_ != -1)
-          .foreach(os.write(buf, 0, _))
+        is.transferTo(os)
       } finally {
         is.close
       }
