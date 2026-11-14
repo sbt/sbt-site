@@ -113,7 +113,7 @@ lazy val gitbook = project
   .settings(
     name := "sbt-site-gitbook",
     libraryDependencies ++= Seq(
-      "com.typesafe" % "config" % "1.4.9"
+      "com.typesafe" % "config" % "1.4.10"
     )
   )
   .dependsOn(core)
