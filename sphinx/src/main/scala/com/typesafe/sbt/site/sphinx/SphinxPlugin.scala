@@ -118,7 +118,7 @@ object SphinxPlugin extends AutoPlugin {
   def seqIfEnabled[T](key: TaskKey[Seq[T]]): Def.Initialize[Task[Seq[T]]] = ifEnabled0[Seq[T], Seq[T]](
     key, identity, Nil)
 
-  private[this] def ifEnabled0[S, T](
+  private def ifEnabled0[S, T](
     key: TaskKey[S],
     f: Task[S] => Task[T],
     nil: T): Def.Initialize[Task[T]] = Def.taskDyn {
