@@ -11,7 +11,8 @@ object SitePlugin extends AutoPlugin {
   override def trigger = allRequirements
   object autoImport extends SiteKeys {
     def publishSite(): SettingsDefinition = addArtifact(packageSite / artifact, packageSite)
-    val addMappingsToSiteDir = com.typesafe.sbt.site.util.SiteHelpers.addMappingsToSiteDir _
+    val addMappingsToSiteDir: (Def.Initialize[Task[Seq[(PluginCompat.FileRef, String)]]], SettingKey[String]) => Setting[?] =
+      SiteHelpers.addMappingsToSiteDir
   }
   import autoImport._
 
