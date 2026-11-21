@@ -28,7 +28,7 @@ jobs:
           cache: "sbt"
 
       - name: Setup sbt
-        uses: sbt/setup-sbt@v1.5.14
+        uses: sbt/setup-sbt@v1.5.15
 
       - run: sbt ci-release
         env:
@@ -56,7 +56,7 @@ jobs:
           cache: sbt
 
       - name: Setup sbt
-        uses: sbt/setup-sbt@v1.5.14
+        uses: sbt/setup-sbt@v1.5.15
 
       - run: sbt makeSite
 

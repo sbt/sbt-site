@@ -59,7 +59,7 @@ jobs:
           cache: "sbt"
 
       - name: Setup sbt
-        uses: sbt/setup-sbt@v1.5.14
+        uses: sbt/setup-sbt@v1.5.15
 
       - name: Install Jekyll, Nanoc, Asciidoctor, sphinx
         run: |-
