@@ -27,6 +27,14 @@ jobs:
             java: 17
             distribution: temurin
             scalaV: "3.x"
+          - os: ubuntu-24.04
+            java: 21
+            distribution: temurin
+            scalaV: "3.x"
+          - os: ubuntu-24.04
+            java: 25
+            distribution: temurin
+            scalaV: "3.x"
     runs-on: "${{ matrix.os }}"
     steps:
       - name: Checkout
@@ -78,5 +86,9 @@ jobs:
       #          mv hugo_0.20.1_linux_amd64/hugo_0.20.1_linux_amd64 ${PWD}/bin/hugo
       #          chmod +x ${PWD}/bin/hugo
 
-      - name: sbt runScriptedTest
-        run: sbt -v "++${{ matrix.scalaV }}; test; scripted; makeSite"
+      - name: Build, unit test and generate the site
+        run: sbt -v "++${{ matrix.scalaV }}; test; makeSite"
+
+      - name: Scripted tests, including the minimum sbt 1 fixture
+        if: matrix.java != 25
+        run: sbt -v "++${{ matrix.scalaV }}; scripted"

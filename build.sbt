@@ -1,5 +1,5 @@
-def scala212 = "2.12.20"
-def scala3 = "3.8.4"
+def scala212 = "2.12.21"
+def scala3 = "3.9.0"
 
 inThisBuild(Seq(
   organization := "com.github.sbt",
@@ -30,7 +30,7 @@ val pluginSettings = Seq(
   (pluginCrossBuild / sbtVersion) := {
     scalaBinaryVersion.value match {
       case "2.12" => "1.9.7"
-      case _      => "2.0.6"
+      case _      => "2.1.0"
     }
   },
   scriptedSbt := {
